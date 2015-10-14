@@ -1,0 +1,22 @@
+{
+  "name": "manifest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/varanosaurus/varanosaurus.git"
+  },
+  "author": "varanosaurus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/varanosaurus/varanosaurus/issues"
+  },
+  "homepage": "https://github.com/varanosaurus/varanosaurus#readme",
+  "dependencies": {
+    "eslint": "^1.6.0"
+  }
+}

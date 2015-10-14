@@ -1,0 +1,29 @@
+{
+  "env": [
+    "browser",
+    "node",
+    "commonjs",
+    "es6"
+  ]
+  "extends": "eslint:recommended",
+  "ecmaFeatures": {
+      "jsx": true
+  },
+  "plugins": [
+      "react"
+  ],
+  "rules": [
+    "space-after-keywords": [2, "always"],
+    "space-before-blocks": [2, "always"],
+    "space-before-function-paren": [2, "never"],
+    "space-in-parens": [2, "never"],
+    "no-trailing-spaces": 2,
+    "curly": [2, "all"],
+    "no-native-reassign": 2,
+    "quotes": [2, "single"],
+    "space-infix-ops": 2,
+    "semi": [2, "always"],
+    "comma-style": [2, "last"],
+    "no-spaced-func": 2
+  ]
+}

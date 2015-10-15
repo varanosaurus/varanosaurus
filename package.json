@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/varanosaurus/varanosaurus#readme",
   "dependencies": {
-    "eslint": "^1.6.0"
+    "eslint": "^1.6.0",
+    "webpack": "^1.12.2"
   }
 }

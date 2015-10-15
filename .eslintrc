@@ -1,10 +1,10 @@
 {
-  "env": [
-    "browser",
-    "node",
-    "commonjs",
-    "es6"
-  ]
+  "env": {
+    "browser": true,
+    "node": true,
+    "commonjs": true,
+    "es6": true
+  },
   "extends": "eslint:recommended",
   "ecmaFeatures": {
       "jsx": true
@@ -12,7 +12,7 @@
   "plugins": [
       "react"
   ],
-  "rules": [
+  "rules": {
     "space-after-keywords": [2, "always"],
     "space-before-blocks": [2, "always"],
     "space-before-function-paren": [2, "never"],
@@ -25,5 +25,5 @@
     "semi": [2, "always"],
     "comma-style": [2, "last"],
     "no-spaced-func": 2
-  ]
+  }
 }

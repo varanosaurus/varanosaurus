@@ -58,7 +58,7 @@ module.exports = {
   Household: Household,
   Reckoning: Reckoning,
   User: User,
-  init: init
+  init: init,
 };
 
 

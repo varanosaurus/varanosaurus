@@ -5,12 +5,19 @@ var pathHandlers = {};
 
 pathHandlers[''] = {
   post: function(request, response, next) {
+
+    var username = request.body.username;
+    var password = request.body.password;
+
     return db.User.find({where: {username: username}})
       .then(function(user) {
         if (user) {
           response.status(409).send('User already exists');
         } else {
-          return db.User.create({username: username, password, password});
+          return db.User.create({
+            username: username,
+            password, password,
+          });
         }
       })
       .then(function(user) {

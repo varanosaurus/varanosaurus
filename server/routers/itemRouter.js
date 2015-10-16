@@ -4,7 +4,26 @@ var db = require('../db/interface.js');
 var pathHandlers = {};
 
 pathHandlers[''] = {
-  post: function(request, response, next)
+  post: function(request, response, next) {
+    return db.Item.find({where: {}})
+      .then(function(user) {
+        if (user) {
+          response.status(409).send('Item already exists');
+        } else {
+          return db.Item.create({});
+        }
+      })
+      .then(function(user) {
+        response.status(201).json({
+          success: true,
+          //token here later
+        });
+      })
+      .catch(function(error) {
+        console.error(error);
+        response.status(500).send();
+      });
+  }
 };
 
 pathHandlers[':itemID'] = {

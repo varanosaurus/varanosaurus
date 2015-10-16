@@ -4,40 +4,57 @@ var Sequelize = require('sequelize');
 var Bluebird = require('bluebird');
 var bcrypt = Bluebird.promisifyAll(require('bcrypt'));
 
-var hashPassword(user) {
+var hashPassword = function(user) {
 	return bcrypt.hashAsync(user.password, null, null)
 		.then(function(hash) {
 			user.password = hash;
 		});
 };
 
-var comparePassword(password) {
+var comparePassword = function(password) {
 	return bcrypt.compareAsync(password, this.password);
 };
 
 module.exports = {
-	
+
 	attributes: {
 
-		username: {
+		accountName: {
 			type: Sequelize.STRING,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				// Must be between 4-12 chars long
+				len: [4, 12],
+				// Must be letters or numbers; case-insensitive for letters
+				isAlphanumeric: true,
+			},
 		},
 
 		password: {
 			type: Sequelize.STRING,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				// Must be min 6, max 28 chars
+				len: [6, 28],
+				// Must be letters, numbers, spaces, or exclamation/question marks
+				is: ['^[a-z \\d!?]+$','i'],
+
+			},
 		},
 
-		name: {
-			type: Sequelize.STRING
-		}
+		displayName: {
+			type: Sequelize.STRING,
+			allowNull: false,
+			validate: {
+				isAlphanumeric: true,
+			},
+		},
 
 		id: {
 			type: Sequelize.INTEGER,
 			primaryKey: true,
-			autoIncrement: true;
-		}
+			autoIncrement: true,
+		},
 
 	},
 
@@ -45,13 +62,13 @@ module.exports = {
 
 		hooks: {
 			beforeCreate: hashPassword,
-			beforeUpdate: hashPassword
+			beforeUpdate: hashPassword,
 		},
 
 		instanceMethods: {
-			comparePassword: comparePassword
-		}
+			comparePassword: comparePassword,
+		},
 
-	}
+	},
 
 };

@@ -3,12 +3,12 @@
 var Sequelize = require('sequelize');
 
 module.exports = {
-	
+
 	attributes: {
 
 		itemDescription: {
 			type: Sequelize.STRING,
-			allowNull: false
+			allowNull: false,
 		},
 
 		details: Sequelize.TEXT,
@@ -19,7 +19,7 @@ module.exports = {
 
 		addingUser: {
 			//FK
-			allowNull: false
+			allowNull: false,
 		},
 
 		fetchingUser: {
@@ -32,7 +32,9 @@ module.exports = {
 
 		price: {
 			type: Sequelize.DECIMAL,
-			allowNull: false
+			// Do we want users to be able to add prices later, but require them for reckoning?
+			allowNull: false,
+			defaultValue: 0.0,
 		},
 
 		timeAdded: {
@@ -48,11 +50,11 @@ module.exports = {
 		id: {
 			type: Sequelize.INTEGER,
 			primaryKey: true,
-			autoIncrement: true;
-		}
+			autoIncrement: true,
+		},
 
 	},
 
-	options: {};
+	options: {},
 
 };

@@ -1,31 +1,34 @@
 var Sequelize = require('sequelize');
 
-var config = require('./postgres.config.js');
-var url = process.env.DATABASE_URL; //SET THIS UP PROPERLY SOON
+// var config = require('./postgres.config.js');
 
-var listItem = require('./models/ListItem.js');
-var household = require('./models/Household.js');
-var reckoning = require('./models/Reckoning.js');
-var user = require('./models/User.js');
+var listItemConfig = require('./models/ListItem.js');
+var householdConfig = require('./models/Household.js');
+var reckoningConfig = require('./models/Reckoning.js');
+var userConfig = require('./models/User.js');
 
 var dbEnvironment = process.env.NODE_ENV;
+
+var shouldForce;
+
+var url = process.env.DATABASE_URL; //SET THIS UP PROPERLY SOON
 
 var schema = 'knead';
 
 //not sure what the ssl does yet, will look this up in a minute
 //yell at Naomi if she forgets to get back to this
-var db = new Sequelize(url, {ssl: true, {schema: schema}});
+var db = new Sequelize(url, {ssl: true, schema: schema});
 
-var ListItem = db.define('listItem', listItem.attributes, listItem.options);
+var ListItem = db.define('listItem', listItemConfig.attributes, listItemConfig.options);
 ListItem.schema(schema);
 
-var Household = db.define('household', household.attributes, household.options);
+var Household = db.define('household', householdConfig.attributes, householdConfig.options);
 Household.schema(schema);
 
-var Reckoning = db.define('reckoning', reckoning.attributes, reckoning.options);
+var Reckoning = db.define('reckoning', reckoningConfig.attributes, reckoningConfig.options);
 Reckoning.schema(schema);
 
-var User = db.define('user', user.attributes, user.options);
+var User = db.define('user', userConfig.attributes, userConfig.options);
 User.schema(schema);
 
 ListItem.belongsTo(Household);
@@ -37,7 +40,7 @@ Household.hasMany(Reckoning);
 User.belongsTo(Household);
 Household.hasMany(User);
 
-if (dbEnvironment === 'reset') {
+if (dbEnvironment === 'reset' || dbEnvironment === 'testing') {
   shouldForce = true;
 } else {
   shouldForce = false;
@@ -60,5 +63,3 @@ module.exports = {
   User: User,
   init: init,
 };
-
-

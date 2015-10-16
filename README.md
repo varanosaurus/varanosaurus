@@ -1,12 +1,13 @@
-# Project Name
+# Knead
 
-> Pithy project description
+Homegood and grocery coordination and share-splitting.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+- Amy Chiu
+- Kyle Cho
+- Naomi Jacobs
+- Cameron Martin
 
 ## Table of Contents
 
@@ -15,7 +16,6 @@
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
-1. [Team](#team)
 1. [Contributing](#contributing)
 
 ## Usage
@@ -24,11 +24,17 @@
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+Server:
+- Node 4+
+- Express
+- Sequelize
+- bcrypt-nodejs
+- ESLint
+
+Mobile client:
+- React Native
+- Xcode 7
+
 
 ## Development
 
@@ -37,10 +43,16 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
 ```
+
+From within the `client-mobile` directory:
+```
+npm install
+```
+to install `react-native` and enable packaging.
+
+Open the `client-mobile/ios/Knead.xcodeproj` file in Xcode and run in the simulator.
 
 ### Roadmap
 

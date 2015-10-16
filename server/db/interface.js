@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 
 // var config = require('./postgres.config.js');
 
-var listItemConfig = require('./models/ListItem.js');
+var listConfig = require('./models/Item.js');
 var householdConfig = require('./models/Household.js');
 var reckoningConfig = require('./models/Reckoning.js');
 var userConfig = require('./models/User.js');
@@ -27,14 +27,15 @@ var Reckoning = db.define('reckoning', reckoningConfig.attributes, reckoningConf
 
 var User = db.define('user', userConfig.attributes, userConfig.options);
 
-Household.hasMany(ListItem);
-ListItem.belongsTo(Household);
+Item.belongsTo(Household);
+Household.hasMany(Item);
 
 Reckoning.belongsTo(Household);
 Household.hasMany(Reckoning);
 
 User.belongsTo(Household);
 Household.hasMany(User);
+Household.belongsTo(User, {as: 'Creator'})
 
 if (dbEnvironment === 'reset' || dbEnvironment === 'testing') {
   shouldForce = true;
@@ -53,7 +54,7 @@ var init = function() {
 
 module.exports = {
   sequelize: db,
-  ListItem: ListItem,
+  Item: Item,
   Household: Household,
   Reckoning: Reckoning,
   User: User,

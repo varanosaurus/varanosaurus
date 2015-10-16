@@ -1,4 +1,4 @@
-//LIST ITEM
+//ITEM
 
 var Sequelize = require('sequelize');
 

@@ -5,6 +5,12 @@ var pathHandlers = {};
 
 pathHandlers[''] = {
   post: function(request, response, next) {
+
+    //first find the username of the creator from the user
+    //then check to see if that user is already in a household
+    //if not, get the user's foreign id and use that
+    //to find the creator
+
     return db.Household.find({where: {}})
       .then(function(user) {
         if (user) {

@@ -35,7 +35,7 @@ Household.hasMany(Reckoning);
 
 User.belongsTo(Household);
 Household.hasMany(User);
-Household.belongsTo(User, {as: 'Creator'})
+Household.belongsTo(User, {as: 'Creator', constraints: false});
 
 if (dbEnvironment === 'reset' || dbEnvironment === 'testing') {
   shouldForce = true;

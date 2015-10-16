@@ -1,4 +1,5 @@
 var router = require('express').Router();
+var db = require('./db/interface.js');
 
 var pathHandlers = {};
 
@@ -11,6 +12,8 @@ pathHandlers[''] = {
 pathHandlers['/users'] = {
 	post: function(request, response, next) {
 		//add new user
+		var username = request.body.username;
+		var password = request.body.password;
 	}
 };
 

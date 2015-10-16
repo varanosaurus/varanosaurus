@@ -24,8 +24,16 @@ Homegood and grocery coordination and share-splitting.
 
 ## Requirements
 
+Server:
 - Node 4+
+- Express
+- Sequelize
+- bcrypt-nodejs
+- ESLint
+
+Mobile client:
 - React Native
+- Xcode 7
 
 
 ## Development
@@ -35,10 +43,16 @@ Homegood and grocery coordination and share-splitting.
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
 ```
+
+From within the `client-mobile` directory:
+```
+npm install
+```
+to install `react-native` and enable packaging.
+
+Open the `client-mobile/ios/Knead.xcodeproj` file in Xcode and run in the simulator.
 
 ### Roadmap
 

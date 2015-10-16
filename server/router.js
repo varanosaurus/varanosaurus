@@ -6,7 +6,11 @@ var pathHandlers = {};
 
 pathHandlers['/users'] = {
 	post: function(request, response, next) {
-		var addResult = dbHelper.user.add(request, response, next);
+
+		var username = request.body.username;
+		var password = request.body.password;
+
+		var addResult = dbHelper.user.add(username, password);
 
 		if (addResult === 'User already exists') {
 			response.status(409).send('User already exists');

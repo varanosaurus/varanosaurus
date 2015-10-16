@@ -1,13 +1,12 @@
 var db = require('../db/interface.js');
 
 
-var userFunctions = {}
+var userFunctions = {};
+var householdFunctions = {};
+var reconciliationFunctions = {};
+var listEntryFunctions = {};
 
-
-userFunctions.add = function(request, response, next) {
-
-  var username = request.body.username;
-  var password = request.body.password;
+userFunctions.add = function(username, password) {
 
   return db.User.find({where: {name: username}})
     .then(function(user) {
@@ -25,5 +24,8 @@ userFunctions.add = function(request, response, next) {
 };
 
 module.exports = {
-  user: userFunctions
+  user: userFunctions,
+  household: householdFunctions,
+  reconciliation: reconciliationFunctions,
+  listEntry: listEntryFunctions
 };

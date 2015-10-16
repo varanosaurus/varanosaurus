@@ -3,22 +3,25 @@
 var Sequelize = require('sequelize');
 
 module.exports = {
-	
+
 	attributes: {
 
 		name: {
 			type: Sequelize.STRING,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				isAlphanumeric: true,
+			},
 		},
 
 		id: {
 			type: Sequelize.INTEGER,
 			primaryKey: true,
-			autoIncrement: true;
-		}
+			autoIncrement: true,
+		},
 
 	},
 
-	options: {};
+	options: {},
 
 };

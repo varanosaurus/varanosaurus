@@ -24,6 +24,7 @@
     "space-infix-ops": 2,
     "semi": [2, "always"],
     "comma-style": [2, "last"],
-    "no-spaced-func": 2
+    "comma-dangle": [2, "always-multiline"],
+    "no-spaced-func": 2,
   }
 }

@@ -1,7 +1,6 @@
 var Sequelize = require('sequelize');
 
-var config = require('./postgres.config.js');
-var url = process.env.DATABASE_URL; //SET THIS UP PROPERLY SOON
+// var config = require('./postgres.config.js');
 
 var listItemConfig = require('./models/ListItem.js');
 var householdConfig = require('./models/Household.js');
@@ -10,11 +9,15 @@ var userConfig = require('./models/User.js');
 
 var dbEnvironment = process.env.NODE_ENV;
 
+var shouldForce;
+
+var url = process.env.DATABASE_URL; //SET THIS UP PROPERLY SOON
+
 var schema = 'knead';
 
 //not sure what the ssl does yet, will look this up in a minute
 //yell at Naomi if she forgets to get back to this
-var db = new Sequelize(url, {ssl: true, {schema: schema}});
+var db = new Sequelize(url, {ssl: true, schema: schema});
 
 var ListItem = db.define('listItem', listItemConfig.attributes, listItemConfig.options);
 ListItem.schema(schema);
@@ -37,7 +40,7 @@ Household.hasMany(Reckoning);
 User.belongsTo(Household);
 Household.hasMany(User);
 
-if (dbEnvironment === 'reset') {
+if (dbEnvironment === 'reset' || dbEnvironment === 'testing') {
   shouldForce = true;
 } else {
   shouldForce = false;
@@ -60,5 +63,3 @@ module.exports = {
   User: User,
   init: init,
 };
-
-

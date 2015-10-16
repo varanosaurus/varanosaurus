@@ -10,14 +10,7 @@ var user = require('./models/User.js');
 
 var dbEnvironment = process.env.NODE_ENV;
 
-var schema;
-var shouldForce;
-
-if (dbEnvironment === 'test') {
-  schema = config.testSchema;
-} else {
-  schema = config.mainSchema;
-}
+var schema = 'knead';
 
 //not sure what the ssl does yet, will look this up in a minute
 //yell at Naomi if she forgets to get back to this
@@ -41,15 +34,10 @@ Household.hasMany(ListItem);
 Reckoning.belongsTo(Household);
 Household.hasMany(Reckoning);
 
-//not sure we need this one, we might be able
-//to get it by querying what we already have?
-ListItem.belongsTo(Reckoning);
-Reckoning.hasMany(ListItem);
-
 User.belongsTo(Household);
 Household.hasMany(User);
 
-if (dbEnvironment === 'test' || dbEnvironment === 'reset') {
+if (dbEnvironment === 'reset') {
   shouldForce = true;
 } else {
   shouldForce = false;

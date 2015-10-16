@@ -1,19 +1,25 @@
 var router = require('express').Router();
 var db = require('./db/interface.js');
+var dbHelper = require('./helpers/dbHelper.js');
 
 var pathHandlers = {};
 
-pathHandlers[''] = {
-	get: function(request, response, next) {
-		//serve static files
-	}
-};
-
 pathHandlers['/users'] = {
 	post: function(request, response, next) {
-		//add new user
-		var username = request.body.username;
-		var password = request.body.password;
+		var addResult = dbHelper.user.add(request, response, next);
+
+		if (addResult === 'User already exists') {
+			response.status(409).send('User already exists');
+
+		} else if (addResult === 'Error') {
+			response.status(500).send();
+			
+		} else {
+			response.status(201).json({
+				success: true
+				//token will go here
+			});
+		}
 	}
 };
 

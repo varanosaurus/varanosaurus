@@ -11,7 +11,7 @@ module.exports = {
 			allowNull: false
 		},
 
-		details: Sequelize.STRING,
+		details: Sequelize.TEXT,
 
 		fetch: Sequelize.BOOLEAN,
 
@@ -44,16 +44,6 @@ module.exports = {
 		timeFetched: Sequelize.DATE,
 
 		timeBought: Sequelize.DATE,
-
-		reckoning: {
-			//FK
-			//nullable
-		}
-
-		household: {
-			//put foreign key here
-			allowNull: false
-		},
 
 		id: {
 			type: Sequelize.INTEGER,

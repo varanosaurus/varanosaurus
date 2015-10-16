@@ -16,12 +16,6 @@ module.exports = {
 			defaultValue: Sequelize.NOW
 		},
 
-		//probably more data here?
-
-		household: {
-			//put foreign key here
-		},
-
 		id: {
 			type: Sequelize.INTEGER,
 			primaryKey: true,

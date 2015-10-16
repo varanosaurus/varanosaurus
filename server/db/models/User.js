@@ -2,8 +2,7 @@
 
 var Sequelize = require('sequelize');
 var Bluebird = require('bluebird');
-var bcrypt = Bluebird.promisifyAll(require('bcrypt-nodejs'));
-//issue installing bcrypt on Naomi's computer - check XCode permissions?
+var bcrypt = Bluebird.promisifyAll(require('bcrypt'));
 
 var hashPassword(user) {
 	return bcrypt.hashAsync(user.password, null, null)

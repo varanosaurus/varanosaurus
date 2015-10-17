@@ -28,7 +28,7 @@ var TabView = React.createClass({
 
         <TabBarIOS.Item
           selected={this.state.selectedTab === 'household'}
-          title='ItemList'
+          title='Household'
           onPress={ () => {
             this.setState({
               selectedTab: 'household'

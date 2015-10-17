@@ -25,8 +25,8 @@ describe('Database interface', function() {
         expect(user).toBeTruthy();
         expect(user).toEqual(jasmine.any(Object));
         expect(user.accountName).toEqual('redstarter');
+        done();
       })
-      .then(done)
       .catch(done.fail.bind(done));
 
     }); // Closes 'it should allow creation'
@@ -118,11 +118,13 @@ describe('Database interface', function() {
       .then(function(match) {
         expect(match).toEqual(true);
         done();
-      });
+      })
+      .catch(done.fail.bind(done));
 
     }); // Closes 'it should properly approve passwords'
 
     it('should properly reject incorrect passwords', function(done) {
+
       db.User.create({
         accountName:'redstarter',
         password: 'beerbro',
@@ -134,12 +136,45 @@ describe('Database interface', function() {
       .then(function(match) {
         expect(match).toEqual(false);
         done();
-      });
+      })
+      .catch(done.fail.bind(done));
+
     }); // Closes 'it should properly reject incorrect passwords'
 
   }); // Closes 'User model'
 
+  describe('Household model', function() {
 
+    it('should allow creation of new households', function(done) {
 
+      db.Household.create({
+        name: '591 Dolores',
+      })
+      .then(function(household) {
+        expect(household).toBeTruthy();
+        expect(household.name).toEqual('591 Dolores');
+        done();
+      })
+      .catch(done.fail.bind(done));
+
+    }); // Closes 'it should allow creation'
+
+    it('should not allow names with characters other than letters, numbers, and spaces', function(done) {
+
+      db.Household.create({
+        name: '591-&&Dolores',
+      })
+      .then(function(household) {
+        expect(household).toBeUndefined();
+      })
+      .catch(function(error) {
+        expect(error).toBeTruthy();
+        expect(error.name).toEqual('SequelizeValidationError');
+      })
+      .then(done);
+
+    }); // Closes 'it should not allow names'
+
+  }); // Closes 'Household model'
 
 }); // Closes 'Database interface'

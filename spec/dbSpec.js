@@ -322,12 +322,12 @@ describe('Database interface', function() {
           description: 'Pilsner',
         })
         .then(function(item) {
-          return item.setFetchingUser(user);
+          return item.setBuyingUser(user);
         });
       })
 
       .then(function() {
-        db.Item.findOne({where: {description: 'Pilsner'}})
+       return db.Item.findOne({where: {description: 'Pilsner'}})
           .then(function(item) {
             expect(item.buyingUserId).toBeTruthy();
             return item.getBuyingUser();
@@ -344,5 +344,105 @@ describe('Database interface', function() {
     }); // Closes 'it should associate with a buyingUser'
 
   }); // Closes 'Item model'
+
+  describe('User-reckoning many-to-many relationship', function() {
+
+    beforeEach(function(done) {
+      var self = this;
+
+      db.User.bulkCreate([
+        {
+          accountName: 'redstarter',
+          password: 'brewbro',
+          displayName: 'Sovester',
+        },
+        {
+          accountName: 'cynthia',
+          password: 'coffeefan',
+          displayName: 'Cindy',
+        },
+        {
+          accountName: 'laura',
+          password: 'guerrero',
+          displayName: 'Laura',
+        },
+      ], {returning: true})
+
+      .then(function(userModels) {
+        self.users = userModels;
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+    }); // Closes 'beforeEach'
+
+    it('should allow joins between a single user and many reckonings', function(done) {
+
+      var users = this.users;
+
+      db.Reckoning.create({totalSpent: 20.49})
+
+        .then(function(reckoning) {
+          return reckoning.addUser(users[0], {contribution: 5.20, debt: 0.0});
+        })
+
+        .then(function() {
+          return db.Reckoning.create({totalSpent: 15.00});
+        })
+
+        .then(function(reckoning) {
+          return reckoning.addUser(users[0], {contribution: 12.00, debt: -3.00});
+        })
+
+        .then(function() {
+          return db.Reckoning.create({totalSpent: 500.00});
+        })
+
+        .then(function(reckoning) {
+          return reckoning.addUser(users[0], {contribution: 2.00, debt: -300.00});
+        })
+
+        .then(function() {
+          return users[0].getReckonings();
+        })
+
+        .then(function(reckonings) {
+          expect(reckonings).toBeTruthy();
+          expect(reckonings.length).toEqual(3);
+        })
+
+        .catch(done.fail.bind(done))
+        .then(done);
+
+    }); // Closes 'it should allow joins between a single user and many reckonings'
+
+    it('should allow joins between a single reckoning and many users', function(done) {
+
+      var users = this.users;
+
+      db.Reckoning.create({totalSpent: 121.39})
+
+        .then(function(reckoning) {
+          return reckoning.setUsers(users)
+            .then(function() {
+              return reckoning;
+            });
+        })
+
+        .then(function(reckoning) {
+          return reckoning.getUsers()
+            .then(function(joinedUsers) {
+              expect(joinedUsers).toBeTruthy();
+              expect(joinedUsers.length).toEqual(3);
+            });
+        })
+
+        .catch(done.fail.bind(done))
+        .then(done);
+
+    }); // Closes 'should allow joins between a single reckoning and many users'
+
+  }); // Closes 'User-reckoning many-to-many relationship'
 
 }); // Closes 'Database interface'

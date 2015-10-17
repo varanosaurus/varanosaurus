@@ -76,5 +76,6 @@ module.exports = {
   Household,
   Reckoning,
   User,
+  UserToReckoning,
   init,
 };

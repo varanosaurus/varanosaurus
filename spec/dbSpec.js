@@ -177,4 +177,23 @@ describe('Database interface', function() {
 
   }); // Closes 'Household model'
 
+  describe('ListItem model', function() {
+
+    it('should allow creation of list items', function(done) {
+
+      db.ListItem.create({
+        description: 'Vampiric toilet paper',
+        addingUserId: '1',
+      })
+      .then(function(listItem) {
+        expect(listItem).toBeTruthy();
+        expect(listItem.description).toEqual('Vampiric toilet paper');
+        done();
+      })
+      .catch(done.fail.bind(done));
+
+    }); // Closes 'it should allow creation'
+
+  }); // Closes 'ListItem model'
+
 }); // Closes 'Database interface'

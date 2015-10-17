@@ -103,6 +103,40 @@ describe('Database interface', function() {
 
     }); // Closes 'it shouldn't allow an empty displayName'
 
+    it('should properly approve passwords with .comparePassword', function(done) {
+
+      db.User.create({
+        accountName: 'redstarter',
+        password: 'beerbro',
+        displayName: 'Sovester',
+      })
+      .then(function(user) {
+        expect(user).toBeTruthy();
+        expect(user.name).not.toEqual('beerbro');
+        return user.comparePassword('beerbro');
+      })
+      .then(function(match) {
+        expect(match).toEqual(true);
+        done();
+      });
+
+    }); // Closes 'it should properly approve passwords'
+
+    it('should properly reject incorrect passwords', function(done) {
+      db.User.create({
+        accountName:'redstarter',
+        password: 'beerbro',
+        displayName: 'Sovester',
+      })
+      .then(function(user) {
+        return user.comparePassword('love2surf');
+      })
+      .then(function(match) {
+        expect(match).toEqual(false);
+        done();
+      });
+    }); // Closes 'it should properly reject incorrect passwords'
+
   }); // Closes 'User model'
 
 

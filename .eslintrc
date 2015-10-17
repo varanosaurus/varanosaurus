@@ -31,5 +31,6 @@
     "no-spaced-func": 2,
     "eol-last": 2,
     "no-console": 1,
+    "object-shorthand": [2, "always"],
   }
 }

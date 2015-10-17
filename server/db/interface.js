@@ -2,10 +2,11 @@ var Sequelize = require('sequelize');
 
 // var config = require('./postgres.config.js');
 
-var itemConfig = require('./models/Item.js');
-var householdConfig = require('./models/Household.js');
-var reckoningConfig = require('./models/Reckoning.js');
-var userConfig = require('./models/User.js');
+var itemConfig = require('./models/Item');
+var householdConfig = require('./models/Household');
+var reckoningConfig = require('./models/Reckoning');
+var userConfig = require('./models/User');
+var userToReckoningConfig = require('./models/UserToReckoning');
 
 var dbEnvironment = process.env.NODE_ENV;
 
@@ -30,12 +31,20 @@ var Reckoning = db.define('reckoning', reckoningConfig.attributes, reckoningConf
 
 var User = db.define('user', userConfig.attributes, userConfig.options);
 
+var UserToReckoning = db.define('userToReckoning', userToReckoningConfig.attributes, userToReckoningConfig.options);
+
 Item.belongsTo(Household);
 Household.hasMany(Item);
 
-Item.belongsTo(User, {as: 'AddingUser', constraints: false});
-Item.belongsTo(User, {as: 'FetchingUser', constraints: false});
-Item.belongsTo(User, {as: 'BuyingUser', constraints: false});
+Item.belongsTo(User, {as: 'addingUser'});
+Item.belongsTo(User, {as: 'fetchingUser'});
+Item.belongsTo(User, {as: 'buyingUser'});
+
+Item.belongsTo(Reckoning);
+Reckoning.hasMany(Item);
+
+User.belongsToMany(Reckoning, {through: UserToReckoning});
+Reckoning.belongsToMany(User, {through: UserToReckoning});
 
 Reckoning.belongsTo(Household);
 Household.hasMany(Reckoning);
@@ -43,8 +52,8 @@ Household.hasMany(Reckoning);
 User.belongsTo(Household);
 Household.hasMany(User);
 
-Household.belongsTo(User, {as: 'Creator', constraints: false});
-Household.belongsTo(User, {as: 'Captain', constraints: false});
+Household.belongsTo(User, {as: 'creator', constraints: false});
+Household.belongsTo(User, {as: 'captain', constraints: false});
 
 if (dbEnvironment === 'reset' || dbEnvironment === 'testing') {
   shouldForce = true;
@@ -67,5 +76,6 @@ module.exports = {
   Household,
   Reckoning,
   User,
+  UserToReckoning,
   init,
 };

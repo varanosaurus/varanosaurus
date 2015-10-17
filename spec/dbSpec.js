@@ -26,9 +26,9 @@ describe('Database interface', function() {
         expect(user).toBeTruthy();
         expect(user).toEqual(jasmine.any(Object));
         expect(user.accountName).toEqual('redstarter');
-        done();
       })
-      .catch(done.fail.bind(done));
+      .catch(done.fail.bind(done))
+      .then(done);
 
     }); // Closes 'it should allow creation'
 
@@ -118,9 +118,9 @@ describe('Database interface', function() {
       })
       .then(function(match) {
         expect(match).toEqual(true);
-        done();
       })
-      .catch(done.fail.bind(done));
+      .catch(done.fail.bind(done))
+      .then(done);
 
     }); // Closes 'it should properly approve passwords'
 
@@ -136,9 +136,9 @@ describe('Database interface', function() {
       })
       .then(function(match) {
         expect(match).toEqual(false);
-        done();
       })
-      .catch(done.fail.bind(done));
+      .catch(done.fail.bind(done))
+      .then(done);
 
     }); // Closes 'it should properly reject incorrect passwords'
 
@@ -154,9 +154,9 @@ describe('Database interface', function() {
       .then(function(household) {
         expect(household).toBeTruthy();
         expect(household.name).toEqual('591 Dolores');
-        done();
       })
-      .catch(done.fail.bind(done));
+      .catch(done.fail.bind(done))
+      .then(done);
 
     }); // Closes 'it should allow creation'
 
@@ -176,6 +176,49 @@ describe('Database interface', function() {
 
     }); // Closes 'it should not allow names'
 
+    it('should associate with many items', function(done) {
+
+      db.Household.create({
+        name: '591 Dolores',
+      })
+      .then(function(household) {
+        return db.Item.bulkCreate([
+            {
+              description: 'TP',
+              householdId: household.id,
+            },
+            {
+              description: 'paper towels',
+              householdId: household.id,
+            },
+            {
+              description: 'hummus',
+              householdId: household.id,
+            },
+          ])
+          .then(function(items) {
+            return items[0].getHousehold();
+          })
+          .then(function(foundHousehold) {
+            expect(foundHousehold).toBeTruthy();
+            expect(foundHousehold.name).toEqual('591 Dolores');
+          });
+      })
+      .then(function() {
+        return db.Household.findOne({where: {name: '591 Dolores'}});
+      })
+      .then(function(household) {
+        return household.getItems();
+      })
+      .then(function(items) {
+        expect(items).toBeTruthy();
+        expect(items.length).toEqual(3);
+      })
+      .catch(done.fail.bind(done))
+      .then(done);
+
+    }); // Closes 'it should associate with many items'
+
   }); // Closes 'Household model'
 
   describe('Item model', function() {
@@ -184,17 +227,222 @@ describe('Database interface', function() {
 
       db.Item.create({
         description: 'Vampiric toilet paper',
-        addingUserId: '1',
       })
       .then(function(listItem) {
         expect(listItem).toBeTruthy();
         expect(listItem.description).toEqual('Vampiric toilet paper');
-        done();
       })
-      .catch(done.fail.bind(done));
+      .catch(done.fail.bind(done))
+      .then(done);
 
     }); // Closes 'it should allow creation'
 
+    it('should associate with an addingUser', function(done) {
+
+      db.User.create({
+        accountName: 'redstarter',
+        password: 'brewbro',
+        displayName: 'Sovester',
+      })
+
+      .then(function(user) {
+        return db.Item.create({
+          description: 'Pilsner',
+        })
+        .then(function(item) {
+          return item.setAddingUser(user);
+        });
+      })
+
+      .then(function() {
+        return db.Item.findOne({where: {description: 'Pilsner'}})
+        .then(function(item) {
+          expect(item).toBeTruthy();
+          expect(item.addingUserId).toBeTruthy();
+
+          return item.getAddingUser()
+            .then(function(user) {
+              expect(user.displayName).toEqual('Sovester');
+              return user;
+            });
+          });
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+
+    }); // Closes 'it should associate with an addingUser'
+
+    it('should associate with a fetchingUser', function(done) {
+
+      db.User.create({
+        accountName: 'redstarter',
+        password: 'brewbro',
+        displayName: 'Sovester',
+      })
+
+      .then(function(user) {
+        return db.Item.create({
+          description: 'Pilsner',
+        })
+        .then(function(item) {
+          return item.setFetchingUser(user);
+        });
+      })
+
+      .then(function() {
+        return db.Item.findOne({where: {description: 'Pilsner'}})
+          .then(function(item) {
+            expect(item.fetchingUserId).toBeTruthy();
+            return item.getFetchingUser();
+          })
+          .then(function(user) {
+            expect(user).toBeTruthy();
+            expect(user.displayName).toEqual('Sovester');
+            return user;
+          });
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+    }); // Closes 'it should associate with a fetchingUser'
+
+    it('should associate with a buyingUser', function(done) {
+
+      db.User.create({
+        accountName: 'redstarter',
+        password: 'brewbro',
+        displayName: 'Sovester',
+      })
+
+       .then(function(user) {
+        return db.Item.create({
+          description: 'Pilsner',
+        })
+        .then(function(item) {
+          return item.setBuyingUser(user);
+        });
+      })
+
+      .then(function() {
+       return db.Item.findOne({where: {description: 'Pilsner'}})
+          .then(function(item) {
+            expect(item.buyingUserId).toBeTruthy();
+            return item.getBuyingUser();
+          })
+          .then(function(user) {
+            expect(user).toBeTruthy();
+            expect(user.displayName).toEqual('Sovester');
+          });
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+    }); // Closes 'it should associate with a buyingUser'
+
   }); // Closes 'Item model'
+
+  describe('User-reckoning many-to-many relationship', function() {
+
+    beforeEach(function(done) {
+      var self = this;
+
+      db.User.bulkCreate([
+        {
+          accountName: 'redstarter',
+          password: 'brewbro',
+          displayName: 'Sovester',
+        },
+        {
+          accountName: 'cynthia',
+          password: 'coffeefan',
+          displayName: 'Cindy',
+        },
+        {
+          accountName: 'laura',
+          password: 'guerrero',
+          displayName: 'Laura',
+        },
+      ], {returning: true})
+
+      .then(function(userModels) {
+        self.users = userModels;
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+    }); // Closes 'beforeEach'
+
+    it('should allow joins between a single user and many reckonings', function(done) {
+
+      var users = this.users;
+
+      db.Reckoning.create({totalSpent: 20.49})
+
+        .then(function(reckoning) {
+          return reckoning.addUser(users[0], {contribution: 5.20, debt: 0.0});
+        })
+
+        .then(function() {
+          return db.Reckoning.create({totalSpent: 15.00});
+        })
+
+        .then(function(reckoning) {
+          return reckoning.addUser(users[0], {contribution: 12.00, debt: -3.00});
+        })
+
+        .then(function() {
+          return db.Reckoning.create({totalSpent: 500.00});
+        })
+
+        .then(function(reckoning) {
+          return reckoning.addUser(users[0], {contribution: 2.00, debt: -300.00});
+        })
+
+        .then(function() {
+          return users[0].getReckonings();
+        })
+
+        .then(function(reckonings) {
+          expect(reckonings).toBeTruthy();
+          expect(reckonings.length).toEqual(3);
+        })
+
+        .catch(done.fail.bind(done))
+        .then(done);
+
+    }); // Closes 'it should allow joins between a single user and many reckonings'
+
+    it('should allow joins between a single reckoning and many users', function(done) {
+
+      var users = this.users;
+
+      db.Reckoning.create({totalSpent: 121.39})
+
+        .then(function(reckoning) {
+          return reckoning.setUsers(users)
+            .then(function() {
+              return reckoning;
+            });
+        })
+
+        .then(function(reckoning) {
+          return reckoning.getUsers()
+            .then(function(joinedUsers) {
+              expect(joinedUsers).toBeTruthy();
+              expect(joinedUsers.length).toEqual(3);
+            });
+        })
+
+        .catch(done.fail.bind(done))
+        .then(done);
+
+    }); // Closes 'should allow joins between a single reckoning and many users'
+
+  }); // Closes 'User-reckoning many-to-many relationship'
 
 }); // Closes 'Database interface'

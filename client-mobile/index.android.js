@@ -12,7 +12,7 @@ var {
   View,
 } = React;
 
-var Varanosaurus = React.createClass({
+var Knead = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
@@ -49,4 +49,4 @@ var styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Varanosaurus', () => Varanosaurus);
+AppRegistry.registerComponent('Knead', () => Knead);

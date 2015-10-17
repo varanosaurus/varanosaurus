@@ -29,7 +29,7 @@ pathHandlers[''] = {
 
       .then(function(household) {
         household.setCreator(userId);
-        //set the creator as the captain as default upon creation
+        //set the creator as the default captain upon creation
         household.setCaptain(userId);
         response.status(201).json({
           success: true,
@@ -44,10 +44,46 @@ pathHandlers[''] = {
   },
 };
 
-pathHandlers[':householdID'] = {
-  // get: function(request, response) {},
+pathHandlers[':householdId'] = {
+  get: function(request, response) {
+
+    var id = request.body.householdId;
+
+    db.Household.find({where: {id}})
+
+      .then(function(household) {
+        if (household) {
+          response.status(201).send(household); //format?
+        } else {
+          response.status(500).send('Household not found');
+        }
+      })
+
+      .catch(function(error) {
+        console.error(error);
+        response.status(500).send();
+      });
+
+  },
   // put: function(request, response) {},
-  // delete: function(request, response) {},
+  delete: function(request, response) {
+
+    var id = request.body.householdId;
+
+    db.Item.destroy({where: {id}})
+      .then(function(numberDestroyed) {
+        if (numberDestroyed) {
+          response.status(201).send();
+        } else {
+          response.status(500).send('Error deleting household');
+        }
+      })
+
+      .catch(function(error) {
+        console.error(error);
+        response.status(500).send();
+      });
+  },
 };
 
 for (var path in pathHandlers) {

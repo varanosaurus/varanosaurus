@@ -74,7 +74,7 @@ pathHandlers[':itemID'] = {
     //we'll set the possible updates to an update object
     //then pass that into the update function
     var updates = {};
-    var options = ['description', 'fetch', 'bought', 'price'];
+    var options = ['description', 'details', 'fetch', 'bought', 'price'];
 
     for (var i = 0; i < options.length; i++) {
       var option = options[i];
@@ -109,7 +109,6 @@ pathHandlers[':itemID'] = {
         console.error(error);
         response.status(500).send();
       });
-
   },
 
   delete: function(request, response) {

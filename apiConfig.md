@@ -12,13 +12,17 @@
       post: {
         accountName: string,
         password: string,
-        displayName: string,
+        displayName: string, //optional?
       }
 
     /:userId
-      get:
-      put:
-      delete:
+      get: n/a (userId will already be in header)
+      put: {
+        password: string, //optional
+        displayName: string, //optional
+        householdId: 
+      }
+      delete: n/a (userId will already be in header)
 
   /reckonings
 
@@ -56,6 +60,7 @@
       put: {
         itemId: integer
         description: string, //optional
+        details: string, //optional
         fetch: true, //optional
         bought: true, //optional
         price: decimal, //optional

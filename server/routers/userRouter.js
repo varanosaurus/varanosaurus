@@ -34,13 +34,48 @@ pathHandlers[''] = {
 };
 
 pathHandlers[':accountName'] = {
-  // get: function(request, response) {
+  get: function(request, response) {
 
-    // var accountName = request.body.accountName
+    var id = request.decoded.userId;
 
+    db.User.find({where: {id}})
+
+      .then(function(user) {
+        if (user) {
+          response.status(201).send(user); //format?
+        } else {
+          response.status(500).send('User not found');
+        }
+      })
+
+      .catch(function(error) {
+        console.error(error);
+        response.status(500).send();
+      });
+
+  },
+
+  // put: function(request, response) {
   // },
-  // put: function(request, response) {},
-  // delete: function(request, response) {},
+
+  delete: function(request, response) {
+
+    var id = request.decoded.userId;
+
+    db.User.destroy({where: {id}})
+      .then(function(numberDestroyed) {
+        if (numberDestroyed) {
+          response.status(201).send();
+        } else {
+          response.status(500).send('Error deleting user');
+        }
+      })
+
+      .catch(function(error) {
+        console.error(error);
+        response.status(500).send();
+      });
+  },
 };
 
 for (var path in pathHandlers) {

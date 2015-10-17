@@ -28,14 +28,16 @@ var User = db.define('user', userConfig.attributes, userConfig.options);
 Item.belongsTo(Household);
 Household.hasMany(Item);
 
+Item.belongsTo(User, {as: 'AddingUser', constraints: false});
+Item.belongsTo(User, {as: 'FetchingUser', constraints: false});
+Item.belongsTo(User, {as: 'BuyingUser', constraints: false});
+
 Reckoning.belongsTo(Household);
 Household.hasMany(Reckoning);
 
 User.belongsTo(Household);
 Household.hasMany(User);
 
-//this will allow you to validate that a user does not already
-//have a household when you add a household
 Household.belongsTo(User, {as: 'Creator', constraints: false});
 Household.belongsTo(User, {as: 'Captain', constraints: false});
 

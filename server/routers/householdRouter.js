@@ -9,7 +9,7 @@ pathHandlers[''] = {
     //decoded is a property set by the token auth middleware
     //that makes the userId always available
     var userId = request.decoded.userId;
-    var name = request.body.name;
+    var accountName = request.body.accountName;
 
     db.User.find({where: {id: userId}})
 
@@ -22,7 +22,7 @@ pathHandlers[''] = {
             if (household) {
               response.status(409).send('Household already exists');
             } else {
-              return db.Household.create({name: name});
+              return db.Household.create({accountName});
             }
           });
       })

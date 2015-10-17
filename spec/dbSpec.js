@@ -1,3 +1,4 @@
+process.env['NODE_ENV'] = 'testing';
 var db = require('../server/db/interface');
 
 describe('Database interface', function() {

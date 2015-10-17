@@ -1,5 +1,6 @@
 var express = require('express');
-var path = require('path');
+// var path = require('path');
+var db = require('./db/interface');
 
 var parser = require('body-parser');
 
@@ -15,16 +16,16 @@ app.use('/auth', authRouter);
 
 var port = process.env.PORT || 8080;
 
-if (process.env.NODE_ENV === 'test') {
-  app.listen(port, function(error) {
+if (process.env.NODE_ENV === 'testing') {
+  module.exports = app.listen(port, function(error) {
     if (error) {
       console.error(error);
     }
   });
 } else {
   db.init().then(function() {
-    
-    app.listen(port, function(error) {
+
+    module.exports = app.listen(port, function(error) {
       if (error) {
         console.error(error);
       } else {
@@ -35,4 +36,4 @@ if (process.env.NODE_ENV === 'test') {
   });
 }
 
-module.exports = app;
+// module.exports = app;

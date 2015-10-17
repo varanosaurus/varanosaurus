@@ -1,5 +1,5 @@
 var authRouter = require('express').Router();
-var db = require('./db/interface');
+var db = require('../db/interface');
 var tokens = require('../services/tokens');
 
 authRouter.post('/login', function(request, response) {

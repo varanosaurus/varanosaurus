@@ -9,6 +9,8 @@ pathHandlers[''] = {
     var accountName = request.body.accountName;
     var password = request.body.password;
 
+    console.log(accountName, password);
+
     return db.User.find({where: {accountName}})
       .then(function(user) {
         if (user) {
@@ -20,10 +22,11 @@ pathHandlers[''] = {
           });
         }
       })
-      .then(function() {
+      .then(function(user) {
         response.status(201).json({
           success: true,
-          //token here later
+          userId: user.id,
+          //token here?[]
         });
       })
       .catch(function(error) {

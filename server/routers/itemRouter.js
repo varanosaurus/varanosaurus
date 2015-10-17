@@ -54,6 +54,7 @@ pathHandlers[':itemID'] = {
 
       .then(function(item) {
         if (item) {
+          console.log(item);
           response.status(201).send(item); //format of item???
         } else {
           response.status(500).send('Item not found');

@@ -11,7 +11,12 @@ var dbEnvironment = process.env.NODE_ENV;
 
 var shouldForce;
 
-var url = process.env.DATABASE_URL; //SET THIS UP PROPERLY SOON
+var url;
+if (dbEnvironment === 'testing') {
+  url = `postgres://${process.env.USER}:@localhost/knead`;
+} else {
+  url = process.env.DATABASE_URL;
+}
 
 var schema = 'knead';
 

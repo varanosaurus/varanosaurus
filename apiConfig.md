@@ -1,8 +1,8 @@
 /auth
   /login
     post: {
-      accountName,
-      password,
+      accountName: string,
+      password: string,
     }
 
 /api
@@ -10,9 +10,9 @@
 
     ''
       post: {
-        accountName,
-        password,
-        displayName
+        accountName: string,
+        password: string,
+        displayName: string,
       }
 
     /:userId
@@ -44,14 +44,19 @@
 
     ''
       post: {
-        description,
-        details, //optional
+        description: string,
+        details: string, //optional
       }
 
     /:itemId
-    
+
       get: {
         itemId
       }
-      put:
+      put: {
+        description: string, //optional
+        fetch: true, //optional
+        bought: true, //optional
+        price: decimal, //optional
+      }
       delete:

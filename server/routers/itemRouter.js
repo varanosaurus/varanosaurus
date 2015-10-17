@@ -65,7 +65,49 @@ pathHandlers[':itemID'] = {
         response.status(500).send();
       });
   },
-  // put: function(request, response),
+  put: function(request, response) {
+
+    var id = request.body.itemId;
+    var userId = request.decoded.userId;
+
+    var updates = {};
+    var options = ['description', 'fetch', 'bought', 'price'];
+
+    for (var i = 0; i < options.length; i++) {
+      var option = options[i];
+      if (request.body[option]) {
+        updates[option] = request.body[option];
+      }
+    }
+
+    //returning tells sequelize to pass the item that was updated
+    //back to us as the second element of the returned array
+    db.Item.update(updates, {where: {id}, returning: true})
+
+      .then(function(updateArray) {
+        if (updateArray) {
+          var item = updateArray[1];
+
+          if (request.body.fetch) {
+            item.setFetchingUser(userId);
+          }
+          if (request.body.bought) {
+            item.setBuyingUser(userId);
+          }
+
+          response.status(201).send(item);
+
+        } else {
+          response.status(500).send('Item not found');
+        }
+      })
+
+      .catch(function(error) {
+        console.error(error);
+        response.status(500).send();
+      });
+
+  },
   // delete: function(request, response),
 };
 

@@ -38,8 +38,6 @@ Household.hasMany(Reckoning);
 User.belongsTo(Household);
 Household.hasMany(User);
 
-//this will allow you to validate that a user does not already
-//have a household when you add a household
 Household.belongsTo(User, {as: 'Creator', constraints: false});
 Household.belongsTo(User, {as: 'Captain', constraints: false});
 

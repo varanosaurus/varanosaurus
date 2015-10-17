@@ -28,6 +28,10 @@ var User = db.define('user', userConfig.attributes, userConfig.options);
 Item.belongsTo(Household);
 Household.hasMany(Item);
 
+Item.belongsTo(User, {as: 'AddingUser', constraints: false});
+Item.belongsTo(User, {as: 'FetchingUser', constraints: false});
+Item.belongsTo(User, {as: 'BuyingUser', constraints: false});
+
 Reckoning.belongsTo(Household);
 Household.hasMany(Reckoning);
 

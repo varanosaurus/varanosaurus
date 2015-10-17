@@ -6,31 +6,21 @@ module.exports = {
 
 	attributes: {
 
-		itemDescription: {
+		description: {
 			type: Sequelize.STRING,
 			allowNull: false,
 		},
 
 		details: Sequelize.TEXT,
 
-		fetch: Sequelize.BOOLEAN,
-
-		bought: Sequelize.BOOLEAN,
-
-		addingUserId: {
-			//FK
-			type: Sequelize.INTEGER,
-			allowNull: false,
+		fetch: {
+			type: Sequelize.BOOLEAN,
+			defaultValue: false,
 		},
 
-		fetchingUserId: {
-			//FK
-			type: Sequelize.INTEGER,
-		},
-
-		buyingUserId: {
-			//FK
-			type: Sequelize.INTEGER,
+		bought: {
+			type: Sequelize.BOOLEAN,
+			defaultValue: false,
 		},
 
 		price: {
@@ -38,11 +28,6 @@ module.exports = {
 			// Do we want users to be able to add prices later, but require them for reckoning?
 			allowNull: false,
 			defaultValue: 0.0,
-		},
-
-		timeAdded: {
-			type: Sequelize.DATE,
-			defaultValue: Sequelize.NOW,
 		},
 
 		//name here is terrible

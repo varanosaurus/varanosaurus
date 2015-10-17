@@ -2,22 +2,22 @@ var authRouter = require('express').Router();
 var db = require('./db/interface');
 var tokens = require('../services/tokens');
 
-authRouter.post('/login', function(req, res) {
-  db.User.findOne({where: {name: req.body.name}})
+authRouter.post('/login', function(request, response) {
+  db.User.findOne({where: {accountName: request.body.accountName}})
     .then(function(user) {
 
       var token;
 
       if (!user) {
-       return res.status(404).end('User doesn\'t exist.');
+       return response.status(404).send('User doesn\'t exist.');
       }
 
-      if (user.comparePassword(req.body.password)) {
+      if (user.comparePassword(request.body.password)) {
         // TODO: see if this way of checking for a set household actually works, or throws an error
         token = tokens.issue(user.id, user.getHousehold() ? user.getHousehold().id : undefined);
-        return res.status(200).json(token);
+        return response.status(200).json(token);
       } else {
-        return res.status(403).end('Wrong password.');
+        return response.status(403).send('Wrong password.');
       }
 
     });

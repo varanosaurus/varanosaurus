@@ -6,17 +6,17 @@ var pathHandlers = {};
 pathHandlers[''] = {
   post: function(request, response) {
 
-    var username = request.body.username;
+    var accountName = request.body.accountName;
     var password = request.body.password;
 
-    return db.User.find({where: {username: username}})
+    return db.User.find({where: {accountName}})
       .then(function(user) {
         if (user) {
           response.status(409).send('User already exists');
         } else {
           return db.User.create({
-            username: username,
-            password: password,
+            accountName,
+            password,
           });
         }
       })
@@ -33,10 +33,10 @@ pathHandlers[''] = {
   },
 };
 
-pathHandlers[':username'] = {
+pathHandlers[':accountName'] = {
   // get: function(request, response) {
 
-    // var username = request.body.username
+    // var accountName = request.body.accountName
 
   // },
   // put: function(request, response) {},

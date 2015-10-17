@@ -26,9 +26,9 @@ describe('Database interface', function() {
         expect(user).toBeTruthy();
         expect(user).toEqual(jasmine.any(Object));
         expect(user.accountName).toEqual('redstarter');
-        done();
       })
-      .catch(done.fail.bind(done));
+      .catch(done.fail.bind(done))
+      .then(done);
 
     }); // Closes 'it should allow creation'
 
@@ -118,9 +118,9 @@ describe('Database interface', function() {
       })
       .then(function(match) {
         expect(match).toEqual(true);
-        done();
       })
-      .catch(done.fail.bind(done));
+      .catch(done.fail.bind(done))
+      .then(done);
 
     }); // Closes 'it should properly approve passwords'
 
@@ -136,9 +136,9 @@ describe('Database interface', function() {
       })
       .then(function(match) {
         expect(match).toEqual(false);
-        done();
       })
-      .catch(done.fail.bind(done));
+      .catch(done.fail.bind(done))
+      .then(done);
 
     }); // Closes 'it should properly reject incorrect passwords'
 
@@ -154,9 +154,9 @@ describe('Database interface', function() {
       .then(function(household) {
         expect(household).toBeTruthy();
         expect(household.name).toEqual('591 Dolores');
-        done();
       })
-      .catch(done.fail.bind(done));
+      .catch(done.fail.bind(done))
+      .then(done);
 
     }); // Closes 'it should allow creation'
 
@@ -188,13 +188,13 @@ describe('Database interface', function() {
       .then(function(listItem) {
         expect(listItem).toBeTruthy();
         expect(listItem.description).toEqual('Vampiric toilet paper');
-        done();
       })
-      .catch(done.fail.bind(done));
+      .catch(done.fail.bind(done))
+      .then(done);
 
     }); // Closes 'it should allow creation'
 
-    it('should associate with users as addingUser, fetchingUser, and buyingUser', function(done) {
+    it('should associate with an addingUser', function(done) {
 
       db.User.create({
         accountName: 'redstarter',
@@ -225,11 +225,27 @@ describe('Database interface', function() {
           });
       })
 
+      .catch(done.fail.bind(done))
+      .then(done);
+
+
+    }); // Closes 'it should associate with an addingUser'
+
+    it('should associate with a fetchingUser', function(done) {
+
+      db.User.create({
+        accountName: 'redstarter',
+        password: 'brewbro',
+        displayName: 'Sovester',
+      })
+
       .then(function(user) {
-        return db.Item.findOne({where: {description: 'Pilsner'}})
-          .then(function(item) {
-            return item.setFetchingUser(user);
-          });
+        return db.Item.create({
+          description: 'Pilsner',
+        })
+        .then(function(item) {
+          return item.setFetchingUser(user);
+        });
       })
 
       .then(function() {
@@ -245,11 +261,26 @@ describe('Database interface', function() {
           });
       })
 
-      .then(function(user) {
-        return db.Item.findOne({where: {description: 'Pilsner'}})
-          .then(function(item) {
-            return item.setBuyingUser(user);
-          });
+      .catch(done.fail.bind(done))
+      .then(done);
+
+    }); // Closes 'it should associate with a fetchingUser'
+
+    it('should associate with a buyingUser', function(done) {
+
+      db.User.create({
+        accountName: 'redstarter',
+        password: 'brewbro',
+        displayName: 'Sovester',
+      })
+
+       .then(function(user) {
+        return db.Item.create({
+          description: 'Pilsner',
+        })
+        .then(function(item) {
+          return item.setFetchingUser(user);
+        });
       })
 
       .then(function() {
@@ -267,8 +298,7 @@ describe('Database interface', function() {
       .catch(done.fail.bind(done))
       .then(done);
 
-
-    }); // Closes 'it should associate with users'
+    }); // Closes 'it should associate with a buyingUser'
 
 
   }); // Closes 'Item model'

@@ -184,7 +184,6 @@ describe('Database interface', function() {
 
       db.Item.create({
         description: 'Vampiric toilet paper',
-        addingUserId: '1',
       })
       .then(function(listItem) {
         expect(listItem).toBeTruthy();
@@ -194,6 +193,83 @@ describe('Database interface', function() {
       .catch(done.fail.bind(done));
 
     }); // Closes 'it should allow creation'
+
+    it('should associate with users as addingUser, fetchingUser, and buyingUser', function(done) {
+
+      db.User.create({
+        accountName: 'redstarter',
+        password: 'brewbro',
+        displayName: 'Sovester',
+      })
+
+      .then(function(user) {
+        return db.Item.create({
+          description: 'Pilsner',
+        })
+        .then(function(item) {
+          return item.setAddingUser(user);
+        });
+      })
+
+      .then(function() {
+        return db.Item.findOne({where: {description: 'Pilsner'}})
+        .then(function(item) {
+          expect(item).toBeTruthy();
+          expect(item.addingUserId).toBeTruthy();
+
+          return item.getAddingUser()
+            .then(function(user) {
+              expect(user.displayName).toEqual('Sovester');
+              return user;
+            });
+          });
+      })
+
+      .then(function(user) {
+        return db.Item.findOne({where: {description: 'Pilsner'}})
+          .then(function(item) {
+            return item.setFetchingUser(user);
+          });
+      })
+
+      .then(function() {
+        return db.Item.findOne({where: {description: 'Pilsner'}})
+          .then(function(item) {
+            expect(item.fetchingUserId).toBeTruthy();
+            return item.getFetchingUser();
+          })
+          .then(function(user) {
+            expect(user).toBeTruthy();
+            expect(user.displayName).toEqual('Sovester');
+            return user;
+          });
+      })
+
+      .then(function(user) {
+        return db.Item.findOne({where: {description: 'Pilsner'}})
+          .then(function(item) {
+            return item.setBuyingUser(user);
+          });
+      })
+
+      .then(function() {
+        db.Item.findOne({where: {description: 'Pilsner'}})
+          .then(function(item) {
+            expect(item.buyingUserId).toBeTruthy();
+            return item.getBuyingUser();
+          })
+          .then(function(user) {
+            expect(user).toBeTruthy();
+            expect(user.displayName).toEqual('Sovester');
+          });
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+
+    }); // Closes 'it should associate with users'
+
 
   }); // Closes 'Item model'
 

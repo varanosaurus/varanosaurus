@@ -177,11 +177,11 @@ describe('Database interface', function() {
 
   }); // Closes 'Household model'
 
-  describe('ListItem model', function() {
+  describe('Item model', function() {
 
     it('should allow creation of list items', function(done) {
 
-      db.ListItem.create({
+      db.Item.create({
         description: 'Vampiric toilet paper',
         addingUserId: '1',
       })
@@ -194,6 +194,6 @@ describe('Database interface', function() {
 
     }); // Closes 'it should allow creation'
 
-  }); // Closes 'ListItem model'
+  }); // Closes 'Item model'
 
 }); // Closes 'Database interface'

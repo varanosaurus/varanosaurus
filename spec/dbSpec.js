@@ -31,6 +31,24 @@ describe('Database interface', function() {
 
     }); // Closes 'it should allow creation'
 
+    it('should validate account names before saving for length and content', function(done) {
+
+      db.User.create({
+        accountName: 'bro',
+        password: 'brewbro',
+        displayName: 'Sovester',
+      })
+      .then(function(user) {
+        expect(user).toBeUndefined();
+      })
+      .catch(function(error) {
+        expect(error).toBeTruthy();
+        expect(error.name).toEqual('SequelizeValidationError');
+      })
+      .then(done);
+
+    }); // Closes 'it should validate account names'
+
     it('should validate passwords before saving for length and content', function(done) {
 
       db.User.create({
@@ -66,6 +84,24 @@ describe('Database interface', function() {
         });
 
     }); // Closes 'it should validate passwords'
+
+    it('shouldn\'t allow an empty displayName', function(done) {
+
+      db.User.create({
+        accountName: 'redstarter',
+        password: 'beerbro',
+        displayName: '',
+      })
+      .then(function(user) {
+        expect(user).toBeUndefined();
+      })
+      .catch(function(error) {
+        expect(error).toBeTruthy();
+        expect(error.name).toEqual('SequelizeValidationError');
+      })
+      .then(done);
+
+    }); // Closes 'it shouldn't allow an empty displayName'
 
   }); // Closes 'User model'
 

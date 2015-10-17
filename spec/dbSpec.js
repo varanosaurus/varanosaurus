@@ -176,6 +176,49 @@ describe('Database interface', function() {
 
     }); // Closes 'it should not allow names'
 
+    it('should associate with many items', function(done) {
+
+      db.Household.create({
+        name: '591 Dolores',
+      })
+      .then(function(household) {
+        return db.Item.bulkCreate([
+            {
+              description: 'TP',
+              householdId: household.id,
+            },
+            {
+              description: 'paper towels',
+              householdId: household.id,
+            },
+            {
+              description: 'hummus',
+              householdId: household.id,
+            },
+          ])
+          .then(function(items) {
+            return items[0].getHousehold();
+          })
+          .then(function(foundHousehold) {
+            expect(foundHousehold).toBeTruthy();
+            expect(foundHousehold.name).toEqual('591 Dolores');
+          });
+      })
+      .then(function() {
+        return db.Household.findOne({where: {name: '591 Dolores'}});
+      })
+      .then(function(household) {
+        return household.getItems();
+      })
+      .then(function(items) {
+        expect(items).toBeTruthy();
+        expect(items.length).toEqual(3);
+      })
+      .catch(done.fail.bind(done))
+      .then(done);
+
+    }); // Closes 'it should associate with many items'
+
   }); // Closes 'Household model'
 
   describe('Item model', function() {

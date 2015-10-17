@@ -37,6 +37,9 @@ Item.belongsTo(User, {as: 'addingUser'});
 Item.belongsTo(User, {as: 'fetchingUser'});
 Item.belongsTo(User, {as: 'buyingUser'});
 
+Item.belongsTo(Reckoning);
+Reckoning.hasMany(Item);
+
 Reckoning.belongsTo(Household);
 Household.hasMany(Reckoning);
 

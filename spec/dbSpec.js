@@ -7,6 +7,11 @@ describe('Database interface', function() {
       .catch(done.fail.bind(done));
   }, 10000);
 
+  beforeEach(function(done) {
+    db.sequelize.sync({force: true})
+      .then(done);
+  });
+
   describe('User model', function() {
 
     it('should allow creation of a new user', function(done) {
@@ -24,7 +29,43 @@ describe('Database interface', function() {
       .then(done)
       .catch(done.fail.bind(done));
 
-    });
+    }); // Closes 'it should allow creation'
+
+    it('should validate passwords before saving for length and content', function(done) {
+
+      db.User.create({
+        accountName: 'redstarter',
+        password: 'bro',
+        displayName: 'Sovester',
+      })
+      .then(function(user) {
+        expect(user).toBeUndefined();
+      })
+      .catch(function(error) {
+        expect(error).toBeTruthy();
+        expect(error.name).toEqual('SequelizeValidationError');
+      });
+
+      db.User.create({
+        accountName: 'redstarter',
+        password: '^^asdlfkja',
+        displayName: 'Sovester',
+      })
+      .then(function(user) {
+        expect(user).toBeUndefined();
+      })
+      .catch(function(error) {
+        expect(error).toBeTruthy();
+        expect(error.name).toEqual('SequelizeValidationError');
+      });
+
+      db.User.findAll()
+        .then(function(users) {
+          expect(users.length).toEqual(0);
+          done();
+        });
+
+    }); // Closes 'it should validate passwords'
 
   }); // Closes 'User model'
 

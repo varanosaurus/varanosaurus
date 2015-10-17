@@ -17,17 +17,20 @@ module.exports = {
 
 		bought: Sequelize.BOOLEAN,
 
-		addingUser: {
+		addingUserId: {
 			//FK
+			type: Sequelize.INTEGER,
 			allowNull: false,
 		},
 
-		fetchingUser: {
+		fetchingUserId: {
 			//FK
+			type: Sequelize.INTEGER,
 		},
 
-		buyingUser: {
+		buyingUserId: {
 			//FK
+			type: Sequelize.INTEGER,
 		},
 
 		price: {

@@ -5,7 +5,7 @@ var Bluebird = require('bluebird');
 var bcrypt = Bluebird.promisifyAll(require('bcrypt'));
 
 var hashPassword = function(user) {
-	return bcrypt.hashAsync(user.password, null, null)
+	return bcrypt.hashAsync(user.password, 8)
 		.then(function(hash) {
 			user.password = hash;
 		});
@@ -37,7 +37,7 @@ module.exports = {
 				// Must be min 6, max 28 chars
 				len: [6, 28],
 				// Must be letters, numbers, spaces, or exclamation/question marks
-				is: ['^[a-z \\d!?]+$','i'],
+				is: ['^[a-z \\d!?]+$', 'i'],
 
 			},
 		},

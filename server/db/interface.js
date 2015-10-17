@@ -17,22 +17,18 @@ var schema = 'knead';
 
 //not sure what the ssl does yet, will look this up in a minute
 //yell at Naomi if she forgets to get back to this
-var db = new Sequelize(url, {ssl: true, schema: schema});
+var db = new Sequelize(url, {ssl: true, logging: false, define: {schema}});
 
-var ListItem = db.define('listItem', listItemConfig.attributes, listItemConfig.options);
-ListItem.schema(schema);
+var ListItem = db.define('listitem', listItemConfig.attributes, listItemConfig.options);
 
 var Household = db.define('household', householdConfig.attributes, householdConfig.options);
-Household.schema(schema);
 
 var Reckoning = db.define('reckoning', reckoningConfig.attributes, reckoningConfig.options);
-Reckoning.schema(schema);
 
 var User = db.define('user', userConfig.attributes, userConfig.options);
-User.schema(schema);
 
-ListItem.belongsTo(Household);
 Household.hasMany(ListItem);
+ListItem.belongsTo(Household);
 
 Reckoning.belongsTo(Household);
 Household.hasMany(Reckoning);

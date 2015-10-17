@@ -51,12 +51,15 @@
     /:itemId
 
       get: {
-        itemId
+        itemId: integer,
       }
       put: {
+        itemId: integer
         description: string, //optional
         fetch: true, //optional
         bought: true, //optional
         price: decimal, //optional
       }
-      delete:
+      delete: {
+        itemId: integer,
+      }

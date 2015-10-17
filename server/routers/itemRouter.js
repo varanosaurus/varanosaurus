@@ -65,11 +65,14 @@ pathHandlers[':itemID'] = {
         response.status(500).send();
       });
   },
+
   put: function(request, response) {
 
     var id = request.body.itemId;
     var userId = request.decoded.userId;
 
+    //we'll set the possible updates to an update object
+    //then pass that into the update function
     var updates = {};
     var options = ['description', 'fetch', 'bought', 'price'];
 
@@ -108,7 +111,25 @@ pathHandlers[':itemID'] = {
       });
 
   },
-  // delete: function(request, response),
+
+  delete: function(request, response) {
+
+    var id = request.body.itemId;
+
+    db.Item.destroy({where: {id}})
+      .then(function(numberDestroyed) {
+        if (numberDestroyed) {
+          response.status(201).send();
+        } else {
+          response.status(500).send('Error deleting item');
+        }
+      })
+
+      .catch(function(error) {
+        console.error(error);
+        response.status(500).send();
+      });
+  },
 };
 
 for (var path in pathHandlers) {

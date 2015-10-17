@@ -2,10 +2,11 @@ var Sequelize = require('sequelize');
 
 // var config = require('./postgres.config.js');
 
-var itemConfig = require('./models/Item.js');
-var householdConfig = require('./models/Household.js');
-var reckoningConfig = require('./models/Reckoning.js');
-var userConfig = require('./models/User.js');
+var itemConfig = require('./models/Item');
+var householdConfig = require('./models/Household');
+var reckoningConfig = require('./models/Reckoning');
+var userConfig = require('./models/User');
+var userToReckoningConfig = require('./models/UserToReckoning');
 
 var dbEnvironment = process.env.NODE_ENV;
 
@@ -30,6 +31,8 @@ var Reckoning = db.define('reckoning', reckoningConfig.attributes, reckoningConf
 
 var User = db.define('user', userConfig.attributes, userConfig.options);
 
+var UserToReckoning = db.define('userToReckoning', userToReckoningConfig.attributes, userToReckoningConfig.options);
+
 Item.belongsTo(Household);
 Household.hasMany(Item);
 
@@ -39,6 +42,9 @@ Item.belongsTo(User, {as: 'buyingUser'});
 
 Item.belongsTo(Reckoning);
 Reckoning.hasMany(Item);
+
+User.belongsToMany(Reckoning, {through: UserToReckoning});
+Reckoning.belongsToMany(User, {through: UserToReckoning});
 
 Reckoning.belongsTo(Household);
 Household.hasMany(Reckoning);

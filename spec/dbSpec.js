@@ -343,7 +343,6 @@ describe('Database interface', function() {
 
     }); // Closes 'it should associate with a buyingUser'
 
-
   }); // Closes 'Item model'
 
 }); // Closes 'Database interface'

@@ -10,7 +10,8 @@ module.exports = {
 			type: Sequelize.STRING,
 			allowNull: false,
 			validate: {
-				isAlphanumeric: true,
+				// Should be alphanumeric + spaces
+				is: ['^[a-z \\d]+$', 'i'],
 			},
 		},
 

@@ -4,38 +4,50 @@ var db = require('../db/interface.js');
 var pathHandlers = {};
 
 pathHandlers[''] = {
-  post: function(request, response, next) {
+  post: function(request, response) {
 
-    //first find the username of the creator from the user
-    //then check to see if that user is already in a household
-    //if not, get the user's foreign id and use that
-    //to find the creator
+    //decoded is a property set by the token auth middleware
+    //that makes the userId always available
+    var userId = request.decoded.userId;
+    var name = request.body.name;
 
-    return db.Household.find({where: {}})
-      .then(function(user) {
-        if (user) {
-          response.status(409).send('Household already exists');
-        } else {
-          return db.Household.create({});
-        }
+    db.User.find({where: {id: userId}})
+
+      .then(function() {
+
+        db.User.getHousehold()
+          .then(function(household) {
+            //see if the user is already associated with a household
+            //if so, reject the creation attempt
+            if (household) {
+              response.status(409).send('Household already exists');
+            } else {
+              return db.Household.create({name: name});
+            }
+          });
       })
-      .then(function(user) {
+
+      .then(function(household) {
+        household.setCreator(userId);
+        //set the creator as the captain as default upon creation
+        household.setCaptain(userId);
         response.status(201).json({
           success: true,
           //token here later
         });
       })
+
       .catch(function(error) {
         console.error(error);
         response.status(500).send();
       });
-  }
+  },
 };
 
 pathHandlers[':householdID'] = {
-  get: function(request, response, next),
-  put: function(request, response, next),
-  delete: function(request, response, next),
+  // get: function(request, response) {},
+  // put: function(request, response) {},
+  // delete: function(request, response) {},
 };
 
 for (var path in pathHandlers) {

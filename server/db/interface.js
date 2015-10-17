@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 
 // var config = require('./postgres.config.js');
 
-var listConfig = require('./models/Item.js');
+var itemConfig = require('./models/Item.js');
 var householdConfig = require('./models/Household.js');
 var reckoningConfig = require('./models/Reckoning.js');
 var userConfig = require('./models/User.js');
@@ -15,11 +15,9 @@ var url = process.env.DATABASE_URL; //SET THIS UP PROPERLY SOON
 
 var schema = 'knead';
 
-//not sure what the ssl does yet, will look this up in a minute
-//yell at Naomi if she forgets to get back to this
 var db = new Sequelize(url, {ssl: true, logging: false, define: {schema}});
 
-var ListItem = db.define('listitem', listItemConfig.attributes, listItemConfig.options);
+var Item = db.define('item', itemConfig.attributes, itemConfig.options);
 
 var Household = db.define('household', householdConfig.attributes, householdConfig.options);
 
@@ -35,7 +33,11 @@ Household.hasMany(Reckoning);
 
 User.belongsTo(Household);
 Household.hasMany(User);
+
+//this will allow you to validate that a user does not already
+//have a household when you add a household
 Household.belongsTo(User, {as: 'Creator', constraints: false});
+Household.belongsTo(User, {as: 'Captain', constraints: false});
 
 if (dbEnvironment === 'reset' || dbEnvironment === 'testing') {
   shouldForce = true;
@@ -54,11 +56,9 @@ var init = function() {
 
 module.exports = {
   sequelize: db,
-  Item: Item,
-  Household: Household,
-  Reckoning: Reckoning,
-  User: User,
-  init: init,
+  Item,
+  Household,
+  Reckoning,
+  User,
+  init,
 };
-
-//little change

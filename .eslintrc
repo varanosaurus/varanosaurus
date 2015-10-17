@@ -30,5 +30,6 @@
     "comma-spacing": [2, {"before": false, "after": true}],
     "no-spaced-func": 2,
     "eol-last": 2,
+    "no-console": 1,
   }
 }

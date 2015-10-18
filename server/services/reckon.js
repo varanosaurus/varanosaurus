@@ -2,8 +2,6 @@ var db = require('../db/interface');
 
 var reckon = function(householdId) {
 
-  var totalSpent;
-
   db.Household.findById(householdId, {
     // Eagerly load some of the associated data
     // that we'll use to calculate the details of
@@ -32,19 +30,54 @@ var reckon = function(householdId) {
 
     .then(function(household) {
 
+      return db.Items
+        .sum('price', {where: {householdId: household.id}})
+        .then(function(sum) {
+          return {household, sum};
+        });
+
+    })
+
+    .then(function(results) {
+
+      var household = results.household;
+      var totalSpent = results.sum;
+
       var userCount = household.Users.length;
+
       var share = totalSpent / userCount;
 
       var userStats = household.Users.reduce(function(collection, user) {
         collection[user.id] = {user, contribution: 0.0, debt: share};
       }, {});
 
-      var totalSpent = household.Items.reduce(function(sum, item) {
-        userStats[item.User.id].contribution += item.price;
-        userStats[item.User.id].debt -= item.price;
-        return sum + item.price;
-      }, 0.0);
+      household.Items.forEach(function(item) {
+        var user = userStats[item.buyingUserId];
+        user.contribution += item.price;
+        user.debt -= item.price;
+      });
 
+      return db.Reckoning.create({totalSpent})
+        .then(function(reckoning) {
+          return reckoning
+            .setHousehold(household)
+            .then(function() {
+              return reckoning;
+            })
+            .then(function(reckoning) {
+              var u = userStats;
+              var promises = [];
+
+              for (var i in u) {
+                promises.push(reckoning.addUser(u[i].user, {contribution: u[i].contribution, debt: u[i].debt}));
+              }
+
+              return Promise.all(promises)
+                      .then(function() {
+                        return reckoning;
+                      });
+            });
+        });
 
     })
 

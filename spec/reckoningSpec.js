@@ -2,7 +2,10 @@ process.env['NODE_ENV'] = 'testing';
 
 var db = require('../server/db/interface');
 var reckon = require('../server/services/reckon');
-var Promise = require('bluebird');
+
+// Need to polyfill this in Jasmine for some reason.
+// `reckon` module uses a native Promise.all with no issues.
+Promise.all = require('bluebird').all;
 
 var testHousehold =
   {
@@ -61,7 +64,7 @@ describe('Reckoning service', function() {
   // DB reset
   beforeEach(function(done) {
 
-    db.sequelize.sync({force: true})
+    db.init()
 
       .catch(done.fail.bind(done))
       .then(done);
@@ -114,25 +117,19 @@ describe('Reckoning service', function() {
 
       })
 
-      .then(function(res) {
-        console.log(res);
-      })
-
-
       .catch(done.fail.bind(done))
       .then(done);
 
   }); // Closes 'beforeEach: DB setup'
 
-  xit('should create a total sum', function(done) {
+  it('should create a total sum', function(done) {
 
     reckon(this.household.id)
       .then(function(reckoning) {
-        console.log(reckoning);
         expect(reckoning).toBeTruthy();
-        expect(reckoning.totalSpent).toEqual(30.00);
+        expect(+reckoning.totalSpent).toEqual(30);
       })
-      // .catch(done.fail.bind(done))
+      .catch(done.fail.bind(done))
       .then(done);
 
   }); // Closes 'should create a total sum'

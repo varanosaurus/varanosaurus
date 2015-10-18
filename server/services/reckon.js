@@ -2,7 +2,7 @@ var db = require('../db/interface');
 
 var reckon = function(householdId) {
 
-  return db.Household.findOne({where: {id: householdId}}, {
+  return db.Household.findById(householdId, {
     // Eagerly load some of the associated data
     // that we'll use to calculate the details of
     // the reckoning and its join table.
@@ -30,7 +30,6 @@ var reckon = function(householdId) {
 
     .then(function(household) {
 
-      // throw new Error(JSON.stringify(household));
 
       return db.Item
         .sum('price', {where: {householdId: household.id}})
@@ -42,21 +41,24 @@ var reckon = function(householdId) {
 
     .then(function(results) {
 
+      // throw new Error(JSON.stringify(results));
+
       var household = results.household;
       var totalSpent = results.sum;
 
-      var userCount = household.Users.length;
+      var userCount = household.users.length;
 
       var share = totalSpent / userCount;
 
-      var userStats = household.Users.reduce(function(collection, user) {
-        collection[user.id] = {user, contribution: 0.0, debt: share};
+      var userStats = household.users.reduce(function(collection, user) {
+        collection[user.id] = {user, contribution: 0, debt: share};
+        return collection;
       }, {});
 
-      household.Items.forEach(function(item) {
+      household.items.forEach(function(item) {
         var user = userStats[item.buyingUserId];
-        user.contribution += item.price;
-        user.debt -= item.price;
+        user.contribution += +item.price;
+        user.debt -= +item.price;
       });
 
       return db.Reckoning.create({totalSpent})

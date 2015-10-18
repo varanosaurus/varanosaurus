@@ -2,7 +2,7 @@ var db = require('../db/interface');
 
 var reckon = function(householdId) {
 
-  db.Household.findById(householdId, {
+  return db.Household.findOne({where: {id: householdId}}, {
     // Eagerly load some of the associated data
     // that we'll use to calculate the details of
     // the reckoning and its join table.
@@ -15,7 +15,7 @@ var reckon = function(householdId) {
       {
         model: db.Item,
         // ... where there is no associated reckoning yet...
-        where: {reckoning: null},
+        where: {reckoningId: null},
         // ... and include the users who bought the item.
         include: [
           {
@@ -30,7 +30,9 @@ var reckon = function(householdId) {
 
     .then(function(household) {
 
-      return db.Items
+      // throw new Error(JSON.stringify(household));
+
+      return db.Item
         .sum('price', {where: {householdId: household.id}})
         .then(function(sum) {
           return {household, sum};
@@ -67,8 +69,9 @@ var reckon = function(householdId) {
             .then(function(reckoning) {
               var u = userStats;
               var promises = [];
+              var i;
 
-              for (var i in u) {
+              for (i in u) {
                 promises.push(reckoning.addUser(u[i].user, {contribution: u[i].contribution, debt: u[i].debt}));
               }
 
@@ -82,7 +85,7 @@ var reckon = function(householdId) {
     })
 
     .catch(function(err) {
-      return err;
+      throw err;
     });
 
 };

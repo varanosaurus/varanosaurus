@@ -134,4 +134,29 @@ describe('Reckoning service', function() {
 
   }); // Closes 'should create a total sum'
 
+  it('should create a reckoning joined to users, with additional contribution and debt columns', function(done) {
+
+    reckon(this.household.id)
+
+      .then(function(reckoning) {
+        return reckoning.getUsers();
+      })
+
+      .then(function(users) {
+        var i;
+
+        expect(users).toBeTruthy();
+        expect(users.length).toEqual(3);
+
+        for (i = 0; i < 3; i++) {
+          expect(+users[i].userToReckoning.contribution).toEqual(jasmine.any(Number));
+          expect(+users[i].userToReckoning.debt).toEqual(jasmine.any(Number));
+        }
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+  }); // Closes 'should create a reckoning joined to users, with additional contribution and debt columns'
+
 }); // Closes 'Reckoning service'

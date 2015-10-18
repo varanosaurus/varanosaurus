@@ -41,8 +41,6 @@ var reckon = function(householdId) {
 
     .then(function(results) {
 
-      // throw new Error(JSON.stringify(results));
-
       var household = results.household;
       var totalSpent = results.sum;
 

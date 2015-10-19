@@ -1,4 +1,5 @@
 process.env['NODE_ENV'] = 'testing';
+var request = require('request');
 var url = 'http://localhost:8080/api';
 
 //really-need lets us easily clear node's cache
@@ -11,7 +12,7 @@ describe('userRouter', function() {
   var server;
 
   beforeEach(function() {
-    server = require('../server/server', {bustCache: true});
+    server = needRequire('../server/server', {bustCache: true});
   });
 
   afterEach(function(done) {
@@ -27,10 +28,9 @@ describe('userRouter', function() {
     var body = JSON.stringify({
       accountName: 'naomi',
       password: 'hypotrochoid',
-      displayName: 'naomi',
     });
 
-    needRequire.post({headers, url: postUrl, body}, function(error, response, body) {
+    request.post({headers, url: postUrl, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
 

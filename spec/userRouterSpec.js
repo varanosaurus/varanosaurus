@@ -82,6 +82,7 @@ describe('userRouter', function() {
 
   it('should update a user and send back the properties that were changed', function(done) {
 
+    //seed database with new user
     var headers = {
       'content-type': 'application/json',
     };
@@ -103,6 +104,7 @@ describe('userRouter', function() {
 
         var parsedBody = JSON.parse(body);
 
+        expect(parsedBody.displayName).toBeTruthy();
         expect(parsedBody.displayName).toEqual('alchiu');
         done();
 
@@ -111,5 +113,36 @@ describe('userRouter', function() {
     });
 
   }); //closes 'should update a user'
+
+  it('should delete a user and send back confirmation', function(done) {
+
+    //seed database with new user
+    var headers = {
+      'content-type': 'application/json',
+    };
+    var body = JSON.stringify({
+      accountName: 'kylecho',
+      password: 'protip',
+    });
+
+    request.post({url, headers, body}, function(error, response, body) {
+
+      var id = JSON.parse(body).userId;
+      var newUrl = url + ':' + id;
+
+      request.del({url: newUrl}, function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+
+        expect(parsedBody.success).toEqual(true);
+        //sequelize returns a string for id; cast to a number first
+        expect(+parsedBody.deletedUserId).toEqual(id);
+        done();
+
+      });
+
+    });
+
+  }); //closes 'should delete a user'
 
 }); //closes 'userRouter'

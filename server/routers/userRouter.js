@@ -84,12 +84,15 @@ router.put('/:userId', function(request, response) {
 
 router.delete('/:userId', function(request, response) {
 
-  var id = request.params.userId;
+  var id = request.params.userId.slice(1); //returns ':userId' not 'userId', so we have to splice the colon out
 
   db.User.destroy({where: {id}})
     .then(function(numberDestroyed) {
       if (numberDestroyed) {
-        response.status(201).send();
+        response.status(201).json({
+          success: true,
+          deletedUserId: id
+        });
       } else {
         response.status(500).send('Error deleting user');
       }

@@ -19,13 +19,15 @@ app.use('/auth', authRouter);
 var port = process.env.PORT || 8080;
 
 if (process.env.NODE_ENV === 'testing') {
+
   module.exports = app.listen(port, function(error) {
     if (error) {
-      console.error(error);
+      console.error('Error listening: ', error);
     } else {
       console.log('testing, listening on port: ', port);
     }
   });
+
 } else {
   db.init().then(function() {
 

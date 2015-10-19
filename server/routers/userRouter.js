@@ -44,7 +44,7 @@ router.get('/:userId', function(request, response) {
         response.status(201).json({
           accountName: user.accountName,
           displayName: user.displayName,
-          id: user.id,
+          userId: user.id,
         }); //format?
       } else {
         response.status(500).send('User not found');
@@ -57,8 +57,35 @@ router.get('/:userId', function(request, response) {
     });
 });
 
-  // put: function(request, response) {
-  // },
+router.put('/:userId', function(request, response) {
+
+  var id = request.params.userId;
+
+  var updates = request.body;
+  var updateList = [];
+  for (var key in updates) {
+    updateList.push(key);
+  }
+
+  //returning tells sequelize to pass the item that was updated
+  //back to us as the second element of the returned array
+  db.User.update(updates, {where: {id}, returning: true})
+
+    .then(function(updateArray) {
+      if (updateArray) {
+        response.status(201).send(updateList);
+
+      } else {
+        response.status(500).send('Item not found');
+      }
+    })
+
+    .catch(function(error) {
+      console.error(error);
+      response.status(500).send();
+    });
+
+});
 
 router.delete('/:userId', function(request, response) {
 

@@ -32,15 +32,20 @@ router.post('/', function(request, response) {
     });
 });
 
-router.get(':accountName', function(request, response) {
+router.get('/:userId', function(request, response) {
 
-  var id = request.decoded.userId;
+  // var id = request.decoded.userId;
+  var id = request.params.userId.slice(1); //returns ':userId' not 'userId', so we have to splice the colon out
 
   db.User.find({where: {id}})
 
     .then(function(user) {
       if (user) {
-        response.status(201).send(user); //format?
+        response.status(201).json({
+          accountName: user.accountName,
+          displayName: user.displayName,
+          id: user.id,
+        }); //format?
       } else {
         response.status(500).send('User not found');
       }
@@ -55,9 +60,9 @@ router.get(':accountName', function(request, response) {
   // put: function(request, response) {
   // },
 
-router.delete(':accountName', function(request, response) {
+router.delete('/:userId', function(request, response) {
 
-  var id = request.decoded.userId;
+  var id = request.params.userId;
 
   db.User.destroy({where: {id}})
     .then(function(numberDestroyed) {

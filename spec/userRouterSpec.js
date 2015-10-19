@@ -12,7 +12,7 @@ describe('userRouter', function() {
   var server;
 
   beforeEach(function() {
-    server = needRequire('../server/server', {bustCache: true});
+    server = needRequire('../server/server', {bustCache: true, keep: false});
   });
 
   afterEach(function(done) {
@@ -30,7 +30,7 @@ describe('userRouter', function() {
       password: 'hypotrochoid',
     });
 
-    request.post({headers, url: postUrl, body}, function(error, response, body) {
+    request.post({url: postUrl, headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
 
@@ -42,5 +42,35 @@ describe('userRouter', function() {
     });
 
   }); //closes 'should create a new user'
+
+  it('should respond to a get request to an id with that user\'s information', function(done) {
+
+    var headers = {
+      'content-type': 'application/json',
+    };
+    var postUrl = url + '/users';
+    var body = JSON.stringify({
+      accountName: 'cameron',
+      password: 'hypotrochoid',
+    });
+
+    request.post({url: postUrl, headers, body}, function(error, response, body) {
+
+      var id = JSON.parse(body).userId;
+
+      var getUrl = url + '/users/:' + id;
+
+      request.get({url: getUrl, headers}, function(error, response, body) {
+
+        expect(JSON.parse(body).accountName).toEqual('cameron');
+        expect(JSON.parse(body).displayName).toEqual(null);
+        expect(typeof(JSON.parse(body).id)).toEqual('number');
+        done();
+
+      });
+
+    });
+
+  });
 
 }); //closes 'userRouter'

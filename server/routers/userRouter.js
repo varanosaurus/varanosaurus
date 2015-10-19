@@ -91,7 +91,7 @@ router.delete('/:userId', function(request, response) {
       if (numberDestroyed) {
         response.status(201).json({
           success: true,
-          deletedUserId: id
+          deletedUserId: id,
         });
       } else {
         response.status(500).send('Error deleting user');

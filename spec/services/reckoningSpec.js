@@ -1,7 +1,7 @@
 process.env['NODE_ENV'] = 'testing';
 
-var db = require('../server/db/interface');
-var reckon = require('../server/services/reckon');
+var db = require('../../server/db/interface');
+var reckon = require('../../server/services/reckon');
 
 // Need to polyfill this in Jasmine for some reason.
 // `reckon` module uses a native Promise.all with no issues.

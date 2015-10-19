@@ -20,7 +20,7 @@ var Knead = React.createClass({
       <NavigatorIOS
         initialRoute={{
           component: TabView,
-          title: 'knead'
+          title: 'Knead'
         }}
         style={styles.container}
       />

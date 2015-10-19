@@ -32,8 +32,8 @@ var reckon = function(householdId) {
   })
 
     .then(function(household) {
-      if (!household.items.length || !household.users.length) {
-        throw new Error('No items to reckon.');
+      if (!household) {
+        throw new Error('Nothing to reckon.');
       }
       // Next, compute the sum of the items we're going to reckon.
       var sum = household.items.reduce(function(sum, item) {
@@ -134,7 +134,7 @@ var reckon = function(householdId) {
     })
 
     .catch(function(err) {
-      if (err.message === 'No items to reckon.') {
+      if (err.message === 'Nothing to reckon.') {
         return null;
       } else {
         throw err;

@@ -197,4 +197,65 @@ describe('Reckoning service', function() {
 
   }); // Closes 'should handle negative debts'
 
+  it('should resolve to null when there are no items to reckon', function(done) {
+
+    db.init()
+      .then(function() {
+        return db.Household.create(testHousehold);
+      })
+
+      .then(function(household) {
+        return Promise.all(
+            testUsers.map(function(user) {
+              return household.createUser(user);
+            })
+          )
+          .then(function() {
+            return household;
+          });
+      })
+
+      .then(function(household) {
+        return reckon(household.id);
+      })
+
+      .then(function(reckoning) {
+        expect(reckoning).toBeNull();
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+  }); // Closes 'should resolve to null when there are no items to reckon'
+
+  it('should resolve to null when there are no users associated with the household', function(done) {
+
+    db.init()
+      .then(function() {
+        return db.Household.create(testHousehold);
+      })
+
+      .then(function(household) {
+        return db.Item.bulkCreate(testItems, {returning: true})
+          .then(function(items) {
+            return household.addItems(items);
+          })
+          .then(function() {
+            return household;
+          });
+      })
+
+      .then(function(household) {
+        return reckon(household.id);
+      })
+
+      .then(function(reckoning) {
+        expect(reckoning).toBeNull();
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+  }); // Closes 'should resolve to null when there are no users associated with the household'
+
 }); // Closes 'Reckoning service'

@@ -32,6 +32,9 @@ var reckon = function(householdId) {
   })
 
     .then(function(household) {
+      if (!household.items.length) {
+        throw new Error('No items to reckon.');
+      }
       // Next, compute the sum of the items we're going to reckon.
       var sum = household.items.reduce(function(sum, item) {
         // Second operator is unary to cast from string -> number.
@@ -131,7 +134,11 @@ var reckon = function(householdId) {
     })
 
     .catch(function(err) {
-      throw err;
+      if (err.message === 'No items to reckon.') {
+        return null;
+      } else {
+        throw err;
+      }
     });
 
 };

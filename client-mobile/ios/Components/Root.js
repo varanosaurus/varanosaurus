@@ -19,6 +19,12 @@ var Root = React.createClass({
       id: 'Sign up'
     })
   },
+  logIn: function() {
+    this.props.navigator.push({
+      index: 2,
+      id: 'Log in'
+    })
+  },
   render: function() {
     return (
       <View style={styles.container}>
@@ -29,9 +35,9 @@ var Root = React.createClass({
           <Text style={styles.btnText}>Sign Up</Text>
 
         </TouchableHighlight>
-        <TouchableHighlight 
+        <TouchableHighlight
           style={styles.button}
-          onPress={() => this.login()}
+          onPress={() => this.logIn()}
         >
           <Text style={styles.btnText}>Login</Text>
         </TouchableHighlight>

@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var Root = require('./ios/Components/Root');
+var SignUp = require('./ios/Components/SignUp');
 
 var {
   AppRegistry,
@@ -12,28 +13,28 @@ var {
 
 
 var Knead = React.createClass({
+
+  renderScene: function(route, navigator) {
+    switch (route.id) {
+      case 'Sign up / Login':
+        return <Root navigator={navigator}/>
+      case 'Sign up':
+        return <SignUp navigator={navigator}/>
+    }
+
+  },
+
   render: function() {
     return (
       <Navigator
         style={styles.container}
         initialRoute={{
-          name: 'Sign up / Login',
           index: 0,
-          title: 'Sign up / Login'
+          id: 'Sign up / Login'
           // component: TabView,
           
         }}
-        renderScene={(route, navigator) => 
-          <Root
-            name={route.name}
-          />
-          // onForward={() => {
-          //   var next = route.index + 1;
-          //   navigator.push({
-          //     name: ''
-          //   })
-          // }}
-        }
+        renderScene={this.renderScene}
       />
     );
   }

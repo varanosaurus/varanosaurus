@@ -5,7 +5,6 @@ var React = require('react-native');
 // var Login = require('./ios/Components/Login');
 
 var {
-  AppRegistry,
   StyleSheet,
   Navigator,
   TouchableHighlight,
@@ -16,11 +15,9 @@ var {
 var Root = React.createClass({
   signUp: function() {
     this.props.navigator.push({
-      name: 'Sign up',
       index: 1,
-      title: 'Sign up'
+      id: 'Sign up'
     })
-    
   },
   render: function() {
     return (

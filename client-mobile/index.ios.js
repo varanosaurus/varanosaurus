@@ -1,28 +1,39 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 
 var React = require('react-native');
-var TabView = require('./ios/Components/TabView');
+var Root = require('./ios/Components/Root');
+var SignUp = require('./ios/Components/SignUp');
 
 var {
   AppRegistry,
   StyleSheet,
-  NavigatorIOS,
+  Navigator,
 } = React;
 
 
+
 var Knead = React.createClass({
+
+  renderScene: function(route, navigator) {
+    switch (route.id) {
+      case 'Sign up / Login':
+        return <Root navigator={navigator}/>
+      case 'Sign up':
+        return <SignUp navigator={navigator}/>
+    }
+
+  },
+
   render: function() {
     return (
-      <NavigatorIOS
-        initialRoute={{
-          component: TabView,
-          title: 'Knead'
-        }}
+      <Navigator
         style={styles.container}
+        initialRoute={{
+          index: 0,
+          id: 'Sign up / Login'
+          // component: TabView,
+        }}
+        renderScene={this.renderScene}
       />
     );
   }
@@ -31,18 +42,8 @@ var Knead = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    backgroundColor: 'white'
+  }
 });
 
 AppRegistry.registerComponent('Knead', () => Knead);

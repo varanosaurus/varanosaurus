@@ -32,7 +32,7 @@ var reckon = function(householdId) {
   })
 
     .then(function(household) {
-      if (!household.items.length) {
+      if (!household.items.length || !household.users.length) {
         throw new Error('No items to reckon.');
       }
       // Next, compute the sum of the items we're going to reckon.

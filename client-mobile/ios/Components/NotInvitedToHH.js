@@ -17,7 +17,7 @@ var NotInvitedToHH = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <Text>You're not in a household yet, please have your roommate invite you</Text>
+        <Text>You are not in a household yet, please have your roommate invite you</Text>
         <Text> ----- OR ----- </Text>
         <TouchableHighlight
           style={styles.button}

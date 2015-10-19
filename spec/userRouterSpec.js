@@ -1,6 +1,7 @@
 process.env['NODE_ENV'] = 'testing';
 var request = require('request');
-var url = 'http://localhost:8080/api';
+var url = 'http://localhost:8080/api/users/';
+// var db = require('../server/db/interface');
 
 //really-need lets us easily clear node's cache
 //after each test so that we can have a clean
@@ -12,7 +13,14 @@ describe('userRouter', function() {
   var server;
 
   beforeEach(function() {
+
+    //theoretically clears the server before each test but doesn't work right now
     server = needRequire('../server/server', {bustCache: true, keep: false});
+
+    //eventually figure out how to clear db before each test
+    //for now, tests are written to not conflict with each other
+    // db.sequelize.drop();
+    // db.sequelize.sync({force: true});
   });
 
   afterEach(function(done) {
@@ -24,13 +32,12 @@ describe('userRouter', function() {
     var headers = {
       'content-type': 'application/json',
     };
-    var postUrl = url + '/users';
     var body = JSON.stringify({
       accountName: 'naomi',
       password: 'hypotrochoid',
     });
 
-    request.post({url: postUrl, headers, body}, function(error, response, body) {
+    request.post({url, headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
 
@@ -48,29 +55,61 @@ describe('userRouter', function() {
     var headers = {
       'content-type': 'application/json',
     };
-    var postUrl = url + '/users';
     var body = JSON.stringify({
       accountName: 'cameron',
       password: 'hypotrochoid',
     });
 
-    request.post({url: postUrl, headers, body}, function(error, response, body) {
+    request.post({url, headers, body}, function(error, response, body) {
 
       var id = JSON.parse(body).userId;
+      var newUrl = url + ':' + id;
 
-      var getUrl = url + '/users/:' + id;
+      request.get({url: newUrl, headers}, function(error, response, body) {
 
-      request.get({url: getUrl, headers}, function(error, response, body) {
+        var parsedBody = JSON.parse(body);
 
-        expect(JSON.parse(body).accountName).toEqual('cameron');
-        expect(JSON.parse(body).displayName).toEqual(null);
-        expect(typeof(JSON.parse(body).id)).toEqual('number');
+        expect(parsedBody.accountName).toEqual('cameron');
+        expect(parsedBody.displayName).toEqual(null);
+        expect(typeof(parsedBody.userId)).toEqual('number');
         done();
 
       });
 
     });
 
-  });
+  }); //closes 'should respond to a get request'
+
+  it('should update a user and send back the properties that were changed', function(done) {
+
+    var headers = {
+      'content-type': 'application/json',
+    };
+    var body = JSON.stringify({
+      accountName: 'amyleechiu',
+      password: 'hypotrochoid',
+    });
+
+    request.post({url, headers, body}, function(error, response, body) {
+
+      var id = JSON.parse(body).userId;
+      var newUrl = url + ':' + id;
+
+      var changes = JSON.stringify({
+        displayName: 'alchiu',
+      });
+
+      request.put({url: newUrl, headers, body: changes}, function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+
+        expect(parsedBody.displayName).toEqual('alchiu');
+        done();
+
+      });
+
+    });
+
+  }); //closes 'should update a user'
 
 }); //closes 'userRouter'

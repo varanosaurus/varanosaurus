@@ -5,7 +5,7 @@ router.post('/', function(request, response) {
 
   var accountName = request.body.accountName;
   var password = request.body.password;
-  var displayName = request.body.displayName;
+  var displayName = request.body.displayName || null;
 
   return db.User.find({where: {accountName}})
     .then(function(user) {
@@ -45,7 +45,7 @@ router.get('/:userId', function(request, response) {
           accountName: user.accountName,
           displayName: user.displayName,
           userId: user.id,
-        }); //format?
+        });
       } else {
         response.status(500).send('User not found');
       }
@@ -59,22 +59,17 @@ router.get('/:userId', function(request, response) {
 
 router.put('/:userId', function(request, response) {
 
-  var id = request.params.userId;
-
+  var id = request.params.userId.slice(1); //returns ':userId' not 'userId', so we have to splice the colon out
   var updates = request.body;
-  var updateList = [];
-  for (var key in updates) {
-    updateList.push(key);
-  }
 
-  //returning tells sequelize to pass the item that was updated
+  //returning tells sequelize to pass the model that was updated
   //back to us as the second element of the returned array
   db.User.update(updates, {where: {id}, returning: true})
 
     .then(function(updateArray) {
       if (updateArray) {
-        response.status(201).send(updateList);
 
+        response.status(201).json(updates);
       } else {
         response.status(500).send('Item not found');
       }

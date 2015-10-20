@@ -10,7 +10,7 @@ var {
   SegmentedControlIOS,
 } = React;
 
-var ItemCell = require('./ItemCell');
+var Cell = require('./Cell');
 var ItemDetails = require('./ItemDetails');
 
 /* This mock data is here to simulate our API */
@@ -149,7 +149,7 @@ var ItemList = React.createClass({
 
   renderRow: function(item) {
     return (
-      <ItemCell
+      <Cell
         onSelect={() => this.selectItem(item)}
         item={item}
       />
@@ -220,7 +220,7 @@ var styles = StyleSheet.create({
   listView: {
     backgroundColor: '#F5FCFF'
   },
-  itemCell: {
+  Cell: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',

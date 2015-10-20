@@ -9,12 +9,12 @@ var {
   Component,
 } = React;
 
-var Reckoning = React.createClass({
+var ByPerson = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
         <Text style={styles.description}>
-          This is going to be the RECKONING VIEW
+          This is going to be the ByPerson VIEW
         </Text>
       </View>
     )
@@ -33,4 +33,4 @@ var styles = StyleSheet.create({
 
 })
 
-module.exports = Reckoning;
+module.exports = ByPerson;

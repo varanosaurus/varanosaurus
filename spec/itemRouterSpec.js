@@ -1,111 +1,140 @@
-// process.env['NODE_ENV'] = 'testing';
-// var request = require('request');
-// var url = 'http://localhost:8080/api/items/';
-// var db = require('../server/db/interface');
+process.env['NODE_ENV'] = 'testing';
+var request = require('request');
+var url = 'http://localhost:8080/api/items/';
+var db = require('../server/db/interface');
 
-// //really-need lets us easily clear node's cache
-// //after each test so that we can have a clean
-// //server instance before the next text
-// var needRequire = require('really-need');
+//really-need lets us easily clear node's cache
+//after each test so that we can have a clean
+//server instance before the next text
+var needRequire = require('really-need');
 
-// xdescribe('itemRouter', function() {
+describe('itemRouter', function() {
 
-//   var server;
+  var server;
 
-//   //declare these for closure access later on
-//   var householdId;
-//   var userId;
-//   var headers = {'content-type': 'application/json'};
+  beforeEach(function(done) {
 
-//   beforeEach(function(done) {
+    var context = this;
+    this.headers = {'content-type': 'application/json'};
 
-//     server = needRequire('../server/server', {bustCache: true, keep: false});
-//     db.sequelize.sync({force: true})
-//       .then(function() {
+    server = needRequire('../server/server', {bustCache: true, keep: false});
+    db.sequelize.sync({force: true})
+      .then(function() {
 
-//         var userUrl = 'http://localhost:8080/api/users/';
-//         var userBody = JSON.stringify({
-//           accountName: 'nedStark',
-//           password: 'RplusLEqualsJ',
-//         });
+        //seed db with user and household
+        var userUrl = 'http://localhost:8080/auth/signup';
+        var userBody = JSON.stringify({
+          accountName: 'nedStark',
+          password: 'RPlusLEqualsJ',
+        });
 
-//         request.post({url: userUrl, headers, body: userBody}, function(error, response, body) {
+        request.post({
+          url: userUrl,
+          headers: context.headers,
+          body: userBody,
+        },
+        function(error, response, body) {
+          var parsedBody = JSON.parse(body);
 
-//           userId = JSON.parse(body).userId;
-//           var headers = {'content-type': 'application/json'};
-//           var householdUrl = 'http://localhost:8080/api/households/';
-//           var householdBody = JSON.stringify({
-//             householdName: 'winterfell',
-//             userId,
-//           });
+          context.headers['X-Access-Token'] = parsedBody.token;
+          context.userId = parsedBody.user.id;
 
-//           request.post({url: householdUrl, headers, body: householdBody}, function(error, response, body) {
+          var householdUrl = 'http://localhost:8080/api/households/';
+          var householdBody = JSON.stringify({
+            householdName: 'Winterfell',
+          });
 
-//             householdId = JSON.parse(body).householdId;
+          request.post({
+            url: householdUrl,
+            headers: context.headers,
+            body: householdBody,
+          },
+          function(error, response, body) {
+            var parsedBody = JSON.parse(body);
 
-//             done();
+            context.headers['X-Access-Token'] = parsedBody.token;
+            context.householdId = parsedBody.household.id;
+            done();
 
-//           });
+          }); //closes post request for household
 
-//         });
+        }); //closes post request for user
 
-//       });
-//   });
+      }); //closes then
 
-//   afterEach(function(done) {
-//     server.close(done);
-//   });
+  }); //closes beforeEach
 
-//   xit('should create a new item and send back the itemId', function(done) {
+  afterEach(function(done) {
+    server.close(done);
+  });
 
-//     var body = JSON.stringify({
-//       description: 'valyrian steel',
-//       householdId,
-//       userId,
-//     });
+  it('should create a new item and send back the item', function(done) {
 
-//     request.post({url, headers, body}, function(error, response, body) {
-//       expect(body).toBeTruthy();
-//     });
+    var context = this;
+    var body = JSON.stringify({description: 'valyrian steel'});
 
-//   }); //closes create
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
-//   xit('should respond to a get request', function(done) {
+      expect(JSON.parse(body).item.description).toEqual('valyrian steel');
+      done();
 
-//     var body = JSON.stringify({
+    });
 
-//     });
+  });
 
-//     request.post({url, headers, body}, function(error, response, body) {
+  xit('should respond to a get request with that item\'s information', function(done) {
 
-//     });
+    var context = this;
 
-//   }); //closes get
+    request.get({url: url + context.userId, headers: context.headers}, function(error, response, body) {
 
-//   xit('should update', function(done) {
+      var parsedBody = JSON.parse(body);
 
-//     var headers = {'content-type': 'application/json'};
-//     var body = JSON.stringify({
+      expect(parsedBody.accountName).toEqual('nedStark');
+      expect(parsedBody.displayName).toEqual(null);
+      expect(parsedBody.id).toEqual(1);
+      done();
 
-//     });
+    });
 
-//     request.post({url, headers, body}, function(error, response, body) {
+  }); //closes 'should respond to a get request'
 
-//     });
+  xit('should update a user and send back the properties that were changed', function(done) {
 
-//   }); //closes update
+    var context = this;
 
-//   xit('should delete', function(done) {
+    var updates = JSON.stringify({
+      password: 'mySecretDiedWithMe',
+      displayName: 'honorableButStupid',
+    });
 
-//     var headers = {'content-type': 'application/json'};
-//     var body = JSON.stringify({
+    request.put({url: url + context.userId, headers: context.headers, body: updates}, function(error, response, body) {
 
-//     });
+      var parsedBody = JSON.parse(body);
 
-//     request.post({url, headers, body}, function(error, response, body) {
+      expect(parsedBody.updates.displayName).toBeTruthy();
+      expect(parsedBody.updates.displayName).toEqual('honorableButStupid');
+      done();
 
-//     });
+    });
 
-//   }); //closes delete
+  }); //closes 'should update a user'
 
-// }); //closes itemRouter
+  xit('should delete a user and send back confirmation', function(done) {
+
+    var context = this;
+
+    request.del({url: url + context.userId, headers: context.headers}, function(error, response, body) {
+
+      var parsedBody = JSON.parse(body);
+
+      expect(parsedBody.success).toEqual(true);
+      //sequelize returns a string for id; cast to a number first
+      expect(+parsedBody.deletedUserId).toEqual(1);
+      done();
+
+    });
+
+  }); //closes 'should delete a user'
+
+}); //closes 'userRouter'

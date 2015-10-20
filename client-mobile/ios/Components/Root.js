@@ -1,12 +1,9 @@
 'use strict';
 
 var React = require('react-native');
-// var SignUp = require('./ios/Components/SignUp');
-// var Login = require('./ios/Components/Login');
 
 var {
   StyleSheet,
-  Navigator,
   TouchableHighlight,
   View,
   Text,

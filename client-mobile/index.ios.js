@@ -4,6 +4,9 @@ var React = require('react-native');
 var Root = require('./ios/Components/Root');
 var SignUp = require('./ios/Components/SignUp');
 var LogIn = require('./ios/Components/LogIn');
+var NotInvitedToHH = require('./ios/Components/NotInvitedToHH');
+var InvitedToHH = require('./ios/Components/InvitedToHH');
+var CreateNewHH = require('./ios/Components/CreateNewHH');
 
 var {
   AppRegistry,
@@ -21,8 +24,13 @@ var Knead = React.createClass({
         return <SignUp navigator={navigator}/>
       case 'Log in':
         return <LogIn navigator={navigator}/>
+      case 'Not invited':
+        return <NotInvitedToHH navigator={navigator}/>
+      case 'Invited':
+        return <InvitedToHH navigator={navigator}/>
+      case 'Create new household':
+        return <CreateNewHH navigator={navigator}/>
     }
-
   },
 
   render: function() {

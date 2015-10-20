@@ -1,7 +1,7 @@
 process.env['NODE_ENV'] = 'testing';
 
-var db = require('../server/db/interface');
-var reckon = require('../server/services/reckon');
+var db = require('../../server/db/interface');
+var reckon = require('../../server/services/reckon');
 
 // Need to polyfill this in Jasmine for some reason.
 // `reckon` module uses a native Promise.all with no issues.
@@ -158,5 +158,104 @@ describe('Reckoning service', function() {
       .then(done);
 
   }); // Closes 'should create a reckoning joined to users, with additional contribution and debt columns'
+
+  it('should handle negative debts', function(done) {
+
+    var household = this.household;
+
+    household.createItem({description: 'Thing 7', price: 200}, {returning: true})
+
+      .then(function(item) {
+        return item.setBuyingUser(1);
+      })
+
+      .then(function() {
+        return reckon(household.id);
+      })
+
+      .then(function(reckoning) {
+        expect(reckoning).toBeTruthy();
+        expect(+reckoning.totalSpent).toEqual(230);
+        return reckoning.getUsers();
+      })
+
+      .then(function(users) {
+        expect(users).toBeTruthy();
+      })
+
+      .then(function() {
+        return db.User.findById(1, {include: [{model: db.Reckoning}]})
+          .then(function(user) {
+            expect(user).toBeTruthy();
+            expect(user.reckonings[0].userToReckoning).toBeTruthy();
+            expect(user.reckonings[0].userToReckoning.debt).toBeLessThan(0);
+          });
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+  }); // Closes 'should handle negative debts'
+
+  it('should resolve to null when there are no items to reckon', function(done) {
+
+    db.init()
+      .then(function() {
+        return db.Household.create(testHousehold);
+      })
+
+      .then(function(household) {
+        return Promise.all(
+            testUsers.map(function(user) {
+              return household.createUser(user);
+            })
+          )
+          .then(function() {
+            return household;
+          });
+      })
+
+      .then(function(household) {
+        return reckon(household.id);
+      })
+
+      .then(function(reckoning) {
+        expect(reckoning).toBeNull();
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+  }); // Closes 'should resolve to null when there are no items to reckon'
+
+  it('should resolve to null when there are no users associated with the household', function(done) {
+
+    db.init()
+      .then(function() {
+        return db.Household.create(testHousehold);
+      })
+
+      .then(function(household) {
+        return db.Item.bulkCreate(testItems, {returning: true})
+          .then(function(items) {
+            return household.addItems(items);
+          })
+          .then(function() {
+            return household;
+          });
+      })
+
+      .then(function(household) {
+        return reckon(household.id);
+      })
+
+      .then(function(reckoning) {
+        expect(reckoning).toBeNull();
+      })
+
+      .catch(done.fail.bind(done))
+      .then(done);
+
+  }); // Closes 'should resolve to null when there are no users associated with the household'
 
 }); // Closes 'Reckoning service'

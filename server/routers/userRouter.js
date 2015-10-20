@@ -57,6 +57,7 @@ router.get('/:userId', function(request, response) {
     });
 });
 
+//TODO: allow household to be added/changed (reissue token)
 router.put('/:userId', function(request, response) {
 
   var id = request.params.userId.slice(1); //returns ':userId' not 'userId', so we have to splice the colon out

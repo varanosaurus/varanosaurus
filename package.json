@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node jasmine-runner.js",
     "test-db": "jasmine spec/dbSpec.js"
   },
   "repository": {
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "jasmine": "^2.3.2",
+    "jasmine-spec-reporter": "^2.4.0",
     "morgan": "^1.6.1",
     "really-need": "^1.6.3",
     "request": "^2.65.0"

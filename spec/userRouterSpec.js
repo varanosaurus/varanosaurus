@@ -1,7 +1,7 @@
 process.env['NODE_ENV'] = 'testing';
 var request = require('request');
 var url = 'http://localhost:8080/api/users/';
-// var db = require('../server/db/interface');
+var db = require('../server/db/interface');
 
 //really-need lets us easily clear node's cache
 //after each test so that we can have a clean
@@ -12,22 +12,18 @@ describe('userRouter', function() {
 
   var server;
 
-  beforeEach(function() {
+  beforeEach(function(done) {
 
-    //theoretically clears the server before each test but doesn't work right now
     server = needRequire('../server/server', {bustCache: true, keep: false});
+    db.sequelize.sync({force: true}).then(done);
 
-    //eventually figure out how to clear db before each test
-    //for now, tests are written to not conflict with each other
-    // db.sequelize.drop();
-    // db.sequelize.sync({force: true});
   });
 
   afterEach(function(done) {
     server.close(done);
   });
 
-  it('should create a new user and send back response with the userId', function(done) {
+  it('should create a new user and send back the userId', function(done) {
 
     var headers = {
       'content-type': 'application/json',
@@ -50,13 +46,13 @@ describe('userRouter', function() {
 
   }); //closes 'should create a new user'
 
-  it('should respond to a get request to an id with that user\'s information', function(done) {
+  it('should respond to a get request with that user\'s information', function(done) {
 
     var headers = {
       'content-type': 'application/json',
     };
     var body = JSON.stringify({
-      accountName: 'cameron',
+      accountName: 'naomi',
       password: 'hypotrochoid',
     });
 
@@ -69,7 +65,7 @@ describe('userRouter', function() {
 
         var parsedBody = JSON.parse(body);
 
-        expect(parsedBody.accountName).toEqual('cameron');
+        expect(parsedBody.accountName).toEqual('naomi');
         expect(parsedBody.displayName).toEqual(null);
         expect(typeof(parsedBody.userId)).toEqual('number');
         done();

@@ -64,33 +64,20 @@ describe('userRouter', function() {
 
   it('should update a user and send back the properties that were changed', function(done) {
 
-    //seed database with new user
-    var headers = {
-      'content-type': 'application/json',
-    };
-    var body = JSON.stringify({
-      accountName: 'amyleechiu',
-      password: 'hypotrochoid',
+    var context = this;
+
+    var changes = JSON.stringify({
+      password: 'mySecretDiedWithMe',
+      displayName: 'honorableButStupid',
     });
 
-    request.post({url, headers, body}, function(error, response, body) {
+    request.put({url: url + context.userId, headers: context.headers, body: changes}, function(error, response, body) {
 
-      var id = JSON.parse(body).userId;
-      var newUrl = url + id;
+      var parsedBody = JSON.parse(body);
 
-      var changes = JSON.stringify({
-        displayName: 'alchiu',
-      });
-
-      request.put({url: newUrl, headers, body: changes}, function(error, response, body) {
-
-        var parsedBody = JSON.parse(body);
-
-        expect(parsedBody.displayName).toBeTruthy();
-        expect(parsedBody.displayName).toEqual('alchiu');
-        done();
-
-      });
+      expect(parsedBody.updates.displayName).toBeTruthy();
+      expect(parsedBody.updates.displayName).toEqual('honorableButStupid');
+      done();
 
     });
 
@@ -98,30 +85,18 @@ describe('userRouter', function() {
 
   it('should delete a user and send back confirmation', function(done) {
 
+    var context = this;
+
     //seed database with new user
-    var headers = {
-      'content-type': 'application/json',
-    };
-    var body = JSON.stringify({
-      accountName: 'kylecho',
-      password: 'protip',
-    });
 
-    request.post({url, headers, body}, function(error, response, body) {
+    request.del({url: url + context.userId, headers: context.headers}, function(error, response, body) {
 
-      var id = JSON.parse(body).userId;
-      var newUrl = url + id;
+      var parsedBody = JSON.parse(body);
 
-      request.del({url: newUrl}, function(error, response, body) {
-
-        var parsedBody = JSON.parse(body);
-
-        expect(parsedBody.success).toEqual(true);
-        //sequelize returns a string for id; cast to a number first
-        expect(+parsedBody.deletedUserId).toEqual(id);
-        done();
-
-      });
+      expect(parsedBody.success).toEqual(true);
+      //sequelize returns a string for id; cast to a number first
+      expect(+parsedBody.deletedUserId).toEqual(1);
+      done();
 
     });
 

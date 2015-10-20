@@ -66,12 +66,12 @@ describe('userRouter', function() {
 
     var context = this;
 
-    var changes = JSON.stringify({
+    var updates = JSON.stringify({
       password: 'mySecretDiedWithMe',
       displayName: 'honorableButStupid',
     });
 
-    request.put({url: url + context.userId, headers: context.headers, body: changes}, function(error, response, body) {
+    request.put({url: url + context.userId, headers: context.headers, body: updates}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
 

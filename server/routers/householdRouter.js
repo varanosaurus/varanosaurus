@@ -65,7 +65,27 @@ router.get('/:householdId', function(request, response) {
 
 });
 
-//TODO: put: function(request, response) {},
+router.put('/:householdId', function(request, response) {
+
+  var id = request.decoded.householdId;
+  var updates = request.body;
+
+  db.Household.update(updates, {where: {id}, returning: true})
+
+    .then(function(updateArray) {
+      if (updateArray) {
+        response.status(201).json({updates, token});
+      } else {
+        response.status(500).send('Household not found');
+      }
+    })
+
+    .catch(function(error) {
+      console.error(error);
+      response.status(500).send();
+    });
+
+});
 
 router.delete('/:householdId', function(request, response) {
 

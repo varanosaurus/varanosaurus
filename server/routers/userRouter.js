@@ -45,10 +45,7 @@ router.put('/:userId', function(request, response) {
           token = tokens.issue(id);
         }
 
-        response.status(201).json({
-          updates,
-          token,
-        });
+        response.status(201).json({updates, token});
 
       } else {
         response.status(500).send('Item not found');

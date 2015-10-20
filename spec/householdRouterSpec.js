@@ -87,29 +87,59 @@ describe('householdRouter', function() {
 
   }); //closes get
 
-  // xit('should update', function(done) {
+  xit('should update a houshold and send back the properties that were changed', function(done) {
 
-  //   var headers = {'content-type': 'application/json'};
-  //   var body = JSON.stringify({
+    var context = this;
 
-  //   });
+    var body = JSON.stringify({householdName: 'Winterfell'});
 
-  //   request.post({url, headers, body}, function(error, response, body) {
+    //seed with existing household first
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
-  //   });
+      var parsedBody = JSON.parse(body);
+      context.headers['X-Access-Token'] = parsedBody.token;
+      context.householdId = parsedBody.household.id;
 
-  // }); //closes update
+      var updates = JSON.stringify({
+        name: 'somewhereInTheRiverlands',
+      });
+
+      request.put({url: url + context.householdId, headers: context.headers, body: updates}, function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+        console.log('body: ', parsedBody);
+
+        expect(parsedBody.updates).toBeTruthy();
+
+        done();
+      });
+
+    });
+
+
+  }); //closes update
 
   // xit('should delete', function(done) {
 
-  //   var headers = {'content-type': 'application/json'};
-  //   var body = JSON.stringify({
+  //   var context = this;
 
-  //   });
+  //   var body = JSON.stringify({householdName: 'Winterfell'});
 
-  //   request.post({url, headers, body}, function(error, response, body) {
+  //   //seed with existing household first
+  //   request.post({url, headers: context.headers, body}, function(error, response, body) {
 
-  //   });
+  //     var parsedBody = JSON.parse(body);
+  //     context.headers['X-Access-Token'] = parsedBody.token;
+
+  //     request.del({url: url + context.userId, headers: context.headers}, function(error, response, body) {
+
+  //       var parsedBody = JSON.parse(body);
+
+  //       expect(parsedBody).toBeTruthy();
+
+  //       done();
+
+  //     });
 
   // }); //closes delete
 

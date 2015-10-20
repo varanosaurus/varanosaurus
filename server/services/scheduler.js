@@ -1,13 +1,16 @@
 var schedule = require('node-schedule');
-var reckon = require('./reckon');
 
 // Schedule shape: {householdId: job}
 var schedules = {};
 
-var createMonthlyReckoning = function(householdId) {
-  var job = schedule.scheduleJob(`${getRandomOf60()} ${getRandomOf60()} ${getRandomMorningHour()} * * *`,
-        reckon.bind(null, householdId));
-  schedules[householdId] = job;
+var createMonthlyJob = function(householdId, callback) {
+  var cronSpec = `${getRandomOf60()} ${getRandomMorningHour()} 1 * *`;
+
+  var jobFn = function() {
+    callback(householdId);
+  };
+
+  schedules[householdId] = schedule.scheduleJob(cronSpec, jobFn);
 };
 
 var getRandomOf60 = function() {
@@ -18,12 +21,12 @@ var getRandomMorningHour = function() {
   return Math.floor(Math.random() * 4);
 };
 
-var clearMonthlyReckoning = function(householdId) {
+var clearMonthlyJob = function(householdId) {
   var job = schedules[householdId];
   return schedule.cancelJob(job);
 };
 
 module.exports = {
-  createMonthlyReckoning,
-  clearMonthlyReckoning,
+  createMonthlyJob,
+  clearMonthlyJob,
 };

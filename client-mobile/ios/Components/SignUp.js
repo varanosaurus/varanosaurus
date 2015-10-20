@@ -1,6 +1,9 @@
 'use strict';
 
 var React = require('react-native');
+var NotInvitedToHH = require('./NotInvitedToHH');
+var InvitedToHH = require('./InvitedToHH');
+var CreateNewHH = require('./CreateNewHH');
 
 var {
   StyleSheet,
@@ -14,8 +17,8 @@ var SignUp = React.createClass({
   joinOrCreateHousehold: function() {
     //if you are not in a household
     this.props.navigator.push({
-      index: 3,
-      id: 'Not invited'
+      title: 'Create New HH',
+      component: CreateNewHH
     })
 
     //NOTE: need to receive data from the server re: if user was invited to HH or not
@@ -30,7 +33,7 @@ var SignUp = React.createClass({
       <View style={styles.container}>
         <TextInput style={styles.input} placeholder='username' keyboardType='default'/>
         <TextInput style={styles.input} placeholder='password' secureTextEntry='true'/>
-        <TouchableHighlight 
+        <TouchableHighlight
           style={styles.button}
           onPress={() => this.joinOrCreateHousehold()}
         >
@@ -48,8 +51,8 @@ var styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   input: {
-    height: 40, 
-    borderColor: 'gray', 
+    height: 40,
+    borderColor: 'gray',
     borderWidth: 1
   },
   button: {

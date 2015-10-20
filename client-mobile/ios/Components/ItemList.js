@@ -8,7 +8,6 @@ var {
   View,
   Text,
   SegmentedControlIOS,
-  Navigator
 } = React;
 
 var ItemCell = require('./ItemCell');
@@ -122,9 +121,13 @@ var ItemList = React.createClass({
 
   getInitialState: function() {
     return {
+      isLoading: false,
+      isLoadingTail: false,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
-      }).cloneWithRows(mockedData)
+      }).cloneWithRows(mockedData),
+      filter: '',
+      queryNumber: 0
     };
   },
 
@@ -140,11 +143,8 @@ var ItemList = React.createClass({
   },
 
   selectItem: function(item: Object) {
-    console.log('reaching here?');
-    ItemList.props.navigator.push({ // this needs to be changed for Navigator
-      id: ItemDetails
-      // passProps: {item},
-    });
+    console.log('selectItem call from itemList :', item);
+    this.props.onSelectItem(item);
   },
 
   renderRow: function(item) {

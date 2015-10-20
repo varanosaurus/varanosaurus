@@ -14,7 +14,7 @@ var LogIn = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <TabView />
+        <TabView navigator={this.props.navigator}/>
       </View>
     );
   }

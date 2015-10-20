@@ -14,63 +14,49 @@ describe('userRouter', function() {
 
   beforeEach(function(done) {
 
-    server = needRequire('../server/server', {bustCache: true, keep: false});
-    db.sequelize.sync({force: true}).then(done);
+    var context = this;
+    this.headers = {'content-type': 'application/json'};
 
-  });
+    server = needRequire('../server/server', {bustCache: true, keep: false});
+    db.sequelize.sync({force: true})
+      .then(function() {
+
+        //seed db with user
+        var userUrl = 'http://localhost:8080/auth/signup';
+        var userBody = JSON.stringify({
+          accountName: 'nedStark',
+          password: 'RPlusLEqualsJ',
+        });
+
+        request.post({url: userUrl, headers: context.headers, body: userBody}, function(error, response, body) {
+          var parsedBody = JSON.parse(body);
+
+          context.headers['X-Access-Token'] = parsedBody.token;
+          context.userId = JSON.parse(body).user.id;
+          done();
+
+        }); //closes post request
+
+      }); //closes then
+
+  }); //closes beforeEach
 
   afterEach(function(done) {
     server.close(done);
   });
 
-  // it('should create a new user and send back the userId', function(done) {
-
-  //   var headers = {
-  //     'content-type': 'application/json',
-  //   };
-  //   var signupUrl = 'http://localhost:8080/auth/signup';
-  //   var body = JSON.stringify({
-  //     accountName: 'naomi',
-  //     password: 'hypotrochoid',
-  //   });
-
-  //   request.post({url: signupUrl, headers, body}, function(error, response, body) {
-
-  //     var parsedBody = JSON.parse(body);
-
-  //     expect(error).toBeFalsy();
-  //     expect(response.statusCode).toEqual(201);
-  //     done();
-
-  //   });
-
-  // }); //closes 'should create a new user'
-
   it('should respond to a get request with that user\'s information', function(done) {
 
-    var headers = {
-      'content-type': 'application/json',
-    };
-    var body = JSON.stringify({
-      accountName: 'naomi',
-      password: 'hypotrochoid',
-    });
+    var context = this;
 
-    request.post({url, headers, body}, function(error, response, body) {
+    request.get({url: url + context.userId, headers: context.headers}, function(error, response, body) {
 
-      var id = JSON.parse(body).userId;
-      var newUrl = url + id;
+      var parsedBody = JSON.parse(body);
 
-      request.get({url: newUrl, headers}, function(error, response, body) {
-
-        var parsedBody = JSON.parse(body);
-
-        expect(parsedBody.accountName).toEqual('naomi');
-        expect(parsedBody.displayName).toEqual(null);
-        expect(typeof(parsedBody.userId)).toEqual('number');
-        done();
-
-      });
+      expect(parsedBody.accountName).toEqual('nedStark');
+      expect(parsedBody.displayName).toEqual(null);
+      expect(parsedBody.id).toEqual(1);
+      done();
 
     });
 

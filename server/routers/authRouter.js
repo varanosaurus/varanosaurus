@@ -25,8 +25,6 @@ authRouter.post('/login', function(request, response) {
 
 authRouter.post('/signup', function(request, response) {
 
-  console.log('got to /signup');
-
   var accountName = request.body.accountName;
   var password = request.body.password;
   var displayName = request.body.displayName || null;
@@ -44,7 +42,6 @@ authRouter.post('/signup', function(request, response) {
       }
     })
     .then(function(user) {
-      console.log('posted user, about to send response');
       response.status(201).json({
         user,
         token: tokens.issue(user.id),

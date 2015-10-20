@@ -12,29 +12,27 @@ describe('householdRouter', function() {
 
   var server;
 
-  //declare these for closure access later on
-
   beforeEach(function(done) {
 
-    var self = this;
+    var context = this;
     this.headers = {'content-type': 'application/json'};
 
     server = needRequire('../server/server', {bustCache: true, keep: false});
     db.sequelize.sync({force: true})
       .then(function() {
 
-        var userUrl = 'http://localhost:8080/api/users/';
+        //seed db with user
+        var userUrl = 'http://localhost:8080/auth/signup';
         var userBody = JSON.stringify({
           accountName: 'nedStark',
           password: 'RplusLEqualsJ',
         });
 
-        request.post({url: userUrl, headers: this.headers, body: userBody}, function(error, response, body) {
+        request.post({url: userUrl, headers: context.headers, body: userBody}, function(error, response, body) {
           var parsedBody = JSON.parse(body);
 
-          self.token = parsedBody.token;
-          self.headers['X-Access-Token'] = parsedBody.token;
-          self.userId = JSON.parse(body).userId;
+          context.headers['X-Access-Token'] = parsedBody.token;
+          context.userId = JSON.parse(body).user.id;
           done();
 
           });
@@ -47,15 +45,18 @@ describe('householdRouter', function() {
     server.close(done);
   });
 
-  it('should create a new household and send back the householdId', function(done) {
+  it('should create a new household and send back the household', function(done) {
 
     var body = JSON.stringify({
       householdName: 'Winterfell',
       userId: this.userId,
     });
 
-    request.post({url, headers: this.headers, body}, function(error, response, body) {
-      expect(body).toBeTruthy();
+    var context = this;
+
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
+
+      expect(JSON.parse(body).household.name).toEqual('Winterfell');
       done();
     });
 

@@ -8,14 +8,14 @@ router.post('/', function(request, response) {
   //that makes the userId always available
   var userId = request.decoded.userId;
 
-  console.log('userId is: ', userId);
   var householdName = request.body.householdName;
 
   db.User.findById(userId)
 
     .then(function(user) {
 
-      user.getHousehold()
+      return user.getHousehold()
+
         .then(function(household) {
           //see if the user is already associated with a household
           //if so, reject the creation attempt

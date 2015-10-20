@@ -4,7 +4,8 @@ var TokenExpiredError = require('jsonwebtoken').TokenExpiredError;
 
 // Middleware for verifying and decoding the request JWT
 var verifyToken = function(request, response, next) {
-  tokens.verify(request.headers['X-Access-Token'])
+
+  tokens.verify(request.headers['x-access-token'])
     .then(function(decoded) {
       request.decoded = decoded;
       next();

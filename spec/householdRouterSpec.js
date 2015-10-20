@@ -87,7 +87,7 @@ describe('householdRouter', function() {
 
   }); //closes get
 
-  xit('should update a houshold and send back the properties that were changed', function(done) {
+  it('should update a houshold and send back the properties that were changed', function(done) {
 
     var context = this;
 

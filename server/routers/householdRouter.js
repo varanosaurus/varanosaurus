@@ -74,7 +74,7 @@ router.put('/:householdId', function(request, response) {
 
     .then(function(updateArray) {
       if (updateArray) {
-        response.status(201).json({updates, token});
+        response.status(201).json({updates});
       } else {
         response.status(500).send('Household not found');
       }

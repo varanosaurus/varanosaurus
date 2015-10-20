@@ -1,18 +1,17 @@
 var router = require('express').Router();
 var db = require('../db/interface.js');
+var tokens = require('../services/tokens');
 
 router.post('/', function(request, response) {
 
   //decoded is a property set by the token auth middleware
   //that makes the userId always available
-  // var userId = request.decoded.userId;
+  var userId = request.decoded.userId;
 
-  //comment this line out and uncomment out 8 when not testing
-  var userId = request.body.userId;
   console.log('userId is: ', userId);
   var householdName = request.body.householdName;
 
-  db.User.find({where: {id: userId}})
+  db.User.findById(userId)
 
     .then(function(user) {
 
@@ -34,10 +33,8 @@ router.post('/', function(request, response) {
       //set the creator as the default captain upon creation
       household.setCaptain(userId);
       response.status(201).json({
-        success: true,
-        householdName: household.name,
-        householdId: household.id,
-        //token here later
+        household,
+        token: tokens.issue(userId, household.id),
       });
     })
 
@@ -49,13 +46,13 @@ router.post('/', function(request, response) {
 
 router.get('/:householdId', function(request, response) {
 
-  var id = request.body.householdId;
+  var id = request.decoded.householdId;
 
-  db.Household.find({where: {id}})
+  db.Household.findById(id)
 
     .then(function(household) {
       if (household) {
-        response.status(201).send(household); //format?
+        response.status(201).json(household);
       } else {
         response.status(500).send('Household not found');
       }
@@ -72,7 +69,7 @@ router.get('/:householdId', function(request, response) {
 
 router.delete('/:householdId', function(request, response) {
 
-  var id = request.body.householdId;
+  var id = request.decoded.householdId;
 
   db.Item.destroy({where: {id}})
     .then(function(numberDestroyed) {

@@ -8,15 +8,16 @@ var db = require('../server/db/interface');
 //server instance before the next text
 var needRequire = require('really-need');
 
-xdescribe('householdRouter', function() {
+describe('householdRouter', function() {
 
   var server;
 
   //declare these for closure access later on
-  var userId;
-  var headers = {'content-type': 'application/json'};
 
   beforeEach(function(done) {
+
+    var self = this;
+    this.headers = {'content-type': 'application/json'};
 
     server = needRequire('../server/server', {bustCache: true, keep: false});
     db.sequelize.sync({force: true})
@@ -28,14 +29,17 @@ xdescribe('householdRouter', function() {
           password: 'RplusLEqualsJ',
         });
 
-        request.post({url: userUrl, headers, body: userBody}, function(error, response, body) {
+        request.post({url: userUrl, headers: this.headers, body: userBody}, function(error, response, body) {
+          var parsedBody = JSON.parse(body);
 
-          userId = JSON.parse(body).userId;
+          self.token = parsedBody.token;
+          self.headers['X-Access-Token'] = parsedBody.token;
+          self.userId = JSON.parse(body).userId;
           done();
 
           });
 
-      }); //closes then after syncing
+      }); //closes the then after syncing
 
   }); //closes beforeEach
 
@@ -47,10 +51,10 @@ xdescribe('householdRouter', function() {
 
     var body = JSON.stringify({
       householdName: 'Winterfell',
-      userId,
+      userId: this.userId,
     });
 
-    request.post({url, headers, body}, function(error, response, body) {
+    request.post({url, headers: this.headers, body}, function(error, response, body) {
       expect(body).toBeTruthy();
       done();
     });
@@ -63,7 +67,7 @@ xdescribe('householdRouter', function() {
 
   //   });
 
-  //   request.post({url, headers, body}, function(error, response, body) {
+  //   request.post({url, headers: this.headers, body}, function(error, response, body) {
 
   //   });
 

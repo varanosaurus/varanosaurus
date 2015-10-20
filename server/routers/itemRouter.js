@@ -3,8 +3,8 @@ var db = require('../db/interface.js');
 
 router.post('/', function(request, response) {
 
-  var householdId = request.decoded.householdId || request.body.householdId; //second part is for testing
-  var userId = request.decoded.userId || request.body.userId; //second part is for testing
+  var householdId = request.decoded.householdId;
+  var userId = request.decoded.userId;
   var description = request.body.description;
   var details;
   if (request.body.details) {
@@ -44,25 +44,13 @@ router.post('/', function(request, response) {
 
 router.get('/:itemId', function(request, response) {
 
-  var id = request.body.itemId.slice(1); //slice out the colon
+  var id = request.params.itemId;
 
-  db.Item.find({where: {id}})
+  db.Item.findById(id)
 
     .then(function(item) {
       if (item) {
-        console.log(item);
-        response.status(201).json({
-          description: item.description,
-          details: item.details,
-          fetch: item.fetch,
-          bought: item.bought,
-          price: item.price,
-          timeFetched: item.timeFetched,
-          timeBought: item.timeBought,
-          addingUser: item.getAddingUser(),
-          fetchingUser: item.fetchingUser(),
-          buyingUser: item.buyingUser(),
-        });
+        response.status(201).json(item);
       } else {
         response.status(500).send('Item not found');
       }
@@ -76,7 +64,7 @@ router.get('/:itemId', function(request, response) {
 
 router.put('/:itemId', function(request, response) {
 
-  var id = request.body.itemId.slice(1); //slice out the colon
+  var id = request.params.itemId;
   var userId = request.decoded.userId;
 
   //we'll set the possible updates to an update object
@@ -96,8 +84,10 @@ router.put('/:itemId', function(request, response) {
   db.Item.update(updates, {where: {id}, returning: true})
 
     .then(function(updateArray) {
+      var item;
+
       if (updateArray) {
-        var item = updateArray[1];
+        item = updateArray[1];
 
         if (request.body.fetch) {
           item.setFetchingUser(userId);
@@ -121,7 +111,7 @@ router.put('/:itemId', function(request, response) {
 
 router.delete('/:itemId', function(request, response) {
 
-  var id = request.body.itemId.slice(1); //slice out the colon
+  var id = request.params.itemId;
 
   db.Item.destroy({where: {id}})
     .then(function(numberDestroyed) {

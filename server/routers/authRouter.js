@@ -23,4 +23,37 @@ authRouter.post('/login', function(request, response) {
     });
 });
 
+authRouter.post('/signup', function(request, response) {
+
+  console.log('got to /signup');
+
+  var accountName = request.body.accountName;
+  var password = request.body.password;
+  var displayName = request.body.displayName || null;
+
+  return db.User.findOne({where: {accountName}})
+    .then(function(user) {
+      if (user) {
+        response.status(409).send('User already exists');
+      } else {
+        return db.User.create({
+          accountName,
+          password,
+          displayName,
+        });
+      }
+    })
+    .then(function(user) {
+      console.log('posted user, about to send response');
+      response.status(201).json({
+        user,
+        token: tokens.issue(user.id),
+      });
+    })
+    .catch(function(error) {
+      console.error(error);
+      response.status(500).send();
+    });
+});
+
 module.exports = authRouter;

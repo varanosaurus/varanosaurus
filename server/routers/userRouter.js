@@ -1,51 +1,19 @@
 var router = require('express').Router();
 var db = require('../db/interface.js');
+var tokens = require('../services/tokens');
 
-router.post('/', function(request, response) {
-
-  var accountName = request.body.accountName;
-  var password = request.body.password;
-  var displayName = request.body.displayName || null;
-
-  return db.User.find({where: {accountName}})
-    .then(function(user) {
-      if (user) {
-        response.status(409).send('User already exists');
-      } else {
-        return db.User.create({
-          accountName,
-          password,
-          displayName,
-        });
-      }
-    })
-    .then(function(user) {
-      response.status(201).json({
-        success: true,
-        userId: user.id,
-        //token here?[]
-      });
-    })
-    .catch(function(error) {
-      console.error(error);
-      response.status(500).send();
-    });
-});
+//If you're looking for where new users are created,
+//go to the authRouter - the creation code lives there
+//so that posts to create new users don't need tokens.
 
 router.get('/:userId', function(request, response) {
 
-  // var id = request.decoded.userId;
-  var id = request.params.userId.slice(1); //returns ':userId' not 'userId', so we have to splice the colon out
-
-  db.User.find({where: {id}})
+  var id = request.decoded.userId;
+  db.User.findById(id)
 
     .then(function(user) {
       if (user) {
-        response.status(201).json({
-          accountName: user.accountName,
-          displayName: user.displayName,
-          userId: user.id,
-        });
+        response.status(201).json(user);
       } else {
         response.status(500).send('User not found');
       }
@@ -60,7 +28,7 @@ router.get('/:userId', function(request, response) {
 //TODO: allow household to be added/changed (reissue token)
 router.put('/:userId', function(request, response) {
 
-  var id = request.params.userId.slice(1); //returns ':userId' not 'userId', so we have to splice the colon out
+  var id = request.decoded.userId;
   var updates = request.body;
 
   //returning tells sequelize to pass the model that was updated
@@ -68,9 +36,20 @@ router.put('/:userId', function(request, response) {
   db.User.update(updates, {where: {id}, returning: true})
 
     .then(function(updateArray) {
-      if (updateArray) {
+      var token;
 
-        response.status(201).json(updates);
+      if (updateArray) {
+        if (updates.householdId) {
+          token = tokens.issue(id, updates.householdId);
+        } else {
+          token = tokens.issue(id);
+        }
+
+        response.status(201).json({
+          updates,
+          token,
+        });
+
       } else {
         response.status(500).send('Item not found');
       }
@@ -85,7 +64,7 @@ router.put('/:userId', function(request, response) {
 
 router.delete('/:userId', function(request, response) {
 
-  var id = request.params.userId.slice(1); //returns ':userId' not 'userId', so we have to splice the colon out
+  var id = request.decoded.userId;
 
   db.User.destroy({where: {id}})
     .then(function(numberDestroyed) {

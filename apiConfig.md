@@ -20,7 +20,6 @@
       put: {
         password: string, //optional
         displayName: string, //optional
-        householdId: 
       }
       delete: n/a (userId will already be in header)
 

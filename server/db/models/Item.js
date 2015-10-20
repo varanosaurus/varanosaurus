@@ -11,7 +11,10 @@ module.exports = {
 			allowNull: false,
 		},
 
-		details: Sequelize.TEXT,
+		details: {
+			type: Sequelize.TEXT,
+			defaultValue: null,
+		},
 
 		fetch: {
 			type: Sequelize.BOOLEAN,
@@ -31,9 +34,15 @@ module.exports = {
 		},
 
 		//name here is terrible
-		timeFetched: Sequelize.DATE,
+		timeFetched: {
+			type: Sequelize.DATE,
+			defaultValue: null,
+		},
 
-		timeBought: Sequelize.DATE,
+		timeBought: {
+			type: Sequelize.DATE,
+			defaultValue: null,
+		},
 
 		id: {
 			type: Sequelize.INTEGER,

@@ -82,7 +82,7 @@ describe('householdRouter', function() {
 
         var parsedBody = JSON.parse(body);
 
-        expect(parsedBody).toBeTruthy();
+        expect(parsedBody.name).toEqual('Winterfell');
 
         done();
       });

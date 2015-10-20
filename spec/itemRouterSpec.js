@@ -82,56 +82,85 @@ describe('itemRouter', function() {
 
   });
 
-  xit('should respond to a get request with that item\'s information', function(done) {
+  it('should respond to a get request with that item\'s information', function(done) {
 
     var context = this;
 
-    request.get({url: url + context.userId, headers: context.headers}, function(error, response, body) {
+    var body = JSON.stringify({description: 'valyrian steel'});
+
+    //seed with existing household first
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
+      context.headers['X-Access-Token'] = parsedBody.token;
+      var itemId = parsedBody.item.id;
 
-      expect(parsedBody.accountName).toEqual('nedStark');
-      expect(parsedBody.displayName).toEqual(null);
-      expect(parsedBody.id).toEqual(1);
-      done();
+      request.get({url: url + itemId, headers: context.headers}, function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+
+        expect(parsedBody.description).toEqual('valyrian steel');
+
+        done();
+
+      });
 
     });
 
   }); //closes 'should respond to a get request'
 
-  xit('should update a user and send back the properties that were changed', function(done) {
+  it('should update a user and send back the properties that were changed', function(done) {
 
     var context = this;
 
-    var updates = JSON.stringify({
-      password: 'mySecretDiedWithMe',
-      displayName: 'honorableButStupid',
-    });
+    var body = JSON.stringify({description: 'valyrian steel'});
 
-    request.put({url: url + context.userId, headers: context.headers, body: updates}, function(error, response, body) {
+    //seed with existing household first
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
+      context.headers['X-Access-Token'] = parsedBody.token;
+      var itemId = parsedBody.item.id;
+      var updateBody = JSON.stringify({
+        details: 'good for beheading, will need soon',
+      });
 
-      expect(parsedBody.updates.displayName).toBeTruthy();
-      expect(parsedBody.updates.displayName).toEqual('honorableButStupid');
-      done();
+      request.put({url: url + itemId, headers: context.headers, body: updateBody}, function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+
+        expect(parsedBody.details).toEqual('good for beheading, will need soon');
+
+        done();
+
+      });
 
     });
 
   }); //closes 'should update a user'
 
-  xit('should delete a user and send back confirmation', function(done) {
+  it('should delete a user and send back confirmation', function(done) {
 
     var context = this;
 
-    request.del({url: url + context.userId, headers: context.headers}, function(error, response, body) {
+    var body = JSON.stringify({description: 'valyrian steel'});
+
+    //seed with existing household first
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
+      context.headers['X-Access-Token'] = parsedBody.token;
+      var itemId = parsedBody.item.id;
 
-      expect(parsedBody.success).toEqual(true);
-      //sequelize returns a string for id; cast to a number first
-      expect(+parsedBody.deletedUserId).toEqual(1);
-      done();
+      request.del({url: url + itemId, headers: context.headers}, function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+        expect(parsedBody.success).toEqual(true);
+        expect(+parsedBody.deletedItemId).toEqual(1);
+
+        done();
+
+      });
 
     });
 

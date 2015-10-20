@@ -1,5 +1,5 @@
 var authRouter = require('express').Router();
-var db = require('./db/interface');
+var db = require('../db/interface');
 var tokens = require('../services/tokens');
 
 authRouter.post('/login', function(request, response) {
@@ -20,6 +20,36 @@ authRouter.post('/login', function(request, response) {
         return response.status(403).send('Wrong password.');
       }
 
+    });
+});
+
+authRouter.post('/signup', function(request, response) {
+
+  var accountName = request.body.accountName;
+  var password = request.body.password;
+  var displayName = request.body.displayName || null;
+
+  return db.User.findOne({where: {accountName}})
+    .then(function(user) {
+      if (user) {
+        response.status(409).send('User already exists');
+      } else {
+        return db.User.create({
+          accountName,
+          password,
+          displayName,
+        });
+      }
+    })
+    .then(function(user) {
+      response.status(201).json({
+        user,
+        token: tokens.issue(user.id),
+      });
+    })
+    .catch(function(error) {
+      console.error(error);
+      response.status(500).send();
     });
 });
 

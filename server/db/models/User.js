@@ -44,7 +44,7 @@ module.exports = {
 
 		displayName: {
 			type: Sequelize.STRING,
-			allowNull: false,
+			defaultValue: null,
 			validate: {
 				isAlphanumeric: true,
 			},

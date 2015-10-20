@@ -3,5 +3,5 @@ var testSchema = 'knead_test';
 
 module.exports = {
   mainSchema: mainSchema,
-  testSchema: testSchema
+  testSchema: testSchema,
 };

@@ -3,37 +3,30 @@ var React = require('react-native');
 var {
   StyleSheet,
   TouchableHighlight,
+  TextInput,
   View,
   Text,
 } = React;
 
-var InvitedToHH = React.createClass({
+var InviteRoommates = React.createClass({
+  submitRoommates: function() {
+    this.props.navigator.popToRoute({
+      index: 1,
+      id: 'Sign up'
+    });
+  },
   render: function() {
     return (
       <View style={styles.container}>
-        <Text>You have been invited to join -Inject Household- </Text>
+        <Text>INVITE ROOMMATES</Text>
+        <TextInput style={styles.input} placeholder="roommate's email address"/>
+        <TextInput style={styles.input} placeholder="roommate's email address"/>
+        <TextInput style={styles.input} placeholder="roommate's email address"/>
         <TouchableHighlight
           style={styles.button}
-          // onPress={() => this.()}
+          onPress={() => this.submitRoommates()}
         >
-          <Text style={styles.btnText}>Join</Text>
-
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.button}
-          // onPress={() => this.()}
-        >
-          <Text style={styles.btnText}>No, thanks</Text>
-
-        </TouchableHighlight>
-
-        <Text> ----- OR ----- </Text>
-        <TouchableHighlight
-          style={styles.button}
-          // onPress={() => this.()}
-        >
-          <Text style={styles.btnText}>Create new household</Text>
-
+          <Text style={styles.btnText}>Submit</Text>
         </TouchableHighlight>
       </View>
     );
@@ -44,6 +37,7 @@ var styles = StyleSheet.create({
   container: {
     marginTop: 64,
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: 'white'
   },
   input: {
@@ -62,7 +56,12 @@ var styles = StyleSheet.create({
   btnText: {
     fontSize: 18,
     color: 'white'
+  },
+  input: {
+    height: 40, 
+    borderColor: 'gray', 
+    borderWidth: 1
   }
 });
 
-module.exports = InvitedToHH;
+module.exports = InviteRoommates;

@@ -9,29 +9,31 @@ var {
 } = React;
 
 var CreateNewHH = React.createClass({
-  // inviteRoommates: function() {
-
-  // },
-
+  inviteRoommates: function() {
+    this.props.navigator.push({
+      index: 6,
+      id: 'Invite roommates'
+    })
+  },
   render: function() {
     return (
       <View style={styles.container}>
         <Text>CREATE NEW HOUSEHOLD VIEW</Text>
         <TouchableHighlight
           style={styles.button}
-          // onPress={() => this.inviteRoommates()}
+          onPress={() => this.inviteRoommates()}
         >
           <Text style={styles.btnText}>Suggestion 1</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
-          // onPress={() => this.inviteRoommates()}
+          onPress={() => this.inviteRoommates()}
         >
           <Text style={styles.btnText}>Suggestion 2</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
-          // onPress={() => this.inviteRoommates()}
+          onPress={() => this.inviteRoommates()}
         >
           <Text style={styles.btnText}>Suggestion 3</Text>
         </TouchableHighlight>
@@ -39,7 +41,7 @@ var CreateNewHH = React.createClass({
         <TextInput style={styles.input} placeholder='Create household name'/>
         <TouchableHighlight
           style={styles.button}
-          // onPress={() => this.inviteRoommates()}
+          onPress={() => this.inviteRoommates()}
         >
           <Text style={styles.btnText}>Make household</Text>
         </TouchableHighlight>

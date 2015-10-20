@@ -7,7 +7,6 @@ var tokens = require('../services/tokens');
 //so that posts to create new users don't need tokens.
 
 router.get('/:userId', function(request, response) {
-
   var id = request.decoded.userId;
   db.User.findById(id)
 

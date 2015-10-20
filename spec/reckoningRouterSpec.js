@@ -82,12 +82,26 @@ describe('itemRouter', function() {
                 jonToken = parsedBody.token;
                 context.headers['X-Access-Token'] = jonToken;
 
-                //now we'll add an item to the household and say that jon already bought it
+                //now we'll add an item to the household
                 request.post({
                   url: itemUrl,
                   headers: context.headers,
-                  body: JSON.stringify({description: 'dragon egg', buyingUserId: jonId}),
-                }, function() { done(); }); //closes post request to /items
+                  body: JSON.stringify({description: 'dragon egg'}),
+                }, function(error, response, body) {
+                  var parsedBody = JSON.parse(body);
+                  var itemId = parsedBody.item.id;
+
+                  //and now we'll update the item saying that jon bought it
+                  request.put({
+                    url: itemUrl + itemId,
+                    headers: context.headers,
+                    body: JSON.stringify({buyingUserId: jonId, price: 100.00}),
+                  },
+                  function() {
+                    done();
+                  }); //closes put request to items/:itemId
+
+                }); //closes post request to /items
 
               }); //closes put request to /users/:userId
 
@@ -105,40 +119,38 @@ describe('itemRouter', function() {
     server.close(done);
   });
 
-  it('should respond to a get request with that reckoning\'s information', function(done) {
+  it('should trigger a reckoning and return the reckoning information', function(done) {
 
-    // var context = this;
+    var context = this;
+    request.post({url, headers: context.headers}, function(error, response, body) {
+      var parsedBody = JSON.parse(body);
 
-    //initiate a reckoning
-    //then fetch the reckoning info
+      expect(parsedBody.totalSpent).toEqual('100.00');
+      done();
 
-    done();
+    });
 
   });
 
-  xit('should respond to a get request with that item\'s information', function(done) {
+  it('should respond to a get request with that reckoning\'s information', function(done) {
 
     var context = this;
-
-    var body = JSON.stringify({description: 'valyrian steel'});
-
-    //seed with existing household first
-    request.post({url, headers: context.headers, body}, function(error, response, body) {
-
+    request.post({url, headers: context.headers}, function(error, response, body) {
       var parsedBody = JSON.parse(body);
-      context.headers['X-Access-Token'] = parsedBody.token;
-      var itemId = parsedBody.item.id;
+      var reckoningId = parsedBody.id;
 
-      request.get({url: url + itemId, headers: context.headers}, function(error, response, body) {
-
+      request.get({url: url + reckoningId, headers: context.headers}, function(error, response, body) {
         var parsedBody = JSON.parse(body);
-        expect(parsedBody.description).toEqual('valyrian steel');
+
+        expect(parsedBody.id).toEqual(reckoningId);
+        expect(parsedBody.totalSpent).toEqual('100.00');
+
         done();
 
       });
 
     });
 
-  }); //closes 'should respond to a get request'
+  });
 
-}); //closes 'userRouter'
+}); //closes 'reckoningRouter'

@@ -72,16 +72,18 @@ router.put('/:itemId', function(request, response) {
   var updates = request.body;
 
   //returning tells sequelize to pass the items that were updated
-  //back to us as the second element of the returned array
-  //even though here we're operating on one element,
-  //it sends back an array in case we updated multiples at once
+  //back to us as the second element of the returned array.
   db.Item.update(updates, {where: {id}, returning: true})
 
     .then(function(updateArray) {
       var item;
 
       if (updateArray) {
-        item = updateArray[1][0]; //gives us an array of one item
+        //Even though we're only operating on one element,
+        //Sequelize sends back an array in case we updated multiples at once
+        //So the first access gets us the array of models updated
+        //And the second access gets us the specific model we want
+        item = updateArray[1][0];
 
         if (request.body.fetch) {
           item.setFetchingUser(userId);

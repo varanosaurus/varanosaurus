@@ -14,28 +14,64 @@ var {
 } = React;
 
 var SignUp = React.createClass({
+  getInitialState: function() {
+    return ({
+       username: '',
+       password: '',
+       error: '',
+    })
+  },
   joinOrCreateHousehold: function() {
     //if you are not in a household
     this.props.navigator.push({
       title: 'Create New HH',
-      component: CreateNewHH
+      component: CreateNewHH,
+    });
+    this.setState({
+      username: this.state.username,
+      password: this.state.password,
     })
+    console.log(this.state);
+    //if user does not provide sufficient username or password, send error feedback
+    //note: logic below doesn't take into account accepted character types
+    if (this.state.username.length === 0 && this.state.password.length === 0) {
+      this.setState({
+        error: 'Please provide a username that is greater than 3 characters and less than 13 characters. Please provide a password that is greater than 5 characters and less than 29 characters.'
+      })
+    } else if (this.state.username.length < 4 || this.state.username.length > 20) {
+      this.setState({
+        error: 'Please provide a username that is greater than 3 characters and less than 21 characters'
+      })
 
-    //NOTE: need to receive data from the server re: if user was invited to HH or not
-    //if you are in a household
-    // this.props.navigator.push({
-    //   index: 4,
-    //   id: 'Invited'
-    // })
+    } else if (this.state.password.length < 6 || this.state.username.password > 28) {
+      this.setState({
+        error: 'Please provide a password that is greater than 5 characters and less than 29 characters'
+      })
+    } else {
+      //if you are not in a household
+      this.props.navigator.push({
+        index: 3,
+        id: 'Not invited',
+      })
+
+      //NOTE: need to receive data from the server re: if user was invited to HH or not
+      //if you are in a household
+      // this.props.navigator.push({
+      //   index: 4,
+      //   id: 'Invited'
+      // })
+      
+    }
   },
   render: function() {
     return (
       <View style={styles.container}>
-        <TextInput style={styles.input} placeholder='username' keyboardType='default'/>
-        <TextInput style={styles.input} placeholder='password' secureTextEntry='true'/>
-        <TouchableHighlight
+        <TextInput style={styles.input} placeholder='username' onChangeText={(username) => this.setState({username})} value={this.state.username}/>
+        <TextInput style={styles.input} placeholder='password' secureTextEntry='true' onChangeText={(password) => this.setState({password})} value={this.state.password}/>
+        <Text style={styles.errorHandling}>{this.state.error}</Text>
+        <TouchableHighlight 
           style={styles.button}
-          onPress={() => this.joinOrCreateHousehold()}
+          onPress={this.joinOrCreateHousehold}
         >
           <Text style={styles.btnText}>Sign Up</Text>
         </TouchableHighlight>
@@ -58,15 +94,20 @@ var styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    margin: 100,
+    paddingTop: 10,
+    paddingBottom: 10,
     backgroundColor: 'black',
     flexDirection: 'row',
     justifyContent: 'center',
+    position: 'absolute',
   },
   btnText: {
-    fontSize: 10,
+    fontSize: 18,
     color: 'white',
-  }
+  },
+  errorHandling: {
+    color: 'red',
+  },
 });
 
 module.exports = SignUp;

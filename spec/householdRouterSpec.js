@@ -28,14 +28,19 @@ describe('householdRouter', function() {
           password: 'RplusLEqualsJ',
         });
 
-        request.post({url: userUrl, headers: context.headers, body: userBody}, function(error, response, body) {
+        request.post({
+          url: userUrl,
+          headers: context.headers,
+          body: userBody,
+        },
+        function(error, response, body) {
           var parsedBody = JSON.parse(body);
 
           context.headers['X-Access-Token'] = parsedBody.token;
           context.userId = JSON.parse(body).user.id;
           done();
 
-          });
+        }); //closes post request
 
       }); //closes the then after syncing
 
@@ -51,7 +56,6 @@ describe('householdRouter', function() {
 
     var body = JSON.stringify({
       householdName: 'Winterfell',
-      userId: this.userId,
     });
 
     request.post({url, headers: context.headers, body}, function(error, response, body) {
@@ -107,8 +111,6 @@ describe('householdRouter', function() {
       request.put({url: url + context.householdId, headers: context.headers, body: updates}, function(error, response, body) {
 
         var parsedBody = JSON.parse(body);
-        console.log('body: ', parsedBody);
-
         expect(parsedBody.updates).toBeTruthy();
 
         done();
@@ -134,8 +136,6 @@ describe('householdRouter', function() {
       request.del({url: url + context.householdId, headers: context.headers}, function(error, response, body) {
 
         var parsedBody = JSON.parse(body);
-        console.log('body: ', parsedBody);
-
         expect(parsedBody.success).toEqual(true);
         expect(+parsedBody.deletedHouseholdId).toEqual(1);
 

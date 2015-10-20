@@ -47,12 +47,12 @@ describe('householdRouter', function() {
 
   it('should create a new household and send back the household', function(done) {
 
+    var context = this;
+
     var body = JSON.stringify({
       householdName: 'Winterfell',
       userId: this.userId,
     });
-
-    var context = this;
 
     request.post({url, headers: context.headers, body}, function(error, response, body) {
 
@@ -62,17 +62,30 @@ describe('householdRouter', function() {
 
   }); //closes create
 
-  // xit('should respond to a get request', function(done) {
+  it('should respond to a get request with that household\'s information', function(done) {
 
-  //   var body = JSON.stringify({
+    var context = this;
 
-  //   });
+    var body = JSON.stringify({householdName: 'Winterfell'});
 
-  //   request.post({url, headers: this.headers, body}, function(error, response, body) {
+    //seed with existing household first
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
-  //   });
+      var parsedBody = JSON.parse(body);
+      context.headers['X-Access-Token'] = parsedBody.token;
 
-  // }); //closes get
+      request.get({url: url + context.userId, headers: context.headers}, function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+
+        expect(parsedBody).toBeTruthy();
+
+        done();
+      });
+
+    });
+
+  }); //closes get
 
   // xit('should update', function(done) {
 

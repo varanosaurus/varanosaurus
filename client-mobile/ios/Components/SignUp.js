@@ -48,24 +48,24 @@ var styles = StyleSheet.create({
   container: {
     marginTop: 64,
     flex: 1,
-    backgroundColor: 'white'
+    flexDirection: 'column',
+    backgroundColor: 'white',
   },
   input: {
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1
+    borderColor: 'gray', 
+    borderWidth: 1,
   },
   button: {
-    height: 15,
     flex: 1,
-    margin: 2,
+    margin: 100,
     backgroundColor: 'black',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   btnText: {
-    fontSize: 18,
-    color: 'white'
+    fontSize: 10,
+    color: 'white',
   }
 });
 

@@ -10,10 +10,8 @@ var {
 
 var InviteRoommates = React.createClass({
   submitRoommates: function() {
-    this.props.navigator.popToRoute({
-      index: 1,
-      id: 'Sign up'
-    });
+    // the below code is a "hack" but react-native doesn't currently support optimally otherwise
+    this.props.navigator.popToRoute(this.props.navigator.getCurrentRoutes()[1]);
   },
   render: function() {
     return (

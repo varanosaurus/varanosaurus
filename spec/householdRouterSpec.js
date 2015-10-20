@@ -116,31 +116,34 @@ describe('householdRouter', function() {
 
     });
 
-
   }); //closes update
 
-  // xit('should delete', function(done) {
+  it('should delete a household and send back confirmation', function(done) {
 
-  //   var context = this;
+    var context = this;
 
-  //   var body = JSON.stringify({householdName: 'Winterfell'});
+    var body = JSON.stringify({householdName: 'Winterfell'});
 
-  //   //seed with existing household first
-  //   request.post({url, headers: context.headers, body}, function(error, response, body) {
+    //seed with existing household first
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
-  //     var parsedBody = JSON.parse(body);
-  //     context.headers['X-Access-Token'] = parsedBody.token;
+      var parsedBody = JSON.parse(body);
+      context.headers['X-Access-Token'] = parsedBody.token;
+      context.householdId = parsedBody.household.id;
 
-  //     request.del({url: url + context.userId, headers: context.headers}, function(error, response, body) {
+      request.del({url: url + context.householdId, headers: context.headers}, function(error, response, body) {
 
-  //       var parsedBody = JSON.parse(body);
+        var parsedBody = JSON.parse(body);
+        console.log('body: ', parsedBody);
 
-  //       expect(parsedBody).toBeTruthy();
+        expect(parsedBody.success).toEqual(true);
+        expect(+parsedBody.deletedHouseholdId).toEqual(1);
 
-  //       done();
+        done();
+      });
 
-  //     });
+    });
 
-  // }); //closes delete
+  }); //closes delete
 
 }); //closes householdRouter

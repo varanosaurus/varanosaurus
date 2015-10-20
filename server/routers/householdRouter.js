@@ -91,10 +91,13 @@ router.delete('/:householdId', function(request, response) {
 
   var id = request.decoded.householdId;
 
-  db.Item.destroy({where: {id}})
+  db.Household.destroy({where: {id}})
     .then(function(numberDestroyed) {
       if (numberDestroyed) {
-        response.status(201).send();
+        response.status(201).json({
+          success: true,
+          deletedHouseholdId: id,
+        });
       } else {
         response.status(500).send('Error deleting household');
       }

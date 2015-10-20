@@ -43,7 +43,14 @@ authRouter.post('/signup', function(request, response) {
     })
     .then(function(user) {
       response.status(201).json({
-        user,
+        user: {
+          accountName: user.accountName,
+          displayName: user.displayName,
+          id: user.id,
+          updatedAt: user.updatedAt,
+          createdAt: user.createdAt,
+          household: user.household,
+        },
         token: tokens.issue(user.id),
       });
     })

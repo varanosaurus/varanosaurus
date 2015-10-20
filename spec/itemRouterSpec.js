@@ -98,9 +98,7 @@ describe('itemRouter', function() {
       request.get({url: url + itemId, headers: context.headers}, function(error, response, body) {
 
         var parsedBody = JSON.parse(body);
-
         expect(parsedBody.description).toEqual('valyrian steel');
-
         done();
 
       });

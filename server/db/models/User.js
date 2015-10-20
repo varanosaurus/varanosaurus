@@ -24,7 +24,7 @@ module.exports = {
 			allowNull: false,
 			validate: {
 				// Must be between 4-12 chars long
-				len: [4, 12],
+				len: [4, 20],
 				// Must be letters or numbers; case-insensitive for letters
 				isAlphanumeric: true,
 			},

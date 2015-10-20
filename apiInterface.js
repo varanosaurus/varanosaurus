@@ -12,11 +12,10 @@
       user: {
         id,
         accountName,
-        password, //hashed and salted - issue that we send this back?
         displayName,
         updatedAt,
         createdAt,
-        household,
+        householdId,
       },
       token: token,
     },
@@ -27,7 +26,7 @@
     url: '/api/users/:userId',
     requestBody: {},
     responseBody: {
-      user, //see POST for props
+      user, //see POST for props that will be included
       token,
     }
   },
@@ -85,7 +84,7 @@
     url: '/api/households/:householdId',
     requestBody: {},
     responseBody: {
-      household,
+      household, //see POST for props that will be included
       token,
     }
   },
@@ -124,16 +123,25 @@
     verb: 'POST',
     url: '/api/items/',
     requestBody: {
-      householdName: 'string',
+      description: 'string',
     },
     responseBody: {
       item: {
-        id,
-        name,
-        updatedAt,
-        createdAt,
-        creatorId,
-        captainId,
+        description: 'string',
+        details: 'string',
+        fetch: 'boolean',
+        bought: 'boolean',
+        price: 'decimal as string',
+        timeFetched: 'date',
+        timeBought: 'date',
+        id: 'number',
+        createdAt: 'date',
+        updatedAt: 'date',
+        householdId: 'number',
+        addingUserId: 'number',
+        fetchingUserId: 'number',
+        buyingUserId: 'nubmer',
+        reckoningId: 'number',
       }
       token,
     },
@@ -144,7 +152,7 @@
     url: '/api/items/:itemId',
     requestBody: {},
     responseBody: {
-      item,
+      item, //see POST for props that will be included
       token,
     }
   },
@@ -177,7 +185,7 @@
   }
 }
 
-//HOUSEHOLDS
+//RECKONINGS
 {
   'add a item': {
     verb: 'POST',

@@ -13,7 +13,14 @@ router.get('/:userId', function(request, response) {
 
     .then(function(user) {
       if (user) {
-        response.status(201).json(user);
+        response.status(201).json({
+          accountName: user.accountName,
+          displayName: user.displayName,
+          id: user.id,
+          updatedAt: user.updatedAt,
+          createdAt: user.createdAt,
+          household: user.household,
+        });
       } else {
         response.status(500).send('User not found');
       }

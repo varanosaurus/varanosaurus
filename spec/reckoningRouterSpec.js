@@ -1,86 +1,144 @@
-// process.env['NODE_ENV'] = 'testing';
-// var request = require('request');
-// var url = 'http://localhost:8080/api/reckonings/';
-// // var db = require('../server/db/interface');
+process.env['NODE_ENV'] = 'testing';
+var request = require('request');
+var url = 'http://localhost:8080/api/reckonings/';
+var db = require('../server/db/interface');
 
-// //really-need lets us easily clear node's cache
-// //after each test so that we can have a clean
-// //server instance before the next text
-// var needRequire = require('really-need');
+//urls we'll use when making requests in the beforeEach hook
+var signupUrl = 'http://localhost:8080/auth/signup';
+var userUrl = 'http://localhost:8080/api/users/';
+var householdUrl = 'http://localhost:8080/api/households/';
+var itemUrl = 'http://localhost:8080/api/items/';
 
-// describe('reckoningRouter', function() {
+//really-need lets us easily clear node's cache
+//after each test so that we can have a clean
+//server instance before the next text
+var needRequire = require('really-need');
 
-//   var server;
+describe('itemRouter', function() {
 
-//   beforeEach(function() {
+  var server;
 
-//     //theoretically clears the server before each test but doesn't work right now
-//     server = needRequire('../server/server', {bustCache: true, keep: false});
+  beforeEach(function(done) {
+    //restart the server for a clean slate
+    server = needRequire('../server/server', {bustCache: true, keep: false});
 
-//     //eventually figure out how to clear db before each test
-//     //for now, tests are written to not conflict with each other
-//     // db.sequelize.drop();
-//     // db.sequelize.sync({force: true});
-//   });
+    var context = this;
+    this.headers = {'content-type': 'application/json'};
+    var jonToken;
+    var jonId;
+    var tyrionToken;
+    // var tyrionId;
 
-//   afterEach(function(done) {
-//     server.close(done);
-//   });
+    //clear the db for a clean slate
+    db.sequelize.sync({force: true})
+      //now seed db with two users, one household, one, and one reckoning
+      .then(function() {
+        //add jonSnow as user1
+        request.post({
+          url: signupUrl,
+          headers: context.headers,
+          body: JSON.stringify({accountName: 'jonSnow', password: 'iKnowNothing'}),
+        },
+        function(error, response, body) {
+          var parsedBody = JSON.parse(body);
+          //save jon's info for later
+          jonToken = parsedBody.token;
+          jonId = parsedBody.user.id;
 
-//   xit('should create', function(done) {
+          //add tyrionLannister as user2
+          request.post({
+            url: signupUrl,
+            headers: context.headers,
+            body: JSON.stringify({accountName: 'tyrionLannister', password: 'godOfTitsAndWine'}),
+          },
+          function(error, response, body) {
+            var parsedBody = JSON.parse(body);
+            //save tyrion's info for later
+            tyrionToken = parsedBody.token;
+            // tyrionId = parsedBody.user.id;
 
-//     var headers = {'content-type': 'application/json'};
+            context.headers['X-Access-Token'] = tyrionToken;
 
-//     var body = JSON.stringify({
+            //add Westeros as household (should be under Tyrion as creator)
+            request.post({
+              url: householdUrl,
+              headers: context.headers,
+              body: JSON.stringify({householdName: 'Westeros'}),
+            },
+            function(error, response, body) {
+              var parsedBody = JSON.parse(body);
+              //now swap back to Jon's token and add him to the household
+              context.headers['X-Access-Token'] = jonToken;
+              context.householdId = parsedBody.household.id;
 
-//     });
+              request.put({
+                url: userUrl + jonId,
+                headers: context.headers,
+                body: JSON.stringify({householdId: context.householdId}),
+              },
+              function(error, response, body) {
+                var parsedBody = JSON.parse(body);
+                //reset since his household is different now
+                jonToken = parsedBody.token;
+                context.headers['X-Access-Token'] = jonToken;
 
-//     request.post({url, headers, body}, function(error, response, body) {
+                //now we'll add an item to the household and say that jon already bought it
+                request.post({
+                  url: itemUrl,
+                  headers: context.headers,
+                  body: JSON.stringify({description: 'dragon egg', buyingUserId: jonId}),
+                }, function() { done(); }); //closes post request to /items
 
-//     });
+              }); //closes put request to /users/:userId
 
-//   }); //closes create
+            }); //closes post request to /households
 
-//   xit('should respond to a get request', function(done) {
+          }); //closes post request to /users (for Tyrion)
 
-//     var headers = {'content-type': 'application/json'};
+        }); //closes post request to /users (for Jon)
 
-//     var body = JSON.stringify({
+      }); //closes then
 
-//     });
+  }); //closes beforeEach
 
-//     request.post({url, headers, body}, function(error, response, body) {
+  afterEach(function(done) {
+    server.close(done);
+  });
 
-//     });
+  it('should respond to a get request with that reckoning\'s information', function(done) {
 
-//   }); //closes get
+    // var context = this;
 
-//   xit('should update', function(done) {
+    //initiate a reckoning
+    //then fetch the reckoning info
 
-//     var headers = {'content-type': 'application/json'};
+    done();
 
-//     var body = JSON.stringify({
+  });
 
-//     });
+  xit('should respond to a get request with that item\'s information', function(done) {
 
-//     request.post({url, headers, body}, function(error, response, body) {
+    var context = this;
 
-//     });
+    var body = JSON.stringify({description: 'valyrian steel'});
 
-//   }); //closes update
+    //seed with existing household first
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
-//   xit('should delete', function(done) {
+      var parsedBody = JSON.parse(body);
+      context.headers['X-Access-Token'] = parsedBody.token;
+      var itemId = parsedBody.item.id;
 
-//     var headers = {'content-type': 'application/json'};
+      request.get({url: url + itemId, headers: context.headers}, function(error, response, body) {
 
-//     var body = JSON.stringify({
+        var parsedBody = JSON.parse(body);
+        expect(parsedBody.description).toEqual('valyrian steel');
+        done();
 
-//     });
+      });
 
-//     request.post({url, headers, body}, function(error, response, body) {
+    });
 
-//     });
+  }); //closes 'should respond to a get request'
 
-//   }); //closes delete
-
-// });
+}); //closes 'userRouter'

@@ -5,7 +5,6 @@ var TabView = require('./TabView');
 
 var {
   StyleSheet,
-  Navigator,
   TouchableHighlight,
   View,
   Text,

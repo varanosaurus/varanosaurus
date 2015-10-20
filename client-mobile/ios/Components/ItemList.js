@@ -1,16 +1,18 @@
 'use strict';
 
 var React = require('react-native');
-// var ShoppingListItem = require('./ShoppingListItem');
-// var ShoppingItemDetail = require('./ShoppingItemDetail');
 
 var {
   StyleSheet,
   ListView,
   View,
   Text,
-  SegmentedControlIOS
+  SegmentedControlIOS,
+  Navigator
 } = React;
+
+var ItemCell = require('./ItemCell');
+var ItemDetails = require('./ItemDetails');
 
 /* This mock data is here to simulate our API */
 var mockedData = [
@@ -116,18 +118,6 @@ var mockedData = [
   }
 ];
 
-/* ItemCell */
-// var ItemCell = React.createClass({
-//   render: function() {
-//     return (
-//       <View style={styles.itemCell}>
-//         <Text style={styles.itemName}>{this.props.itemName}</Text>
-//         <Text style={styles.itemPrice}>{this.props.itemPrice}</Text>
-//       </View>
-//     );
-//   }
-// });
-
 var ItemList = React.createClass({
 
   getInitialState: function() {
@@ -149,6 +139,23 @@ var ItemList = React.createClass({
     });
   },
 
+  selectItem: function(item: Object) {
+    console.log('reaching here?');
+    ItemList.props.navigator.push({ // this needs to be changed for Navigator
+      id: ItemDetails
+      // passProps: {item},
+    });
+  },
+
+  renderRow: function(item) {
+    return (
+      <ItemCell
+        onSelect={() => this.selectItem(item)}
+        item={item}
+      />
+    );
+  },
+
   render: function() {
     return (
         <View style={styles.segmentControl}>
@@ -164,15 +171,6 @@ var ItemList = React.createClass({
             {this.renderListView()}
         </View>
       )
-  },
-
-  renderItem: function(item) {
-    return (
-      <View style={styles.itemCell}>
-        <Text style={styles.itemName}>{item.itemName}</Text>
-        <Text style={styles.itemPrice}>${item.itemPrice}</Text>
-      </View>
-    );
   },
 
   renderListView: function() {
@@ -193,23 +191,24 @@ var ItemList = React.createClass({
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderItem}
+        renderRow={this.renderRow}
         style={styles.listView}
         automaticallyAdjustContentInsets={false}
-        contentInset={{bottom: 50}} />
-        )
+        contentInset={{bottom: 50}}
+       />
+    )
   },
 
   renderBoughtListView: function() {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderItem}
+        renderRow={this.renderRow}
         style={styles.listView}
         automaticallyAdjustContentInsets={false}
         contentInset={{bottom: 50}}
        />
-      )
+    )
   },
 
 });

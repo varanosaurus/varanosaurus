@@ -48,21 +48,23 @@ var Root = React.createClass({
 
 var styles = StyleSheet.create({
   container: {
-    marginTop: 64,
     flex: 1,
-    backgroundColor: 'white'
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff'
   },
   button: {
     height: 36,
     flex: 1,
-    margin: 2,
-    backgroundColor: 'black',
     flexDirection: 'row',
-    justifyContent: 'center'
+    backgroundColor: '#2fb4da',
+    justifyContent: 'center',
+    color: '#FFFFFF'
   },
   btnText: {
     fontSize: 18,
-    color: 'white'
+    color: '#fff',
+    marginTop: 6
   }
 });
 

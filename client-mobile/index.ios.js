@@ -32,7 +32,6 @@ var Knead = React.createClass({
         initialRoute={{
           index: 0,
           id: 'Sign up / Login'
-          // component: TabView,
         }}
         renderScene={this.renderScene}
       />

@@ -1,25 +1,28 @@
 'use strict';
 
 var React = require('react-native');
+var SignUp = require('./SignUp');
+var LogIn = require('./LogIn');
 
 var {
   StyleSheet,
   TouchableHighlight,
   View,
-  Text,
+  Text
 } = React;
 
 var Root = React.createClass({
   signUp: function() {
     this.props.navigator.push({
-      index: 1,
-      id: 'Sign up'
-    })
+      title: 'Sign Up',
+      component: SignUp
+    });
+
   },
   logIn: function() {
     this.props.navigator.push({
-      index: 2,
-      id: 'Log in'
+      title: 'Log In',
+      component: LogIn
     })
   },
   render: function() {

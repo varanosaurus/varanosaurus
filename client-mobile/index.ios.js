@@ -18,7 +18,12 @@ var {
 } = React;
 
 var Knead = React.createClass({
+<<<<<<< HEAD
   renderScene: function(route, navigator) {
+=======
+
+  renderScene: function (route, navigator) {
+>>>>>>> implemented client side error handling
     switch (route.id) {
       case 'Sign up / Login':
         return <Root navigator={navigator}/>

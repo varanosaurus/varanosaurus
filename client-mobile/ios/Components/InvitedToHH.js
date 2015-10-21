@@ -52,17 +52,18 @@ var styles = StyleSheet.create({
     borderWidth: 1
   },
   button: {
-    height: 15,
     flex: 1,
-    margin: 2,
+    paddingTop: 10,
+    paddingBottom: 10,
     backgroundColor: 'black',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    position: 'absolute',
   },
   btnText: {
     fontSize: 18,
-    color: 'white'
-  }
+    color: 'white',
+  },
 });
 
 module.exports = InvitedToHH;

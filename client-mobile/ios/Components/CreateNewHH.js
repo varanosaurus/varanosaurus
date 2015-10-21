@@ -55,30 +55,32 @@ var styles = StyleSheet.create({
     marginTop: 64,
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   input: {
     height: 40, 
     borderColor: 'gray', 
-    borderWidth: 1
+    borderWidth: 1,
   },
   button: {
-    height: 15,
     flex: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
     margin: 2,
     backgroundColor: 'black',
-    flexDirection: 'row',
-    justifyContent: 'center'
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   btnText: {
     fontSize: 18,
-    color: 'white'
+    color: 'white',
   },
   input: {
     height: 40, 
     borderColor: 'gray', 
-    borderWidth: 1
-  }
+    borderWidth: 1,
+  },
 });
+
 
 module.exports = CreateNewHH;

@@ -19,7 +19,7 @@ var SignUp = React.createClass({
        username: '',
        password: '',
        error: '',
-    })
+    });
   },
   joinOrCreateHousehold: function() {
     //if you are not in a household
@@ -27,40 +27,41 @@ var SignUp = React.createClass({
       title: 'Create New HH',
       component: CreateNewHH,
     });
+    // var init = { 
+    //   method: 'POST',
+    //   cache: 'default',
+    // };
     this.setState({
       username: this.state.username,
       password: this.state.password,
-    })
-    console.log(this.state);
+    });
     //if user does not provide sufficient username or password, send error feedback
     //note: logic below doesn't take into account accepted character types
     if (this.state.username.length === 0 && this.state.password.length === 0) {
       this.setState({
-        error: 'Please provide a username that is greater than 3 characters and less than 13 characters. Please provide a password that is greater than 5 characters and less than 29 characters.'
-      })
+        error: 'Please provide a username that is greater than 3 characters and less than 13 characters. Please provide a password that is greater than 5 characters and less than 29 characters.',
+      });
     } else if (this.state.username.length < 4 || this.state.username.length > 20) {
       this.setState({
-        error: 'Please provide a username that is greater than 3 characters and less than 21 characters'
-      })
-
+        error: 'Please provide a username that is greater than 3 characters and less than 21 characters',
+      });
     } else if (this.state.password.length < 6 || this.state.username.password > 28) {
       this.setState({
-        error: 'Please provide a password that is greater than 5 characters and less than 29 characters'
-      })
+        error: 'Please provide a password that is greater than 5 characters and less than 29 characters',
+      });
     } else {
+      // fetch(mock, init) 
       //if you are not in a household
       this.props.navigator.push({
         index: 3,
         id: 'Not invited',
-      })
-
+      });
       //NOTE: need to receive data from the server re: if user was invited to HH or not
       //if you are in a household
       // this.props.navigator.push({
       //   index: 4,
       //   id: 'Invited'
       // })
-      
     }
   },
   render: function() {
@@ -69,15 +70,12 @@ var SignUp = React.createClass({
         <TextInput style={styles.input} placeholder='username' onChangeText={(username) => this.setState({username})} value={this.state.username}/>
         <TextInput style={styles.input} placeholder='password' secureTextEntry='true' onChangeText={(password) => this.setState({password})} value={this.state.password}/>
         <Text style={styles.errorHandling}>{this.state.error}</Text>
-        <TouchableHighlight 
-          style={styles.button}
-          onPress={this.joinOrCreateHousehold}
-        >
+        <TouchableHighlight style={styles.button} onPress={this.joinOrCreateHousehold}>
           <Text style={styles.btnText}>Sign Up</Text>
         </TouchableHighlight>
       </View>
     );
-  }
+  },
 });
 
 var styles = StyleSheet.create({
@@ -89,7 +87,7 @@ var styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: 'gray', 
+    borderColor: 'gray',
     borderWidth: 1,
   },
   button: {

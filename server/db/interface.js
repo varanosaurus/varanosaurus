@@ -7,6 +7,7 @@ var householdConfig = require('./models/Household');
 var reckoningConfig = require('./models/Reckoning');
 var userConfig = require('./models/User');
 var userToReckoningConfig = require('./models/UserToReckoning');
+var invitationConfig = require('./models/Invitation');
 
 var dbEnvironment = process.env.NODE_ENV;
 
@@ -33,6 +34,8 @@ var User = db.define('user', userConfig.attributes, userConfig.options);
 
 var UserToReckoning = db.define('userToReckoning', userToReckoningConfig.attributes, userToReckoningConfig.options);
 
+var Invitation = db.define('invitation', invitationConfig.attributes, invitationConfig.options);
+
 Item.belongsTo(Household);
 Household.hasMany(Item);
 
@@ -54,6 +57,11 @@ Household.hasMany(User);
 
 Household.belongsTo(User, {as: 'creator', constraints: false});
 Household.belongsTo(User, {as: 'captain', constraints: false});
+
+Invitation.belongsTo(User);
+Invitation.belongsTo(Household);
+Household.hasMany(Invitation);
+User.hasMany(Invitation);
 
 if (dbEnvironment === 'reset' || dbEnvironment === 'testing') {
   shouldForce = true;
@@ -77,5 +85,6 @@ module.exports = {
   Reckoning,
   User,
   UserToReckoning,
+  Invitation,
   init,
 };

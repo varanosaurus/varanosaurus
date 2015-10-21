@@ -9,26 +9,41 @@ var {
 } = React;
 
 var InviteRoommates = React.createClass({
+  getInitialState: function() {
+    return ({
+      inputField: 2,
+    })
+  },
+  addRoommate: function() {
+    this.state.inputField++;
+  },
   submitRoommates: function() {
     // the below code is a "hack" but react-native doesn't currently support optimally otherwise
     // this.props.navigator.popToRoute(this.props.navigator.getCurrentRoutes()[1]);
   },
   render: function() {
+    var inputFields = this.state.inputField;
     return (
       <View style={styles.container}>
-        <Text>INVITE ROOMMATES</Text>
-        <TextInput style={styles.input} placeholder="roommate's email address"/>
-        <TextInput style={styles.input} placeholder="roommate's email address"/>
-        <TextInput style={styles.input} placeholder="roommate's email address"/>
+        <TextInput style={styles.input} keyboardType='default' placeholder="roommate's email address"/>
+        <TextInput style={styles.input} keyboardType='default' placeholder="roommate's email address"/>
+        <TextInput style={styles.input} keyboardType='default' placeholder="roommate's email address"/>
+        {inputFields.forEach(function(inputField) {
+          return <TextInput style={styles.input} keyboardType='default' placeholder="roommate's email address"/>
+        })}
+        <Text 
+          style={styles.hyperLink}
+          onPress={() => this.addRoommate}
+        >Invite more</Text>
         <TouchableHighlight
           style={styles.button}
           onPress={() => this.submitRoommates()}
         >
-          <Text style={styles.btnText}>Submit</Text>
+          <Text style={styles.btnText}>Invite Roommates</Text>
         </TouchableHighlight>
       </View>
     );
-  }
+  },
 });
 
 var styles = StyleSheet.create({
@@ -36,12 +51,15 @@ var styles = StyleSheet.create({
     marginTop: 64,
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   input: {
-    height: 40, 
-    borderColor: 'gray', 
-    borderWidth: 1
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+  },
+  hyperLink: {
+    color: 'blue',
   },
   button: {
     flex: 1,
@@ -54,13 +72,8 @@ var styles = StyleSheet.create({
   },
   btnText: {
     fontSize: 18,
-    color: 'white'
+    color: 'white',
   },
-  input: {
-    height: 40, 
-    borderColor: 'gray', 
-    borderWidth: 1
-  }
 });
 
 module.exports = InviteRoommates;

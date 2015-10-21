@@ -2,7 +2,7 @@
 
 var React = require('react-native');
 var Root = require('./ios/Components/Root');
-var ItemList = require('./ios/Components/ItemList');
+// var ItemList = require('./ios/Components/ItemList');
 var SignUp = require('./ios/Components/SignUp');
 var LogIn = require('./ios/Components/LogIn');
 var NotInvitedToHH = require('./ios/Components/NotInvitedToHH');
@@ -17,22 +17,22 @@ var {
 } = React;
 
 var Knead = React.createClass({
-  renderScene: function (route, navigator) {
+  renderScene: function(route, navigator) {
     switch (route.id) {
       case 'Sign up / Login':
-        return <Root navigator={navigator}/>
+        return <Root navigator={navigator}/>;
       case 'Sign up':
-        return <SignUp navigator={navigator}/>
+        return <SignUp navigator={navigator}/>;
       case 'Log in':
-        return <LogIn navigator={navigator}/>
+        return <LogIn navigator={navigator}/>;
       case 'Not invited':
-        return <NotInvitedToHH navigator={navigator}/>
+        return <NotInvitedToHH navigator={navigator}/>;
       case 'Invited':
-        return <InvitedToHH navigator={navigator}/>
+        return <InvitedToHH navigator={navigator}/>;
       case 'Create new household':
-        return <CreateNewHH navigator={navigator}/>
-      case 'Invite roommates': 
-        return <InviteRoommates navigator={navigator}/>
+        return <CreateNewHH navigator={navigator}/>;
+      case 'Invite roommates':
+        return <InviteRoommates navigator={navigator}/>;
     }
   },
   render: function() {
@@ -45,15 +45,14 @@ var Knead = React.createClass({
         }}
       />
     );
-  }
-
+  },
 });
 
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
-  }
+    backgroundColor: 'white',
+  },
 });
 
 AppRegistry.registerComponent('Knead', () => Knead);

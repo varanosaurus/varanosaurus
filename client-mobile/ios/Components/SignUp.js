@@ -1,8 +1,6 @@
 'use strict';
 
 var React = require('react-native');
-var NotInvitedToHH = require('./NotInvitedToHH');
-var InvitedToHH = require('./InvitedToHH');
 var CreateNewHH = require('./CreateNewHH');
 
 var {
@@ -22,7 +20,7 @@ var SignUp = React.createClass({
     });
   },
   joinOrCreateHousehold: function() {
-    // var init = { 
+    // var init = {
     //   method: 'POST',
     //   cache: 'default',
     // };
@@ -45,7 +43,7 @@ var SignUp = React.createClass({
         error: 'Please provide a password that is greater than 5 characters and less than 29 characters',
       });
     } else {
-      // fetch(mock, init) 
+    // fetch(mock, init)
       //if you are not in a household
       this.props.navigator.push({
         title: 'Create Household',

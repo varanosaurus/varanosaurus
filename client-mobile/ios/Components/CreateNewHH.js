@@ -18,25 +18,25 @@ var CreateNewHH = React.createClass({
   },
 
   inviteRoommates: function() {
-    if(this.state.householdName.length === 0) {
+    if (this.state.householdName.length === 0) {
       this.setState({
-        error: 'Please provide a household name'
+        error: 'Please provide a household name',
       });
     } else {
       this.props.navigator.push({
         title: 'Invite Roommates',
         component: InviteRoommates,
-      })
+      });
     }
   },
   render: function() {
     return (
       <View style={styles.container}>
-        <TextInput 
-          style={styles.input} 
-          keyboardType='default' 
-          placeholder='Create household name' 
-          onChangeText={(householdName) => this.setState({householdName: householdName})} 
+        <TextInput
+          style={styles.input}
+          keyboardType='default'
+          placeholder='Create household name'
+          onChangeText={(householdName) => this.setState({householdName: householdName})}
           value={this.state.householdName}
         />
         <Text style={styles.errorHandling}>{this.state.error}</Text>
@@ -44,13 +44,11 @@ var CreateNewHH = React.createClass({
           style={styles.button}
           onPress={() => this.inviteRoommates()}
         >
-          <Text 
-            style={styles.btnText}>Make household
-          </Text>
+          <Text style={styles.btnText}>Make household</Text>
         </TouchableHighlight>
       </View>
     );
-  }
+  },
 });
 
 var styles = StyleSheet.create({
@@ -61,8 +59,8 @@ var styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   input: {
-    height: 40, 
-    borderColor: 'gray', 
+    height: 40,
+    borderColor: 'gray',
     borderWidth: 1,
   },
   button: {

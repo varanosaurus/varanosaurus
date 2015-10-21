@@ -8,22 +8,22 @@ var {
   StyleSheet,
   TouchableHighlight,
   View,
-  Text
+  Text,
 } = React;
 
 var Root = React.createClass({
   signUp: function() {
     this.props.navigator.push({
       title: 'Sign up',
-      component: SignUp
+      component: SignUp,
     });
 
   },
   logIn: function() {
     this.props.navigator.push({
       title: 'Login',
-      component: LogIn
-    })
+      component: LogIn,
+    });
   },
   render: function() {
     return (
@@ -43,7 +43,7 @@ var Root = React.createClass({
         </TouchableHighlight>
       </View>
     );
-  }
+  },
 });
 
 var styles = StyleSheet.create({
@@ -51,7 +51,7 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   button: {
     height: 36,
@@ -59,13 +59,13 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#2fb4da',
     justifyContent: 'center',
-    color: '#FFFFFF'
+    color: '#FFFFFF',
   },
   btnText: {
     fontSize: 18,
     color: '#fff',
-    marginTop: 6
-  }
+    marginTop: 6,
+  },
 });
 
 module.exports = Root;

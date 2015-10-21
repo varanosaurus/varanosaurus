@@ -5,6 +5,7 @@ var MyInfo = require('./MyInfo');
 var ByItemList = require('./ByItemList');
 var ByPersonList = require('./ByPersonList');
 var ByItemDetails = require('./ByItemDetails');
+var ByPersonDetails = require('./ByPersonDetails');
 
 var {
   StyleSheet,
@@ -66,7 +67,15 @@ var StatementDetails = React.createClass({
             })
           }}
         >
-        <ByPersonList />
+        <ByPersonList
+          onSelectByPerson={ (byPerson) => {
+            this.props.navigator.push({
+              title: byPerson.personName,
+              component: ByPersonDetails,
+              passProps: {byPerson}
+            });
+          }}
+        />
         </TabBarIOS.Item>
 
       </TabBarIOS>

@@ -60,7 +60,7 @@ var TabView = React.createClass({
         <StatementList
           onSelectStatement={ (statement) => {
             this.props.navigator.push({
-              title: statement.statementName + ' Statement',
+              title: 'Reckoning',
               component: StatementDetails,
               passProps: {statement}
             });

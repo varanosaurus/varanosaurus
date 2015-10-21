@@ -11,11 +11,12 @@ var {
 var InviteRoommates = React.createClass({
   getInitialState: function() {
     return ({
-      inputField: 2,
-    })
+      inputField: [],
+    });
   },
   addRoommate: function() {
-    this.state.inputField++;
+    this.state.inputField.push(true);
+    this.setState(this.state.inputField);
   },
   submitRoommates: function() {
     // the below code is a "hack" but react-native doesn't currently support optimally otherwise
@@ -25,16 +26,35 @@ var InviteRoommates = React.createClass({
     var inputFields = this.state.inputField;
     return (
       <View style={styles.container}>
-        <TextInput style={styles.input} keyboardType='default' placeholder="roommate's email address"/>
-        <TextInput style={styles.input} keyboardType='default' placeholder="roommate's email address"/>
-        <TextInput style={styles.input} keyboardType='default' placeholder="roommate's email address"/>
-        {inputFields.forEach(function(inputField) {
-          return <TextInput style={styles.input} keyboardType='default' placeholder="roommate's email address"/>
-        })}
-        <Text 
+        <TextInput
+          style={styles.input} 
+          keyboardType='default'
+          placeholder="roommate's email address"
+        />
+        <TextInput 
+          style={styles.input}
+          keyboardType='default'
+          placeholder="roommate's email address"
+        />
+        <TextInput 
+          style={styles.input} 
+          keyboardType='default' 
+          placeholder="roommate's email address"
+        />
+          {inputFields.map(function(input) {
+            return (<TextInput 
+                      style={styles.input} 
+                      keyboardType='default' 
+                      placeholder="roommate's email address"
+                    />)
+           })
+          }
+        <Text
           style={styles.hyperLink}
-          onPress={() => this.addRoommate}
-        >Invite more</Text>
+          onPress={this.addRoommate}
+        >
+          Invite more
+        </Text>
         <TouchableHighlight
           style={styles.button}
           onPress={() => this.submitRoommates()}

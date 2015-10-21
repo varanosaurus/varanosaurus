@@ -135,24 +135,21 @@
       details: string, //optional
     },
     responseBody: {
-      item: {
-        description: string,
-        details: string,
-        fetch: boolean,
-        bought: boolean,
-        price: stringified decimal,
-        timeFetched: date,
-        timeBought: date,
-        id: integer,
-        createdAt: date,
-        updatedAt: date,
-        householdId: integer,
-        addingUserId: integer,
-        fetchingUserId: integer,
-        buyingUserId: integer,
-        reckoningId: integer,
-      },
-      token: token,
+      description: string,
+      details: string,
+      fetch: boolean,
+      bought: boolean,
+      price: stringified decimal,
+      timeFetched: date,
+      timeBought: date,
+      id: integer,
+      createdAt: date,
+      updatedAt: date,
+      householdId: integer,
+      addingUserId: integer,
+      fetchingUserId: integer,
+      buyingUserId: integer,
+      reckoningId: integer,
     },
   },
 
@@ -161,51 +158,54 @@
     url: '/api/items/:itemId',
     requestBody: {},
     responseBody: {
-      item: {
-        description: string,
-        details: string,
-        fetch: 'boolean',
-        bought: 'boolean',
-        price: stringified decimal,
-        timeFetched: date,
-        timeBought: date,
-        id: integer,
-        createdAt: date,
-        updatedAt: date,
-        householdId: integer,
-        addingUserId: integer,
-        fetchingUserId: integer,
-        buyingUserId: 'nubmer',
-        reckoningId: integer,
-      }
-      token,
-    }
+      description: string,
+      details: string,
+      fetch: boolean,
+      bought: boolean,
+      price: stringified decimal,
+      timeFetched: date,
+      timeBought: date,
+      id: integer,
+      createdAt: date,
+      updatedAt: date,
+      householdId: integer,
+      addingUserId: integer,
+      fetchingUserId: integer,
+      buyingUserId: number,
+      reckoningId: integer,
+    },
   },
 
   'change an item\'s info': {
     verb: 'PUT',
     url: '/api/items/:itemId',
     requestBody: {
-      'propertyToChange': 'thingtoChangeItTo',
-      'anotherThing': 'anotherChange',
+      details: string, //optional
+      fetch: boolean, //optional
+      bought: boolean, //optional
+      price: stringified decimal, //optional
+      fetchingUserId: integer, //optional
+      buyingUserId: number, //optional
     },
     responseBody: {
       updates: {
-        'propertyThatWasChanged': 'changedVal',
-        'anotherPropToChange': 'otherChangedVal',
-        updatedAt: date,
+        details: string, //only if included in request
+        fetch: boolean, //only if included in request
+        bought: boolean, //only if included in request
+        price: stringified decimal, //only if included in request
+        fetchingUserId: integer, //only if included in request
+        buyingUserId: number, //only if included in request,
       },
-      token: token,
-    }
+    },
   },
 
-  'delete an user': {
+  'delete an item': {
     verb: 'DELETE',
     url: '/api/items/:itemId',
     requestBody: {},
     responseBody: {
       success: boolean,
-      deletedHouseholdId: id,
+      deletedItemId: id,
     }
   }
 }
@@ -229,12 +229,17 @@
     },
   },
 
-  'get a household\'s info': {
+  'get a reckoning\'s info': {
     verb: 'GET',
     url: '/api/households/:householdId',
     requestBody: {},
     responseBody: {
-      reckoning, //see POST for props that will be included
-    }
+      totalSpent: stringified decimal,
+      date: date,
+      id: integer,
+      createdAt: date,
+      updatedAt: date,
+      householdId: integer,
+    },
   },
 }

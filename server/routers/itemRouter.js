@@ -1,6 +1,5 @@
 var router = require('express').Router();
 var db = require('../db/interface.js');
-var tokens = require('../services/tokens');
 
 router.post('/', function(request, response) {
 
@@ -30,10 +29,7 @@ router.post('/', function(request, response) {
     .then(function(item) {
       item.setHousehold(householdId);
       item.setAddingUser(userId);
-      response.status(201).json({
-        item,
-        token: tokens.issue(userId, householdId),
-      });
+      response.status(201).json(item);
     })
 
     .catch(function(error) {

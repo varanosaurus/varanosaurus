@@ -41,7 +41,7 @@ describe('itemRouter', function() {
 
           var householdUrl = 'http://localhost:8080/api/households/';
           var householdBody = JSON.stringify({
-            householdName: 'Winterfell',
+            name: 'Winterfell',
           });
 
           request.post({
@@ -74,8 +74,10 @@ describe('itemRouter', function() {
     var body = JSON.stringify({description: 'valyrian steel'});
 
     request.post({url, headers: context.headers, body}, function(error, response, body) {
+      var parsedBody = JSON.parse(body);
 
-      expect(JSON.parse(body).item.description).toEqual('valyrian steel');
+      expect(parsedBody.description).toEqual('valyrian steel');
+      expect(parsedBody.addingUserId).toEqual(1);
       done();
 
     });
@@ -88,12 +90,11 @@ describe('itemRouter', function() {
 
     var body = JSON.stringify({description: 'valyrian steel'});
 
-    //seed with existing household first
+    //seed with existing item first
     request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
-      context.headers['X-Access-Token'] = parsedBody.token;
-      var itemId = parsedBody.item.id;
+      var itemId = parsedBody.id;
 
       request.get({url: url + itemId, headers: context.headers}, function(error, response, body) {
 
@@ -107,21 +108,18 @@ describe('itemRouter', function() {
 
   }); //closes 'should respond to a get request'
 
-  it('should update a user and send back the properties that were changed', function(done) {
+  it('should update an item and send back the properties that were changed', function(done) {
 
     var context = this;
 
     var body = JSON.stringify({description: 'valyrian steel'});
 
-    //seed with existing household first
+    //seed with existing item first
     request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
-      context.headers['X-Access-Token'] = parsedBody.token;
-      var itemId = parsedBody.item.id;
-      var updateBody = JSON.stringify({
-        details: 'good for beheading, will need soon',
-      });
+      var itemId = parsedBody.id;
+      var updateBody = JSON.stringify({details: 'good for beheading, will need soon'});
 
       request.put({url: url + itemId, headers: context.headers, body: updateBody}, function(error, response, body) {
 
@@ -137,18 +135,17 @@ describe('itemRouter', function() {
 
   }); //closes 'should update a user'
 
-  it('should delete a user and send back confirmation', function(done) {
+  it('should delete an item and send back confirmation', function(done) {
 
     var context = this;
 
     var body = JSON.stringify({description: 'valyrian steel'});
 
-    //seed with existing household first
+    //seed with existing item first
     request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
-      context.headers['X-Access-Token'] = parsedBody.token;
-      var itemId = parsedBody.item.id;
+      var itemId = parsedBody.id;
 
       request.del({url: url + itemId, headers: context.headers}, function(error, response, body) {
 
@@ -162,6 +159,6 @@ describe('itemRouter', function() {
 
     });
 
-  }); //closes 'should delete a user'
+  }); //closes 'should delete an item'
 
-}); //closes 'userRouter'
+}); //closes 'itemRouter'

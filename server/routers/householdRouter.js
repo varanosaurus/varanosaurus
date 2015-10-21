@@ -8,7 +8,7 @@ router.post('/', function(request, response) {
   //that makes the userId always available
   var userId = request.decoded.userId;
 
-  var householdName = request.body.householdName;
+  var name = request.body.name;
 
   db.User.findById(userId)
 
@@ -22,7 +22,7 @@ router.post('/', function(request, response) {
           if (household) {
             response.status(409).send('Household already exists');
           } else {
-            return db.Household.create({name: householdName});
+            return db.Household.create({name});
           }
         });
     })

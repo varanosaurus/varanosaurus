@@ -1,7 +1,7 @@
 process.env['NODE_ENV'] = 'testing';
 var request = require('request');
 var url = 'http://localhost:8080/auth';
-var db = require('../server/db/interface');
+var db = require('../../server/db/interface');
 
 var needRequire = require('really-need');
 
@@ -11,7 +11,7 @@ describe('authRouter', function() {
 
   beforeEach(function(done) {
 
-    server = needRequire('../server/server', {bustCache: true, keep: false});
+    server = needRequire('../../server/server', {bustCache: true, keep: false});
     db.sequelize.sync({force: true}).then(done);
 
   });

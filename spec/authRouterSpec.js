@@ -32,6 +32,8 @@ describe('authRouter', function() {
 
     request.post({url: url + '/signup', headers, body}, function(error, response, body) {
 
+      expect(body).toEqual(jasmine.any(String));
+
       var parsedBody = JSON.parse(body);
 
       expect(error).toBeFalsy();

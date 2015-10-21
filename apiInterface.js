@@ -133,6 +133,9 @@
     requestBody: {
       description: string,
       details: string, //optional
+      fetch: boolean, //optional, defaults to false
+      bought: boolean, //optional, defaults to false
+      price: stringified decimal, //optional, defaults to 0
     },
     responseBody: {
       description: string,

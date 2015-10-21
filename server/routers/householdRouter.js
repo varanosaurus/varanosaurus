@@ -1,6 +1,8 @@
 var router = require('express').Router();
 var db = require('../db/interface.js');
 var tokens = require('../services/tokens');
+var scheduler = require('../services/scheduler');
+var reckon = require('../services/reckon');
 
 router.post('/', function(request, response) {
 
@@ -28,6 +30,8 @@ router.post('/', function(request, response) {
     })
 
     .then(function(household) {
+      //set scheduler to call a reckoning once a month
+      scheduler.createMonthlyJob(household.id, reckon);
 
       household.setCreator(userId);
       //set the creator as the default captain upon creation

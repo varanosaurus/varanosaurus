@@ -141,7 +141,6 @@ describe('itemRouter', function() {
 
       request.get({url: url + reckoningId, headers: context.headers}, function(error, response, body) {
         var parsedBody = JSON.parse(body);
-        console.log('reckoning: ', parsedBody);
 
         expect(parsedBody.id).toEqual(reckoningId);
         expect(parsedBody.totalSpent).toEqual('100.00');

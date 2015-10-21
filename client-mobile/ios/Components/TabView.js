@@ -2,10 +2,11 @@
 
 var React = require('react-native');
 var Household = require('./Household');
-var Reckoning = require('./Reckoning');
 var More = require('./More');
 var ItemList = require('./ItemList');
 var ItemDetails = require('./ItemDetails');
+var StatementList = require('./StatementList');
+var StatementDetails = require('./StatementDetails');
 
 var {
   // StyleSheet,
@@ -38,12 +39,10 @@ var TabView = React.createClass({
         >
         <ItemList
           onSelectItem={ (item) => {
-            console.log('onPress call from :', item);
-            console.log('this.props.navigator is:', this.props.navigator);
             this.props.navigator.push({
-            title: item.itemName,
-            component: ItemDetails,
-            passProps: {item}
+              title: item.itemName,
+              component: ItemDetails,
+              passProps: {item}
             });
           }}
         />
@@ -58,7 +57,15 @@ var TabView = React.createClass({
             })
           }}
         >
-        <Reckoning />
+        <StatementList
+          onSelectStatement={ (statement) => {
+            this.props.navigator.push({
+              title: 'Reckoning',
+              component: StatementDetails,
+              passProps: {statement}
+            });
+          }}
+        />
         </TabBarIOS.Item>
 
         <TabBarIOS.Item

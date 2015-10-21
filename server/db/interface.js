@@ -58,10 +58,13 @@ Household.hasMany(User);
 Household.belongsTo(User, {as: 'creator', constraints: false});
 Household.belongsTo(User, {as: 'captain', constraints: false});
 
-Invitation.belongsTo(User);
+Invitation.belongsTo(User, {as: 'toUser', constraints: false});
+Invitation.belongsTo(User, {as: 'fromUser', constraints: false});
+User.hasMany(Invitation, {as: 'toUser', constraints: false});
+User.hasMany(Invitation, {as: 'fromUser', constraints: false});
+
 Invitation.belongsTo(Household);
 Household.hasMany(Invitation);
-User.hasMany(Invitation);
 
 if (dbEnvironment === 'reset' || dbEnvironment === 'testing') {
   shouldForce = true;

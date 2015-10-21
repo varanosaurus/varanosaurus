@@ -3,7 +3,9 @@ var db = require('../db/interface');
 var tokens = require('../services/tokens');
 
 authRouter.post('/login', function(request, response) {
+
   db.User.findOne({where: {accountName: request.body.accountName}})
+
     .then(function(user) {
 
       var token;
@@ -20,7 +22,13 @@ authRouter.post('/login', function(request, response) {
         return response.status(403).send('Wrong password.');
       }
 
+    })
+
+    .catch(function(error) {
+      console.error(error);
+      response.status(500).send(error);
     });
+
 });
 
 authRouter.post('/signup', function(request, response) {

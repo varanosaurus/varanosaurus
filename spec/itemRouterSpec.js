@@ -41,7 +41,7 @@ describe('itemRouter', function() {
 
           var householdUrl = 'http://localhost:8080/api/households/';
           var householdBody = JSON.stringify({
-            householdName: 'Winterfell',
+            name: 'Winterfell',
           });
 
           request.post({
@@ -74,67 +74,91 @@ describe('itemRouter', function() {
     var body = JSON.stringify({description: 'valyrian steel'});
 
     request.post({url, headers: context.headers, body}, function(error, response, body) {
+      var parsedBody = JSON.parse(body);
 
-      expect(JSON.parse(body).item.description).toEqual('valyrian steel');
+      expect(parsedBody.description).toEqual('valyrian steel');
+      expect(parsedBody.addingUserId).toEqual(1);
       done();
 
     });
 
   });
 
-  xit('should respond to a get request with that item\'s information', function(done) {
+  it('should respond to a get request with that item\'s information', function(done) {
 
     var context = this;
 
-    request.get({url: url + context.userId, headers: context.headers}, function(error, response, body) {
+    var body = JSON.stringify({description: 'valyrian steel'});
+
+    //seed with existing item first
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
+      var itemId = parsedBody.id;
 
-      expect(parsedBody.accountName).toEqual('nedStark');
-      expect(parsedBody.displayName).toEqual(null);
-      expect(parsedBody.id).toEqual(1);
-      done();
+      request.get({url: url + itemId, headers: context.headers}, function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+        expect(parsedBody.description).toEqual('valyrian steel');
+        done();
+
+      });
 
     });
 
   }); //closes 'should respond to a get request'
 
-  xit('should update a user and send back the properties that were changed', function(done) {
+  it('should update an item and send back the properties that were changed', function(done) {
 
     var context = this;
 
-    var updates = JSON.stringify({
-      password: 'mySecretDiedWithMe',
-      displayName: 'honorableButStupid',
-    });
+    var body = JSON.stringify({description: 'valyrian steel'});
 
-    request.put({url: url + context.userId, headers: context.headers, body: updates}, function(error, response, body) {
+    //seed with existing item first
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
+      var itemId = parsedBody.id;
+      var updateBody = JSON.stringify({details: 'good for beheading, will need soon'});
 
-      expect(parsedBody.updates.displayName).toBeTruthy();
-      expect(parsedBody.updates.displayName).toEqual('honorableButStupid');
-      done();
+      request.put({url: url + itemId, headers: context.headers, body: updateBody}, function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+
+        expect(parsedBody.details).toEqual('good for beheading, will need soon');
+
+        done();
+
+      });
 
     });
 
   }); //closes 'should update a user'
 
-  xit('should delete a user and send back confirmation', function(done) {
+  it('should delete an item and send back confirmation', function(done) {
 
     var context = this;
 
-    request.del({url: url + context.userId, headers: context.headers}, function(error, response, body) {
+    var body = JSON.stringify({description: 'valyrian steel'});
+
+    //seed with existing item first
+    request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
+      var itemId = parsedBody.id;
 
-      expect(parsedBody.success).toEqual(true);
-      //sequelize returns a string for id; cast to a number first
-      expect(+parsedBody.deletedUserId).toEqual(1);
-      done();
+      request.del({url: url + itemId, headers: context.headers}, function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+        expect(parsedBody.success).toEqual(true);
+        expect(+parsedBody.deletedItemId).toEqual(1);
+
+        done();
+
+      });
 
     });
 
-  }); //closes 'should delete a user'
+  }); //closes 'should delete an item'
 
-}); //closes 'userRouter'
+}); //closes 'itemRouter'

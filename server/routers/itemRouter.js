@@ -1,6 +1,5 @@
 var router = require('express').Router();
 var db = require('../db/interface.js');
-var tokens = require('../services/tokens');
 
 router.post('/', function(request, response) {
 
@@ -30,10 +29,7 @@ router.post('/', function(request, response) {
     .then(function(item) {
       item.setHousehold(householdId);
       item.setAddingUser(userId);
-      response.status(201).json({
-        item,
-        token: tokens.issue(userId, householdId),
-      });
+      response.status(201).json(item);
     })
 
     .catch(function(error) {
@@ -69,25 +65,21 @@ router.put('/:itemId', function(request, response) {
 
   //we'll set the possible updates to an update object
   //then pass that into the update function
-  var updates = {};
-  var options = ['description', 'details', 'fetch', 'bought', 'price'];
+  var updates = request.body;
 
-  for (var i = 0; i < options.length; i++) {
-    var option = options[i];
-    if (request.body[option]) {
-      updates[option] = request.body[option];
-    }
-  }
-
-  //returning tells sequelize to pass the item that was updated
-  //back to us as the second element of the returned array
+  //returning tells sequelize to pass the items that were updated
+  //back to us as the second element of the returned array.
   db.Item.update(updates, {where: {id}, returning: true})
 
     .then(function(updateArray) {
       var item;
 
       if (updateArray) {
-        item = updateArray[1];
+        //Even though we're only operating on one element,
+        //Sequelize sends back an array in case we updated multiples at once
+        //So the first access gets us the array of models updated
+        //And the second access gets us the specific model we want
+        item = updateArray[1][0];
 
         if (request.body.fetch) {
           item.setFetchingUser(userId);
@@ -96,7 +88,7 @@ router.put('/:itemId', function(request, response) {
           item.setBuyingUser(userId);
         }
 
-        response.status(201).send(item);
+        response.status(201).json(item); //todo: send back actual item
 
       } else {
         response.status(500).send('Item not found');
@@ -116,7 +108,10 @@ router.delete('/:itemId', function(request, response) {
   db.Item.destroy({where: {id}})
     .then(function(numberDestroyed) {
       if (numberDestroyed) {
-        response.status(201).send();
+        response.status(201).json({
+          success: true,
+          deletedItemId: id,
+        });
       } else {
         response.status(500).send('Error deleting item');
       }

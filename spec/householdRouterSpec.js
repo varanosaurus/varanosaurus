@@ -55,7 +55,7 @@ describe('householdRouter', function() {
     var context = this;
 
     var body = JSON.stringify({
-      householdName: 'Winterfell',
+      name: 'Winterfell',
     });
 
     request.post({url, headers: context.headers, body}, function(error, response, body) {
@@ -70,7 +70,7 @@ describe('householdRouter', function() {
 
     var context = this;
 
-    var body = JSON.stringify({householdName: 'Winterfell'});
+    var body = JSON.stringify({name: 'Winterfell'});
 
     //seed with existing household first
     request.post({url, headers: context.headers, body}, function(error, response, body) {
@@ -82,7 +82,7 @@ describe('householdRouter', function() {
 
         var parsedBody = JSON.parse(body);
 
-        expect(parsedBody).toBeTruthy();
+        expect(parsedBody.name).toEqual('Winterfell');
 
         done();
       });
@@ -95,7 +95,7 @@ describe('householdRouter', function() {
 
     var context = this;
 
-    var body = JSON.stringify({householdName: 'Winterfell'});
+    var body = JSON.stringify({name: 'Winterfell'});
 
     //seed with existing household first
     request.post({url, headers: context.headers, body}, function(error, response, body) {
@@ -124,7 +124,7 @@ describe('householdRouter', function() {
 
     var context = this;
 
-    var body = JSON.stringify({householdName: 'Winterfell'});
+    var body = JSON.stringify({name: 'Winterfell'});
 
     //seed with existing household first
     request.post({url, headers: context.headers, body}, function(error, response, body) {

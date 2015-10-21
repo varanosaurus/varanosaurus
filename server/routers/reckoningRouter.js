@@ -1,22 +1,43 @@
 var router = require('express').Router();
-// var db = require('../db/interface.js');
+var db = require('../db/interface');
+var reckon = require('../services/reckon');
 
-var pathHandlers = {};
+//posts to reckonings are a bit different from the other models
+//instead of taking user input and saving it to the db,
+//we trigger a reckoning for the household
+router.post('/', function(request, response) {
+  var householdId = request.decoded.householdId;
 
-pathHandlers[''] = {
-  // post: function(request, response, next) {},
-};
+  reckon(householdId)
+    .then(function(reckoning) {
+      response.status(201).json(reckoning);
+    })
 
-pathHandlers[':reckoningID'] = {
-  // get: function(request, response, next),
-  // put: function(request, response, next),
-  // delete: function(request, response, next),
-};
+    .catch(function(error) {
+      console.error(error);
+      response.status(500).send();
+    });
 
-for (var path in pathHandlers) {
-  for (var method in path) {
-    router.route(path, /* verifyToken, */ method);
-  }
-}
+});
+
+router.get('/:reckoningId', function(request, response) {
+
+  var id = request.params.reckoningId;
+
+  db.Reckoning.findById(id)
+
+    .then(function(reckoning) {
+      if (reckoning) {
+        response.status(201).json(reckoning);
+      } else {
+        response.status(500).send('Reckoning not found');
+      }
+    })
+
+    .catch(function(error) {
+      console.error(error);
+      response.status(500).send();
+    });
+});
 
 module.exports = router;

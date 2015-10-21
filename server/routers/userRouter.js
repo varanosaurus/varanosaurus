@@ -7,13 +7,19 @@ var tokens = require('../services/tokens');
 //so that posts to create new users don't need tokens.
 
 router.get('/:userId', function(request, response) {
-
   var id = request.decoded.userId;
   db.User.findById(id)
 
     .then(function(user) {
       if (user) {
-        response.status(201).json(user);
+        response.status(201).json({
+          accountName: user.accountName,
+          displayName: user.displayName,
+          id: user.id,
+          updatedAt: user.updatedAt,
+          createdAt: user.createdAt,
+          household: user.household,
+        });
       } else {
         response.status(500).send('User not found');
       }

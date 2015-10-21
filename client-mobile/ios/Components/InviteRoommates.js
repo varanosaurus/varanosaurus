@@ -11,7 +11,7 @@ var {
 var InviteRoommates = React.createClass({
   getInitialState: function() {
     return ({
-      inputField: [],
+      inputField: [true, true, true],
     });
   },
   addRoommate: function() {
@@ -19,9 +19,9 @@ var InviteRoommates = React.createClass({
     this.setState(this.state.inputField);
   },
   submitRoommates: function() {
-    //Note: need to write better logic for error handling. right now if the user deletes all the text in the input fields, they won't get the error 
-    if(this.state.input === undefined) {
-      this.setState({error: 'Please add at least one roommate before submitting'})
+    //Note: need to write better logic for error handling. right now if the user deletes all the text in the input fields, they won't get the error
+    if (this.state.input === undefined) {
+      this.setState({error: 'Please add at least one roommate before submitting'});
     }
     // the below code is a "hack" but react-native doesn't currently support optimally otherwise
     // this.props.navigator.popToRoute(this.props.navigator.getCurrentRoutes()[1]);
@@ -30,24 +30,6 @@ var InviteRoommates = React.createClass({
     var inputFields = this.state.inputField;
     return (
       <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          keyboardType='default'
-          placeholder="roommate's email address"
-          onChangeText={(input) => this.setState({input: input})}
-        />
-        <TextInput
-          style={styles.input}
-          keyboardType='default'
-          placeholder="roommate's email address"
-          onChangeText={(input) => this.setState({input: input})}
-        />
-        <TextInput
-          style={styles.input}
-          keyboardType='default'
-          placeholder="roommate's email address"
-          onChangeText={(input) => this.setState({input: input})}
-        />
           {inputFields.map(function() {
             return (<TextInput
                       style={styles.input}

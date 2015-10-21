@@ -2,6 +2,7 @@ process.env['NODE_ENV'] = 'testing';
 var request = require('request');
 var url = 'http://localhost:8080/api/users/';
 var db = require('../../server/db/interface');
+var householdUrl = 'http://localhost:8080/api/households';
 
 //really-need lets us easily clear node's cache
 //after each test so that we can have a clean
@@ -24,7 +25,7 @@ describe('userRouter', function() {
         //seed db with user
         var userUrl = 'http://localhost:8080/auth/signup';
         var userBody = JSON.stringify({
-          accountName: 'nedStark',
+          username: 'nedStark',
           password: 'RPlusLEqualsJ',
         });
 
@@ -32,8 +33,20 @@ describe('userRouter', function() {
           var parsedBody = JSON.parse(body);
 
           context.headers['X-Access-Token'] = parsedBody.token;
-          context.userId = JSON.parse(body).user.id;
-          done();
+          context.userId = parsedBody.user.id;
+
+          var householdBody = JSON.stringify({
+            name: 'Winterfell',
+          });
+
+          request.post({url: householdUrl, headers: context.headers, body: householdBody}, function(error, response, body) {
+            var parsedBody = JSON.parse(body);
+
+            context.headers['X-Access-Token'] = parsedBody.token;
+            context.householdId = parsedBody.household.id;
+            done();
+
+          });
 
         }); //closes post request
 
@@ -53,8 +66,7 @@ describe('userRouter', function() {
 
       var parsedBody = JSON.parse(body);
 
-      expect(parsedBody.accountName).toEqual('nedStark');
-      expect(parsedBody.displayName).toEqual(null);
+      expect(parsedBody.username).toEqual('nedStark');
       expect(parsedBody.id).toEqual(1);
       done();
 
@@ -62,21 +74,20 @@ describe('userRouter', function() {
 
   }); //closes 'should respond to a get request'
 
-  it('should update a user and send back the properties that were changed', function(done) {
+  it('should update a user\'s info and send back the properties that were changed', function(done) {
 
     var context = this;
 
     var updates = JSON.stringify({
       password: 'mySecretDiedWithMe',
-      displayName: 'honorableButStupid',
+      householdId: context.householdId,
     });
 
     request.put({url: url + context.userId, headers: context.headers, body: updates}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
 
-      expect(parsedBody.updates.displayName).toBeTruthy();
-      expect(parsedBody.updates.displayName).toEqual('honorableButStupid');
+      expect(parsedBody.updates.householdId).toEqual(1);
       done();
 
     });

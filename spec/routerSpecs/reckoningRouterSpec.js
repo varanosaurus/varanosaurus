@@ -37,7 +37,7 @@ describe('itemRouter', function() {
         request.post({
           url: signupUrl,
           headers: context.headers,
-          body: JSON.stringify({accountName: 'jonSnow', password: 'iKnowNothing'}),
+          body: JSON.stringify({username: 'jonSnow', password: 'iKnowNothing'}),
         },
         function(error, response, body) {
           var parsedBody = JSON.parse(body);
@@ -49,7 +49,7 @@ describe('itemRouter', function() {
           request.post({
             url: signupUrl,
             headers: context.headers,
-            body: JSON.stringify({accountName: 'tyrionLannister', password: 'godOfTitsAndWine'}),
+            body: JSON.stringify({username: 'tyrionLannister', password: 'godOfTitsAndWine'}),
           },
           function(error, response, body) {
             var parsedBody = JSON.parse(body);

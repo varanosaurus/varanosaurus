@@ -26,7 +26,7 @@ describe('authRouter', function() {
       'content-type': 'application/json',
     };
     var body = JSON.stringify({
-      accountName: 'naomi',
+      username: 'naomi',
       password: 'hypotrochoid',
     });
 

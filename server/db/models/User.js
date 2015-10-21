@@ -19,7 +19,7 @@ module.exports = {
 
 	attributes: {
 
-		accountName: {
+		username: {
 			type: Sequelize.STRING,
 			allowNull: false,
 			validate: {

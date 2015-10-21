@@ -35,7 +35,6 @@ authRouter.post('/signup', function(request, response) {
 
   var accountName = request.body.accountName;
   var password = request.body.password;
-  var displayName = request.body.displayName || null;
 
   return db.User.findOne({where: {accountName}})
     .then(function(user) {
@@ -45,7 +44,6 @@ authRouter.post('/signup', function(request, response) {
         return db.User.create({
           accountName,
           password,
-          displayName,
         });
       }
     })
@@ -53,7 +51,6 @@ authRouter.post('/signup', function(request, response) {
       response.status(201).json({
         user: {
           accountName: user.accountName,
-          displayName: user.displayName,
           id: user.id,
           updatedAt: user.updatedAt,
           createdAt: user.createdAt,

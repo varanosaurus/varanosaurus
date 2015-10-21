@@ -42,14 +42,6 @@ module.exports = {
 			},
 		},
 
-		displayName: {
-			type: Sequelize.STRING,
-			defaultValue: null,
-			validate: {
-				isAlphanumeric: true,
-			},
-		},
-
 		id: {
 			type: Sequelize.INTEGER,
 			primaryKey: true,

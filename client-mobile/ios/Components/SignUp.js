@@ -22,11 +22,6 @@ var SignUp = React.createClass({
     });
   },
   joinOrCreateHousehold: function() {
-    //if you are not in a household
-    this.props.navigator.push({
-      title: 'Create New HH',
-      component: CreateNewHH,
-    });
     // var init = { 
     //   method: 'POST',
     //   cache: 'default',
@@ -53,8 +48,8 @@ var SignUp = React.createClass({
       // fetch(mock, init) 
       //if you are not in a household
       this.props.navigator.push({
-        index: 3,
-        id: 'Not invited',
+        title: 'Create Household',
+        component: CreateNewHH,
       });
       //NOTE: need to receive data from the server re: if user was invited to HH or not
       //if you are in a household
@@ -67,8 +62,8 @@ var SignUp = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <TextInput style={styles.input} placeholder='username' onChangeText={(username) => this.setState({username})} value={this.state.username}/>
-        <TextInput style={styles.input} placeholder='password' secureTextEntry='true' onChangeText={(password) => this.setState({password})} value={this.state.password}/>
+        <TextInput keyboardType='default' style={styles.input} placeholder='username' onChangeText={(username) => this.setState({username})} value={this.state.username}/>
+        <TextInput keyboardType='default' style={styles.input} placeholder='password' secureTextEntry='true' onChangeText={(password) => this.setState({password})} value={this.state.password}/>
         <Text style={styles.errorHandling}>{this.state.error}</Text>
         <TouchableHighlight style={styles.button} onPress={this.joinOrCreateHousehold}>
           <Text style={styles.btnText}>Sign Up</Text>

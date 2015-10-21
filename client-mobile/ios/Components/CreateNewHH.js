@@ -1,4 +1,5 @@
 var React = require('react-native');
+var InviteRoommates = require('./InviteRoommates');
 
 var {
   StyleSheet,
@@ -9,41 +10,43 @@ var {
 } = React;
 
 var CreateNewHH = React.createClass({
+  getInitialState: function() {
+    return ({
+       householdName: '',
+       error: '',
+    });
+  },
+
   inviteRoommates: function() {
-    this.props.navigator.push({
-      index: 6,
-      id: 'Invite roommates'
-    })
+    if(this.state.householdName.length === 0) {
+      this.setState({
+        error: 'Please provide a household name'
+      });
+    } else {
+      this.props.navigator.push({
+        title: 'Invite Roommates',
+        component: InviteRoommates,
+      })
+    }
   },
   render: function() {
     return (
       <View style={styles.container}>
-        <Text>CREATE NEW HOUSEHOLD VIEW</Text>
+        <TextInput 
+          style={styles.input} 
+          keyboardType='default' 
+          placeholder='Create household name' 
+          onChangeText={(householdName) => this.setState({householdName: householdName})} 
+          value={this.state.householdName}
+        />
+        <Text style={styles.errorHandling}>{this.state.error}</Text>
         <TouchableHighlight
           style={styles.button}
           onPress={() => this.inviteRoommates()}
         >
-          <Text style={styles.btnText}>Suggestion 1</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.button}
-          onPress={() => this.inviteRoommates()}
-        >
-          <Text style={styles.btnText}>Suggestion 2</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.button}
-          onPress={() => this.inviteRoommates()}
-        >
-          <Text style={styles.btnText}>Suggestion 3</Text>
-        </TouchableHighlight>
-        <Text> ----- OR ----- </Text>
-        <TextInput style={styles.input} placeholder='Create household name'/>
-        <TouchableHighlight
-          style={styles.button}
-          onPress={() => this.inviteRoommates()}
-        >
-          <Text style={styles.btnText}>Make household</Text>
+          <Text 
+            style={styles.btnText}>Make household
+          </Text>
         </TouchableHighlight>
       </View>
     );
@@ -70,15 +73,14 @@ var styles = StyleSheet.create({
     backgroundColor: 'black',
     flexDirection: 'column',
     justifyContent: 'center',
+    position: 'absolute',
   },
   btnText: {
     fontSize: 18,
     color: 'white',
   },
-  input: {
-    height: 40, 
-    borderColor: 'gray', 
-    borderWidth: 1,
+  errorHandling: {
+    color: 'red',
   },
 });
 

@@ -14,14 +14,14 @@ var {
 var Root = React.createClass({
   signUp: function() {
     this.props.navigator.push({
-      title: 'Knead',
+      title: 'Sign up',
       component: SignUp
     });
 
   },
   logIn: function() {
     this.props.navigator.push({
-      title: 'Knead',
+      title: 'Login',
       component: LogIn
     })
   },

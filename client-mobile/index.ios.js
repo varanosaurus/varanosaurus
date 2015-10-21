@@ -2,7 +2,6 @@
 
 var React = require('react-native');
 var Root = require('./ios/Components/Root');
-
 var ItemList = require('./ios/Components/ItemList');
 var SignUp = require('./ios/Components/SignUp');
 var LogIn = require('./ios/Components/LogIn');
@@ -18,12 +17,7 @@ var {
 } = React;
 
 var Knead = React.createClass({
-<<<<<<< HEAD
-  renderScene: function(route, navigator) {
-=======
-
   renderScene: function (route, navigator) {
->>>>>>> implemented client side error handling
     switch (route.id) {
       case 'Sign up / Login':
         return <Root navigator={navigator}/>
@@ -47,7 +41,7 @@ var Knead = React.createClass({
         style={styles.container}
         initialRoute={{
           title: 'Knead',
-          component: Root
+          component: Root,
         }}
       />
     );

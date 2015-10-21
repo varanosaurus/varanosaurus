@@ -5,7 +5,7 @@ var Bluebird = require('bluebird');
 var bcrypt = Bluebird.promisifyAll(require('bcrypt-nodejs'));
 
 var hashPassword = function(user) {
-	return bcrypt.hashAsync(user.password, 8, null)
+	return bcrypt.hashAsync(user.password, null, null)
 		.then(function(hash) {
 			user.password = hash;
 		});

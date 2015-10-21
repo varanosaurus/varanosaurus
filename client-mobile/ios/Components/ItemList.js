@@ -6,13 +6,10 @@ var {
   StyleSheet,
   ListView,
   View,
-  Text,
   SegmentedControlIOS,
 } = React;
 
 var Cell = require('./Cell');
-var PendingItemDetails = require('./PendingItemDetails');
-var BoughtItemDetails = require('./BoughtItemDetails');
 
 /* This mock data is here to simulate our API */
 var mockedData = [
@@ -21,113 +18,113 @@ var mockedData = [
     itemPrice: 10,
     requestedBy: 'Cameron',
     details: 'Any brand. Mid price-range, Low fat.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Bread',
     itemPrice: 7,
     requestedBy: 'Kyle',
     details: 'Any brand. Cheap, Whole grain.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Detergent',
     itemPrice: 10,
     requestedBy: 'Naomi',
     details: 'Any brand.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Drinking Water',
     itemPrice: 9,
     requestedBy: 'Amy',
     details: '2 Gallon please.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Kitchen Towel',
     itemPrice: 5,
     requestedBy: 'Cameron',
     details: '6 rolls?',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Soap',
     itemPrice: 9,
     requestedBy: 'Taylor',
     details: 'I prefer Dove.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Monthly Internet',
     itemPrice: 9,
     requestedBy: 'Cameron',
     details: 'Any brand. Should be fast.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Chips',
     itemPrice: 9,
     requestedBy: 'Alex',
     details: 'BBQ flavor.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Milk',
     itemPrice: 10,
     requestedBy: 'Cameron',
     details: 'Any brand. Mid price-range, Low fat.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Bread',
     itemPrice: 7,
     requestedBy: 'Kyle',
     details: 'Any brand. Cheap, Whole grain.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Detergent',
     itemPrice: 10,
     requestedBy: 'Naomi',
     details: 'Any brand.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Drinking Water',
     itemPrice: 9,
     requestedBy: 'Amy',
     details: '2 Gallon please.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Kitchen Towel',
     itemPrice: 5,
     requestedBy: 'Cameron',
     details: '6 rolls?',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Soap',
     itemPrice: 9,
     requestedBy: 'Taylor',
     details: 'I prefer Dove.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Monthly Internet',
     itemPrice: 9,
     requestedBy: 'Cameron',
     details: 'Any brand. Should be fast.',
-    isPending: true
+    isPending: true,
   },
   {
     itemName: 'Chips',
     itemPrice: 9,
     requestedBy: 'Alex',
     details: 'BBQ flavor.',
-    isPending: true
-  }
+    isPending: true,
+  },
 ];
 
 var ItemList = React.createClass({
@@ -137,10 +134,10 @@ var ItemList = React.createClass({
       isLoading: false,
       isLoadingTail: false,
       dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2
+        rowHasChanged: (row1, row2) => row1 !== row2,
       }).cloneWithRows(mockedData),
       filter: '',
-      queryNumber: 0
+      queryNumber: 0,
     };
   },
 
@@ -151,11 +148,11 @@ var ItemList = React.createClass({
   fetchData: function() {
     // Return mocked data for now
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(mockedData)
+      dataSource: this.state.dataSource.cloneWithRows(mockedData),
     });
   },
 
-  selectItem: function(item: Object) {
+  selectItem: function(item) {
     if (this.state.selectedTab === 'Pending') {
       this.props.onSelectPendingItem(item);
     } else if (this.state.selectedTab === 'Bought') {
@@ -181,12 +178,12 @@ var ItemList = React.createClass({
             tintColor={'#2fb4da'}
             onValueChange={(val) => {
               this.setState({
-                selectedTab: val
-              })
+                selectedTab: val,
+              });
             }} />
             {this.renderListView()}
         </View>
-      )
+      );
   },
 
   renderListView: function() {
@@ -195,11 +192,11 @@ var ItemList = React.createClass({
         <View style={styles.container}>
           {this.renderPendingListView()}
         </View>
-      )
+      );
     } else if (this.state.selectedTab === 'Bought') {
       return (
         this.renderBoughtListView()
-      )
+      );
     }
   },
 
@@ -212,7 +209,7 @@ var ItemList = React.createClass({
         automaticallyAdjustContentInsets={false}
         contentInset={{bottom: 50}}
        />
-    )
+    );
   },
 
   renderBoughtListView: function() {
@@ -224,7 +221,7 @@ var ItemList = React.createClass({
         automaticallyAdjustContentInsets={false}
         contentInset={{bottom: 50}}
        />
-    )
+    );
   },
 
 });
@@ -234,7 +231,7 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   listView: {
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   Cell: {
     flex: 1,
@@ -245,7 +242,7 @@ var styles = StyleSheet.create({
     marginRight: 6,
     padding: 6,
     borderBottomWidth: .5,
-    borderColor: 'lightgray'
+    borderColor: 'lightgray',
   },
   itemName: {
     fontSize: 20,
@@ -259,8 +256,8 @@ var styles = StyleSheet.create({
   },
   segmentControl: {
     flex: 1,
-    marginTop: 64
-  }
+    marginTop: 64,
+  },
 });
 
 module.exports = ItemList;

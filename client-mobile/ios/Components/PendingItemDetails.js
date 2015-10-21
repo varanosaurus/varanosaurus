@@ -11,7 +11,7 @@ var {
 var PendingItemDetails = React.createClass({
   getInitialState: function() {
     return ({
-       price: 0
+       price: 0,
     });
   },
   render: function() {
@@ -41,7 +41,7 @@ var styles = StyleSheet.create({
     flex: 1,
     marginTop: 64,
     padding: 10,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   title: {
     fontFamily: 'Arial',
@@ -56,7 +56,7 @@ var styles = StyleSheet.create({
   },
   mainSection: {
     flex: 1,
-  }
+  },
 });
 
 module.exports = PendingItemDetails;

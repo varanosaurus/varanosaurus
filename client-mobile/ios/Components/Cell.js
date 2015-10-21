@@ -5,7 +5,7 @@ var {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View
+  View,
 } = React;
 
 var Cell = React.createClass({
@@ -23,7 +23,7 @@ var Cell = React.createClass({
         </TouchableElement>
       </View>
     );
-  }
+  },
 });
 
 var styles = StyleSheet.create({
@@ -31,7 +31,7 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   listView: {
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   Cell: {
     flex: 1,
@@ -42,7 +42,7 @@ var styles = StyleSheet.create({
     marginRight: 6,
     padding: 6,
     borderBottomWidth: .5,
-    borderColor: 'lightgray'
+    borderColor: 'lightgray',
   },
   itemName: {
     fontSize: 20,
@@ -53,7 +53,7 @@ var styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 6,
     textAlign: 'center',
-  }
+  },
 });
 
 module.exports = Cell;

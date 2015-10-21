@@ -2,81 +2,59 @@
 
 var React = require('react-native');
 var {
-  AppRegistry,
-  Image,
   StyleSheet,
   Text,
   View,
-  ListView,
   TouchableHighlight,
 } = React;
 
 var globalData = 0;
-var operator = "", operand = "";
+var operator = '', operand = '';
 var calMethod = '';
-
-var Cell = React.createClass({
-  render() {
-    var keyPad = 0;
-    return(
-      <TouchableHighlight
-        onPress={this.props.onPress}
-        underlayColor="transparent"
-        activeOpacity={0.8}>
-        <View style={styles.cell}>
-          <Text style={styles.textInside}>hi</Text>
-        </View>
-      </TouchableHighlight>
-    );
-  }
-});
 
 var ByItemDetails = React.createClass({
   getInitialState() {
-    return {hey: 0};
+    return {total: 0};
   },
   changeData() {
     this.setState({
-      hey: globalData + 1,
-    })
+      total: globalData + 1,
+    });
     globalData += 1;
   },
-  handlePress(hi) {
+  handlePress(key) {
     if (calMethod === '') {
-      operator += hi.toString();
+      operator += key.toString();
     } else {
-      operand += hi.toString();
+      operand += key.toString();
     }
     this.setState({
-      hey: calMethod === '' ? operator : operand,
-    })
+      total: calMethod === '' ? operator : operand,
+    });
   },
-  handleCalMethod(hey) {
-    console.log(hey);
-    calMethod = hey;
-    console.log("method is " + hey);
+  handleCalMethod(total) {
+    calMethod = total;
   },
   handleResult() {
-    console.log("equal");
     if (calMethod !== '') {
       this.setState({
-        hey: calMethod === '+' ? (parseFloat(operator) + parseFloat(operand)) : calMethod === '−' ? (parseFloat(operator) - parseFloat(operand)) : calMethod === '×' ? (parseFloat(operator) * parseFloat(operand)) : (parseFloat(operator) / parseFloat(operand))
+        total: calMethod === '+' ? (parseFloat(operator) + parseFloat(operand)) : calMethod === '−' ? (parseFloat(operator) - parseFloat(operand)) : calMethod === '×' ? (parseFloat(operator) * parseFloat(operand)) : (parseFloat(operator) / parseFloat(operand)),
       });
-      operator = "";
-      operand = ""
+      operator = '';
+      operand = '';
       calMethod = '';
-    };
+    }
   },
   handleClear() {
-    operator = "";
-    operand = ""
+    operator = '';
+    operand = '';
     calMethod = '';
     this.setState({
-      hey: 0,
-    })
+      total: 0,
+    });
   },
   render: function() {
-    var data = this.state.hey
+    var data = this.state.total;
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Product: Milk</Text>
@@ -172,7 +150,6 @@ var ByItemDetails = React.createClass({
                 <Text style={[styles.textInside, styles.functionalText]}>AC</Text>
               </View>
             </TouchableHighlight>
-
             <TouchableHighlight
               onPress={this.handlePress.bind(this, 0)}
               underlayColor="transparent"
@@ -192,13 +169,13 @@ var ByItemDetails = React.createClass({
           </View>
         </View>
       </View>
-      )
+    );
   },
 });
 
 var styles = StyleSheet.create({
-  hi: {
-    backgroundColor: "blue",
+  key: {
+    backgroundColor: 'blue',
   },
   container: {
     flex: 1,
@@ -214,15 +191,15 @@ var styles = StyleSheet.create({
   },
   board: {
     padding: 1,
-    backgroundColor: "#000000",
+    backgroundColor: '#000000',
   },
   rows: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   cell: {
     height: 90,
     width: 90,
-    backgroundColor: "#f1f1f1",
+    backgroundColor: '#f1f1f1',
     margin: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -231,17 +208,17 @@ var styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     fontSize: 50,
-    fontFamily: "Arial",
+    fontFamily: 'Arial',
   },
   textInside: {
     fontFamily: 'Arial',
     fontSize: 30,
   },
   functionalButton: {
-    backgroundColor: "#2fb4da",
+    backgroundColor: '#2fb4da',
   },
   functionalText: {
-    color: "white",
+    color: 'white',
   },
 });
 

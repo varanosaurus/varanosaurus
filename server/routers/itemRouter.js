@@ -6,10 +6,6 @@ router.post('/', function(request, response) {
   var householdId = request.decoded.householdId;
   var userId = request.decoded.userId;
   var description = request.body.description;
-  var details;
-  if (request.body.details) {
-    details = request.body.details;
-  }
 
   db.Item.find({where: {householdId, description}})
 
@@ -18,11 +14,7 @@ router.post('/', function(request, response) {
         //this household already has the same item, so reject
         response.status(409).send('Item already exists');
       } else {
-        if (details) {
-          return db.Item.create({description, details});
-        } else {
-          return db.Item.create({description});
-        }
+        return db.Item.create(request.body);
       }
     })
 

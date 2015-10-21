@@ -14,7 +14,7 @@ var shouldForce;
 
 var url;
 if (dbEnvironment === 'testing') {
-  url = `postgres://${process.env.USER}:@localhost/knead`;
+  url = `postgres://${process.env.USER !== 'travis' ? process.env.USER : 'postgres'}:@localhost/knead`;
 } else {
   url = process.env.DATABASE_URL;
 }

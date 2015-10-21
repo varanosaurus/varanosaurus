@@ -8,18 +8,11 @@ var tokens = require('../services/tokens');
 
 router.get('/:userId', function(request, response) {
   var id = request.decoded.userId;
-  db.User.findById(id)
+  db.User.findById(id, {attributes: {exclude: ['password']}})
 
     .then(function(user) {
       if (user) {
-        response.status(201).json({
-          accountName: user.accountName,
-          displayName: user.displayName,
-          id: user.id,
-          updatedAt: user.updatedAt,
-          createdAt: user.createdAt,
-          household: user.household,
-        });
+        response.status(201).json(user);
       } else {
         response.status(500).send('User not found');
       }

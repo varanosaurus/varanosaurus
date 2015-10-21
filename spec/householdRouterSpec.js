@@ -82,7 +82,8 @@ describe('householdRouter', function() {
 
         var parsedBody = JSON.parse(body);
 
-        expect(parsedBody.name).toEqual('Winterfell');
+        expect(parsedBody.household.name).toEqual('Winterfell');
+        expect(parsedBody.users).toBeTruthy();
 
         done();
       });

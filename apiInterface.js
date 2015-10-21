@@ -88,12 +88,18 @@
     url: '/api/households/:householdId',
     requestBody: {},
     responseBody: {
-     id: integer,
-     name: string,
-     updatedAt: date,
-     createdAt: date,
-     creatorId: integer,
-     captainId: integer, 
+      household: {
+       id: integer,
+       name: string,
+       updatedAt: date,
+       createdAt: date,
+       creatorId: integer,
+       captainId: integer, 
+      },
+      users: {
+        user1accountName: integer, //integer will be the userId
+        user2accountName: integer, //etc
+      }
     }
   },
 
@@ -133,6 +139,9 @@
     requestBody: {
       description: string,
       details: string, //optional
+      fetch: boolean, //optional, defaults to false
+      bought: boolean, //optional, defaults to false
+      price: stringified decimal, //optional, defaults to 0
     },
     responseBody: {
       description: string,

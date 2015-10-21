@@ -27,26 +27,26 @@ var InviteRoommates = React.createClass({
     return (
       <View style={styles.container}>
         <TextInput
-          style={styles.input} 
-          keyboardType='default'
-          placeholder="roommate's email address"
-        />
-        <TextInput 
           style={styles.input}
           keyboardType='default'
           placeholder="roommate's email address"
         />
-        <TextInput 
-          style={styles.input} 
-          keyboardType='default' 
+        <TextInput
+          style={styles.input}
+          keyboardType='default'
           placeholder="roommate's email address"
         />
-          {inputFields.map(function(input) {
-            return (<TextInput 
-                      style={styles.input} 
-                      keyboardType='default' 
+        <TextInput
+          style={styles.input}
+          keyboardType='default'
+          placeholder="roommate's email address"
+        />
+          {inputFields.map(function() {
+            return (<TextInput
+                      style={styles.input}
+                      keyboardType='default'
                       placeholder="roommate's email address"
-                    />)
+                    />);
            })
           }
         <Text

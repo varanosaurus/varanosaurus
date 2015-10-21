@@ -11,109 +11,122 @@ var {
 } = React;
 
 var Cell = require('./Cell');
-var ItemDetails = require('./ItemDetails');
+var PendingItemDetails = require('./PendingItemDetails');
+var BoughtItemDetails = require('./BoughtItemDetails');
 
 /* This mock data is here to simulate our API */
 var mockedData = [
   {
     itemName: 'Milk',
-    itemPrice: 10
+    itemPrice: 10,
+    requestedBy: 'Cameron',
+    details: 'Any brand. Mid price-range, Low fat.',
+    isPending: true
   },
   {
     itemName: 'Bread',
-    itemPrice: 7
+    itemPrice: 7,
+    requestedBy: 'Kyle',
+    details: 'Any brand. Cheap, Whole grain.',
+    isPending: true
   },
   {
     itemName: 'Detergent',
-    itemPrice: 10
+    itemPrice: 10,
+    requestedBy: 'Naomi',
+    details: 'Any brand.',
+    isPending: true
   },
   {
     itemName: 'Drinking Water',
-    itemPrice: 9
+    itemPrice: 9,
+    requestedBy: 'Amy',
+    details: '2 Gallon please.',
+    isPending: true
   },
   {
     itemName: 'Kitchen Towel',
-    itemPrice: 5
+    itemPrice: 5,
+    requestedBy: 'Cameron',
+    details: '6 rolls?',
+    isPending: true
   },
   {
     itemName: 'Soap',
-    itemPrice: 9
+    itemPrice: 9,
+    requestedBy: 'Taylor',
+    details: 'I prefer Dove.',
+    isPending: true
   },
   {
     itemName: 'Monthly Internet',
-    itemPrice: 9
+    itemPrice: 9,
+    requestedBy: 'Cameron',
+    details: 'Any brand. Should be fast.',
+    isPending: true
   },
   {
     itemName: 'Chips',
-    itemPrice: 9
+    itemPrice: 9,
+    requestedBy: 'Alex',
+    details: 'BBQ flavor.',
+    isPending: true
   },
   {
     itemName: 'Milk',
-    itemPrice: 10
+    itemPrice: 10,
+    requestedBy: 'Cameron',
+    details: 'Any brand. Mid price-range, Low fat.',
+    isPending: true
   },
   {
     itemName: 'Bread',
-    itemPrice: 7
+    itemPrice: 7,
+    requestedBy: 'Kyle',
+    details: 'Any brand. Cheap, Whole grain.',
+    isPending: true
   },
   {
     itemName: 'Detergent',
-    itemPrice: 10
+    itemPrice: 10,
+    requestedBy: 'Naomi',
+    details: 'Any brand.',
+    isPending: true
   },
   {
     itemName: 'Drinking Water',
-    itemPrice: 9
+    itemPrice: 9,
+    requestedBy: 'Amy',
+    details: '2 Gallon please.',
+    isPending: true
   },
   {
     itemName: 'Kitchen Towel',
-    itemPrice: 5
+    itemPrice: 5,
+    requestedBy: 'Cameron',
+    details: '6 rolls?',
+    isPending: true
   },
   {
     itemName: 'Soap',
-    itemPrice: 9
+    itemPrice: 9,
+    requestedBy: 'Taylor',
+    details: 'I prefer Dove.',
+    isPending: true
   },
   {
     itemName: 'Monthly Internet',
-    itemPrice: 9
+    itemPrice: 9,
+    requestedBy: 'Cameron',
+    details: 'Any brand. Should be fast.',
+    isPending: true
   },
   {
     itemName: 'Chips',
-    itemPrice: 9
-  },
-  {
-    itemName: 'Chips',
-    itemPrice: 9
-  },
-  {
-    itemName: 'Milk',
-    itemPrice: 10
-  },
-  {
-    itemName: 'Bread',
-    itemPrice: 7
-  },
-  {
-    itemName: 'Detergent',
-    itemPrice: 10
-  },
-  {
-    itemName: 'Drinking Water',
-    itemPrice: 9
-  },
-  {
-    itemName: 'Kitchen Towel',
-    itemPrice: 5
-  },
-  {
-    itemName: 'Soap',
-    itemPrice: 9
-  },
-  {
-    itemName: 'Monthly Internet',
-    itemPrice: 9
-  },
-  {
-    itemName: 'Chips',
-    itemPrice: 9
+    itemPrice: 9,
+    requestedBy: 'Alex',
+    details: 'BBQ flavor.',
+    isPending: true
   }
 ];
 
@@ -143,8 +156,11 @@ var ItemList = React.createClass({
   },
 
   selectItem: function(item: Object) {
-    console.log('selectItem call from itemList :', item);
-    this.props.onSelectItem(item);
+    if (this.state.selectedTab === 'Pending') {
+      this.props.onSelectPendingItem(item);
+    } else if (this.state.selectedTab === 'Bought') {
+      this.props.onSelectBoughtItem(item);
+    }
   },
 
   renderRow: function(item) {

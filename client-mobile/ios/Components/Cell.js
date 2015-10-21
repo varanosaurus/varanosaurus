@@ -8,15 +8,6 @@ var {
   View
 } = React;
 
-// var getStyleFromScore = require('./getStyleFromScore');
-// var getImageSource = require('./getImageSource');
-// var getTextFromScore = require('./getTextFromScore');
-
-  // <View style={styles.Cell}>
-  //   <Text style={styles.itemName}>{item.itemName}</Text>
-  //   <Text style={styles.itemPrice}>${item.itemPrice}</Text>
-  // </View>
-
 var Cell = React.createClass({
   render: function() {
     var TouchableElement = TouchableHighlight;

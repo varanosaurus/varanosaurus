@@ -59,7 +59,6 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#2fb4da',
     justifyContent: 'center',
-    color: '#FFFFFF',
   },
   btnText: {
     fontSize: 18,

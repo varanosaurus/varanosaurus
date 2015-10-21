@@ -9,7 +9,6 @@ var {
 
 var ByPersonDetails = React.createClass({
   render: function() {
-    console.log('this props is...', this.props);
     return (
       <View style={styles.contentContainer}>
         <View style={styles.mainSection}>

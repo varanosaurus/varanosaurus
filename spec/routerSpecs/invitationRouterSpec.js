@@ -148,6 +148,59 @@ describe('Invitation router', function() {
 
   }); // 'should allow Michael to request his invites over HTTP'
 
+  it('should allow Michael to delete an invite he doesn\'t care for', function(done) {
+
+    var context = this;
+
+    request({
+          method: 'POST',
+          headers: context.headers,
+          url: inviteUrl,
+          body: JSON.stringify({
+                      toUsername: 'redstarter',
+                    }),
+    }, function(error, response) {
+
+      var invitation = JSON.parse(response.body);
+
+      if (error) {
+        done.fail(error);
+      }
+
+      expect(response.statusCode).toEqual(201);
+
+      db.User.findOne({where: {accountName: 'redstarter'}})
+
+        .then(function(user) {
+          context.headers['X-Access-Token'] = tokens.issue(user.id, user.householdId);
+        })
+
+        .then(function() {
+
+          request({
+            method: 'DELETE',
+            headers: context.headers,
+            url: inviteUrl + '/' + invitation.id,
+          }, function(error, response) {
+            expect(error).toBeFalsy();
+            expect(response.statusCode).toEqual(200);
+
+            db.Invitation.findAll()
+              .then(function(invitations) {
+                expect(invitations.length).toEqual(0);
+              })
+              .then(done);
+
+          });
+
+        })
+
+        .catch(done.fail.bind(done));
+
+    });
+
+  }); // 'should allow Michael to delete an invite he doesn't care for'
+
 
 
 

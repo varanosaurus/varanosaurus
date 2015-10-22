@@ -1,7 +1,7 @@
 process.env['NODE_ENV'] = 'testing';
 var request = require('request');
 var url = 'http://localhost:8080/api/households/';
-var db = require('../server/db/interface');
+var db = require('../../server/db/interface');
 
 //really-need lets us easily clear node's cache
 //after each test so that we can have a clean
@@ -17,7 +17,7 @@ describe('householdRouter', function() {
     var context = this;
     this.headers = {'content-type': 'application/json'};
 
-    server = needRequire('../server/server', {bustCache: true, keep: false});
+    server = needRequire('../../server/server', {bustCache: true, keep: false});
     db.sequelize.sync({force: true})
       .then(function() {
 

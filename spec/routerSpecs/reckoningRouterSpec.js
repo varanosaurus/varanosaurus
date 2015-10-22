@@ -1,7 +1,7 @@
 process.env['NODE_ENV'] = 'testing';
 var request = require('request');
 var url = 'http://localhost:8080/api/reckonings/';
-var db = require('../server/db/interface');
+var db = require('../../server/db/interface');
 
 //urls we'll use when making requests in the beforeEach hook
 var signupUrl = 'http://localhost:8080/auth/signup';
@@ -20,7 +20,7 @@ describe('itemRouter', function() {
 
   beforeEach(function(done) {
     //restart the server for a clean slate
-    server = needRequire('../server/server', {bustCache: true, keep: false});
+    server = needRequire('../../server/server', {bustCache: true, keep: false});
 
     var context = this;
     this.headers = {'content-type': 'application/json'};

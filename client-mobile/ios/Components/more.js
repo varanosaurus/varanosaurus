@@ -19,11 +19,12 @@ var More = React.createClass({
     this.props.SelectRoommates();
   },
 
-
   editNotifications: function() {
+    this.props.SelectNotifications();
   },
 
   logout: function() {
+    //logout logic
   },
 
   render: function() {

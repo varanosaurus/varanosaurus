@@ -9,6 +9,7 @@ var StatementDetails = require('./StatementDetails');
 var More = require('./More');
 var Profile = require('./Profile');
 var Roommates = require('./Roommates');
+var Notifications = require('./Notifications');
 
 var {
   TabBarIOS,
@@ -87,23 +88,20 @@ var TabView = React.createClass({
             this.props.navigator.push({
               title: 'Edit Profile',
               component: Profile,
-              // passProps: {},
             });
           }}
           SelectRoommates={ () => {
             this.props.navigator.push({
               title: 'Edit Roommates',
               component: Roommates,
-              // passProps: {},
             });
           }}
-          // onSelectNotifications={ (setting) => {
-          //   this.props.navigator.push({
-          //     title: 'Settings',
-          //     component: Settings,
-          //     passProps: {setting},
-          //   });
-          // }}
+          SelectNotifications={ () => {
+            this.props.navigator.push({
+              title: 'Edit Notifications',
+              component: Notifications,
+            });
+          }}
         />
         </TabBarIOS.Item>
       </TabBarIOS>

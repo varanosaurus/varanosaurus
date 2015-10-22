@@ -12,7 +12,10 @@ var authRouter = require('./routers/authRouter');
 var app = express();
 
 app.use(parser.json());
-app.use(morgan('dev'));
+
+if (process.env.NODE_ENV !== 'testing') {
+  app.use(morgan('dev'));
+}
 
 app.use('/api', verifyToken, apiRouter);
 app.use('/auth', authRouter);

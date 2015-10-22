@@ -2,7 +2,7 @@ var router = require('express').Router();
 
 var db = require('../db/interface');
 
-router.post(function(request, response) {
+router.post('/', function(request, response) {
 
   var fromUserId = request.decoded.userId;
   var householdId = request.decoded.householdId;
@@ -28,7 +28,7 @@ router.post(function(request, response) {
 
 });
 
-router.get(function(request, response) {
+router.get('/', function(request, response) {
 
   var userId = request.decoded.userId;
 

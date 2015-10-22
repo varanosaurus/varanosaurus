@@ -1,8 +1,11 @@
 process.env['NODE_ENV'] = 'testing';
-// var request = require('request');
-// var inviteUrl = 'http://localhost:8080/api/invitations/';
+process.env['TOKEN_SECRET'] = 'testing';
+
+var request = require('request');
+var inviteUrl = 'http://localhost:8080/api/invitations/';
 // var authUrl = 'http://localhost:8080/auth';
 var db = require('../../server/db/interface');
+var tokens = require('../../server/services/tokens');
 
 //really-need lets us easily clear node's cache
 //after each test so that we can have a clean
@@ -16,7 +19,7 @@ describe('Invitation router', function() {
   beforeEach(function(done) {
     var context = this;
 
-    context.headers = {'content-type': 'application/json'};
+    context.headers = {'Content-Type': 'application/json'};
 
     server = needRequire('../../server/server', {bustCache: true, keep: false});
 
@@ -47,6 +50,7 @@ describe('Invitation router', function() {
           .then(function(user) {
             household.addUser(user);
             user.setHousehold(household);
+            context.headers['X-Access-Token'] = tokens.issue(user.id, household.id);
           });
       })
 
@@ -58,7 +62,41 @@ describe('Invitation router', function() {
     server.close(done);
   });
 
+  it('should allow Gary to invite Michael to the household', function(done) {
 
+    request({
+          method: 'POST',
+          headers: this.headers,
+          url: inviteUrl,
+          body: JSON.stringify({
+                      toUsername: 'redstarter',
+                    }),
+    }, function(err, response, body) {
+
+      expect(err).toBeNull();
+      expect(response.statusCode).toEqual(201);
+
+      db.User.findOne({where: {accountName: 'redstarter'}})
+        .then(function(user) {
+          console.log(user);
+          return user.getReceivedInvitations();
+        })
+        .then(function(invitations) {
+          var invitation;
+
+          expect(invitations).toBeTruthy();
+          expect(invitations.length).toEqual(1);
+
+          invitation = invitations[0];
+
+          expect(invitation).toBeTruthy();
+          expect(invitation.toJSON()).toEqual(body);
+          done();
+        })
+        .catch(done.fail.bind(done));
+    });
+
+  }); // 'should allow Gary to invite Michael to the household'
 
 
 

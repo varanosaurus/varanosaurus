@@ -58,10 +58,10 @@ Household.hasMany(User);
 Household.belongsTo(User, {as: 'creator', constraints: false});
 Household.belongsTo(User, {as: 'captain', constraints: false});
 
-Invitation.belongsTo(User, {as: 'toUser', constraints: false});
-Invitation.belongsTo(User, {as: 'fromUser', constraints: false});
-User.hasMany(Invitation, {as: 'toUser', constraints: false});
-User.hasMany(Invitation, {as: 'fromUser', constraints: false});
+Invitation.belongsTo(User, {as: 'toUser'});
+Invitation.belongsTo(User, {as: 'fromUser'});
+User.hasMany(Invitation, {as: 'sentInvitations', foreignKey: 'fromUserId'});
+User.hasMany(Invitation, {as: 'receivedInvitations', foreignKey: 'toUserId'});
 
 Invitation.belongsTo(Household);
 Household.hasMany(Invitation);

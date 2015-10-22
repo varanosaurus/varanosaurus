@@ -49,7 +49,7 @@ var login = function(username, password) {
       return response.clone().json()
         .then(function(body) {
           console.log(body);
-          Store.saveToken(body.token);
+          Store.setToken(body.token);
           return response.json();
         });
       //will return a promise with JSON passed in

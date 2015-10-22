@@ -4,20 +4,35 @@ var _userId;
 var _householdId;
 var _token;
 
-var saveUserId = function(userId) {
+var setUserId = function(userId) {
   _userId = userId;
 };
 
-var saveHouseholdId = function(householdId) {
+var getUserId = function() {
+  return _userId;
+};
+
+var setHouseholdId = function(householdId) {
   _householdId = householdId;
 };
 
-var saveToken = function(token) {
+var getHouseholdId = function() {
+  return _householdId;
+};
+
+var setToken = function(token) {
   _token = token;
 };
 
+var getToken = function() {
+  return _token;
+};
+
 module.exports = {
-  saveUserId,
-  saveHouseholdId,
-  saveToken,
+  setUserId,
+  getUserId,
+  setHouseholdId,
+  getHouseholdId,
+  setToken,
+  getToken,
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var Button = require('react-native-button');
+// var Button = require('react-native-button');
 
 var {
   StyleSheet,

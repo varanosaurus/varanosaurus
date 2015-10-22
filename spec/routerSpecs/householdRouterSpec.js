@@ -24,7 +24,7 @@ describe('householdRouter', function() {
         //seed db with user
         var userUrl = 'http://localhost:8080/auth/signup';
         var userBody = JSON.stringify({
-          accountName: 'nedStark',
+          username: 'nedStark',
           password: 'RplusLEqualsJ',
         });
 

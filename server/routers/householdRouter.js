@@ -51,7 +51,7 @@ router.get('/:householdId', function(request, response) {
     .then(function(household) {
       if (household) {
         //get the users in the household
-        db.User.findAll({where: {householdId: id}, attributes: ['accountName', 'id']})
+        db.User.findAll({where: {householdId: id}, attributes: ['username', 'id']})
           .then(function(users) {
             response.status(201).send(JSON.stringify({
               household,

@@ -4,15 +4,13 @@
     verb: 'POST',
     url: '/auth/signup',
     requestBody: {
-      accountName: string,
+      username: string,
       password: string,
-      displayName: string, //optional
     },
     responseBody: {
       user: {
         id: integer,
-        accountName: string,
-        displayName: string,
+        username: string,
         updatedAt: date,
         createdAt: date,
         householdId: integer,
@@ -27,8 +25,7 @@
     requestBody: {},
     responseBody: {
       id: integer,
-      accountName: string,
-      displayName: string,
+      username: string,
       updatedAt: date,
       createdAt: date,
       householdId: integer,
@@ -39,12 +36,11 @@
     verb: 'PUT',
     url: '/api/users/:userId',
     requestBody: {
-      displayName: string, //optional
+      password: string, //optional
       householdId: integer, //optional
     },
     responseBody: {
       updates: {
-        displayName: string, //only if included in request
         householdId: integer, //only if included in request
       },
       token: token, //included since the household may have changed

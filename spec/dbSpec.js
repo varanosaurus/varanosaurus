@@ -18,14 +18,13 @@ describe('Database interface', function() {
     it('should allow creation of a new user', function(done) {
 
       db.User.create({
-        accountName: 'redstarter',
+        username: 'redstarter',
         password: 'brewbro',
-        displayName: 'Sovester',
       })
       .then(function(user) {
         expect(user).toBeTruthy();
         expect(user).toEqual(jasmine.any(Object));
-        expect(user.accountName).toEqual('redstarter');
+        expect(user.username).toEqual('redstarter');
       })
       .catch(done.fail.bind(done))
       .then(done);
@@ -35,9 +34,8 @@ describe('Database interface', function() {
     it('should validate account names before saving for length and content', function(done) {
 
       db.User.create({
-        accountName: 'bro',
+        username: 'bro',
         password: 'brewbro',
-        displayName: 'Sovester',
       })
       .then(function(user) {
         expect(user).toBeUndefined();
@@ -53,9 +51,8 @@ describe('Database interface', function() {
     it('should validate passwords before saving for length and content', function(done) {
 
       db.User.create({
-        accountName: 'redstarter',
+        username: 'redstarter',
         password: 'bro',
-        displayName: 'Sovester',
       })
       .then(function(user) {
         expect(user).toBeUndefined();
@@ -66,9 +63,8 @@ describe('Database interface', function() {
       });
 
       db.User.create({
-        accountName: 'redstarter',
+        username: 'redstarter',
         password: '^^asdlfkja',
-        displayName: 'Sovester',
       })
       .then(function(user) {
         expect(user).toBeUndefined();
@@ -86,30 +82,11 @@ describe('Database interface', function() {
 
     }); // Closes 'it should validate passwords'
 
-    it('shouldn\'t allow an empty displayName', function(done) {
-
-      db.User.create({
-        accountName: 'redstarter',
-        password: 'beerbro',
-        displayName: '',
-      })
-      .then(function(user) {
-        expect(user).toBeUndefined();
-      })
-      .catch(function(error) {
-        expect(error).toBeTruthy();
-        expect(error.name).toEqual('SequelizeValidationError');
-      })
-      .then(done);
-
-    }); // Closes 'it shouldn't allow an empty displayName'
-
     it('should properly approve passwords with .comparePassword', function(done) {
 
       db.User.create({
-        accountName: 'redstarter',
+        username: 'redstarter',
         password: 'beerbro',
-        displayName: 'Sovester',
       })
       .then(function(user) {
         expect(user).toBeTruthy();
@@ -127,9 +104,8 @@ describe('Database interface', function() {
     it('should properly reject incorrect passwords', function(done) {
 
       db.User.create({
-        accountName:'redstarter',
+        username:'redstarter',
         password: 'beerbro',
-        displayName: 'Sovester',
       })
       .then(function(user) {
         return user.comparePassword('love2surf');
@@ -240,9 +216,8 @@ describe('Database interface', function() {
     it('should associate with an addingUser', function(done) {
 
       db.User.create({
-        accountName: 'redstarter',
+        username: 'redstarter',
         password: 'brewbro',
-        displayName: 'Sovester',
       })
 
       .then(function(user) {
@@ -262,7 +237,7 @@ describe('Database interface', function() {
 
           return item.getAddingUser()
             .then(function(user) {
-              expect(user.displayName).toEqual('Sovester');
+              expect(user.username).toEqual('redstarter');
               return user;
             });
           });
@@ -277,9 +252,8 @@ describe('Database interface', function() {
     it('should associate with a fetchingUser', function(done) {
 
       db.User.create({
-        accountName: 'redstarter',
+        username: 'redstarter',
         password: 'brewbro',
-        displayName: 'Sovester',
       })
 
       .then(function(user) {
@@ -299,7 +273,7 @@ describe('Database interface', function() {
           })
           .then(function(user) {
             expect(user).toBeTruthy();
-            expect(user.displayName).toEqual('Sovester');
+            expect(user.username).toEqual('redstarter');
             return user;
           });
       })
@@ -312,9 +286,8 @@ describe('Database interface', function() {
     it('should associate with a buyingUser', function(done) {
 
       db.User.create({
-        accountName: 'redstarter',
+        username: 'redstarter',
         password: 'brewbro',
-        displayName: 'Sovester',
       })
 
        .then(function(user) {
@@ -334,7 +307,7 @@ describe('Database interface', function() {
           })
           .then(function(user) {
             expect(user).toBeTruthy();
-            expect(user.displayName).toEqual('Sovester');
+            expect(user.username).toEqual('redstarter');
           });
       })
 
@@ -352,19 +325,16 @@ describe('Database interface', function() {
 
       db.User.bulkCreate([
         {
-          accountName: 'redstarter',
+          username: 'redstarter',
           password: 'brewbro',
-          displayName: 'Sovester',
         },
         {
-          accountName: 'cynthia',
+          username: 'cynthia',
           password: 'coffeefan',
-          displayName: 'Cindy',
         },
         {
-          accountName: 'laura',
+          username: 'laura',
           password: 'guerrero',
-          displayName: 'Laura',
         },
       ], {returning: true})
 

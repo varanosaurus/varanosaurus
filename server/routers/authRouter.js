@@ -4,8 +4,7 @@ var tokens = require('../services/tokens');
 
 authRouter.post('/login', function(request, response) {
 
-  db.User.findOne({where: {accountName: request.body.accountName}})
-
+  db.User.findOne({where: {username: request.body.username}})
     .then(function(user) {
 
       var token;
@@ -33,27 +32,24 @@ authRouter.post('/login', function(request, response) {
 
 authRouter.post('/signup', function(request, response) {
 
-  var accountName = request.body.accountName;
+  var username = request.body.username;
   var password = request.body.password;
-  var displayName = request.body.displayName || null;
 
-  return db.User.findOne({where: {accountName}})
+  return db.User.findOne({where: {username}})
     .then(function(user) {
       if (user) {
         response.status(409).send('User already exists');
       } else {
         return db.User.create({
-          accountName,
+          username,
           password,
-          displayName,
         });
       }
     })
     .then(function(user) {
       response.status(201).json({
         user: {
-          accountName: user.accountName,
-          displayName: user.displayName,
+          username: user.username,
           id: user.id,
           updatedAt: user.updatedAt,
           createdAt: user.createdAt,
@@ -64,7 +60,7 @@ authRouter.post('/signup', function(request, response) {
     })
     .catch(function(error) {
       console.error(error);
-      response.status(500).send();
+      response.status(500).send('Error signing up user');
     });
 });
 

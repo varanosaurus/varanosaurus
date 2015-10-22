@@ -4,15 +4,27 @@ var React = require('react-native');
 
 var {
   StyleSheet,
+  TouchableHighlight,
   View,
   Text,
 } = React;
 
-var Settings = React.createClass({
+var Profile = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <Text>TESTING</Text>
+        <TouchableHighlight
+          style={styles.button}
+          // onPress={}
+        >
+        <Text>Username</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.button}
+          // onPress={}
+        >
+        <Text>Deactivate</Text>
+        </TouchableHighlight>
       </View>
     );
   },
@@ -35,4 +47,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = Settings;
+module.exports = Profile;

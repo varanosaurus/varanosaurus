@@ -1,17 +1,19 @@
+'use strict';
+
 var React = require('react-native');
 
 var {
   StyleSheet,
   TouchableHighlight,
-  TextInput,
   View,
   Text,
+  TextInput,
 } = React;
 
-var InviteRoommates = React.createClass({
+var Roommates = React.createClass({
   getInitialState: function() {
     return ({
-      inputField: [true, true, true],
+      inputField: [true],
     });
   },
   addRoommate: function() {
@@ -23,34 +25,34 @@ var InviteRoommates = React.createClass({
     if (this.state.input === undefined) {
       this.setState({error: 'Please add at least one roommate before submitting'});
     }
-    // the below code is a "hack" but react-native doesn't currently support optimally otherwise
-    // this.props.navigator.popToRoute(this.props.navigator.getCurrentRoutes()[1]);
   },
   render: function() {
     var inputFields = this.state.inputField;
     var self = this;
     return (
       <View style={styles.container}>
+        <TouchableHighlight style={styles.button}>
+          <Text style={styles.remove}>Remove Roommate 1</Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight style={styles.button}>
+          <Text style={styles.remove}>Remove Roommate 2</Text>
+        </TouchableHighlight>
+
         {inputFields.map(function() {
           return (<TextInput
-                    style={styles.input}
-                    keyboardType='default'
-                    placeholder="roommate's email address"
-                    onChangeText={(input) => self.setState({input: input})}
+                      style={styles.input}
+                      keyboardType='default'
+                      placeholder="roommate's email address"
+                      onChangeText={(input) => self.setState({input: input})}
                   />);
-         })
+          })
         }
-        <Text
-          style={styles.hyperLink}
-          onPress={this.addRoommate}
-        >
-          Invite more
-        </Text>
+
+        <Text style={styles.hyperLink} onPress={this.addRoommate}>Invite more</Text>
         <Text style={styles.errorHandling}>{this.state.error}</Text>
-        <TouchableHighlight
-          style={styles.button}
-          onPress={() => this.submitRoommates()}
-        >
+        
+        <TouchableHighlight style={styles.button} onPress={() => this.submitRoommates()}>
           <Text style={styles.btnText}>Invite Roommates</Text>
         </TouchableHighlight>
       </View>
@@ -60,10 +62,10 @@ var InviteRoommates = React.createClass({
 
 var styles = StyleSheet.create({
   container: {
-    marginTop: 64,
     flex: 1,
-    flexDirection: 'column',
+    marginTop: 64,
     backgroundColor: 'white',
+    flexDirection: 'column',
   },
   input: {
     height: 40,
@@ -74,21 +76,19 @@ var styles = StyleSheet.create({
     color: 'blue',
   },
   button: {
-    flex: 1,
+    backgroundColor: '#EDEBE8',
     paddingTop: 10,
     paddingBottom: 10,
-    backgroundColor: 'black',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    position: 'absolute',
   },
   btnText: {
     fontSize: 18,
-    color: 'white',
+  },
+  remove: {
+    color: 'red',
   },
   errorHandling: {
     color: 'red',
   },
 });
 
-module.exports = InviteRoommates;
+module.exports = Roommates;

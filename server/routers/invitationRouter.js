@@ -7,7 +7,7 @@ router.post('/', function(request, response) {
   var fromUserId = request.decoded.userId;
   var householdId = request.decoded.householdId;
 
-  db.User.findOne({where: {accountName: request.body.toUsername}})
+  db.User.findOne({where: {username: request.body.toUsername}})
 
     .then(function(toUser) {
       if (!toUser) {

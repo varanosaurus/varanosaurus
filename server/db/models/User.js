@@ -19,7 +19,7 @@ module.exports = {
 
 	attributes: {
 
-		accountName: {
+		username: {
 			type: Sequelize.STRING,
 			allowNull: false,
 			validate: {
@@ -39,14 +39,6 @@ module.exports = {
 				// Must be letters, numbers, spaces, or exclamation/question marks
 				is: ['^[a-z \\d!?]+$', 'i'],
 
-			},
-		},
-
-		displayName: {
-			type: Sequelize.STRING,
-			defaultValue: null,
-			validate: {
-				isAlphanumeric: true,
 			},
 		},
 

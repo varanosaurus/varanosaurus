@@ -15,19 +15,16 @@ var testHousehold =
 var testUsers =
   [
     {
-      accountName: 'redstarter',
+      username: 'redstarter',
       password: 'brewbro',
-      displayName: 'Sovester',
     },
     {
-      accountName: 'cynthia',
+      username: 'cynthia',
       password: 'coffeefan',
-      displayName: 'Cindy',
     },
     {
-      accountName: 'laura',
+      username: 'laura',
       password: 'guerrero',
-      displayName: 'Laura',
     },
   ];
 

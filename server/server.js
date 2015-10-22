@@ -27,6 +27,8 @@ if (process.env.NODE_ENV === 'testing') {
   module.exports = app.listen(port, function(error) {
     if (error) {
       console.error('Error listening: ', error);
+    } else {
+      console.log('Testing: listening on port: ', port);
     }
   });
 

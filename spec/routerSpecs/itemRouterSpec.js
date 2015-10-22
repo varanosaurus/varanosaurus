@@ -24,7 +24,7 @@ describe('itemRouter', function() {
         //seed db with user and household
         var userUrl = 'http://localhost:8080/auth/signup';
         var userBody = JSON.stringify({
-          accountName: 'nedStark',
+          username: 'nedStark',
           password: 'RPlusLEqualsJ',
         });
 

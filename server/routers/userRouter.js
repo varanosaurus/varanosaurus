@@ -44,6 +44,10 @@ router.put('/:userId', function(request, response) {
           token = tokens.issue(id);
         }
 
+        if (updates.password) {
+          delete updates.password;
+        }
+
         response.status(201).json({updates, token});
 
       } else {

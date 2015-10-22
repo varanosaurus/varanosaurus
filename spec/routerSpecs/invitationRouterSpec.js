@@ -30,11 +30,11 @@ describe('Invitation router', function() {
         return db.User.bulkCreate(
           [
             {
-              accountName: 'redstarter',
+              username: 'redstarter',
               password: 'broioioing',
             },
             {
-              accountName: 'sylkal',
+              username: 'sylkal',
               password: '4dmathshapes',
             },
           ]
@@ -46,7 +46,7 @@ describe('Invitation router', function() {
       })
 
       .then(function(household) {
-        return db.User.findOne({where: {accountName: 'sylkal'}})
+        return db.User.findOne({where: {username: 'sylkal'}})
           .then(function(user) {
             household.addUser(user);
             user.setHousehold(household);
@@ -78,7 +78,7 @@ describe('Invitation router', function() {
       expect(err).toBeNull();
       expect(response.statusCode).toEqual(201);
 
-      db.User.findOne({where: {accountName: 'redstarter'}})
+      db.User.findOne({where: {username: 'redstarter'}})
         .then(function(user) {
           return user.getReceivedInvitations();
         })

@@ -118,7 +118,7 @@ describe('Invitation router', function() {
 
       expect(response.statusCode).toEqual(201);
 
-      db.User.findOne({where: {accountName: 'redstarter'}})
+      db.User.findOne({where: {username: 'redstarter'}})
 
         .then(function(user) {
           context.headers['X-Access-Token'] = tokens.issue(user.id, user.householdId);
@@ -129,7 +129,7 @@ describe('Invitation router', function() {
           request({
             method: 'GET',
             headers: context.headers,
-            url: inviteUrl,
+            url: inviteUrl + '/inbox',
           }, function(error, request, body) {
             var parsedBody = JSON.parse(body);
 
@@ -169,7 +169,7 @@ describe('Invitation router', function() {
 
       expect(response.statusCode).toEqual(201);
 
-      db.User.findOne({where: {accountName: 'redstarter'}})
+      db.User.findOne({where: {username: 'redstarter'}})
 
         .then(function(user) {
           context.headers['X-Access-Token'] = tokens.issue(user.id, user.householdId);

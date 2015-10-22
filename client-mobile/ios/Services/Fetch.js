@@ -40,8 +40,11 @@ var makeParams = function(method, token, body) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(body),
   };
+
+  if (body) {
+    params.body = JSON.stringify(body);
+  }
 
   if (token) {
     //attach the token if given
@@ -65,46 +68,62 @@ var signup = function(username, password) {
     .then(function(response) {
       return response.clone().json()
         .then(function(body) {
-          console.log('body inside clone: ', body);
           Store.token.set(body.token);
           return response.json();
         });
     });
 };
 
-// var login = function(username, password) {
-//   var params = makeParams('POST', null, {username, password});
+var login = function(username, password) {
+  var params = makeParams('POST', null, {username, password});
 
-//   fetch(url + '/auth/login', params)
-//     //fetch returns a promise
-//     //response is an object that has methods to access headers
-//     //but also methods to access the body data
-//     //however, the body data comes in a stream which can only be read once
-//     //so if we want to read the data twice
-//     //we must clone the response
-//     .then(function(response) {
-//       return response.clone().json()
-//         .then(function(body) {
-//           console.log('body inside clone: ', body);
-//           Store.token.set(body.token);
-//           return response.json();
-//         });
-//       //will return a promise with JSON passed in
-//       // return response.json();
-//     });
-// };
+  fetch(url + '/auth/login', params)
+    .then(function(response) {
+      return response.clone().json()
+        .then(function(body) {
+          Store.token.set(body.token);
+          return response.json();
+        });
+    });
+};
 
-// var updateUser = function(updates) {
-//   var params = makeParams('PUT', savedToken, updates);
+var updateUser = function(updates) {
+  var params = makeParams('PUT', Store.token.get(), updates);
 
-//   fetch(url + '/users/' + )
-// };
+  fetch(url + 'api/users/' + Store.userId.get(), params)
+    .then(function(response) {
+      if (updates.householdId) {
+        //if the user's household was updated,
+        //a new token will have been reissued,
+        //so we need to store the new token
+        return response.clone().json()
+          .then(function(body) {
+            Store.token.set(body.token);
+            return response.json();
+          });
+      } else {
+        return response.json();
+      }
+    });
+};
 
 //getUser --> necessary? should be returned with login/signup/updateUser
 
-//deleteUser
+var deleteUser = function() {
+  var params = makeParams('DELETE', Store.token.get());
 
-//addHousehold
+  fetch(url + 'api/users/' + Store.userId.get(), params)
+    .then(function(response) {
+      //not sure how we should deal with deletes, actually
+      //probably won't be necessary to do for MVP
+      //do we clear their id and everything from the Store and immediately sign them out?
+      //for now, we'll just return the body
+      return response.json();
+    });
+};
+
+var addHousehold = function() {};
+
 
 //getHousehold
 
@@ -122,4 +141,8 @@ var signup = function(username, password) {
 
 module.exports = {
   signup,
+  login,
+  updateUser,
+  deleteUser,
+  addHousehold,
 };

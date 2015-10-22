@@ -7,6 +7,8 @@ var PendingItemDetails = require('./PendingItemDetails');
 var BoughtItemDetails = require('./BoughtItemDetails');
 var StatementList = require('./StatementList');
 var StatementDetails = require('./StatementDetails');
+var More = require('./More');
+var Settings = require('./Settings');
 
 var {
   TabBarIOS,
@@ -80,43 +82,23 @@ var TabView = React.createClass({
             });
           }}
         >
-        <More />
+          <More 
+            onSelectEdit={ (setting) => {
+              this.props.navigator.push({
+                title: 'Settings',
+                component: Settings,
+                passProps: {setting}
+              });
+            }}
+          />
         </TabBarIOS.Item>
-
       </TabBarIOS>
-
-      // <View automaticallyAdjustContentInsets={false} style={styles.container}>
-      //   <Text style={styles.welcome}>
-      //     Hi Goose! Welcome to React Native!
-      //   </Text>
-      //   <Text style={styles.instructions}>
-      //     To get started, edit index.ios.js
-      //   </Text>
-      //   <Text style={styles.instructions}>
-      //     Press Cmd+R to reload,{'\n'}
-      //     Cmd+D or shake for dev menu
-      //   </Text>
-      // </View>
     );
   },
 });
 
 // var styles = StyleSheet.create({
-//   container: {
-//     marginTop: 64,
-//     flex: 1,
-//     backgroundColor: 'white',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
+  
 // });
 
 

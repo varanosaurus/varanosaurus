@@ -5,17 +5,8 @@ var {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View
+  View,
 } = React;
-
-// var getStyleFromScore = require('./getStyleFromScore');
-// var getImageSource = require('./getImageSource');
-// var getTextFromScore = require('./getTextFromScore');
-
-  // <View style={styles.Cell}>
-  //   <Text style={styles.itemName}>{item.itemName}</Text>
-  //   <Text style={styles.itemPrice}>${item.itemPrice}</Text>
-  // </View>
 
 var Cell = React.createClass({
   render: function() {
@@ -32,7 +23,7 @@ var Cell = React.createClass({
         </TouchableElement>
       </View>
     );
-  }
+  },
 });
 
 var styles = StyleSheet.create({
@@ -40,7 +31,7 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   listView: {
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   Cell: {
     flex: 1,
@@ -51,7 +42,7 @@ var styles = StyleSheet.create({
     marginRight: 6,
     padding: 6,
     borderBottomWidth: .5,
-    borderColor: 'lightgray'
+    borderColor: 'lightgray',
   },
   itemName: {
     fontSize: 20,
@@ -62,7 +53,7 @@ var styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 6,
     textAlign: 'center',
-  }
+  },
 });
 
 module.exports = Cell;

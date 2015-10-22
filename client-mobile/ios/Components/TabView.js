@@ -1,27 +1,23 @@
 'use strict';
 
 var React = require('react-native');
-var Household = require('./Household');
 var More = require('./More');
 var ItemList = require('./ItemList');
-var ItemDetails = require('./ItemDetails');
+var PendingItemDetails = require('./PendingItemDetails');
+var BoughtItemDetails = require('./BoughtItemDetails');
 var StatementList = require('./StatementList');
 var StatementDetails = require('./StatementDetails');
 
 var {
-  // StyleSheet,
   TabBarIOS,
-  Component,
-  View,
-  Text,
 } = React;
 
 var TabView = React.createClass({
 
   getInitialState: function() {
-    return {
-      selectedTab: 'household'
-    }
+    return ({
+      selectedTab: 'household',
+    });
   },
 
   render: function() {
@@ -33,16 +29,23 @@ var TabView = React.createClass({
           title='Household'
           onPress={ () => {
             this.setState({
-              selectedTab: 'household'
+              selectedTab: 'household',
             });
           }}
         >
         <ItemList
-          onSelectItem={ (item) => {
+          onSelectPendingItem={ (item) => {
             this.props.navigator.push({
               title: item.itemName,
-              component: ItemDetails,
-              passProps: {item}
+              component: PendingItemDetails,
+              passProps: {item},
+            });
+          }}
+          onSelectBoughtItem={ (item) => {
+            this.props.navigator.push({
+              title: item.itemName,
+              component: BoughtItemDetails,
+              passProps: {item},
             });
           }}
         />
@@ -53,8 +56,8 @@ var TabView = React.createClass({
           title='Reckoning'
           onPress={ () => {
             this.setState({
-              selectedTab: 'reckoning'
-            })
+              selectedTab: 'reckoning',
+            });
           }}
         >
         <StatementList
@@ -62,7 +65,7 @@ var TabView = React.createClass({
             this.props.navigator.push({
               title: 'Reckoning',
               component: StatementDetails,
-              passProps: {statement}
+              passProps: {statement},
             });
           }}
         />
@@ -73,8 +76,8 @@ var TabView = React.createClass({
           title='More'
           onPress={ () => {
             this.setState({
-              selectedTab: 'more'
-            })
+              selectedTab: 'more',
+            });
           }}
         >
         <More />
@@ -95,7 +98,7 @@ var TabView = React.createClass({
       //   </Text>
       // </View>
     );
-  }
+  },
 });
 
 // var styles = StyleSheet.create({

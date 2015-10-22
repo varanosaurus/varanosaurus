@@ -4,12 +4,11 @@ var React = require('react-native');
 var {
   StyleSheet,
   Text,
-  View
+  View,
 } = React;
 
 var ByPersonDetails = React.createClass({
   render: function() {
-    console.log('this props is...', this.props);
     return (
       <View style={styles.contentContainer}>
         <View style={styles.mainSection}>
@@ -30,7 +29,7 @@ var styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   personName: {
     flex: 1,
@@ -40,7 +39,7 @@ var styles = StyleSheet.create({
   },
   mainSection: {
     flex: 1,
-  }
+  },
 });
 
 module.exports = ByPersonDetails;

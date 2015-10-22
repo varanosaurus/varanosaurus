@@ -32,5 +32,9 @@
     "eol-last": 2,
     "no-console": 1,
     "object-shorthand": [1, "always"],
+  },
+  "globals": {
+    "GLOBAL": true,
+    "window": true,
   }
 }

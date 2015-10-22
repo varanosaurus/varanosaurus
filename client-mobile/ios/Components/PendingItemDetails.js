@@ -1,11 +1,12 @@
 'use strict';
 
 var React = require('react-native');
+var Button = require('react-native-button');
+
 var {
   StyleSheet,
   Text,
   View,
-  TextInput,
 } = React;
 
 var PendingItemDetails = React.createClass({
@@ -14,6 +15,11 @@ var PendingItemDetails = React.createClass({
        price: 0,
     });
   },
+
+  // rednerScene: function() {
+  //   return ()
+  // },
+
   render: function() {
     return (
       <View style={styles.contentContainer}>
@@ -21,15 +27,7 @@ var PendingItemDetails = React.createClass({
           <Text style={styles.title}>Product: {this.props.item.itemName}</Text>
           <Text>Requested By: {this.props.item.requestedBy}</Text>
           <Text>Details: "{this.props.item.details}"</Text>
-          <Text style={styles.itemName}>This is the PENDING item details view. It needs an input field.</Text>
-          <TextInput
-              input='number'
-              style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 5}}
-              onChangeText={(price) => this.setState({price})}
-              keyboardType='number-pad'
-              textAlign='right'
-              value={this.state.price}
-            />
+          <Button onPress={this.renderScene} style={styles.btn}>Buy</Button>
         </View>
       </View>
     );
@@ -39,9 +37,6 @@ var PendingItemDetails = React.createClass({
 var styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    marginTop: 64,
-    padding: 10,
-    backgroundColor: '#F5FCFF',
   },
   title: {
     fontFamily: 'Arial',
@@ -56,6 +51,15 @@ var styles = StyleSheet.create({
   },
   mainSection: {
     flex: 1,
+    marginTop: 64,
+    padding: 10,
+    backgroundColor: '#F5FCFF',
+  },
+  btn: {
+    margin: 10,
+    backgroundColor: '#3B5998',
+    color: 'white',
+    padding: 10,
   },
 });
 

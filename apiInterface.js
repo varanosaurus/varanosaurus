@@ -1,4 +1,4 @@
-//USERS
+]//USERS
 {
   'sign up a user': {
     verb: 'POST',

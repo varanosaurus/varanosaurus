@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react-native');
-var More = require('./More');
 var ItemList = require('./ItemList');
 var PendingItemDetails = require('./PendingItemDetails');
 var BoughtItemDetails = require('./BoughtItemDetails');
@@ -82,12 +81,12 @@ var TabView = React.createClass({
             });
           }}
         >
-          <More 
+          <More
             onSelectEdit={ (setting) => {
               this.props.navigator.push({
                 title: 'Settings',
                 component: Settings,
-                passProps: {setting}
+                passProps: {setting},
               });
             }}
           />
@@ -98,7 +97,7 @@ var TabView = React.createClass({
 });
 
 // var styles = StyleSheet.create({
-  
+
 // });
 
 

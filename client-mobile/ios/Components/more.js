@@ -7,21 +7,20 @@ var {
   TouchableHighlight,
   View,
   Text,
-  Component,
 } = React;
 
 var More = React.createClass({
 
   select: function() {
     console.log(this.props);
-    this.props.onSelectEdit(setting)
+    this.props.onSelectEdit();
   },
 
   render: function() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight 
-          style={styles.button} 
+        <TouchableHighlight
+          style={styles.button}
           onPress={() => this.select()}
         >
           <Text style={styles.btnText}>Edit Profile</Text>
@@ -36,9 +35,9 @@ var More = React.createClass({
           <Text style={styles.btnText}>Logout</Text>
         </TouchableHighlight>
       </View>
-    )
-  }
-})
+    );
+  },
+});
 
 var styles = StyleSheet.create({
   container: {
@@ -55,6 +54,6 @@ var styles = StyleSheet.create({
   btnText: {
     fontSize: 18,
   },
-})
+});
 
 module.exports = More;

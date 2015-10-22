@@ -73,12 +73,13 @@ describe('Invitation router', function() {
                     }),
     }, function(err, response, body) {
 
+      var parsedBody = JSON.parse(body);
+
       expect(err).toBeNull();
       expect(response.statusCode).toEqual(201);
 
       db.User.findOne({where: {accountName: 'redstarter'}})
         .then(function(user) {
-          console.log(user);
           return user.getReceivedInvitations();
         })
         .then(function(invitations) {
@@ -90,7 +91,7 @@ describe('Invitation router', function() {
           invitation = invitations[0];
 
           expect(invitation).toBeTruthy();
-          expect(invitation.toJSON()).toEqual(body);
+          expect(invitation.id).toEqual(parsedBody.id);
           done();
         })
         .catch(done.fail.bind(done));

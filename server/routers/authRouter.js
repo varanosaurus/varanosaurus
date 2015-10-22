@@ -60,7 +60,7 @@ authRouter.post('/signup', function(request, response) {
     })
     .catch(function(error) {
       console.error(error);
-      response.status(500).send();
+      response.status(500).send('Error signing up user');
     });
 });
 

@@ -4,13 +4,13 @@
     verb: 'POST',
     url: '/auth/signup',
     requestBody: {
-      accountName: string,
+      username: string,
       password: string,
     },
     responseBody: {
       user: {
         id: integer,
-        accountName: string,
+        username: string,
         updatedAt: date,
         createdAt: date,
         householdId: integer,
@@ -25,7 +25,7 @@
     requestBody: {},
     responseBody: {
       id: integer,
-      accountName: string,
+      username: string,
       updatedAt: date,
       createdAt: date,
       householdId: integer,

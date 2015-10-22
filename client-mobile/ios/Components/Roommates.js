@@ -51,7 +51,7 @@ var Roommates = React.createClass({
 
         <Text style={styles.hyperLink} onPress={this.addRoommate}>Invite more</Text>
         <Text style={styles.errorHandling}>{this.state.error}</Text>
-        
+
         <TouchableHighlight style={styles.button} onPress={() => this.submitRoommates()}>
           <Text style={styles.btnText}>Invite Roommates</Text>
         </TouchableHighlight>

@@ -21,11 +21,9 @@ var More = React.createClass({
 
 
   editNotifications: function() {
-    console.log("notifications")
   },
 
   logout: function() {
-    console.log("logout")
   },
 
   render: function() {
@@ -37,19 +35,19 @@ var More = React.createClass({
         >
           <Text style={styles.btnText}>Edit Profile</Text>
         </TouchableHighlight>
-        <TouchableHighlight 
+        <TouchableHighlight
           style={styles.button}
           onPress={this.editRoommates}
         >
           <Text style={styles.btnText}>Edit Roommates</Text>
         </TouchableHighlight>
-        <TouchableHighlight 
+        <TouchableHighlight
           style={styles.button}
           onPress={this.editNotifications}
         >
           <Text style={styles.btnText}>Edit Notifications</Text>
         </TouchableHighlight>
-        <TouchableHighlight 
+        <TouchableHighlight
           style={styles.button}
           onPress={this.logout}
         >

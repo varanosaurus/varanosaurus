@@ -99,6 +99,44 @@ describe('Invitation router', function() {
 
   }); // 'should allow Gary to invite Michael to the household'
 
+  it('should allow Gary to retrieve the invitations he\'s sent', function(done) {
+
+    var context = this;
+
+    request({
+      method: 'POST',
+      headers: context.headers,
+      url: inviteUrl,
+      body: JSON.stringify({
+        toUsername: 'redstarter',
+      }),
+    }, function(error, response) {
+
+      if (error) {
+        done.fail(error);
+      }
+
+      expect(response.statusCode).toEqual(201);
+
+      request({
+        method: 'GET',
+        headers: context.headers,
+        url: inviteUrl + '/outbox',
+      }, function(error, response, body) {
+        var parsedBody = JSON.parse(body);
+
+        expect(response.statusCode).toEqual(200);
+        expect(parsedBody).toBeTruthy();
+        expect(parsedBody).toEqual(jasmine.any(Array));
+        expect(parsedBody.length).toEqual(1);
+
+        done();
+      });
+
+    });
+
+  }); // 'should allow Gary to retrieve the invitations he\'s sent'
+
   it('should allow Michael to request his invites over HTTP', function(done) {
 
     var context = this;

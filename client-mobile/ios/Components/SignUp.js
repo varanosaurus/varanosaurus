@@ -45,7 +45,8 @@ var SignUp = React.createClass({
 
       Fetch.signup(this.state.username, this.state.password)
         .then(function(body) {
-          console.log('body: ', body);
+          console.log('body inside Signup: ', body);
+          //info
         })
         .catch(function(error) {
           console.error('Error signing up user: ', error);

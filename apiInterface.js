@@ -1,4 +1,12 @@
 //USERS
+'User Model': {
+  id: integer,
+  username: string,
+  updatedAt: date,
+  createdAt: date,
+  householdId: integer,
+}
+
 {
   'sign up a user': {
     verb: 'POST',
@@ -8,13 +16,7 @@
       password: string,
     },
     responseBody: {
-      user: {
-        id: integer,
-        username: string,
-        updatedAt: date,
-        createdAt: date,
-        householdId: integer,
-      },
+      user: User
       token: token,
     },
   },
@@ -22,14 +24,8 @@
   'get a user\'s info': {
     verb: 'GET',
     url: '/api/users/:userId',
-    requestBody: {},
-    responseBody: {
-      id: integer,
-      username: string,
-      updatedAt: date,
-      createdAt: date,
-      householdId: integer,
-    }
+    requestBody: null,
+    responseBody: User
   },
 
   'change a user\'s info': {
@@ -50,7 +46,7 @@
   'delete a user': {
     verb: 'DELETE',
     url: '/api/users/:userId',
-    requestBody: {},
+    requestBody: null,
     responseBody: {
       success: boolean,
       deletedUserId: id,
@@ -59,6 +55,15 @@
 }
 
 //HOUSEHOLDS
+'Household Model': {
+  id: integer,
+  name: string,
+  updatedAt: date,
+  createdAt: date,
+  creatorId: integer,
+  captainId: integer,
+}
+
 {
   'add a household': {
     verb: 'POST',
@@ -67,31 +72,17 @@
       name: string,
     },
     responseBody: {
-      household: {
-        id: integer,
-        name: string,
-        updatedAt: date,
-        createdAt: date,
-        creatorId: integer,
-        captainId: integer,
-      }
-      token,
+      household: Household,
+      token: token,
     },
   },
 
   'get a household\'s info': {
     verb: 'GET',
     url: '/api/households/:householdId',
-    requestBody: {},
+    requestBody: null,
     responseBody: {
-      household: {
-       id: integer,
-       name: string,
-       updatedAt: date,
-       createdAt: date,
-       creatorId: integer,
-       captainId: integer, 
-      },
+      household: Household,
       users: {
         user1accountName: integer, //integer will be the userId
         user2accountName: integer, //etc
@@ -116,10 +107,10 @@
     }
   },
 
-  'delete a user': {
+  'delete a household': {
     verb: 'DELETE',
     url: '/api/households/:householdId',
-    requestBody: {},
+    requestBody: null,
     responseBody: {
       success: boolean,
       deletedHouseholdId: id,
@@ -128,10 +119,35 @@
 }
 
 //ITEMS
+'Item Model': {
+  description: string,
+  details: string,
+  fetch: boolean,
+  bought: boolean,
+  price: stringified decimal,
+  timeFetched: date,
+  timeBought: date,
+  id: integer,
+  createdAt: date,
+  updatedAt: date,
+  householdId: integer,
+  addingUserId: integer,
+  fetchingUserId: integer,
+  buyingUserId: integer,
+  reckoningId: integer,
+}
+
 {
+  'get all items of a household': {
+    verb: 'GET',
+    url: 'api/items',
+    requestBody: null,
+    responseBody: [Item],
+  },
+
   'add an item': {
     verb: 'POST',
-    url: '/api/items/',
+    url: '/api/items',
     requestBody: {
       description: string,
       details: string, //optional
@@ -139,46 +155,14 @@
       bought: boolean, //optional, defaults to false
       price: stringified decimal, //optional, defaults to 0
     },
-    responseBody: {
-      description: string,
-      details: string,
-      fetch: boolean,
-      bought: boolean,
-      price: stringified decimal,
-      timeFetched: date,
-      timeBought: date,
-      id: integer,
-      createdAt: date,
-      updatedAt: date,
-      householdId: integer,
-      addingUserId: integer,
-      fetchingUserId: integer,
-      buyingUserId: integer,
-      reckoningId: integer,
-    },
+    responseBody: Item,
   },
 
   'get an item\'s info': {
     verb: 'GET',
     url: '/api/items/:itemId',
-    requestBody: {},
-    responseBody: {
-      description: string,
-      details: string,
-      fetch: boolean,
-      bought: boolean,
-      price: stringified decimal,
-      timeFetched: date,
-      timeBought: date,
-      id: integer,
-      createdAt: date,
-      updatedAt: date,
-      householdId: integer,
-      addingUserId: integer,
-      fetchingUserId: integer,
-      buyingUserId: number,
-      reckoningId: integer,
-    },
+    requestBody: null,
+    responseBody: Item
   },
 
   'change an item\'s info': {
@@ -207,7 +191,7 @@
   'delete an item': {
     verb: 'DELETE',
     url: '/api/items/:itemId',
-    requestBody: {},
+    requestBody: null,
     responseBody: {
       success: boolean,
       deletedItemId: id,
@@ -216,35 +200,80 @@
 }
 
 //RECKONINGS
+'Reckoning Model': {
+  totalSpent: stringified decimal,
+  date: date,
+  id: integer,
+  createdAt: date,
+  updatedAt: date,
+  householdId: integer,
+}
+
 {
+  'get all reckonings of a household': {
+    verb: 'GET',
+    url: '/api/reckonings',
+    requestBody: null,
+    responseBody: [Reckoning],
+  },
   //we didn't talk about having support for this in MVP,
   //but for testing it made sense to have this feature available
   //so it's included here and we can decide later if it's post-MVP or not
   'initiate a reckoning': {
     verb: 'POST',
-    url: '/api/reckonings/',
-    requestBody: {},
-    responseBody: {
-      totalSpent: stringified decimal,
-      date: date,
-      id: integer,
-      createdAt: date,
-      updatedAt: date,
-      householdId: integer,
-    },
+    url: '/api/reckonings',
+    requestBody: null,
+    responseBody: Reckoning,
   },
 
   'get a reckoning\'s info': {
     verb: 'GET',
-    url: '/api/households/:householdId',
-    requestBody: {},
-    responseBody: {
-      totalSpent: stringified decimal,
-      date: date,
-      id: integer,
-      createdAt: date,
-      updatedAt: date,
-      householdId: integer,
-    },
+    url: '/api/reckonings/:reckoningId',
+    requestBody: null,
+    responseBody: Reckoning,
   },
+}
+
+//INVITATIONS
+'Invitation Model': {
+  seen: boolean,
+  seenAt: date,
+  id: int,
+  createdAt: date,
+  updatedAt: date,
+  fromUserId: int,
+  toUserId: int,
+  householdId: int,
+}
+
+{
+  'send an invitation to a user by name': {
+    verb: 'POST',
+    url: '/api/invitations',
+    requestBody: {
+      toUsername: string
+    },
+    responseBody: Invitation,
+  },
+
+  'get all sent invitations': {
+    verb: 'GET',
+    url: '/api/invitations/inbox',
+    requestBody: null,
+    responseBody: [Invitation],
+  },
+
+  'get all received invitations': {
+    verb: 'GET',
+    url: '/api/invitations/inbox',
+    requestBody: null,
+    responseBody: [Invitation],
+  },
+
+  'delete an invitation': {
+    verb: 'DELETE',
+    url: '/api/invitations/:invitationId',
+    requestBody: null,
+    repsonseBody: null
+  }
 }

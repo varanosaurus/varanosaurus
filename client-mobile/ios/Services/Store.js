@@ -4,35 +4,36 @@ var _userId;
 var _householdId;
 var _token;
 
-var setUserId = function(userId) {
+var userId = {};
+userId.set = function(userId) {
   _userId = userId;
+  console.log('userId was set');
 };
 
-var getUserId = function() {
+userId.get = function() {
   return _userId;
 };
 
-var setHouseholdId = function(householdId) {
+var householdId = {};
+householdId.set = function(householdId) {
   _householdId = householdId;
 };
 
-var getHouseholdId = function() {
+householdId.get = function() {
   return _householdId;
 };
 
-var setToken = function(token) {
+var token = {};
+token.set = function(token) {
   _token = token;
 };
 
-var getToken = function() {
+token.get = function() {
   return _token;
 };
 
 module.exports = {
-  setUserId,
-  getUserId,
-  setHouseholdId,
-  getHouseholdId,
-  setToken,
-  getToken,
+  userId,
+  householdId,
+  token,
 };

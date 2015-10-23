@@ -1,12 +1,15 @@
 'use strict';
 
 var React = require('react-native');
-var More = require('./More');
 var ItemList = require('./ItemList');
 var PendingItemDetails = require('./PendingItemDetails');
 var BoughtItemDetails = require('./BoughtItemDetails');
 var StatementList = require('./StatementList');
 var StatementDetails = require('./StatementDetails');
+var More = require('./More');
+var Profile = require('./Profile');
+var Roommates = require('./Roommates');
+var Notifications = require('./Notifications');
 
 var {
   TabBarIOS,
@@ -80,43 +83,34 @@ var TabView = React.createClass({
             });
           }}
         >
-        <More />
+        <More
+          SelectProfile={ () => {
+            this.props.navigator.push({
+              title: 'Edit Profile',
+              component: Profile,
+            });
+          }}
+          SelectRoommates={ () => {
+            this.props.navigator.push({
+              title: 'Edit Roommates',
+              component: Roommates,
+            });
+          }}
+          SelectNotifications={ () => {
+            this.props.navigator.push({
+              title: 'Edit Notifications',
+              component: Notifications,
+            });
+          }}
+        />
         </TabBarIOS.Item>
-
       </TabBarIOS>
-
-      // <View automaticallyAdjustContentInsets={false} style={styles.container}>
-      //   <Text style={styles.welcome}>
-      //     Hi Goose! Welcome to React Native!
-      //   </Text>
-      //   <Text style={styles.instructions}>
-      //     To get started, edit index.ios.js
-      //   </Text>
-      //   <Text style={styles.instructions}>
-      //     Press Cmd+R to reload,{'\n'}
-      //     Cmd+D or shake for dev menu
-      //   </Text>
-      // </View>
     );
   },
 });
 
 // var styles = StyleSheet.create({
-//   container: {
-//     marginTop: 64,
-//     flex: 1,
-//     backgroundColor: 'white',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
+
 // });
 
 

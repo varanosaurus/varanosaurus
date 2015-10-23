@@ -1,6 +1,24 @@
 var router = require('express').Router();
 var db = require('../db/interface.js');
 
+router.get('/', function(request, response) {
+  var householdId = request.decoded.householdId;
+  if (!householdId) {
+    response.status(400).send('No household saved in token');
+  }
+
+  db.Item.findAll({where: {householdId, reckoningId: null}})
+
+    .then(function(items) {
+      response.json(items);
+    })
+
+    .catch(function(error) {
+      response.status(500).send(error);
+    });
+
+});
+
 router.post('/', function(request, response) {
 
   var householdId = request.decoded.householdId;

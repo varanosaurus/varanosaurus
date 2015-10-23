@@ -132,6 +132,21 @@ describe('itemRouter', function() {
 
   });
 
+  it('should respond to a get request to /reckonings with all the reckonings of the household', function(done) {
+    var context = this;
+    request.post({url, headers: context.headers}, function() {
+
+      request.get({url, headers: context.headers}, function(error, response, body) {
+        var parsedBody = JSON.parse(body);
+
+        expect(Array.isArray(parsedBody.reckonings)).toBeTruthy();
+        done();
+      });
+
+    });
+
+  });
+
   it('should respond to a get request with that reckoning\'s information', function(done) {
 
     var context = this;
@@ -142,8 +157,8 @@ describe('itemRouter', function() {
       request.get({url: url + reckoningId, headers: context.headers}, function(error, response, body) {
         var parsedBody = JSON.parse(body);
 
-        expect(parsedBody.id).toEqual(reckoningId);
-        expect(parsedBody.totalSpent).toEqual('100.00');
+        expect(parsedBody.reckoning.id).toEqual(reckoningId);
+        expect(parsedBody.reckoning.totalSpent).toEqual('100.00');
 
         done();
 

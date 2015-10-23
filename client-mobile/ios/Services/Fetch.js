@@ -1,31 +1,5 @@
 'use strict';
 
-//React-Native uses the fetch API, docs for which are found here: https://github.com/github/fetch
-//However, React-Native did not include all of fetch's functionality it its own version of fetch
-//(to find theirs, see react-native/Libraries/Fetch)
-//This means some methods on the request object fetch returns don't exist
-//So we're going to add one of them in here so that we can use it.
-//In react-native/JavaScriptAppEngine/Initialization/InitializeJavaScriptAppEngine.js,
-//The fetch Response class is set to the GLOBAL variable, which window is then set to
-//We'll access it that way here and then add the clone function to the Response prototype
-
-if (typeof GLOBAL === 'undefined') {
-  GLOBAL = this;
-}
-
-if (typeof window === 'undefined') {
-  window = GLOBAL;
-}
-
-GLOBAL.Response.prototype.clone = function() {
-  return new Response(this._bodyInit, {
-    status: this.status,
-    statusText: this.statusText,
-    headers: new Headers(this.headers),
-    url: this.url,
-  });
-};
-
 var Store = require('./Store');
 
 var testUrl = 'http://localhost:8080';
@@ -40,8 +14,11 @@ var makeParams = function(method, token, body) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(body),
   };
+
+  if (body) {
+    params.body = JSON.stringify(body);
+  }
 
   if (token) {
     //attach the token if given
@@ -55,56 +32,86 @@ var makeParams = function(method, token, body) {
 var signup = function(username, password) {
   var params = makeParams('POST', null, {username, password});
 
-  return fetch(url + '/auth/signup', params)
-    //fetch returns a promise
-    //response is an object that has methods to access headers
-    //but also methods to access the body data
-    //however, the body data comes in a stream which can only be read once
-    //so if we want to read the data twice
-    //we must clone the response
+  fetch(url + '/auth/signup', params)
     .then(function(response) {
-      return response.clone().json()
+      response.json()
         .then(function(body) {
-          console.log('body inside clone: ', body);
-          Store.token.set(body.token);
-          return response.json();
+          Store.token = body.token;
         });
+    })
+    .catch(function(error) {
+      console.error(error);
     });
 };
 
-// var login = function(username, password) {
-//   var params = makeParams('POST', null, {username, password});
+var login = function(username, password) {
+  var params = makeParams('POST', null, {username, password});
 
-//   fetch(url + '/auth/login', params)
-//     //fetch returns a promise
-//     //response is an object that has methods to access headers
-//     //but also methods to access the body data
-//     //however, the body data comes in a stream which can only be read once
-//     //so if we want to read the data twice
-//     //we must clone the response
-//     .then(function(response) {
-//       return response.clone().json()
-//         .then(function(body) {
-//           console.log('body inside clone: ', body);
-//           Store.token.set(body.token);
-//           return response.json();
-//         });
-//       //will return a promise with JSON passed in
-//       // return response.json();
-//     });
-// };
+  fetch(url + '/auth/login', params)
+    .then(function(response) {
+      response.json()
+        .then(function(body) {
+          Store.token = body.token;
+        });
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-// var updateUser = function(updates) {
-//   var params = makeParams('PUT', savedToken, updates);
+//updates should be an object where the keys
+//are the properties to be changed
+//and the values are the new values
+var updateUser = function(updates) {
+  var params = makeParams('PUT', Store.token, updates);
 
-//   fetch(url + '/users/' + )
-// };
+  fetch(url + 'api/users/' + Store.user.id, params)
+    .then(function(response) {
+      if (updates.householdId) {
+        //if the user's household was updated,
+        //a new token will have been reissued,
+        //so we need to store the new token
+        response.json()
+          .then(function(body) {
+            Store.token = body.token;
+          });
+      }
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
 //getUser --> necessary? should be returned with login/signup/updateUser
 
-//deleteUser
+var deleteUser = function() {
+  var params = makeParams('DELETE', Store.token);
 
-//addHousehold
+  fetch(url + 'api/users/' + Store.user.id, params)
+    .then(function(response) {
+      //not sure how we should deal with deletes, actually
+      //probably won't be necessary to do for MVP
+      //do we clear their id and everything from the Store and immediately sign them out?
+      //for now, we'll just return the body
+      return response.json();
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+};
+
+// var addHousehold = function(name) {
+//   var params = makeParams('POST', Store.token, {name});
+
+//   fetch(url + '/api/households/', params)
+//     .then(function(response) {
+//       response.json()
+//         .then(function(body) {
+
+//         })
+//     })
+// };
+
 
 //getHousehold
 
@@ -122,4 +129,8 @@ var signup = function(username, password) {
 
 module.exports = {
   signup,
+  login,
+  updateUser,
+  deleteUser,
+  // addHousehold,
 };

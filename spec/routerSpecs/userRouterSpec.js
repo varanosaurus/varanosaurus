@@ -66,8 +66,8 @@ describe('userRouter', function() {
 
       var parsedBody = JSON.parse(body);
 
-      expect(parsedBody.username).toEqual('nedStark');
-      expect(parsedBody.id).toEqual(1);
+      expect(parsedBody.user.username).toEqual('nedStark');
+      expect(parsedBody.user.id).toEqual(1);
       done();
 
     });
@@ -87,7 +87,7 @@ describe('userRouter', function() {
 
       var parsedBody = JSON.parse(body);
 
-      expect(parsedBody.updates.householdId).toEqual(1);
+      expect(parsedBody.user.householdId).toEqual(1);
       done();
 
     });

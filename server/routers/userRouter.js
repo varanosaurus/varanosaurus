@@ -12,7 +12,7 @@ router.get('/:userId', function(request, response) {
 
     .then(function(user) {
       if (user) {
-        response.status(201).json(user);
+        response.status(201).json({user});
       } else {
         response.status(500).send('User not found');
       }
@@ -44,11 +44,7 @@ router.put('/:userId', function(request, response) {
           token = tokens.issue(id);
         }
 
-        if (updates.password) {
-          delete updates.password;
-        }
-
-        response.status(201).json({updates, token});
+        response.status(201).json({user: updateArray[1][0], token});
 
       } else {
         response.status(500).send('Item not found');

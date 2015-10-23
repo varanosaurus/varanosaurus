@@ -16,7 +16,20 @@
       password: string,
     },
     responseBody: {
-      user: User
+      user: User,
+      token: token,
+    },
+  },
+
+  'login a user': {
+    verb: 'POST',
+    url: '/auth/login',
+    requestBody: {
+      username: string,
+      password: string,
+    },
+    responseBody: {
+      user: User,
       token: token,
     },
   },
@@ -25,7 +38,7 @@
     verb: 'GET',
     url: '/api/users/:userId',
     requestBody: null,
-    responseBody: User
+    responseBody: User,
   },
 
   'change a user\'s info': {
@@ -36,9 +49,13 @@
       householdId: integer, //optional
     },
     responseBody: {
-      updates: {
-        householdId: integer, //only if included in request
-      },
+      user: {
+        id: integer,
+        username: string,
+        updatedAt: date,
+        createdAt: date,
+        householdId: integer,
+      }, 
       token: token, //included since the household may have changed
     }
   },
@@ -98,13 +115,8 @@
       captainId: integer, //optional
     },
     responseBody: {
-      updates: {
-        name: string, //only if included in request
-        captainId: integer, //only if included in request
-        updatedAt: date,
-      },
-      token: token,
-    }
+      household: Household,
+    },
   },
 
   'delete a household': {
@@ -142,7 +154,9 @@
     verb: 'GET',
     url: 'api/items',
     requestBody: null,
-    responseBody: [Item],
+    responseBody: {
+      items: [Item],
+    },
   },
 
   'add an item': {
@@ -155,14 +169,14 @@
       bought: boolean, //optional, defaults to false
       price: stringified decimal, //optional, defaults to 0
     },
-    responseBody: Item,
+    responseBody: {item: Item},
   },
 
   'get an item\'s info': {
     verb: 'GET',
     url: '/api/items/:itemId',
     requestBody: null,
-    responseBody: Item
+    responseBody: {item: Item},
   },
 
   'change an item\'s info': {
@@ -177,14 +191,7 @@
       buyingUserId: number, //optional
     },
     responseBody: {
-      updates: {
-        details: string, //only if included in request
-        fetch: boolean, //only if included in request
-        bought: boolean, //only if included in request
-        price: stringified decimal, //only if included in request
-        fetchingUserId: integer, //only if included in request
-        buyingUserId: number, //only if included in request,
-      },
+      item: Item,
     },
   },
 
@@ -214,7 +221,9 @@
     verb: 'GET',
     url: '/api/reckonings',
     requestBody: null,
-    responseBody: [Reckoning],
+    responseBody: {
+      reckonings: [Reckoning],
+    },
   },
   //we didn't talk about having support for this in MVP,
   //but for testing it made sense to have this feature available
@@ -251,7 +260,7 @@
     verb: 'POST',
     url: '/api/invitations',
     requestBody: {
-      toUsername: string
+      toUsername: string,
     },
     responseBody: Invitation,
   },

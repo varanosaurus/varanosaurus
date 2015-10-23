@@ -80,7 +80,7 @@ router.put('/:householdId', function(request, response) {
 
     .then(function(updateArray) {
       if (updateArray) {
-        response.status(201).json({updates});
+        response.status(201).json({household: updateArray[1][0]});
       } else {
         response.status(500).send('Household not found');
       }

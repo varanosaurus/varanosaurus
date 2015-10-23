@@ -11,7 +11,7 @@ router.get('/', function(request, response) {
   db.Reckoning.findAll({where: {householdId}})
 
     .then(function(reckonings) {
-      response.json(reckonings);
+      response.json({reckonings});
     })
 
     .catch(function(error) {
@@ -50,7 +50,7 @@ router.get('/:reckoningId', function(request, response) {
 
     .then(function(reckoning) {
       if (reckoning || reckoning.householdId === householdId) {
-        response.status(201).json(reckoning);
+        response.status(201).json({reckoning});
       } else if (reckoning) {
         response.sendStatus(403);
       } else {

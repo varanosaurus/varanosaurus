@@ -112,7 +112,7 @@ describe('householdRouter', function() {
       request.put({url: url + context.householdId, headers: context.headers, body: updates}, function(error, response, body) {
 
         var parsedBody = JSON.parse(body);
-        expect(parsedBody.updates).toBeTruthy();
+        expect(parsedBody.household).toBeTruthy();
 
         done();
       });

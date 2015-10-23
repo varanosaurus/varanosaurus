@@ -43,14 +43,7 @@ var SignUp = React.createClass({
       });
     } else {
 
-      Fetch.signup(this.state.username, this.state.password)
-        .then(function(body) {
-          console.log('body inside Signup: ', body);
-          //info
-        })
-        .catch(function(error) {
-          console.error('Error signing up user: ', error);
-        });
+      Fetch.signup(this.state.username, this.state.password);
 
       //if you are not in a household
       this.props.navigator.push({

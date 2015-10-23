@@ -25,7 +25,7 @@
     verb: 'GET',
     url: '/api/users/:userId',
     requestBody: null,
-    responseBody: User
+    responseBody: User,
   },
 
   'change a user\'s info': {
@@ -36,9 +36,13 @@
       householdId: integer, //optional
     },
     responseBody: {
-      updates: {
-        householdId: integer, //only if included in request
-      },
+      user: {
+        id: integer,
+        username: string,
+        updatedAt: date,
+        createdAt: date,
+        householdId: integer,
+      }, 
       token: token, //included since the household may have changed
     }
   },
@@ -98,10 +102,13 @@
       captainId: integer, //optional
     },
     responseBody: {
-      updates: {
-        name: string, //only if included in request
-        captainId: integer, //only if included in request
-        updatedAt: date,
+      household: {
+       id: integer,
+       name: string,
+       updatedAt: date,
+       createdAt: date,
+       creatorId: integer,
+       captainId: integer, 
       },
       token: token,
     }
@@ -162,7 +169,7 @@
     verb: 'GET',
     url: '/api/items/:itemId',
     requestBody: null,
-    responseBody: Item
+    responseBody: Item,
   },
 
   'change an item\'s info': {
@@ -177,13 +184,22 @@
       buyingUserId: number, //optional
     },
     responseBody: {
-      updates: {
-        details: string, //only if included in request
-        fetch: boolean, //only if included in request
-        bought: boolean, //only if included in request
-        price: stringified decimal, //only if included in request
-        fetchingUserId: integer, //only if included in request
-        buyingUserId: number, //only if included in request,
+      item: {
+        description: string,
+        details: string,
+        fetch: boolean,
+        bought: boolean,
+        price: stringified decimal,
+        timeFetched: date,
+        timeBought: date,
+        id: integer,
+        createdAt: date,
+        updatedAt: date,
+        householdId: integer,
+        addingUserId: integer,
+        fetchingUserId: integer,
+        buyingUserId: number,
+        reckoningId: integer,
       },
     },
   },
@@ -251,7 +267,7 @@
     verb: 'POST',
     url: '/api/invitations',
     requestBody: {
-      toUsername: string
+      toUsername: string,
     },
     responseBody: Invitation,
   },

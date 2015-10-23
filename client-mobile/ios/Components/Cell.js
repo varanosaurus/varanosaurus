@@ -18,7 +18,6 @@ var Cell = React.createClass({
           onPress={this.props.onSelect} >
           <View style={styles.Cell}>
             <Text style={styles.itemName}>{this.props.item.itemName}</Text>
-            <Text style={styles.itemPrice}>${this.props.item.itemPrice}</Text>
           </View>
         </TouchableElement>
       </View>
@@ -47,11 +46,6 @@ var styles = StyleSheet.create({
   itemName: {
     fontSize: 20,
     marginBottom: 8,
-    textAlign: 'center',
-  },
-  itemPrice: {
-    fontSize: 16,
-    marginBottom: 6,
     textAlign: 'center',
   },
 });

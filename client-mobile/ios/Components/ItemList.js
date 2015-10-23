@@ -138,6 +138,7 @@ var ItemList = React.createClass({
       }).cloneWithRows(mockedData),
       filter: '',
       queryNumber: 0,
+      selectedTab: 'Pending',
     };
   },
 

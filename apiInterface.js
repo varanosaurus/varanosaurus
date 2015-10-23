@@ -16,7 +16,20 @@
       password: string,
     },
     responseBody: {
-      user: User
+      user: User,
+      token: token,
+    },
+  },
+
+  'login a user': {
+    verb: 'POST',
+    url: '/auth/login',
+    requestBody: {
+      username: string,
+      password: string,
+    },
+    responseBody: {
+      user: User,
       token: token,
     },
   },

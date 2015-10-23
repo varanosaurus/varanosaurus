@@ -94,7 +94,7 @@ describe('itemRouter', function() {
       request.get({url, headers: context.headers}, function(error, response, body) {
         var parsedBody = JSON.parse(body);
 
-        expect(Array.isArray(parsedBody)).toBeTruthy();
+        expect(Array.isArray(parsedBody.items)).toBeTruthy();
         done();
       });
 

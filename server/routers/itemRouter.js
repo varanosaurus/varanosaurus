@@ -10,7 +10,7 @@ router.get('/', function(request, response) {
   db.Item.findAll({where: {householdId, reckoningId: null}})
 
     .then(function(items) {
-      response.json(items);
+      response.json({items});
     })
 
     .catch(function(error) {

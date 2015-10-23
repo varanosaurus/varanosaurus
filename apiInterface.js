@@ -115,14 +115,7 @@
       captainId: integer, //optional
     },
     responseBody: {
-      household: {
-       id: integer,
-       name: string,
-       updatedAt: date,
-       createdAt: date,
-       creatorId: integer,
-       captainId: integer, 
-      },
+      household: Household,
     },
   },
 
@@ -161,7 +154,9 @@
     verb: 'GET',
     url: 'api/items',
     requestBody: null,
-    responseBody: [Item],
+    responseBody: {
+      items: [Item],
+    },
   },
 
   'add an item': {
@@ -174,14 +169,14 @@
       bought: boolean, //optional, defaults to false
       price: stringified decimal, //optional, defaults to 0
     },
-    responseBody: Item,
+    responseBody: {item: Item},
   },
 
   'get an item\'s info': {
     verb: 'GET',
     url: '/api/items/:itemId',
     requestBody: null,
-    responseBody: Item,
+    responseBody: {item: Item},
   },
 
   'change an item\'s info': {
@@ -196,23 +191,7 @@
       buyingUserId: number, //optional
     },
     responseBody: {
-      item: {
-        description: string,
-        details: string,
-        fetch: boolean,
-        bought: boolean,
-        price: stringified decimal,
-        timeFetched: date,
-        timeBought: date,
-        id: integer,
-        createdAt: date,
-        updatedAt: date,
-        householdId: integer,
-        addingUserId: integer,
-        fetchingUserId: integer,
-        buyingUserId: number,
-        reckoningId: integer,
-      },
+      item: Item,
     },
   },
 
@@ -242,7 +221,9 @@
     verb: 'GET',
     url: '/api/reckonings',
     requestBody: null,
-    responseBody: [Reckoning],
+    responseBody: {
+      reckonings: [Reckoning],
+    },
   },
   //we didn't talk about having support for this in MVP,
   //but for testing it made sense to have this feature available

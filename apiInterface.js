@@ -123,8 +123,7 @@
        creatorId: integer,
        captainId: integer, 
       },
-      token: token,
-    }
+    },
   },
 
   'delete a household': {

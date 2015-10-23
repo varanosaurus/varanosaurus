@@ -84,6 +84,23 @@ describe('itemRouter', function() {
 
   });
 
+  it('should respond to a get request to /items with all the items of that household', function(done) {
+
+    var context = this;
+    var body = JSON.stringify({description: 'valyrian steel'});
+
+    request.post({url, headers: context.headers, body}, function() {
+
+      request.get({url, headers: context.headers}, function(error, response, body) {
+        var parsedBody = JSON.parse(body);
+
+        expect(Array.isArray(parsedBody)).toBeTruthy();
+        done();
+      });
+
+    });
+  });
+
   it('should respond to a get request with that item\'s information', function(done) {
 
     var context = this;
@@ -99,7 +116,7 @@ describe('itemRouter', function() {
       request.get({url: url + itemId, headers: context.headers}, function(error, response, body) {
 
         var parsedBody = JSON.parse(body);
-        expect(parsedBody.description).toEqual('valyrian steel');
+        expect(parsedBody.item.description).toEqual('valyrian steel');
         done();
 
       });
@@ -125,7 +142,7 @@ describe('itemRouter', function() {
 
         var parsedBody = JSON.parse(body);
 
-        expect(parsedBody.details).toEqual('good for beheading, will need soon');
+        expect(parsedBody.item.details).toEqual('good for beheading, will need soon');
 
         done();
 

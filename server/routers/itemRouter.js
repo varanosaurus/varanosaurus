@@ -56,7 +56,7 @@ router.get('/:itemId', function(request, response) {
 
     .then(function(item) {
       if (item) {
-        response.status(201).json(item);
+        response.status(201).json({item});
       } else {
         response.status(500).send('Item not found');
       }
@@ -98,7 +98,7 @@ router.put('/:itemId', function(request, response) {
           item.setBuyingUser(userId);
         }
 
-        response.status(201).json(item); //todo: send back actual item
+        response.status(201).json({item});
 
       } else {
         response.status(500).send('Item not found');

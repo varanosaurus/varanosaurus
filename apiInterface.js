@@ -210,6 +210,12 @@
 }
 
 {
+  'get all reckonings of a household': {
+    verb: 'GET',
+    url: '/api/reckonings',
+    requestBody: null,
+    responseBody: [Reckoning],
+  },
   //we didn't talk about having support for this in MVP,
   //but for testing it made sense to have this feature available
   //so it's included here and we can decide later if it's post-MVP or not
@@ -222,7 +228,7 @@
 
   'get a reckoning\'s info': {
     verb: 'GET',
-    url: '/api/households/:householdId',
+    url: '/api/reckonings/:reckoningId',
     requestBody: null,
     responseBody: Reckoning,
   },

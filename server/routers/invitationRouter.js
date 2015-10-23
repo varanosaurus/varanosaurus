@@ -21,7 +21,7 @@ router.post('/', function(request, response) {
       return db.Invitation.create({toUserId: toUser.id, fromUserId, householdId})
 
         .then(function(invitation) {
-          response.status(201).json(invitation);
+          response.status(201).json({invitation});
         });
 
     })
@@ -39,7 +39,7 @@ router.get('/inbox', function(request, response) {
   db.Invitation.findAll({where: {toUserId: userId}})
 
     .then(function(invitations) {
-      response.json(invitations);
+      response.json({invitations});
     })
 
     .catch(function(error) {
@@ -55,7 +55,7 @@ router.get('/outbox', function(request, response) {
   db.Invitation.findAll({Where: {fromUserId: userId}})
 
     .then(function(invitations) {
-      response.json(invitations);
+      response.json({invitations});
     })
 
     .catch(function(error) {

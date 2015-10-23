@@ -47,7 +47,7 @@ router.put('/:userId', function(request, response) {
         response.status(201).json({user: updateArray[1][0], token});
 
       } else {
-        response.status(500).send('Item not found');
+        response.status(404).send('Item not found');
       }
     })
 

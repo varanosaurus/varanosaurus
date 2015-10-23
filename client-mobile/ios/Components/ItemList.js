@@ -18,7 +18,7 @@ var mockedData = [
     itemPrice: 10,
     requestedBy: 'Cameron',
     details: 'Any brand. Mid price-range, Low fat.',
-    isPending: true,
+    isPending: false,
   },
   {
     itemName: 'Bread',
@@ -32,7 +32,7 @@ var mockedData = [
     itemPrice: 10,
     requestedBy: 'Naomi',
     details: 'Any brand.',
-    isPending: true,
+    isPending: false,
   },
   {
     itemName: 'Drinking Water',
@@ -46,21 +46,21 @@ var mockedData = [
     itemPrice: 5,
     requestedBy: 'Cameron',
     details: '6 rolls?',
-    isPending: true,
+    isPending: false,
   },
   {
     itemName: 'Soap',
     itemPrice: 9,
     requestedBy: 'Taylor',
     details: 'I prefer Dove.',
-    isPending: true,
+    isPending: false,
   },
   {
     itemName: 'Monthly Internet',
     itemPrice: 9,
     requestedBy: 'Cameron',
     details: 'Any brand. Should be fast.',
-    isPending: true,
+    isPending: false,
   },
   {
     itemName: 'Chips',
@@ -95,7 +95,7 @@ var mockedData = [
     itemPrice: 9,
     requestedBy: 'Amy',
     details: '2 Gallon please.',
-    isPending: true,
+    isPending: false,
   },
   {
     itemName: 'Kitchen Towel',
@@ -109,14 +109,14 @@ var mockedData = [
     itemPrice: 9,
     requestedBy: 'Taylor',
     details: 'I prefer Dove.',
-    isPending: true,
+    isPending: false,
   },
   {
     itemName: 'Monthly Internet',
     itemPrice: 9,
     requestedBy: 'Cameron',
     details: 'Any brand. Should be fast.',
-    isPending: true,
+    isPending: false,
   },
   {
     itemName: 'Chips',

@@ -24,7 +24,7 @@ var PendingItemDetails = React.createClass({
     });
   },
 
-  openModal: function(id) {
+  openModal: function() {
     this.refs.modal.open();
   },
 

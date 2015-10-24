@@ -1,35 +1,36 @@
 'use strict';
 
 var React = require('react-native');
-var Root = require('./ios/Components/Root');
+var {createStore} = require('redux');
+var {Provider} = require('react-redux');
+
+var App = require('./newOrg/Components/App');
 
 var {
   AppRegistry,
-  StyleSheet,
-  NavigatorIOS,
+//   StyleSheet,
+//   NavigatorIOS,
 } = React;
+
+var store = createStore((state) => state, {entryMode: 'Login', token: null});
 
 var Knead = React.createClass({
 
-  render: function() {
+  render() {
     return (
-      <NavigatorIOS
-        style={styles.container}
-        initialRoute={{
-          title: 'Knead',
-          component: Root,
-        }}
-      />
+      <Provider store={store}>
+        <App />
+      </Provider>
     );
   },
 
 });
 
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-});
+// var styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: 'white',
+//   },
+// });
 
 AppRegistry.registerComponent('Knead', () => Knead);

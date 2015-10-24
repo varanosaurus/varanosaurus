@@ -91,7 +91,7 @@ describe('Invitation router', function() {
           invitation = invitations[0];
 
           expect(invitation).toBeTruthy();
-          expect(invitation.id).toEqual(parsedBody.id);
+          expect(invitation.id).toEqual(parsedBody.invitation.id);
           done();
         })
         .catch(done.fail.bind(done));
@@ -127,8 +127,8 @@ describe('Invitation router', function() {
 
         expect(response.statusCode).toEqual(200);
         expect(parsedBody).toBeTruthy();
-        expect(parsedBody).toEqual(jasmine.any(Array));
-        expect(parsedBody.length).toEqual(1);
+        expect(parsedBody.invitations).toEqual(jasmine.any(Array));
+        expect(parsedBody.invitations.length).toEqual(1);
 
         done();
       });
@@ -172,8 +172,8 @@ describe('Invitation router', function() {
             var parsedBody = JSON.parse(body);
 
             expect(parsedBody).toBeTruthy();
-            expect(parsedBody).toEqual(jasmine.any(Array));
-            expect(parsedBody.length).toEqual(1);
+            expect(parsedBody.invitations).toEqual(jasmine.any(Array));
+            expect(parsedBody.invitations.length).toEqual(1);
             done();
           });
 
@@ -199,7 +199,7 @@ describe('Invitation router', function() {
                     }),
     }, function(error, response) {
 
-      var invitation = JSON.parse(response.body);
+      var invitation = JSON.parse(response.body).invitation;
 
       if (error) {
         done.fail(error);
@@ -218,7 +218,7 @@ describe('Invitation router', function() {
           request({
             method: 'DELETE',
             headers: context.headers,
-            url: inviteUrl + '/' + invitation.id,
+            url: inviteUrl + invitation.id,
           }, function(error, response) {
             expect(error).toBeFalsy();
             expect(response.statusCode).toEqual(200);

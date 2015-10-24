@@ -262,21 +262,21 @@
     requestBody: {
       toUsername: string,
     },
-    responseBody: Invitation,
+    responseBody: {invitation: Invitation},
   },
 
   'get all sent invitations': {
     verb: 'GET',
     url: '/api/invitations/inbox',
     requestBody: null,
-    responseBody: [Invitation],
+    responseBody: {invitations: [Invitation]},
   },
 
   'get all received invitations': {
     verb: 'GET',
     url: '/api/invitations/inbox',
     requestBody: null,
-    responseBody: [Invitation],
+    responseBody: {invitations: [Invitation]},
   },
 
   'delete an invitation': {

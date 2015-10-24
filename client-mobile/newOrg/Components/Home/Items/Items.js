@@ -20,14 +20,14 @@ var Items = React.createClass({
       default:
         return <ItemList />;
     }
-  }
+  },
 
 });
 
 
 function select(state) {
   return {
-    itemsViewMode: state.uiMode.itemsViewMode
+    itemsViewMode: state.uiMode.itemsViewMode,
   };
 }
 

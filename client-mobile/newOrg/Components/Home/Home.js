@@ -9,17 +9,17 @@ var HomeTab = require('/dumb/HomeTab');
 var Home = React.createClass({
 
   render() {
-    return this.props.house 
+    return this.props.house
       ? this.renderHomeTab()
       : this.renderHomeless();
   },
 
   renderHomeless() {
     return <Homeless />;
-  },  
+  },
 
   renderHomeTab() {
-    return <HomeTab 
+    return <HomeTab
       uiMode={this.props.selectedHomeTab}
       {...tabHandlers}
     />;
@@ -29,7 +29,7 @@ var Home = React.createClass({
 
 function select(state) {
   return {
-    house: state.data.household, 
+    house: state.data.household,
     selectedHomeTab: state.uiMode.selectedHomeTab,
   };
 }
@@ -43,9 +43,7 @@ var tabHandlers = {
   },
   gotoSettingsTab() {
     //TODO: ACTION - UPDATE uiMODE to SettingsTab
-}
+  },
+};
 
 module.exports = connect(select)(Home);
-
-
-

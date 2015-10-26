@@ -9,7 +9,7 @@ var Signup = require('./dumb/Signup');
 var Entry = React.createClass({
 
   render() {
-    return this.props.entryMode === 'Signup'
+    return this.props.entryMode === 'signup'
       ? this.renderSignup()
       : this.renderLogin();
   },
@@ -44,13 +44,13 @@ var Entry = React.createClass({
 
   gotoLogin() {
     // dispatch action to store to change
-    // state.entryMode -> 'Login'
+    // state.entryMode -> 'login'
     this.props.dispatch(/*TODO: ENTRYMODE_LOGIN*/);
   },
 
   gotoSignup() {
     // dispatch action to store to change
-    // state.entryMode -> 'Signup'
+    // state.entryMode -> 'signup'
     this.props.dispatch(/*TODO: ENTRYMODE_SIGNUP*/);
   },
 
@@ -58,7 +58,7 @@ var Entry = React.createClass({
 
 function select(state) {
   // TODO: set default for state.entryMode
- return {entryMode: state.entryMode};
+ return {entryMode: state.uiMode.entryMode};
 }
 
 module.exports = connect(select)(Entry);

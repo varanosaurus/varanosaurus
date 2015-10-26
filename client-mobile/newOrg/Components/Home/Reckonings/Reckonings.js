@@ -29,15 +29,23 @@ var Reckoning = React.createClass({
   },
 
   renderDetails() {
+    var reckoning;
+
+    this.props.reckonings.forEach((dataReckoning) => {
+      if (dataReckoning.id === this.props.selectedReckoning) {
+        reckoning = dataReckoning;
+      }
+    });
+
     return (
       <ReckoningDetails
-        reckoning={this.props.selectedReckoning}
+        reckoning={reckoning}
       />
     );
   },
 
-  handleSelect(/* reckoning */) {
-    /* dispatching an action */
+  handleSelect(/* reckoningId */) {
+    /* dispatch SELECT_RECKONING */
   },
 
 });

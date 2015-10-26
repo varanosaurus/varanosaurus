@@ -5,11 +5,11 @@ var {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View
+  View,
 } = React;
 
 var ReckoningCell = React.createClass({
-  render: function() {
+  render() {
     var TouchableElement = TouchableHighlight;
 
     return (
@@ -22,7 +22,7 @@ var ReckoningCell = React.createClass({
         </TouchableElement>
       </View>
     );
-  }
+  },
 });
 
 var styles = StyleSheet.create({
@@ -30,7 +30,7 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   listView: {
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   ReckoningCell: {
     flex: 1,
@@ -41,13 +41,13 @@ var styles = StyleSheet.create({
     marginRight: 6,
     padding: 6,
     borderBottomWidth: .5,
-    borderColor: 'lightgray'
+    borderColor: 'lightgray',
   },
   reckoningName: {
     fontSize: 20,
     marginBottom: 8,
     textAlign: 'center',
-  }
+  },
 });
 
 module.exports = ReckoningCell;

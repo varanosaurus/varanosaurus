@@ -2,37 +2,52 @@
 
 var React = require('react-native');
 
-var ReckoningDetailList = require('./ReckoningDetailList/ReckoningDetailList');
-var UserReckoningDetail = require('./dumb/UserReckoningDetail');
+var {connect} = require('react-redux');
+
+var ReckoningItemsDetails = require('./ReckoningDetailList/ReckoningItemsDetailsController');
+var ReckoningUsersDetails = require('./dumb/ReckoningUsersDetails');
 
 var ReckoningDetails = React.createClass({
 
+  // TODO: component fetches items and users data for reckoning upon mounting?
+
   render() {
     switch (this.props.reckoningsDetailsMode) {
-      case 'list':
-        return this.renderList();
-      case 'details':
-        return this.renderDetails();
+      case 'items':
+        return this.renderItemsDetails();
+      case 'users':
+        return this.renderUserDetails();
       default:
-        return this.renderList();
+        return this.renderItemsDetails();
     }
   },
 
-  renderList() {
+  renderItemsDetails() {
     return (
-      <ReckoningDetailList
+      <ReckoningItemsDetails
         /* TODO: pass prop? */
+        items={this.props.reckoning.items}
+        onSelect={this.goToItemsDetailsView}
       />
     );
   },
 
-  renderDetails() {
+  renderUsersDetails() {
     return (
-      <UserReckoningDetail
+      <ReckoningUsersDetails
         /* TODO: pass prop? */
+        figures={this.props.reckoning.userFigures}
       />
     );
-  }
+  },
+
+  goToItemsDetailsView() {
+    // TODO: dispatch action state.uiMode.reckoningsDetailsMode -> 'items'
+  },
+
+  goToUsersDetailsView() {
+    // TODO: dispatch action state.uiMode.reckoningsDetailsMode -> 'users'
+  },
 
 });
 
@@ -42,4 +57,4 @@ function select(state) {
   };
 }
 
-module.exports = ReckoningDetails;
+module.exports = connect(select)(ReckoningDetails);

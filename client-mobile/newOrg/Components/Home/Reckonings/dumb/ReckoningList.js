@@ -6,7 +6,6 @@ var {
   StyleSheet,
   ListView,
   View,
-  Text
 } = React;
 
 var ReckoningCell = require('./ReckoningCell');
@@ -19,7 +18,7 @@ var ReckoningList = React.createClass({
     });
   },
 
-  renderRow: function(reckoning) {
+  renderRow(reckoning) {
     return (
       <ReckoningCell
         onSelect={this.props.handleSelect}
@@ -28,7 +27,7 @@ var ReckoningList = React.createClass({
     );
   },
 
-  render: function() {
+  render() {
     var dataSource = this.dataSource.cloneWithRows(this.props.reckonings);
     return (
         <View style={styles.reckoningList}>
@@ -40,8 +39,8 @@ var ReckoningList = React.createClass({
             contentInset={{bottom: 50}}
            />
         </View>
-      )
-  }
+      );
+  },
 
 });
 
@@ -50,7 +49,7 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   listView: {
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   Cell: {
     flex: 1,
@@ -61,7 +60,7 @@ var styles = StyleSheet.create({
     marginRight: 6,
     padding: 6,
     borderBottomWidth: .5,
-    borderColor: 'lightgray'
+    borderColor: 'lightgray',
   },
   statementName: {
     fontSize: 20,
@@ -70,8 +69,8 @@ var styles = StyleSheet.create({
   },
   reckoningList: {
     flex: 1,
-    marginTop: 64
-  }
+    marginTop: 64,
+  },
 });
 
-module.exports = StatementList;
+module.exports = ReckoningList;

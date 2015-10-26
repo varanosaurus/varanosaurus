@@ -1,10 +1,13 @@
 'use strict';
 
 var React = require('react-native');
-var {createStore} = require('redux');
+var {createStore, applyMiddleware} = require('redux');
 var {Provider} = require('react-redux');
+var thunk = require('redux-thunk');
+
 
 var App = require('./newOrg/Components/App');
+var appReducer = require('./newOrg/Reducers/appReducer');
 
 var {
   AppRegistry,
@@ -12,7 +15,7 @@ var {
 //   NavigatorIOS,
 } = React;
 
-var store = createStore((state) => state, {entryMode: 'Login', token: null});
+var store = applyMiddleware(thunk)(createStore)(appReducer);
 
 var Knead = React.createClass({
 

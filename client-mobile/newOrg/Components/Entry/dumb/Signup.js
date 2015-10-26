@@ -38,7 +38,6 @@ var Signup = React.createClass({
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
           />
-          // <Text style={styles.errorHandling}>{this.props.error}</Text>
           <TouchableHighlight style={styles.button} onPress={this.handleSubmit}>
             <Text style={styles.btnText}>Sign up</Text>
           </TouchableHighlight>

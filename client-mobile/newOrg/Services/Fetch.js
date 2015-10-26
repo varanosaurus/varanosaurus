@@ -1,6 +1,6 @@
 'use strict';
 
-var Store = require('./Store');
+// var Store = require('./Store');
 
 var testUrl = 'http://localhost:8080';
 var deployUrl;
@@ -22,7 +22,7 @@ var makeParams = function(method, token, body) {
 
   if (token) {
     //attach the token if given
-    params.headers['x-access-token'] = token;
+    params.headers['X-Access-Token'] = token;
   }
 
   return params;
@@ -32,13 +32,8 @@ var makeParams = function(method, token, body) {
 var signup = function(username, password) {
   var params = makeParams('POST', null, {username, password});
 
-  fetch(url + '/auth/signup', params)
-    .then(function(response) {
-      response.json()
-        .then(function(body) {
-          Store.token = body.token;
-        });
-    })
+  // TODO: just return response
+  return fetch(url + '/auth/signup', params)
     .catch(function(error) {
       console.error(error);
     });
@@ -47,13 +42,8 @@ var signup = function(username, password) {
 var login = function(username, password) {
   var params = makeParams('POST', null, {username, password});
 
-  fetch(url + '/auth/login', params)
-    .then(function(response) {
-      response.json()
-        .then(function(body) {
-          Store.token = body.token;
-        });
-    })
+  // TODO: just return response
+  return fetch(url + '/auth/login', params)
     .catch(function(error) {
       console.error(error);
     });

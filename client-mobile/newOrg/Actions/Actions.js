@@ -1,26 +1,32 @@
 // LOGIN: submit username/password to server for verification, and handle success or failure
 
-exports.login = function() {
-  // return fetch.login(data.username, data.password)
-  //   .then(function(response) {
-  //     if (response.statusCode === 200) {
-  //       response.json()
-  //         .then(function(body) {
-  //           return {/*data*/}
-  //         })
-  //     } else {
+var Network = require('../Services/Fetch');
 
-  //     }
-  //   })
-
-  return {
-    type: 'LOGIN',
-    payload: '',// fetch.login(data.username, data.password)
+exports.login = function(username, password) {
+  // Thunk
+  return function(dispatch) {
+    console.log('trying to log in:', username, password);
+    return Network.login(username, password)
+      .then(function(response) {
+        if (response.ok) {
+          return response.json()
+            .then(function(body) {
+              return dispatch(loginSuccess(body));
+            });
+        } else {
+          console.log(response);
+          // TODO: show body text?
+          return dispatch(loginFailure(response.statusText));
+        }
+      })
+      .catch(function(error) {
+        return dispatch(loginFailure(error.message));
+      });
   };
 };
 
 // LOGIN_SUCCESS: set token, user, and household(optional) from server's response into store
-exports.loginSuccess = function(data) {
+function loginSuccess(data) {
   return {
     type: 'LOGIN_SUCCESS',
     payload: {
@@ -29,11 +35,60 @@ exports.loginSuccess = function(data) {
       household: data.household,
     },
   };
-};
+}
 
 // LOGIN_FAILURE: display error message?
 
+function loginFailure(message) {
+  return {
+    type: 'LOGIN_FAILURE',
+    payload: {message},
+    error: true,
+  };
+}
+
 // SIGNUP: submit username/password to server for creation of user; set token and user from server's response into store
+
+exports.signup = function(username, password) {
+
+  return function(dispatch) {
+    return Network.signup(username, password)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            console.log(body);
+            if (response.ok) {
+              return dispatch(signupSuccess(body));
+            } else {
+              return dispatch(signupFailure(body));
+            }
+          });
+      })
+      .catch(function(error) {
+        console.log(error);
+        return dispatch(signupFailure(error.message));
+      });
+  };
+};
+
+function signupSuccess(data) {
+  return {
+    type: 'SIGNUP_SUCCESS',
+    payload: {
+      token: data.token,
+      user: data.user,
+      household: null,
+    },
+  };
+}
+
+function signupFailure(message) {
+  return {
+    type: 'SIGNUP_FAILURE',
+    payload: {message},
+    error: true,
+  };
+}
 
 // ENTRYMODE_LOGIN: set state.uiMode.entryMode to 'login'; navigate to login screen
 

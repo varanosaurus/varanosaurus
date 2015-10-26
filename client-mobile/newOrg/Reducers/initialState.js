@@ -27,7 +27,11 @@ var state = {
     itemDetails: 'list', //'details', 'add'
     reckoningsViewMode: 'list', //'details'
     selectedReckoning: null, //reckoningId
-    selectedItem: null, //itemId
+    selectedItem: null, /*{
+        item: {itemModel},
+        creator: {userModel},
+        buyer: {userModel},
+    },*/
     reckoningsDetailsMode: 'list', //'details'
     settingsViewMode: 'options', //'invite'
   },

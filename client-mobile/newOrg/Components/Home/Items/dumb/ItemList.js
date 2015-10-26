@@ -1,6 +1,8 @@
 'use strict';
 
 var React = require('react-native');
+var ActionButton = require('react-native-action-button');
+// var Icon = require('react-native-vector-icons/Ionicons');
 
 var {
   // StyleSheet,
@@ -37,12 +39,18 @@ var ItemList = React.createClass({
               this.props.goToBoughtItemsList();
             }
           }} />
-          <ListView
-            dataSource={dataSource}
-            renderRow={this.renderRow}
-            automaticallyAdjustcontentInsets={false}
-            contentInset={{bottom: 50}}
-          />
+        <ListView
+          dataSource={dataSource}
+          renderRow={this.renderRow}
+          automaticallyAdjustcontentInsets={false}
+          contentInset={{bottom: 50}}
+        />
+        <ActionButton
+          bgColor="rgba(23, 9, 107, 0.75)"
+          buttonColor="rgba(63,159,107,1)"
+          onPress={this.props.gotoAddItemView}
+        >
+        </ActionButton>
       </View>
     );
   },

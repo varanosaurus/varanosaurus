@@ -24,11 +24,14 @@ var Items = React.createClass({
           {...itemDetailsHandlers}
         />;
       case 'add':
-        return <ItemAdd />;
+        return <ItemAdd
+          item={this.props.item}
+          {...itemAddHandlers}
+        />;
       default:
         return <ItemList
           itemsFilter={this.props.itemsFilter}
-          {...itemAddHandlers}
+          {...itemListHandlers}
         />;
     }
   },
@@ -47,22 +50,23 @@ function select(state) {
     itemsFilter: state.uiMode.itemsFilter,
     itemDetails: state.uiMode.itemDetails,
     items,
+    item: state.uiMode.selectedItem,
   };
 }
 
 var itemListHandlers = {
-  goToPendingItemsList() {
+  gotoPendingItemsList() {
     //TODO: ACTION - UPDATE uiMode.itemsFilter to pending
     //set items to pendingItems
   },
-  goToBoughtItemsList() {
+  gotoBoughtItemsList() {
     //TODO: ACTION - UPDATE uiMode.itemsFilter to bought
     //set items to boughtItems
   },
   // goToItemDetailsView(item) {
   //   //TODO: ACTION - UPDATE uiMode.itemsViewMode to details
   // },
-  goToAddItemView() {
+  gotoAddItemView() {
     //TODO: ACTION - UPDATE uiMode.itemsViewMode to add
   },
 };

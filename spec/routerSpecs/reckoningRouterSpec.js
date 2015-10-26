@@ -1,4 +1,6 @@
 process.env['NODE_ENV'] = 'testing';
+process.env['TOKEN_SECRET'] = 'testing';
+
 var request = require('request');
 var url = 'http://localhost:8080/api/reckonings/';
 var db = require('../../server/db/interface');
@@ -159,6 +161,8 @@ describe('itemRouter', function() {
 
         expect(parsedBody.reckoning.id).toEqual(reckoningId);
         expect(parsedBody.reckoning.totalSpent).toEqual('100.00');
+
+        console.log(parsedBody.reckoning.users);
 
         done();
 

@@ -4,14 +4,23 @@ var React = require('react-native');
 var {connect} = require('react-redux');
 
 var Entry = require('./Entry/Entry');
-var Home = require('./Home/Home');
+// var Home = require('./Home/Home');
+var {Text} = React;
 
 var App = React.createClass({
 
   render() {
-    return this.props.token
-      ? this.renderHome()
-      : this.renderEntry();
+    switch (this.props.token == null) {
+    case true:
+      return this.renderEntry();
+    case false:
+      return this.renderHome();
+    default:
+      return this.renderEntry();
+    }
+    // return this.props.token
+    //   ? this.renderHome()
+    //   : this.renderEntry();
   },
 
   renderEntry() {
@@ -19,7 +28,8 @@ var App = React.createClass({
   },
 
   renderHome() {
-    return <Home />;
+    return <Text>Hello world</Text>;
+    // return <Home />;
   },
 
 });

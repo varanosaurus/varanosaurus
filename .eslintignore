@@ -1,4 +1,4 @@
 **/node_modules
 **/node_modules/**
 apiInterface.js
-client-mobile/ios/newOrg/Reducers/initialState.js
+**/initialState.js

@@ -46,8 +46,8 @@ function select(state) {
   return {
     reckoningsViewMode: state.uiMode.reckoningsViewMode,
     reckonings: state.data.reckonings,
-    selectedReckoning: state.data.selectedReckoning,
+    selectedReckoning: state.uiMode.selectedReckoning,
   };
 }
 
-module.exports = connect(select)(Items);
+module.exports = connect(select)(Reckoning);

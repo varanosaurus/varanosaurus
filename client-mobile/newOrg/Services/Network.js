@@ -46,6 +46,7 @@ var signup = function(username, password) {
 
 var login = function(username, password) {
   var params = makeParams('POST', {username, password});
+
   return fetch(url + 'auth/login', params)
     .catch(function(error) {
       console.error(error);

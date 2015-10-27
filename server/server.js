@@ -33,6 +33,7 @@ if (process.env.NODE_ENV === 'testing') {
   });
 
 } else {
+  //check for prod
   db.init().then(function() {
 
     module.exports = app.listen(port, function(error) {

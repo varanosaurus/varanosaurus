@@ -69,6 +69,3 @@ function select(state) {
 
 module.exports = connect(select)(Homeless);
 
-
-
-

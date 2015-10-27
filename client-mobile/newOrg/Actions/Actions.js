@@ -91,6 +91,7 @@ function signupSuccess(data) {
     payload: {
       token: data.token,
       user: data.user,
+      //always null on sign up
       household: null,
     },
   };

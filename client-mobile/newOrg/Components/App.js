@@ -13,7 +13,6 @@ var App = React.createClass({
   },
 
   render() {
-    console.log('token from inside app: ', this.props.token);
     switch (this.props.token == '') {
     case true:
       return this.renderEntry();

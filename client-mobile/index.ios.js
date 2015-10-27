@@ -1,13 +1,10 @@
 'use strict';
 
 var React = require('react-native');
-var {createStore, applyMiddleware} = require('redux');
 var {Provider} = require('react-redux');
-var thunk = require('redux-thunk');
-
 
 var App = require('./newOrg/Components/App');
-var appReducer = require('./newOrg/Reducers/appReducer');
+var Store = require('./newOrg/Services/Store');
 
 var {
   AppRegistry,
@@ -15,13 +12,11 @@ var {
 //   NavigatorIOS,
 } = React;
 
-var store = applyMiddleware(thunk)(createStore)(appReducer);
-
 var Knead = React.createClass({
 
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={Store}>
         <App />
       </Provider>
     );

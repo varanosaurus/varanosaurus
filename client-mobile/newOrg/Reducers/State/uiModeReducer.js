@@ -36,9 +36,63 @@ function itemsFilter(state = 'pending', action) {
   }
 }
 
+function selectedItemId(state = null, action) {
+  switch (action.type) {
+  case 'SELECT_ITEM':
+    return action.payload.itemId;
+  default:
+    return state;
+  }
+}
+
 function reckoningsViewMode(state = 'list', action) {
   switch (action.type) {
   case 'SET_RECKONINGS_VIEW_MODE':
+    return action.payload.mode;
+  default:
+    return state;
+  }
+}
+
+function selectedReckoningId(state = null, action) {
+  switch (action.type) {
+  case 'SELECT_RECKONING':
+    return action.payload.reckoningId;
+  default:
+    return state;
+  }
+}
+
+function reckoningDetailsMode(state = 'items', action) {
+  switch (action.type) {
+  case 'SET_RECKONINGS_DETAILS_MODE':
+    return action.payload.mode;
+  default:
+    return state;
+  }
+}
+
+function reckoningDetailsItemsMode(state = 'list', action) {
+  switch (action.type) {
+  case 'SET_RECKONINGS_ITEMS_MODE':
+    return action.payload.mode;
+  default:
+    return state;
+  }
+}
+
+function reckoningSelectedItemId(state = null, action) {
+  switch (action.type) {
+  case 'SELECT_RECKONING_ITEM':
+    return action.payload.itemId;
+  default:
+    return state;
+  }
+}
+
+function settingsViewMode(state = 'options', action) {
+  switch (action.type) {
+  case 'SET_SETTINGS_VIEW_MODE':
     return action.payload.mode;
   default:
     return state;
@@ -50,5 +104,11 @@ module.exports = combineReducers({
   selectedHomeTab,
   itemsViewMode,
   itemsFilter,
+  selectedItemId,
   reckoningsViewMode,
+  selectedReckoningId,
+  reckoningDetailsMode,
+  reckoningDetailsItemsMode,
+  reckoningSelectedItemId,
+  settingsViewMode,
 });

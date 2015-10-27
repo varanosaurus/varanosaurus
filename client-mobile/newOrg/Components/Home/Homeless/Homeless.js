@@ -5,11 +5,11 @@ var {connect} = require('react-redux');
 
 var CreateHousehold = require('./dumb/CreateHousehold');
 var Invitations = require('./dumb/Invitations');
-var RoommateInvitations = require('./dumb/RoommateInvitations');
+var InviteRoommates = require('./dumb/InviteRoommates');
 
 var Homeless = React.createClass({
   render() {
-    return this.props.invitations.length > 0 && this.props.house === null// user has pending invitations && user does not belong to a household (note: second condition is checked in Home.js too)
+    return this.props.invitations.length > 0
       ? this.renderInvitations()
       : this.renderCreateHousehold();
   },
@@ -18,7 +18,7 @@ var Homeless = React.createClass({
     return (
       <Invitations
         invitations={this.props.invitations}
-        submit={this.renderCreateHousehold}
+        submit={this.gotoCreateHousehold}
         join={this.handleJoinHousehold}
         decline={this.handleDeclineHousehold}
       />
@@ -29,13 +29,17 @@ var Homeless = React.createClass({
     return (
       <CreateHousehold
         submit={this.handleHouseholdCreation}
-        gotoRoommateInvitations={this.gotoRoommateInvitations}
+        gotoInviteRoommates={this.gotoInviteRoommates}
       />
     );
   },
 
-  gotoRoommateInvitations() {
-    return (<RoommateInvitations submit={this.handleRoommateInvites} />);
+  gotoInviteRoommates() {
+    return (<InviteRoommates submit={this.handleInviteRoommates} />);
+  },
+
+  gotoCreateHousehold(/*TODO: payload*/) {
+    // dispatch action to store causing change in uiMode to 
   },
 
   handleHouseholdCreation(/*TODO: payload*/) {
@@ -53,7 +57,7 @@ var Homeless = React.createClass({
     this.props.dispatch(/*TODO: REMOVE HOUSEHOLD INVITATION*/);
   },
 
-  handleRoommateInvites(/*TODO: payload*/) {
+  handleInviteRoommates(/*TODO: payload*/) {
     //dispatch action to store --> update store with creation of new invitation model in data.invitations
     this.props.dispatch(/*TODO: SEND INVITES*/);
   },

@@ -10,30 +10,39 @@ var RoommateInvitations = require('./dumb/RoommateInvitations');
 var Homeless = React.createClass({
   render() {
     return this.props.invitations.length > 0
-      ? renderInvitations()
-      : renderCreateHousehold();
+      ? this.renderInvitations()
+      : this.renderCreateHousehold();
   },
+
+  renderInvitations() {
+    return (<Invitations
+      submit={this.renderCreateHousehold}
+      join={this.handleJoinHousehold}
+      // decline={}
+    />);
+  },
+
+  renderCreateHousehold() {
+    return (<CreateHousehold
+      submit={this.handleHouseholdCreation}
+      gotoRoommateInvitations={this.gotoRoommateInvitations}
+    />);
+  },
+
+  handleHouseholdCreation(/*TODO: payload*/) {
+    // dispatch action to store causing creation of new household
+    this.props.dispatch(/*TODO: HOUSEHOLD CREATION*/);
+  },
+
+  handleJoinHousehold(/*TODO: payload*/) {
+
+  },
+
+  gotoRoommateInvitations() {
+    return (<RoommateInvitations />);
+  },
+
 });
-
-renderInvitations() {
-  return <Invitations submit={this.renderCreateHousehold}/>;
-},
-
-renderCreateHousehold() {
-  return <CreateHousehold 
-    submit={this.handleHouseholdCreation} 
-    gotoRoommateInvitations={this.gotoRoommateInvitations}
-  />;
-},
-
-handleHouseholdCreation(/*TODO: payload*/) {
-  // dispatch action to store causing creation of new household
-  this.props.dispatch(/*TODO: HOUSEHOLD CREATION*/)
-},
-
-gotoRoommateInvitations() {
-  return <RoommateInvitations />
-}
 
 function select(state) {
   return {

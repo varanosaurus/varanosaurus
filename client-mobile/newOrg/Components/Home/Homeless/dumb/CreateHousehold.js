@@ -18,25 +18,27 @@ var CreateHousehold = React.createClass({
   },
 
   render() {
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        keyboardType='default'
-        placeholder='Create household name'
-        onChangeText={(householdName) => this.setState({householdName: householdName})}
-        value={this.state.householdName}
-      />
-      <TouchableHighlight
-        style={styles.button}
-        onPress={() => {
-          this.props.submit({this.state.householdName});
-          this.props.gotoRoommateInvitations();
-        }}
-      >
-        <Text style={styles.btnText}>Make household</Text>
-      </TouchableHighlight>
-    </View>
-  }
+    return (
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          keyboardType='default'
+          placeholder='Create household name'
+          onChangeText={(householdName) => this.setState({householdName: householdName})}
+          value={this.state.householdName}
+        />
+        <TouchableHighlight
+          style={styles.button}
+          onPress={() => {
+            this.props.submit();
+            this.props.gotoRoommateInvitations();
+          }}
+        >
+          <Text style={styles.btnText}>Make household</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  },
 
 });
 

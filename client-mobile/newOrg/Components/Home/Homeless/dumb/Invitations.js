@@ -13,8 +13,8 @@ var Invitations = React.createClass({
   getInitialState() {
     return ({
       invitations: this.props.invitations,
-      acceptedInvitation: "",
-      declinedInvitation: "",
+      acceptedInvitation: '',
+      declinedInvitation: '',
     });
   },
 
@@ -24,15 +24,16 @@ var Invitations = React.createClass({
       <View>
         {
           invitations.map(function(invitation) {
-            return (<Text>You have been invited to the {invitation.householdName} household!</Text>
-                    <TouchableHighlight onPress={}>
-                      <Text>Join</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={}>
-                      <Text>Decline</Text>
-                    </TouchableHighlight>
-                   );
-          }) 
+            return (
+              <Text>You have been invited to the {invitation.householdName} household!</Text>
+              // <TouchableHighlight onPress={}>
+              //   <Text>Join</Text>
+              // </TouchableHighlight>
+              // <TouchableHighlight onPress={}>
+              //   <Text>Decline</Text>
+              // </TouchableHighlight>
+            );
+          })
         }
         <Text> ----- OR----- </Text>
         <TouchableHighlight
@@ -44,8 +45,8 @@ var Invitations = React.createClass({
     );
   },
 
-  joinHousehold() {
-    this.props.join(invitation)
+  joinHousehold(invitation) {
+    this.props.join(invitation);
   },
 
 });

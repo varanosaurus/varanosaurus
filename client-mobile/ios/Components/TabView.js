@@ -110,7 +110,6 @@ var TabView = React.createClass({
 });
 
 // var styles = StyleSheet.create({
-
 // });
 
 

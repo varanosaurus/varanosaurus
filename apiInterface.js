@@ -155,7 +155,8 @@
     url: 'api/items',
     requestBody: null,
     responseBody: {
-      items: [Item],
+      bought: [Item],
+      pending: [Item],
     },
   },
 
@@ -253,6 +254,7 @@
   fromUserId: int,
   toUserId: int,
   householdId: int,
+  status: str, //'pending' or 'rejected' or 'accepted'
 }
 
 {
@@ -276,7 +278,27 @@
     verb: 'GET',
     url: '/api/invitations/inbox',
     requestBody: null,
-    responseBody: {invitations: [Invitation]},
+    responseBody: {
+      invitations: [
+        {
+          invitation: Invitation,
+          householdName: str,
+        },
+      ]
+    },
+  },
+
+  'respond to an invitation': {
+    verb: 'PUT',
+    url: '/api/invitations/:invitationId',
+    requestBody: {
+      status: string, //'accepted' or 'rejected'
+    },
+    responseBody: {
+      invitation: Invitation,
+      household: null, //if rejected, or Household model if accepted,
+      token: null, //only present if accepted
+    },
   },
 
   'delete an invitation': {

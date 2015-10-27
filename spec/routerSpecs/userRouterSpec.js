@@ -87,6 +87,7 @@ describe('userRouter', function() {
 
       var parsedBody = JSON.parse(body);
 
+      expect(parsedBody.household.id).toEqual(1);
       expect(parsedBody.user.householdId).toEqual(1);
       done();
 

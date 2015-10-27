@@ -20,6 +20,11 @@ module.exports = {
       autoIncrement: true,
     },
 
+    status: {
+      type: Sequelize.STRING,
+      defaultValue: 'pending',
+    },
+
   },
 
   options: {

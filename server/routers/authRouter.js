@@ -15,8 +15,17 @@ authRouter.post('/login', function(request, response) {
 
       if (user.comparePassword(request.body.password)) {
         // TODO: see if this way of checking for a set household actually works, or throws an error
-        token = tokens.issue(user.id, user.getHousehold() ? user.getHousehold().id : undefined);
-        return response.status(200).json({user, token});
+        // token = tokens.issue(user.id, user.getHousehold() ? user.getHousehold().id : undefined);
+        if (user.householdId !== null) {
+          token = tokens.issue(user.id, user.householdId);
+          db.Household.findOne({where: {id: user.householdId}})
+            .then(function(household) {
+              return response.status(200).json({user, household, token});
+            });
+        } else {
+          token = tokens.issue(user.id);
+          return response.status(200).json({user, token});
+        }
       } else {
         return response.status(403).send({error: 'Wrong password.'});
       }

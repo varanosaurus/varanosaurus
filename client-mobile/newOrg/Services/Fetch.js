@@ -1,13 +1,18 @@
 'use strict';
 
-// var Store = require('./Store');
+var Store = require('./Store');
 
-var testUrl = 'http://localhost:8080';
+var testUrl = 'http://localhost:8080/';
 var deployUrl;
 
 var url = deployUrl || testUrl;
+var userUrl = 'api/users/';
+var itemUrl = 'api/items/';
+var householdUrl = 'api/households/';
+// var reckoningUrl = 'api/reckonings/';
+var invitationUrl = 'api/invitations/';
 
-var makeParams = function(method, token, body) {
+var makeParams = function(method, body) {
 
   var params = {
     method,
@@ -20,9 +25,9 @@ var makeParams = function(method, token, body) {
     params.body = JSON.stringify(body);
   }
 
-  if (token) {
+  if (Store.getState().token) {
     //attach the token if given
-    params.headers['X-Access-Token'] = token;
+    params.headers['X-Access-Token'] = Store.getState().token;
   }
 
   return params;
@@ -30,7 +35,7 @@ var makeParams = function(method, token, body) {
 };
 
 var signup = function(username, password) {
-  var params = makeParams('POST', null, {username, password});
+  var params = makeParams('POST', {username, password});
 
   // TODO: just return response
   return fetch(url + '/auth/signup', params)
@@ -40,7 +45,7 @@ var signup = function(username, password) {
 };
 
 var login = function(username, password) {
-  var params = makeParams('POST', null, {username, password});
+  var params = makeParams('POST', {username, password});
 
   // TODO: just return response
   return fetch(url + '/auth/login', params)
@@ -49,78 +54,131 @@ var login = function(username, password) {
     });
 };
 
-// //updates should be an object where the keys
-// //are the properties to be changed
-// //and the values are the new values
-// var updateUser = function(updates) {
-//   var params = makeParams('PUT', Store.token, updates);
+//updates should be an object where the keys
+//are the properties to be changed
+//and the values are the new values
+var updateUser = function(updates) {
+  var params = makeParams('PUT', updates);
+  return fetch(url + userUrl + Store.getState().data.user.id, params)
+    //make sure to tell the other thing to reset the token
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-//   fetch(url + 'api/users/' + Store.user.id, params)
-//     .then(function(response) {
-//       if (updates.householdId) {
-//         //if the user's household was updated,
-//         //a new token will have been reissued,
-//         //so we need to store the new token
-//         response.json()
-//           .then(function(body) {
-//             Store.token = body.token;
-//           });
-//       }
-//     })
-//     .catch(function(error) {
-//       console.error(error);
-//     });
-// };
+//getUser --> necessary? should be returned with login/signup/updateUser
 
-// //getUser --> necessary? should be returned with login/signup/updateUser
+var deleteUser = function() {
+  var params = makeParams('DELETE');
+  return fetch(url + userUrl + Store.getState().data.user.id, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-// var deleteUser = function() {
-//   var params = makeParams('DELETE', Store.token);
+var addHousehold = function(name) {
+  var params = makeParams('POST', {name});
+  return fetch(url + householdUrl, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-//   fetch(url + 'api/users/' + Store.user.id, params)
-//     .then(function(response) {
-//       //not sure how we should deal with deletes, actually
-//       //probably won't be necessary to do for MVP
-//       //do we clear their id and everything from the Store and immediately sign them out?
-//       //for now, we'll just return the body
-//       return response.json();
-//     })
-//     .catch(function(error) {
-//       console.error(error);
-//     });
-// };
+// getHousehold --> needed if we return the household at login/signup?
 
-// // var addHousehold = function(name) {
-// //   var params = makeParams('POST', Store.token, {name});
+var updateHousehold = function(updates) {
+  var params = makeParams('PUT', updates);
+  return fetch(url + 'api/households/' + Store.getState().data.household.id, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-// //   fetch(url + '/api/households/', params)
-// //     .then(function(response) {
-// //       response.json()
-// //         .then(function(body) {
+var deleteHousehold = function() {
+  var params = makeParams('DELETE');
+  return fetch(url + householdUrl + Store.getState().data.household.id, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-// //         })
-// //     })
-// // };
+//options = requestBody for 'add an item' in apiInterface
+var addItem = function(options) {
+  var params = makeParams('POST', options);
+  return fetch(url + itemUrl, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
+var getItem = function() {
+  var params = makeParams('GET');
+  return fetch(url + itemUrl + Store.getState().uiMode.selectedItem.id, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-// //getHousehold
+//getallItemsInHousehold --> necessary? Could just send back with login
 
-// //updateHousehold
+var updateItem = function(updates) {
+  var params = makeParams('PUT', updates);
+  return fetch(url + itemUrl + Store.getState().uiMode.selectedItem.id, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-// //deleteHousehold
+var inviteUser = function(toUsername) {
+  var params = makeParams('POST', {toUsername});
+  return fetch(url + invitationUrl, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-// //addItem
+var getInvitationInbox = function() {
+  var params = makeParams('GET');
+  return fetch(url + invitationUrl + '/inbox', params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-// //getItem
+var getInvitationOutbox = function() {
+  var params = makeParams('GET');
+  return fetch(url + invitationUrl + '/outbox', params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-// //getItemsinHousehold
+var respondToInvitation = function(status, invitationId) {
+  var params = makeParams('PUT', {status});
+  return fetch(url + invitationUrl + invitationId, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
 
-// //updateItem
+//deleteInvitation?
 
 module.exports = {
   signup,
   login,
-  // updateUser,
-  // deleteUser,
-  // addHousehold,
+  updateUser,
+  deleteUser,
+
+  addHousehold,
+  updateHousehold,
+  deleteHousehold,
+
+  inviteUser,
+  respondToInvitation,
+  getInvitationInbox,
+  getInvitationOutbox,
+
+  addItem,
+  getItem,
+  updateItem,
 };

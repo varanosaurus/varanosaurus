@@ -12,14 +12,14 @@ var tokens = require('../../server/services/tokens');
 //server instance before the next text
 var needRequire = require('really-need');
 
-describe('Invitation router', function() {
+describe('invitationRouter', function() {
 
   var server;
 
   beforeEach(function(done) {
     var context = this;
 
-    context.headers = {'Content-Type': 'application/json'};
+    this.headers = {'Content-Type': 'application/json'};
 
     server = needRequire('../../server/server', {bustCache: true, keep: false});
 
@@ -142,12 +142,12 @@ describe('Invitation router', function() {
     var context = this;
 
     request({
-          method: 'POST',
-          headers: context.headers,
-          url: inviteUrl,
-          body: JSON.stringify({
-                      toUsername: 'redstarter',
-                    }),
+      method: 'POST',
+      headers: context.headers,
+      url: inviteUrl,
+      body: JSON.stringify({
+        toUsername: 'redstarter',
+      }),
     }, function(error, response) {
 
       if (error) {
@@ -185,6 +185,79 @@ describe('Invitation router', function() {
     });
 
   }); // 'should allow Michael to request his invites over HTTP'
+
+  it('should allow Michael to accept Gary\'s invitation', function(done) {
+
+    var context = this;
+
+    request({
+      method: 'POST',
+      headers: context.headers,
+      url: inviteUrl,
+      body: JSON.stringify({
+        toUsername: 'redstarter',
+      }),
+    }, function(err, response, body) {
+
+      var parsedBody = JSON.parse(body);
+
+      request({
+        method: 'PUT',
+        headers: context.headers,
+        url: inviteUrl + parsedBody.invitation.id,
+        body: JSON.stringify({
+          status: 'accepted',
+        }),
+      },
+      function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+        expect(parsedBody.household).toBeTruthy();
+        expect(parsedBody.token).toBeTruthy();
+        expect(parsedBody.invitation.id).toEqual(1);
+        done();
+
+      });
+
+    });
+
+  });
+
+  it('should allow Michael to reject Gary\'s invitation', function(done) {
+
+    var context = this;
+
+    request({
+      method: 'POST',
+      headers: context.headers,
+      url: inviteUrl,
+      body: JSON.stringify({
+        toUsername: 'redstarter',
+      }),
+    }, function(err, response, body) {
+
+      var parsedBody = JSON.parse(body);
+
+      request({
+        method: 'PUT',
+        headers: context.headers,
+        url: inviteUrl + parsedBody.invitation.id,
+        body: JSON.stringify({
+          status: 'rejected',
+        }),
+      },
+      function(error, response, body) {
+
+        var parsedBody = JSON.parse(body);
+        expect(parsedBody.household).toBeFalsy();
+        expect(parsedBody.invitation.id).toEqual(1);
+        done();
+
+      });
+
+    });
+
+  }); // 'should allow Michael to reject Gary\'s invitation'
 
   it('should allow Michael to delete an invite he doesn\'t care for', function(done) {
 

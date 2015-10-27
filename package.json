@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "TOKEN_SECRET=testing NODE_ENV=testing node server/server.js",
     "test": "node jasmine-runner.js",
     "test-db": "jasmine spec/dbSpec.js"
   },

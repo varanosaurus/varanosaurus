@@ -1,6 +1,9 @@
 node_modules/
 bower_components/
 *.log
+*.js.save
+
+**/npm-debug*
 
 build/
 dist/
@@ -11,7 +14,8 @@ dist/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*

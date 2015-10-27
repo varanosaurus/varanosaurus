@@ -4,7 +4,7 @@ var React = require('react-native');
 var {connect} = require('react-redux');
 
 var ReckoningList = require('./dumb/ReckoningList');
-var ReckoningDetails = require('./ReckoningDetail/ReckoningDetails');
+var ReckoningDetails = require('./ReckoningDetails/ReckoningDetails');
 var Actions = require('../../../Actions/Actions');
 
 var Reckoning = React.createClass({
@@ -45,8 +45,8 @@ var Reckoning = React.createClass({
     );
   },
 
-  handleSelect(/* reckoningId */) {
-    /* dispatch SELECT_RECKONING */
+  handleSelect(data) {
+    this.dispatch(Actions.selectReckoning(data));
   },
 
 });

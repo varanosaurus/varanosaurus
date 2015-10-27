@@ -24,10 +24,12 @@ var ItemList = React.createClass({
 
   render() {
 
+    console.log('hello from inside itemlist:');
+    console.log(this.props.items);
     var dataSource = this.dataSource.cloneWithRows(this.props.items);
 
     return (
-      <View >
+      <View>
         <SegmentedControlIOS
           values={['Pending', 'Bought']}
           selectedIndex={0}

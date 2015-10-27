@@ -4,7 +4,7 @@ var React = require('react-native');
 var {connect} = require('react-redux');
 
 var ItemList = require('./dumb/ItemList');
-var ItemDetails = require('./ItemDetails/ItemDetails');
+var ItemDetails = require('./dumb/ItemDetails');
 var ItemAdd = require('./ItemAdd/ItemAdd');
 
 var Items = React.createClass({

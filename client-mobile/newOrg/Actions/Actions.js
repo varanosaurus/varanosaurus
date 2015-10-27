@@ -47,6 +47,14 @@ function loginFailure(message) {
   };
 }
 
+// LOGOUT: remove token and set state to initial?
+
+exports.logout = function() {
+  return {
+    type: 'LOGOUT',
+  };
+};
+
 // SIGNUP: submit username/password to server for creation of user; set token and user from server's response into store
 
 exports.signup = function(username, password) {
@@ -102,13 +110,7 @@ exports.setEntryMode = function(mode) {
   };
 };
 
-// HOMETAB_ITEMS: set state.uiMode.selectedHomeTab to 'items'; navigate to items view
-
-// HOMETAB_RECKONINGS: set state.uiMode.selectedHomeTab to 'reckonings'; navigate to reckonings view
-
-// HOMETAB_SETTINGS: set state.uiMode.selectedHomeTab to 'settings'; navigate to settings view
-
-  // or, SET_HOMETAB, with payload of 'items', 'reckonings', or 'settings' ?
+// SET_HOMETAB, with payload of 'items', 'reckonings', or 'settings' ?
 exports.setHomeTab = function(mode) {
   return {
     type: 'SET_HOME_TAB',
@@ -116,11 +118,9 @@ exports.setHomeTab = function(mode) {
   };
 };
 
-// ITEMSFILTER_PENDING: set state.uiMode.itemsFilter to 'pending'
+// SET_ITEMS_VIEW_MODE, with payload of 'details' or 'list'
 
-// ITEMSFILTER_BOUGHT: set state.uiMode.itemsFilter to 'bought'
-
-  // or, SET_ITEMS_FILTER, with payload of 'pending' or 'bought' ?
+// SET_ITEMS_FILTER, with payload of 'pending' or 'bought' ?
 exports.setItemsFilter = function(mode) {
   return {
     type: 'SET_ITEMS_FILTER',
@@ -133,6 +133,8 @@ exports.setItemsFilter = function(mode) {
 // GET_HOME_ITEMS: grab list of household's current unreckoned items (split into bought and pending)
 // and set into state.data.items.bought and state.data.items.pending
 
+// GET_RECKONING_DATA: get associated users and items with reckoning; coordinate with server
+
 // SELECT_RECKONING: set state.uiMode.selectedReckoning to payload reckoning id
 exports.selectReckoning = function(id) {
   return {
@@ -141,7 +143,10 @@ exports.selectReckoning = function(id) {
   };
 };
 
-// GET_RECKONING_DATA: get associated users and items with reckoning; coordinate with server
+// SET_RECKONINGS_VIEW_MODE: 'list', 'details'
+
+// SET_RECKONINGS_DETAILS_MODE: 'items', 'users'
+
 
 // RECKONING_SELECT_ITEM: set state.uiMode.reckoningsSelectedItem to payload item id
 exports.setReckoningDetailsMode = function(mode) {

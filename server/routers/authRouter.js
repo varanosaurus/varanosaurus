@@ -4,7 +4,7 @@ var tokens = require('../services/tokens');
 
 authRouter.post('/login', function(request, response) {
 
-  db.User.findOne({where: {username: request.body.username}})
+  db.User.findOne({where: {username: request.body.username}/*, attributes: {exclude: ['password']}*/})
     .then(function(user) {
 
       var token;
@@ -13,6 +13,8 @@ authRouter.post('/login', function(request, response) {
        return response.status(404).send({error: 'User doesn\'t exist.'});
       }
 
+      var userData = {username: user.username, id: user.id, householdId: user.householdId};
+
       if (user.comparePassword(request.body.password)) {
         // TODO: see if this way of checking for a set household actually works, or throws an error
         // token = tokens.issue(user.id, user.getHousehold() ? user.getHousehold().id : undefined);
@@ -20,11 +22,11 @@ authRouter.post('/login', function(request, response) {
           token = tokens.issue(user.id, user.householdId);
           db.Household.findOne({where: {id: user.householdId}})
             .then(function(household) {
-              return response.status(200).json({user, household, token});
+              return response.status(200).json({user: userData, household, token});
             });
         } else {
           token = tokens.issue(user.id);
-          return response.status(200).json({user, token});
+          return response.status(200).json({user: userData, token});
         }
       } else {
         return response.status(403).send({error: 'Wrong password.'});

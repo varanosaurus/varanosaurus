@@ -16,11 +16,6 @@ module.exports = {
 			defaultValue: null,
 		},
 
-		fetch: {
-			type: Sequelize.BOOLEAN,
-			defaultValue: false,
-		},
-
 		bought: {
 			type: Sequelize.BOOLEAN,
 			defaultValue: false,
@@ -31,12 +26,6 @@ module.exports = {
 			// Do we want users to be able to add prices later, but require them for reckoning?
 			// allowNull: false,
 			defaultValue: 0.0,
-		},
-
-		//name here is terrible
-		timeFetched: {
-			type: Sequelize.DATE,
-			defaultValue: null,
 		},
 
 		timeBought: {

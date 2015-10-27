@@ -4,10 +4,8 @@ var React = require('react-native');
 
 var {
   StyleSheet,
-  TouchableHighlight,
   View,
   Text,
-  Component,
 } = React;
 
 var Settings = React.createClass({
@@ -16,9 +14,9 @@ var Settings = React.createClass({
       <View style={styles.container}>
         <Text>TESTING</Text>
       </View>
-    )
-  }
-})
+    );
+  },
+});
 
 var styles = StyleSheet.create({
   container: {
@@ -35,6 +33,6 @@ var styles = StyleSheet.create({
   btnText: {
     fontSize: 18,
   },
-})
+});
 
 module.exports = Settings;

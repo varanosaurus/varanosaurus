@@ -255,7 +255,7 @@ describe('invitationRouter', function() {
 
       });
 
-    });   
+    });
 
   }); // 'should allow Michael to reject Gary\'s invitation'
 

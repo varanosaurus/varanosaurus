@@ -75,7 +75,7 @@ router.put('/:invitationId', function(request, response) {
 
   db.Invitation.findOne({where: {id: invitationId}})
 
-    .then(function(invitation) {
+    .then(function() {
 
       if (status === 'accepted' || status === 'rejected') {
         db.Invitation.update(request.body, {where: {id: invitationId}, returning: true})
@@ -83,7 +83,7 @@ router.put('/:invitationId', function(request, response) {
             if (status === 'accepted') {
 
               db.User.update({householdId}, {where: {id: userId}})
-                .then(function(user) {
+                .then(function() {
 
                   db.Household.findOne({where: {id: householdId}})
                     .then(function(household) {
@@ -92,15 +92,15 @@ router.put('/:invitationId', function(request, response) {
                         household,
                         token: tokens.issue(userId, householdId),
                       });
-                    })
-                })
+                    });
+                });
 
             } else {
               response.status(200).json({
                 invitation: invitationArray[1][0],
               });
             }
-          })
+          });
 
       } else {
         response.status(400).send('Bad request');
@@ -111,7 +111,7 @@ router.put('/:invitationId', function(request, response) {
     .catch(function(error) {
       console.error(error);
       response.status(500).send(error);
-    })
+    });
 });
 
 router.route('/:invitationId')

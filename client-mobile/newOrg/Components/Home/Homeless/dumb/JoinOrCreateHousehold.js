@@ -10,20 +10,38 @@ var {
   TouchableHighlight,
 } = React;
 
-var CreateHousehold = React.createClass({
-  getInitialState: function() {
+var JoinOrCreateHousehold = React.createClass({
+  getInitialState() {
     return ({
-       householdName: '',
+      invitations: this.props.invitations,
+      householdName: '',
+      acceptedInvitation: '',
+      declinedInvitation: '',
     });
   },
 
   render() {
+    var invitations = this.state.invitations;
     return (
-      <View style={styles.container}>
+      <View>
+        {
+          invitations.map(function(invitation) {
+            return (
+              <Text>You have been invited to the {invitation.householdName} household!</Text>
+              // <TouchableHighlight onPress={}>
+              //   <Text>Join</Text>
+              // </TouchableHighlight>
+              // <TouchableHighlight onPress={}>
+              //   <Text>Decline</Text>
+              // </TouchableHighlight>
+            );
+          })
+        }
+        <Text> ----- OR----- </Text>
         <TextInput
           style={styles.input}
           keyboardType='default'
-          placeholder='Create household name'
+          placeholder='What is your household name?'
           onChangeText={(householdName) => this.setState({householdName: householdName})}
           value={this.state.householdName}
         />
@@ -34,10 +52,14 @@ var CreateHousehold = React.createClass({
             this.props.gotoInviteRoommates();
           }}
         >
-          <Text style={styles.btnText}>Make household</Text>
+          <Text style={styles.btnText}>Create household</Text>
         </TouchableHighlight>
       </View>
     );
+  },
+
+  joinHousehold(invitation) {
+    this.props.join(invitation);
   },
 
   handleSubmit() {
@@ -47,7 +69,7 @@ var CreateHousehold = React.createClass({
 
 });
 
-module.exports = CreateHousehold;
+module.exports = JoinOrCreateHousehold;
 
 var styles = StyleSheet.create({
   container: {
@@ -79,3 +101,4 @@ var styles = StyleSheet.create({
     color: 'red',
   },
 });
+

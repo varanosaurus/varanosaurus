@@ -3,49 +3,36 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var CreateHousehold = require('./dumb/CreateHousehold');
-var Invitations = require('./dumb/Invitations');
-var InviteRoommates = require('./dumb/InviteRoommates');
+var JoinOrCreateHousehold = require('./dumb/JoinOrCreateHousehold');
+// var InviteRoommates = require('./dumb/InviteRoommates');
 
 var Homeless = React.createClass({
-  render() {
-    return this.props.invitations.length > 0
-      ? this.renderInvitations()
-      : this.renderCreateHousehold();
-  },
 
-  renderInvitations() {
+  //if you created a household
+  render() {
     return (
-      <Invitations
+      <JoinOrCreateHousehold
         invitations={this.props.invitations}
-        submit={this.gotoCreateHousehold}
         join={this.handleJoinHousehold}
         decline={this.handleDeclineHousehold}
-      />
-    );
-  },
-
-  renderCreateHousehold() {
-    return (
-      <CreateHousehold
         submit={this.handleHouseholdCreation}
         gotoInviteRoommates={this.gotoInviteRoommates}
       />
     );
   },
 
+  // renderCreateHousehold() {
+  //   return (
+  //     <CreateHousehold
+  //       submit={this.handleHouseholdCreation}
+  //       gotoInviteRoommates={this.gotoInviteRoommates}
+  //     />
+  //   );
+  // },
+
   gotoInviteRoommates() {
-    return (<InviteRoommates submit={this.handleInviteRoommates} />);
-  },
-
-  gotoCreateHousehold(/*TODO: payload*/) {
-
+    //dispatch action to store, changing homelessViewMode to inviteRoommates
     this.props.dispatch();
-  },
-
-  handleHouseholdCreation(/*TODO: payload*/) {
-    // dispatch action to store causing creation of new household
-    this.props.dispatch(/*TODO: HOUSEHOLD CREATION*/);
   },
 
   handleJoinHousehold(/*TODO: payload*/) {
@@ -56,6 +43,11 @@ var Homeless = React.createClass({
   handleDeclineHousehold(/*TODO: payload*/) {
     //dispatch action to store causing removal of household invitation (updates invitation list in invitations UI)
     this.props.dispatch(/*TODO: REMOVE HOUSEHOLD INVITATION*/);
+  },
+
+  handleHouseholdCreation(/*TODO: payload*/) {
+    // dispatch action to store causing creation of new household
+    this.props.dispatch(/*TODO: HOUSEHOLD CREATION*/);
   },
 
   handleInviteRoommates(/*TODO: payload*/) {

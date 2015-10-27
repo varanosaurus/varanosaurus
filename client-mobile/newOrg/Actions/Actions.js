@@ -144,3 +144,9 @@ exports.selectReckoning = function(id) {
 // GET_RECKONING_DATA: get associated users and items with reckoning; coordinate with server
 
 // RECKONING_SELECT_ITEM: set state.uiMode.reckoningsSelectedItem to payload item id
+exports.setReckoningDetailsMode = function(mode) {
+  return {
+    type: 'SET_RECKONING_DETAILS_MODE',
+    payload: {mode},
+  };
+};

@@ -1,11 +1,11 @@
 'use strict';
 
 var React = require('react-native');
-
 var {connect} = require('react-redux');
 
 var ReckoningItemsDetails = require('./ReckoningDetailList/ReckoningItemsDetailsController');
 var ReckoningUsersDetails = require('./dumb/ReckoningUsersDetails');
+var Actions = require('../../../../Actions/Actions');
 
 var ReckoningDetails = React.createClass({
 
@@ -42,11 +42,11 @@ var ReckoningDetails = React.createClass({
   },
 
   goToItemsDetailsView() {
-    // TODO: dispatch action state.uiMode.reckoningsDetailsMode -> 'items'
+    this.props.dispatch(Actions.setReckoningDetailsMode('items'));
   },
 
   goToUsersDetailsView() {
-    // TODO: dispatch action state.uiMode.reckoningsDetailsMode -> 'users'
+    this.props.dispatch(Actions.setReckoningDetailsMode('users'));
   },
 
 });

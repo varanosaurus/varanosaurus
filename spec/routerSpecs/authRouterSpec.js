@@ -38,7 +38,8 @@ describe('authRouter', function() {
             headers: context.headers,
             body,
           },
-          function() {
+          function(error, response, body) {
+            context.householdId = JSON.parse(body).household.id;
             done();
           }); //closes post request
 
@@ -96,34 +97,51 @@ describe('authRouter', function() {
 
   }); //closes 'should create a new user'
 
-  it('should login an existing user and send back the user', function(done) {
+  it('should login an existing user and send back the user and household (if one exists)', function(done) {
+
+    var context = this;
 
     var headers = {
       'content-type': 'application/json',
     };
     var body = JSON.stringify({
-      username: 'naomi',
+      username: 'naomijacobs',
       password: 'hypotrochoid',
     });
 
-    request.post({url: authUrl + '/signup', headers, body}, function() {
+    request.post({url: authUrl + '/signup', headers, body}, function(error, response, body) {
+
+      var parsedBody = JSON.parse(body);
 
       var loginBody = JSON.stringify({
-        username: 'naomi',
+        username: 'naomijacobs',
         password: 'hypotrochoid',
       });
 
-      //send without token to simulate login
-      request.post({url: authUrl + '/login', headers, body: loginBody}, function(error, response, body) {
+      context.headers['x-access-token'] = tokens.issue(parsedBody.user.id);
 
-        var parsedBody = JSON.parse(body);
+      request.put({
+        url: userUrl + parsedBody.user.id,
+        headers: context.headers,
+        body: JSON.stringify({householdId: context.householdId}),
+      },
+      function(error, response, body) {
 
-        expect(error).toBeFalsy();
-        expect(parsedBody.user).toBeTruthy();
-        expect(parsedBody.token).toBeTruthy();
-        done();
+        //send without token to simulate login
+        request.post({url: authUrl + 'login', headers, body: loginBody}, function(error, response, body) {
 
-      }); //closes login
+          var parsedBody = JSON.parse(body);
+
+          expect(error).toBeFalsy();
+          expect(parsedBody.user).toBeTruthy();
+          expect(parsedBody.token).toBeTruthy();
+          expect(parsedBody.household).toBeTruthy();
+          done();
+
+        }); //closes login
+        
+      })
+
 
     }); //closes signup
 

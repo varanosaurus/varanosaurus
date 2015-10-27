@@ -125,7 +125,7 @@ describe('authRouter', function() {
         headers: context.headers,
         body: JSON.stringify({householdId: context.householdId}),
       },
-      function(error, response, body) {
+      function() {
 
         //send without token to simulate login
         request.post({url: authUrl + 'login', headers, body: loginBody}, function(error, response, body) {
@@ -139,9 +139,8 @@ describe('authRouter', function() {
           done();
 
         }); //closes login
-        
-      })
 
+      });
 
     }); //closes signup
 

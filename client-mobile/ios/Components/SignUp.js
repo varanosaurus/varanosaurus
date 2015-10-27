@@ -2,7 +2,7 @@
 
 var React = require('react-native');
 var CreateNewHH = require('./CreateNewHH');
-var Fetch = require('../Services/Fetch');
+// var Fetch = require('../Services/Fetch');
 
 var {
   StyleSheet,
@@ -43,7 +43,7 @@ var SignUp = React.createClass({
       });
     } else {
 
-      Fetch.signup(this.state.username, this.state.password);
+      // Fetch.signup(this.state.username, this.state.password);
 
       //if you are not in a household
       this.props.navigator.push({

@@ -155,7 +155,8 @@
     url: 'api/items',
     requestBody: null,
     responseBody: {
-      items: [Item],
+      bought: [Item],
+      pending: [Item],
     },
   },
 
@@ -291,7 +292,6 @@
     verb: 'PUT',
     url: '/api/invitations/:invitationId',
     requestBody: {
-      invitationId: int,
       status: string, //'accepted' or 'rejected'
     },
     responseBody: {

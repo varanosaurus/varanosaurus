@@ -27,6 +27,7 @@ exports.login = function(username, password) {
 
 // LOGIN_SUCCESS: set token, user, and household(optional) from server's response into store
 function loginSuccess(data) {
+  console.log('login succeeded:', data);
   return {
     type: 'LOGIN_SUCCESS',
     payload: {

@@ -46,7 +46,7 @@ router.put('/:userId', function(request, response) {
                 token,
                 household,
               });
-            })
+            });
         } else {
           token = tokens.issue(id);
           response.status(201).json({user: updateArray[1][0], token});

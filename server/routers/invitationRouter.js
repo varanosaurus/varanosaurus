@@ -1,6 +1,7 @@
 var router = require('express').Router();
 
 var db = require('../db/interface');
+var tokens = require('../services/tokens');
 
 router.post('/', function(request, response) {
 
@@ -39,6 +40,7 @@ router.get('/inbox', function(request, response) {
   db.Invitation.findAll({where: {toUserId: userId}})
 
     .then(function(invitations) {
+      //also send back household id names
       response.json({invitations});
     })
 
@@ -63,6 +65,53 @@ router.get('/outbox', function(request, response) {
       response.status(500).send(error);
     });
 
+});
+
+router.put('/:invitationId', function(request, response) {
+  var userId = request.decoded.userId;
+  var householdId = request.decoded.householdId;
+  var invitationId = request.params.invitationId;
+  var status = request.body.status;
+
+  db.Invitation.findOne({where: {id: invitationId}})
+
+    .then(function(invitation) {
+
+      if (status === 'accepted' || status === 'rejected') {
+        db.Invitation.update(request.body, {where: {id: invitationId}, returning: true})
+          .then(function(invitationArray) {
+            if (status === 'accepted') {
+
+              db.User.update({householdId}, {where: {id: userId}})
+                .then(function(user) {
+
+                  db.Household.findOne({where: {id: householdId}})
+                    .then(function(household) {
+                      response.status(200).json({
+                        invitation: invitationArray[1][0],
+                        household,
+                        token: tokens.issue(userId, householdId),
+                      });
+                    })
+                })
+
+            } else {
+              response.status(200).json({
+                invitation: invitationArray[1][0],
+              });
+            }
+          })
+
+      } else {
+        response.status(400).send('Bad request');
+      }
+
+    })
+
+    .catch(function(error) {
+      console.error(error);
+      response.status(500).send(error);
+    })
 });
 
 router.route('/:invitationId')

@@ -38,12 +38,11 @@ describe('authRouter', function() {
             headers: context.headers,
             body,
           },
-          function(error, response, body) {
+          function() {
             done();
           }); //closes post request
-          
-        })
 
+        });
 
       }) //closes then after syncing
 
@@ -84,13 +83,13 @@ describe('authRouter', function() {
       request.put({
         url: userUrl + parsedBody.user.id,
         headers: context.headers,
-        body: JSON.stringify({householdId: 1,}),
+        body: JSON.stringify({householdId: 1}),
       },
       function(error, response, body) {
         var parsedBody = JSON.parse(body);
         expect(parsedBody.household).toBeTruthy();
         done();
-      })
+      });
 
     });
 

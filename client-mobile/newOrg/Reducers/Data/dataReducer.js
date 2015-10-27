@@ -3,6 +3,7 @@ var {combineReducers} = require('redux');
 function user(state = {}, action) {
   switch (action.type) {
   case 'LOGIN_SUCCESS':
+    return action.payload.user;
   case 'SIGNUP_SUCCESS':
     return action.payload.user;
   case 'LOGOUT':

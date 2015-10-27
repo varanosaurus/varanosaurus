@@ -5,12 +5,16 @@ var {connect} = require('react-redux');
 
 var Entry = require('./Entry/Entry');
 var Home = require('./Home/Home');
-// var {Text} = React;
 
 var App = React.createClass({
 
+  componentWillReceiveProps() {
+    this.render();
+  },
+
   render() {
-    switch (this.props.token == null) {
+    console.log('token from inside app: ', this.props.token);
+    switch (this.props.token == '') {
     case true:
       return this.renderEntry();
     case false:
@@ -18,9 +22,6 @@ var App = React.createClass({
     default:
       return this.renderEntry();
     }
-    // return this.props.token
-    //   ? this.renderHome()
-    //   : this.renderEntry();
   },
 
   renderEntry() {
@@ -38,6 +39,3 @@ function select(state) {
 }
 
 module.exports = connect(select)(App);
-
-// before connect: App...
-// after connect: App.dispatch, App.props.token

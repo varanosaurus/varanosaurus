@@ -5,19 +5,26 @@ var Network = require('../Services/Network');
 exports.login = function(username, password) {
   // Thunk
   return function(dispatch) {
-    console.log('trying to log in:', username, password);
     return Network.login(username, password)
       .then(function(response) {
-        if (response.ok) {
-          return response.json()
-            .then(function(body) {
+        return response.json()
+          .then(function(body) {
+            console.log('response status:' + response.ok);
+            if (response.ok) {
               return dispatch(loginSuccess(body));
-            });
-        } else {
-          console.log(response);
-          // TODO: show body text?
-          return dispatch(loginFailure(response.statusText));
-        }
+            } else {
+              return dispatch(loginFailure(body));
+            }
+          });
+        // if (response.ok) {
+        //   return response.json()
+        //     .then(function(body) {
+        //       console.log('dispatching loginSuccess: ' + body);
+        //       return dispatch(loginSuccess(body));
+        //     });
+        // } else {
+        //   return dispatch(loginFailure(response.statusText));
+        // }
       })
       .catch(function(error) {
         return dispatch(loginFailure(error.message));
@@ -27,13 +34,12 @@ exports.login = function(username, password) {
 
 // LOGIN_SUCCESS: set token, user, and household(optional) from server's response into store
 function loginSuccess(data) {
-  console.log('login succeeded:', data);
   return {
     type: 'LOGIN_SUCCESS',
     payload: {
       token: data.token,
       user: data.user,
-      household: data.household,
+      household: data.household || null,
     },
   };
 }
@@ -65,7 +71,6 @@ exports.signup = function(username, password) {
       .then(function(response) {
         return response.json()
           .then(function(body) {
-            console.log(body);
             if (response.ok) {
               return dispatch(signupSuccess(body));
             } else {

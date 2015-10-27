@@ -5,6 +5,8 @@ function appReducer(state, action) {
       token: null,
       uiMode: {
         entryMode: 'login',
+        selectedHomeTab: 'items',
+        itemsViewMode: 'list',
       },
     };
   }
@@ -25,10 +27,16 @@ function appReducer(state, action) {
           token: action.payload.token,
           data: {
             user: action.payload.user,
-            household: action.payload.household,
+            household: {name: 'test', id: 1},
           },
         }
       );
+  case 'SET_HOME_TAB':
+    return Object.assign(
+      {},
+      state,
+      {uiMode: {selectedHomeTab: action.payload.mode}}
+    );
   }
 
   return state;

@@ -10,7 +10,7 @@ authRouter.post('/login', function(request, response) {
       var token;
 
       if (!user) {
-       return response.status(404).send('User doesn\'t exist.');
+       return response.status(404).send({error: 'User doesn\'t exist.'});
       }
 
       if (user.comparePassword(request.body.password)) {
@@ -18,7 +18,7 @@ authRouter.post('/login', function(request, response) {
         token = tokens.issue(user.id, user.getHousehold() ? user.getHousehold().id : undefined);
         return response.status(200).json({user, token});
       } else {
-        return response.status(403).send('Wrong password.');
+        return response.status(403).send({error: 'Wrong password.'});
       }
 
     })
@@ -38,7 +38,7 @@ authRouter.post('/signup', function(request, response) {
   return db.User.findOne({where: {username}})
     .then(function(user) {
       if (user) {
-        response.status(409).send('User already exists');
+        response.status(409).send({error: 'User already exists'});
       } else {
         return db.User.create({
           username,
@@ -60,7 +60,7 @@ authRouter.post('/signup', function(request, response) {
     })
     .catch(function(error) {
       console.error(error);
-      response.status(500).send('Error signing up user');
+      response.status(500).send({error: 'Error signing up user'});
     });
 });
 

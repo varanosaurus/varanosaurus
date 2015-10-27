@@ -16,23 +16,23 @@ var HomeTab = React.createClass({
 
     return (
 
-      <TabBarIOS selectedTab={this.props.uiMode}>
+      <TabBarIOS selectedTab={this.props.selectedTab}>
         <TabBarIOS.Item
-          selected={this.props.uiMode === 'itemsTab'}
+          selected={this.props.selectedTab === 'items'}
           title='Items'
           onPress={this.props.gotoItemsTab}
         >
           {this.renderItemsTabView()}
         </TabBarIOS.Item>
         <TabBarIOS.Item
-          selected={this.props.uiMode === 'reckoningsTab'}
+          selected={this.props.selectedTab === 'reckonings'}
           title='Reckonings'
           onPress={this.props.gotoReckoningsTab}
         >
           {this.renderReckoningsTabView()}
         </TabBarIOS.Item>
         <TabBarIOS.Item
-          selected={this.props.uiMode === 'settingsTab'}
+          selected={this.props.selectedTab === 'settings'}
           title='Settings'
           onPress={this.props.gotoSettingsTab}
         >

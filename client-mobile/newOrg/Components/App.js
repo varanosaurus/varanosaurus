@@ -4,8 +4,8 @@ var React = require('react-native');
 var {connect} = require('react-redux');
 
 var Entry = require('./Entry/Entry');
-// var Home = require('./Home/Home');
-var {Text} = React;
+var Home = require('./Home/Home');
+// var {Text} = React;
 
 var App = React.createClass({
 
@@ -28,8 +28,7 @@ var App = React.createClass({
   },
 
   renderHome() {
-    return <Text>Hello world</Text>;
-    // return <Home />;
+    return <Home />;
   },
 
 });

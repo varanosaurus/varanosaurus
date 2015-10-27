@@ -3,7 +3,7 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var ReckoningItemsDetails = require('./ReckoningDetailList/ReckoningItemsDetailsController');
+var ReckoningItemsDetails = require('./ReckoningItemsDetails/ReckoningItemsDetails');
 var ReckoningUsersDetails = require('./dumb/ReckoningUsersDetails');
 var Actions = require('../../../../Actions/Actions');
 

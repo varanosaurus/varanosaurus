@@ -249,40 +249,6 @@ describe('Database interface', function() {
 
     }); // Closes 'it should associate with an addingUser'
 
-    it('should associate with a fetchingUser', function(done) {
-
-      db.User.create({
-        username: 'redstarter',
-        password: 'brewbro',
-      })
-
-      .then(function(user) {
-        return db.Item.create({
-          description: 'Pilsner',
-        })
-        .then(function(item) {
-          return item.setFetchingUser(user);
-        });
-      })
-
-      .then(function() {
-        return db.Item.findOne({where: {description: 'Pilsner'}})
-          .then(function(item) {
-            expect(item.fetchingUserId).toBeTruthy();
-            return item.getFetchingUser();
-          })
-          .then(function(user) {
-            expect(user).toBeTruthy();
-            expect(user.username).toEqual('redstarter');
-            return user;
-          });
-      })
-
-      .catch(done.fail.bind(done))
-      .then(done);
-
-    }); // Closes 'it should associate with a fetchingUser'
-
     it('should associate with a buyingUser', function(done) {
 
       db.User.create({

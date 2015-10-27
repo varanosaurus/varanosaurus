@@ -10,11 +10,12 @@ var userToReckoningConfig = require('./models/UserToReckoning');
 var invitationConfig = require('./models/Invitation');
 
 var dbEnvironment = process.env.NODE_ENV;
+var testSeed = require('./testSeed');
 
 var shouldForce;
 
 var url;
-if (dbEnvironment === 'testing') {
+if (dbEnvironment === 'testing' || dbEnvironment === 'development') {
   url = `postgres://${process.env.USER !== 'travis' ? process.env.USER : 'postgres'}:@localhost/knead`;
 } else {
   url = process.env.DATABASE_URL;
@@ -40,7 +41,6 @@ Item.belongsTo(Household);
 Household.hasMany(Item);
 
 Item.belongsTo(User, {as: 'addingUser'});
-Item.belongsTo(User, {as: 'fetchingUser'});
 Item.belongsTo(User, {as: 'buyingUser'});
 
 Item.belongsTo(Reckoning);
@@ -66,7 +66,7 @@ User.hasMany(Invitation, {as: 'receivedInvitations', foreignKey: 'toUserId'});
 Invitation.belongsTo(Household);
 Household.hasMany(Invitation);
 
-if (dbEnvironment === 'reset' || dbEnvironment === 'testing') {
+if (dbEnvironment === 'reset' || dbEnvironment === 'testing' || dbEnvironment === 'development') {
   shouldForce = true;
 } else {
   shouldForce = false;
@@ -77,6 +77,8 @@ var init = function() {
     .then(function() {
       if (dbEnvironment === 'reset') {
         process.exit(0);
+      } else if (dbEnvironment === 'development') {
+       return testSeed();
       }
     });
 };

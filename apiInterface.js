@@ -166,7 +166,6 @@
     requestBody: {
       description: string,
       details: string, //optional
-      fetch: boolean, //optional, defaults to false
       bought: boolean, //optional, defaults to false
       price: stringified decimal, //optional, defaults to 0
     },
@@ -185,10 +184,8 @@
     url: '/api/items/:itemId',
     requestBody: {
       details: string, //optional
-      fetch: boolean, //optional
       bought: boolean, //optional
       price: stringified decimal, //optional
-      fetchingUserId: integer, //optional
       buyingUserId: number, //optional
     },
     responseBody: {

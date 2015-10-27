@@ -1,6 +1,6 @@
 // LOGIN: submit username/password to server for verification, and handle success or failure
 
-var Network = require('../Services/Fetch');
+var Network = require('../Services/Network');
 
 exports.login = function(username, password) {
   // Thunk

@@ -1,6 +1,7 @@
 'use strict';
 
 var Store = require('./Store');
+console.log(Store);
 
 var testUrl = 'http://localhost:8080/';
 var deployUrl;

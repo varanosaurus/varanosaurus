@@ -11,7 +11,7 @@ var HomeTab = require('./dumb/HomeTab');
 var Home = React.createClass({
 
   render() {
-    return this.props.house
+    return this.props.house //user belongs to a household (has a householdId)
       ? this.renderHomeTab()
       : this.renderHomeless();
   },
@@ -43,7 +43,7 @@ var Home = React.createClass({
 
 function select(state) {
   return {
-    house: state.data.household,
+    house: state.data.user.householdId,
     selectedHomeTab: state.uiMode.selectedHomeTab,
   };
 }

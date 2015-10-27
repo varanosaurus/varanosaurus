@@ -30,14 +30,19 @@ var CreateHousehold = React.createClass({
         <TouchableHighlight
           style={styles.button}
           onPress={() => {
-            this.props.submit();
-            this.props.gotoRoommateInvitations();
+            this.handleSubmit;
+            this.props.gotoRoommateInvitations;
           }}
         >
           <Text style={styles.btnText}>Make household</Text>
         </TouchableHighlight>
       </View>
     );
+  },
+
+  handleSubmit() {
+    var household = this.state.householdName;
+    this.props.submit(household);
   },
 
 });

@@ -1,10 +1,11 @@
-function token(state = null, action) {
+function token(state = '', action) {
   switch (action.type) {
   case 'LOGIN_SUCCESS':
+    return '' + action.payload.token;
   case 'SIGNUP_SUCCESS':
-    return action.payload.token;
+    return '' + action.payload.token;
   case 'LOGOUT':
-    return null;
+    return '';
   default:
     return state;
   }

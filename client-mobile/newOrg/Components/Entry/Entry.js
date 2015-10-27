@@ -59,7 +59,6 @@ var Entry = React.createClass({
 });
 
 function select(state) {
-  // TODO: set default for state.entryMode
  return {entryMode: state.uiMode.entryMode};
 }
 

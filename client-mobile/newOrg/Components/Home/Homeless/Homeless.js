@@ -39,7 +39,8 @@ var Homeless = React.createClass({
   },
 
   gotoCreateHousehold(/*TODO: payload*/) {
-    // dispatch action to store causing change in uiMode to 
+
+    this.props.dispatch();
   },
 
   handleHouseholdCreation(/*TODO: payload*/) {

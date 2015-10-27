@@ -4,7 +4,6 @@ var tokens = require('../services/tokens');
 
 //If you're looking for where new users are created,
 //go to the authRouter - the creation code lives there
-//so that posts to create new users don't need tokens.
 
 router.get('/:userId', function(request, response) {
   var id = request.decoded.userId;
@@ -40,11 +39,18 @@ router.put('/:userId', function(request, response) {
       if (updateArray) {
         if (updates.householdId) {
           token = tokens.issue(id, updates.householdId);
+          db.Household.findOne({where: {id: updates.householdId}})
+            .then(function(household) {
+              response.status(201).json({
+                user: updateArray[1][0],
+                token,
+                household,
+              });
+            })
         } else {
           token = tokens.issue(id);
+          response.status(201).json({user: updateArray[1][0], token});
         }
-
-        response.status(201).json({user: updateArray[1][0], token});
 
       } else {
         response.status(404).send('Item not found');

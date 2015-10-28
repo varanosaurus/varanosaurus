@@ -4,7 +4,7 @@ var tokens = require('../services/tokens');
 
 authRouter.post('/login', function(request, response) {
 
-  db.User.findOne({where: {username: request.body.username}, attributes: {exclude: ['password']}})
+  db.User.findOne({where: {username: request.body.username}})
     .then(function(user) {
 
       var token;

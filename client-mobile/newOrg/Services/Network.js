@@ -83,6 +83,14 @@ var addHousehold = function(name) {
     });
 };
 
+var getItems = function() {
+  var params = makeParams('GET');
+  return fetch(url + itemUrl, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
+
 // getHousehold --> needed if we return the household at login/signup?
 
 var updateHousehold = function(updates) {
@@ -180,4 +188,5 @@ module.exports = {
   addItem,
   getItem,
   updateItem,
+  getItems,
 };

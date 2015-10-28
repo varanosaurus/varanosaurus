@@ -71,12 +71,14 @@ var seed = function() {
 
   .then(function() {
     //add items
+    //household 1 has users 1 and 4
+    //household 2 has users 2 and 3
     return db.Item.bulkCreate([
       {
         description: 'valyrian steel',
         householdId: 1,
         addingUserId: 1,
-        buyingUserId: 2,
+        buyingUserId: 1,
       },
       {
         description: 'boiled leather',
@@ -91,7 +93,7 @@ var seed = function() {
       {
         description: 'albino wolf cub',
         householdId: 1,
-        addingUserId: 2,
+        addingUserId: 4,
         buyingUserId: 4,
       },
       {
@@ -109,6 +111,7 @@ var seed = function() {
         description: 'dragon\'s blood',
         householdId: 2,
         addingUserId: 3,
+        buyingUserId: 3,
       },
     ]);
   })
@@ -125,12 +128,14 @@ var seed = function() {
 
   .then(function() {
     //now add more items that won't have been reckoned
+    //household 1 has users 1 and 4
+    //household 2 has users 2 and 3
     return db.Item.bulkCreate([
       {
         description: 'Needle',
         householdId: 1,
         addingUserId: 1,
-        buyingUserId: 2,
+        buyingUserId: 4,
       },
       {
         description: 'Ice',
@@ -140,12 +145,12 @@ var seed = function() {
       {
         description: 'Blackfyre',
         householdId: 1,
-        addingUserId: 4,
+        addingUserId: 1,
       },
       {
         description: 'Bright Roar',
         householdId: 1,
-        addingUserId: 2,
+        addingUserId: 4,
         buyingUserId: 4,
       },
       {

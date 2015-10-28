@@ -2,6 +2,10 @@
 
 var React = require('react-native');
 
+var {connect} = require('react-redux');
+
+var Actions = require('../../../Actions/Actions');
+
 var Items = require('../Items/Items');
 var Reckonings = require('../Reckonings/Reckonings');
 var Settings = require('../Settings/Settings');
@@ -22,21 +26,21 @@ var HomeTab = React.createClass({
         <TabBarIOS.Item
           selected={this.props.selectedTab === 'items'}
           title='Items'
-          onPress={this.props.gotoItemsTab}
+          onPress={this.gotoItemsTab}
         >
           {this.renderItemsTabView()}
         </TabBarIOS.Item>
         <TabBarIOS.Item
           selected={this.props.selectedTab === 'reckonings'}
           title='Reckonings'
-          onPress={this.props.gotoReckoningsTab}
+          onPress={this.gotoReckoningsTab}
         >
           {this.renderReckoningsTabView()}
         </TabBarIOS.Item>
         <TabBarIOS.Item
           selected={this.props.selectedTab === 'settings'}
           title='Settings'
-          onPress={this.props.gotoSettingsTab}
+          onPress={this.gotoSettingsTab}
         >
           {this.renderSettingsTabView()}
         </TabBarIOS.Item>
@@ -58,7 +62,23 @@ var HomeTab = React.createClass({
     return <Settings />;
   },
 
+  gotoItemsTab() {
+    this.props.dispatch(Actions.setHomeTab('items'));
+  },
+  gotoReckoningsTab() {
+    this.props.dispatch(Actions.setHomeTab('reckonings'));
+  },
+  gotoSettingsTab() {
+    this.props.dispatch(Actions.setHomeTab('settings'));
+  },
+
 });
 
-module.exports = HomeTab;
+function select(state) {
+  return {
+    selectedTab: state.uiMode.selectedHomeTab,
+  };
+}
+
+module.exports = connect(select)(HomeTab);
 

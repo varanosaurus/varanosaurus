@@ -45,8 +45,10 @@ var PendingItemDetails = React.createClass({
       updates.details = this.state.details;
     }
     if (this.state.price) {
-      updates.price = this.state.details;
+      updates.price = +this.state.price;
       updates.bought = true;
+      updates.timeBought = new Date();
+      this.props.gotoBoughtItemsList();
     }
     this.props.updateItem(updates);
     this.saveChanges();
@@ -89,32 +91,27 @@ var PendingItemDetails = React.createClass({
         </View>
       );
     // not editing & buying
-    // } else if (!this.state.isEditing && this.state.isBuying) {
-    //   return (
-    //     <View style={styles.contentContainer}>
-    //       <View style={styles.mainSection}>
-    //         <Text style={styles.title}>Product: {this.props.item.description}</Text>
-    //         <Text>Requested By: {this.props.creator.username} </Text>
-    //         <Text>Details: {this.props.item.details} </Text>
-    //         <TextInput
-    //           keyboardType='number-pad'
-    //           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-    //           onChangeText={(price) => this.setState({price})}
-    //           value={this.state.price}
-    //         />
-    //         <Button
-    //           onPress={this.openModal}
-    //           style={styles.btn}>
-    //           Enter Price
-    //         </Button>
-    //       </View>
-    //         <Modal
-    //           style={styles.modal}
-    //           ref={"modal"}>
-    //           <BoughtItemDetails item={this.props.item}/>
-    //         </Modal>
-    //     </View>
-    //   ); //closes return
+    } else if (!this.state.isEditing && this.state.isBuying) {
+      return (
+        <View style={styles.contentContainer}>
+          <View style={styles.mainSection}>
+            <Text style={styles.title}>Product: {this.props.item.description}</Text>
+            <Text>Requested By: {this.props.creator.username} </Text>
+            <Text>Details: {this.props.item.details} </Text>
+            <TextInput
+              keyboardType='number-pad'
+              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+              onChangeText={(price) => this.setState({price})}
+              value={this.state.price}
+            />
+            <Button
+              onPress={this.handleSubmit}
+              style={styles.btn}>
+              Enter Price
+            </Button>
+          </View>
+        </View>
+      ); //closes return
     } //closes editing and not buying
   }, //closes render
 }); //closes class

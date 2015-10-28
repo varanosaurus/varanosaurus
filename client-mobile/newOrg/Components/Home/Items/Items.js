@@ -45,6 +45,7 @@ var Items = React.createClass({
         item={this.props.selectedItem}
         creator={this.props.creator}
         updateItem={this.updateItem}
+        gotoBoughtItemsList={this.gotoBoughtItemsList}
       />;
     } else {
       return <BoughtItemDetails
@@ -56,10 +57,12 @@ var Items = React.createClass({
 
   gotoPendingItemsList() {
     this.props.dispatch(Actions.setItemsFilter('pending'));
+    this.props.dispatch(Actions.setItemsViewMode('list'));
   },
 
   gotoBoughtItemsList() {
     this.props.dispatch(Actions.setItemsFilter('bought'));
+    this.props.dispatch(Actions.setItemsViewMode('list'));
   },
 
   goToItemDetailsView(item) {

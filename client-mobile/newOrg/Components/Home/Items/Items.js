@@ -82,9 +82,6 @@ function select(state) {
     }
   }
 
-  console.log('selectedItem: ', selectedItem);
-  console.log('creator: ', creator);
-
   return {
     itemsViewMode: state.uiMode.itemsViewMode,
     itemsFilter: state.uiMode.itemsFilter,

@@ -52,7 +52,7 @@ function items(state, action) {
 function reckonings(state = [], action) {
   switch (action.type) {
   case 'FETCH_RECKONING_LISTS_SUCCESS':
-    return action.payload.reckonings;
+    return action.payload.reckonings.reckonings;
   default:
     return state;
   }

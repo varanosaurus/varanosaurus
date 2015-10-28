@@ -207,6 +207,12 @@ exports.selectReckoning = function(id) {
 };
 
 // SET_RECKONINGS_VIEW_MODE: 'list', 'details'
+exports.setReckoningsViewMode = function(mode) {
+  return {
+    type: 'SET_RECKONINGS_VIEW_MODE',
+    payload: {mode},
+  };
+};
 
 // SET_RECKONINGS_DETAILS_MODE: 'items', 'users'
 

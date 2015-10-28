@@ -9,7 +9,6 @@ exports.login = function(username, password) {
       .then(function(response) {
         return response.json()
           .then(function(body) {
-            console.log('response status:' + response.ok);
             if (response.ok) {
               return dispatch(loginSuccess(body));
             } else {

@@ -32,7 +32,7 @@ router.post('/', function(request, response) {
 
   reckon(householdId)
     .then(function(reckoning) {
-      response.status(201).json(reckoning);
+      response.status(201).json({reckoning});
     })
 
     .catch(function(error) {

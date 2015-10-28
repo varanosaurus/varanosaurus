@@ -4,7 +4,7 @@ var tokens = require('../services/tokens');
 
 authRouter.post('/login', function(request, response) {
 
-  db.User.findOne({where: {username: request.body.username}/*, attributes: {exclude: ['password']}*/})
+  db.User.findOne({where: {username: request.body.username}})
     .then(function(user) {
 
       var token;
@@ -64,7 +64,7 @@ authRouter.post('/signup', function(request, response) {
           id: user.id,
           updatedAt: user.updatedAt,
           createdAt: user.createdAt,
-          household: user.household,
+          householdId: user.householdId,
         },
         token: tokens.issue(user.id),
       });

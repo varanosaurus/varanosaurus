@@ -7,8 +7,7 @@ var appReducer = require('../Reducers/appReducer');
 var store = applyMiddleware(thunk)(createStore)(appReducer);
 
 store.subscribe(function() {
-  console.log('current state:');
-  console.log(store.getState());
+  console.log('current state:', store.getState());
 });
 
 module.exports = store;

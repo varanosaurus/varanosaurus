@@ -7,10 +7,19 @@ router.get('/', function(request, response) {
     response.status(400).send('No household saved in token');
   }
 
-  db.Item.findAll({where: {householdId, reckoningId: null}})
+  db.Item.findAll({where: {householdId, bought: false, reckoningId: null}})
+    .then(function(pending) {
+      if (!pending) {
+        response.status(500).send('Error finding pending items');
+      }
 
-    .then(function(items) {
-      response.json({items});
+      db.Item.findAll({where: {householdId, bought: true, reckoningId: null}})
+        .then(function(bought) {
+          if (!bought) {
+            response.status(500).send('Error finding bought items');
+          }
+          response.status(201).json({bought, pending});
+        });
     })
 
     .catch(function(error) {
@@ -39,7 +48,7 @@ router.post('/', function(request, response) {
     .then(function(item) {
       item.setHousehold(householdId);
       item.setAddingUser(userId);
-      response.status(201).json(item);
+      response.status(201).json({item});
     })
 
     .catch(function(error) {

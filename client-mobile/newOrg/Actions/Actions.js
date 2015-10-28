@@ -9,7 +9,6 @@ exports.login = function(username, password) {
       .then(function(response) {
         return response.json()
           .then(function(body) {
-            console.log('response status:' + response.ok);
             if (response.ok) {
               return dispatch(loginSuccess(body));
             } else {
@@ -128,10 +127,10 @@ exports.setHomeTab = function(mode) {
 // SET_ITEMS_VIEW_MODE, with payload of 'details' or 'list'
 
 // SET_ITEMS_FILTER, with payload of 'pending' or 'bought' ?
-exports.setItemsFilter = function(mode) {
+exports.setItemsFilter = function(filter) {
   return {
     type: 'SET_ITEMS_FILTER',
-    payload: {mode},
+    payload: {filter},
   };
 };
 

@@ -18,7 +18,7 @@ function selectedHomeTab(state = 'items', action) {
   }
 }
 
-function itemsViewMode(state = 'details', action) {
+function itemsViewMode(state = 'list', action) {
   switch (action.type) {
   case 'SET_ITEMS_VIEW_MODE':
     return action.payload.mode;

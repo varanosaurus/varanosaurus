@@ -19,6 +19,8 @@ var {
 var HomeTab = React.createClass({
 
   render() {
+    console.log('rendering hometabs, see props below');
+    console.dir(this.props);
 
     return (
 
@@ -51,15 +53,15 @@ var HomeTab = React.createClass({
   },
 
   renderItemsTabView() {
-    return <Items />;
+    return <Items navigator={this.props.navigator} />;
   },
 
   renderReckoningsTabView() {
-    return <Reckonings />;
+    return <Reckonings navigator={this.props.navigator} />;
   },
 
   renderSettingsTabView() {
-    return <Settings />;
+    return <Settings navigator={this.props.navigator} />;
   },
 
   gotoItemsTab() {
@@ -81,4 +83,3 @@ function select(state) {
 }
 
 module.exports = connect(select)(HomeTab);
-

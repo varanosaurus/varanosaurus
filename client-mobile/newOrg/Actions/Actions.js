@@ -228,6 +228,7 @@ exports.setItemsFilter = function(filter) {
 };
 
 exports.selectItem = function(item) {
+  console.log('selecting item ' + item);
   return {
     type: 'SELECT_ITEM',
     payload: {itemId: item.id},

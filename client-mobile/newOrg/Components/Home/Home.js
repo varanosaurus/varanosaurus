@@ -3,7 +3,7 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var Actions = require('../../Actions/Actions');
+// var Actions = require('../../Actions/Actions');
 
 var Homeless = require('./Homeless/Homeless');
 // var HomeTab = require('./dumb/HomeTab');
@@ -12,35 +12,10 @@ var NavRedux = require('../NavRedux');
 var Home = React.createClass({
 
   render() {
-    return <NavRedux />;
-    // return this.props.household
-    //   ? this.renderHomeTab()
-    //   : this.renderHomeless();
-  },
-
-  renderHomeless() {
-    return <Homeless />;
-  },
-
-  renderHomeTab() {
-    return <HomeTab
-      selectedTab={this.props.selectedHomeTab}
-      gotoItemsTab={this.gotoItemsTab}
-      gotoReckoningsTab={this.gotoReckoningsTab}
-      gotoSettingsTab={this.gotoSettingsTab}
-    />;
-  },
-
-  gotoItemsTab() {
-    this.props.dispatch(Actions.setHomeTab('items'));
-    this.props.dispatch(Actions.setItemsViewMode('list'));
-  },
-  gotoReckoningsTab() {
-    this.props.dispatch(Actions.setHomeTab('reckonings'));
-  },
-  gotoSettingsTab() {
-    this.props.dispatch(Actions.setHomeTab('settings'));
-  },
+    return this.props.household
+      ? <NavRedux />
+      : <Homeless />;
+  };
 
 });
 

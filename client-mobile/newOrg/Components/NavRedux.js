@@ -9,7 +9,6 @@ var {
   Navigator,
   TouchableHighlight,
   Text,
-  View,
 } = React;
 
 
@@ -25,30 +24,23 @@ var NavRedux = React.createClass({
   // },
 
   render() {
-
-    return <Navigator
-      initialRoute={Routes.hometab}
-      renderScene={this.renderScene}
-      configureScene={this.configureScene}
-      ref='navigator'
-      />;
-
+    console.log('rendering navigator');
+    return (
+        <Navigator
+          initialRoute={Routes.hometab}
+          renderScene={this.renderScene}
+          configureScene={this.configureScene}
+          ref='navigator'
+          navigationBar={<Navigator.NavigationBar routeMapper={this.routeMapper} />}
+        />
+      );
   },
 
-  renderScene(route) {
-    var NavBar = Navigator.NavigationBar;
+  renderScene(route, navigator) {
     var Component = route.component;
-
-    if (route.name === 'hometab') {
-      return <Component />;
-    } else {
-      return (
-        <View>
-          <NavBar title={route.title} routeMapper={this.routeMapper} />
-          <Component {...route.props} />
-        </View>
-      );
-    }
+    console.log('rendering component:');
+    console.dir(Component);
+    return <Component {...route.props} navigator={navigator} />;
   },
 
   configureScene(route) {
@@ -57,23 +49,23 @@ var NavRedux = React.createClass({
 
   routeMapper: {
 
-    LeftButton(route, navigator, index) {
+    LeftButton(route, navigator, index, navState) {
+      if (index === 0) {
+        return null;
+      }
+
       return (<TouchableHighlight style={{marginTop: 30}} onPress={() => {
         if (index > 0) {
-          this.navigator.pop();
+          navigator.pop();
         }
       }}>
-      {() => {
-        if (index > 0) {
-          return <Text>{this.navigator.getCurrentRoutes()[index - 1].title}</Text>;
-        }
-      }}
+        <Text>{navState.routeStack[index - 1].title}</Text>
       </TouchableHighlight>
       );
     },
 
     RightButton() {
-      return;
+      return null;
     },
 
     Title(route) {

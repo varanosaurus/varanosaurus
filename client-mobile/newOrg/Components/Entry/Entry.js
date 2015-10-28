@@ -5,7 +5,8 @@ var {connect} = require('react-redux');
 
 var actions = require('../../Actions/Actions');
 
-var Login = require('./dumb/Login');
+// var Login = require('./dumb/Login'); // KC
+var Reckonings = require('../Home/Reckonings/Reckonings'); // KC
 var Signup = require('./dumb/Signup');
 
 var Entry = React.createClass({
@@ -18,10 +19,11 @@ var Entry = React.createClass({
 
   renderLogin() {
     return (
-      <Login
-          submit={this.handleLogin}
-          gotoSignup={this.gotoSignup}
-      />
+      <Reckonings /> // KC
+      // <Login
+          // submit={this.handleLogin}
+          // gotoSignup={this.gotoSignup}
+      // />
     );
   },
 

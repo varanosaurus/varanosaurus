@@ -3,6 +3,8 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
+var Actions = require('../../../Actions/Actions');
+
 var ItemList = require('./dumb/ItemList');
 // var ItemDetails = require('./dumb/ItemDetails');
 // var ItemAdd = require('./ItemAdd/ItemAdd');
@@ -25,7 +27,17 @@ var Items = React.createClass({
     return <ItemList
       itemsFilter={this.props.itemsFilter}
       items={this.props.items}
+      gotoPendingItemsList={this.gotoPendingItemsList}
+      gotoBoughtItemsList={this.gotoBoughtItemsList}
     />;
+  },
+
+  gotoPendingItemsList() {
+    this.props.dispatch(Actions.setItemsFilter('pending'));
+  },
+
+  gotoBoughtItemsList() {
+    this.props.dispatch(Actions.setItemsFilter('bought'));
   },
 
 });

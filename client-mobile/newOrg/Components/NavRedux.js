@@ -16,19 +16,38 @@ var {
 
 var NavRedux = React.createClass({
 
+  componentWillMount() {
+    var navBar = <Navigator.NavigationBar
+      title={this.props.routes[this.props.routes.length - 1].title}
+      routeMapper={this.routeMapper}
+    />;
+
+    this.navigator = <Navigator
+      initialRoute={this.props.initialRoute}
+      renderScene={this.renderScene}
+      configureScene={this.configureScene}
+      navigationBar={navBar}
+      ref='navigator'
+      />;
+  },
+
   componentWillReceiveProps(nextProps) {
+    console.log('hello from componentWillReceiveProps');
     var next = nextProps.routes;
-    var current = this.getCurrentRoutes();
+    console.log(nextProps);
+    console.dir(this);
+    var current = this.refs.navigator.getCurrentRoutes();
+    console.dir(current);
     var i;
 
-    for (i = 0; i < Math.max(next.routes.length, current.length); i++) {
+    for (i = 0; i < Math.max(next.length, current.length); i++) {
 
-      if (next.routes[i] && !current[i]) {
-        this.push(next.routes[i]);
+      if (next[i] && !current[i]) {
+        this.push(next[i]);
         break;
       }
 
-      if (!next.routes[i] && current[i]) {
+      if (!next[i] && current[i]) {
         this.pop();
         break;
       }
@@ -37,28 +56,12 @@ var NavRedux = React.createClass({
   },
 
   render() {
+    console.log('rendering navbar');
+    return this.navigator;
 
-    console.log('rendering navigator, pre-navbar');
-
-    var navBar = <Navigator.NavigationBar
-      title={this.props.routes[this.props.routes.length - 1].title}
-      routeMapper={this.routeMapper}
-    />;
-
-    console.log('post creation of navbar');
-
-    return (
-      <Navigator
-        initialRouteStack={this.props.routes}
-        renderScene={this.renderScene}
-        configureScene={this.configureScene}
-        navigationBar={navBar}
-        />
-    );
   },
 
   renderScene(route) {
-    console.log('attempting to render a route: ' + route);
     var Component = route.component;
     return (
       <Component {...route.props} />
@@ -100,9 +103,11 @@ var NavRedux = React.createClass({
 
 function select(state) {
   var routes = state.routes.map((routeName) => Routes[routeName]());
+  var initialRoute = Routes[state.initialRoute]();
 
   return {
     routes,
+    initialRoute,
   };
 }
 

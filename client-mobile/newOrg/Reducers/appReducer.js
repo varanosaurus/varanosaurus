@@ -4,9 +4,14 @@ var routes = require('./routesReducer');
 var uiMode = require('./State/uiModeReducer');
 var data = require('./Data/dataReducer');
 
+function initialRoute(state = 'hometab') {
+  return state;
+}
+
 module.exports = combineReducers({
   token,
   routes,
+  initialRoute,
   uiMode,
   data,
 });

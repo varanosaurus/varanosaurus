@@ -1,14 +1,18 @@
 'use strict';
 
 var React = require('react-native');
-var Navbar = require('react-native-navbar');
+// var NavBar = require('react-native-navbar');
 var {connect} = require('react-redux');
 
-var Actions = require('../Actions/Actions');
+// var Actions = require('../Actions/Actions');
+var Routes = require('../Services/Routes');
 
 var {
   Navigator,
+  TouchableHighlight,
+  Text,
 } = React;
+
 
 var NavRedux = React.createClass({
 
@@ -34,17 +38,14 @@ var NavRedux = React.createClass({
 
   render() {
 
-    var leftButtonConfig = {};
+    console.log('rendering navigator, pre-navbar');
 
-    if (this.props.routes.length > 1) {
-      leftButtonConfig.title = 'Back';
-      leftButtonConfig.handler = this.goBack;
-    }
-
-    var navBar = <NavBar
+    var navBar = <Navigator.NavigationBar
       title={this.props.routes[this.props.routes.length - 1].title}
-      leftButton={leftButtonConfig}
+      routeMapper={this.routeMapper}
     />;
+
+    console.log('post creation of navbar');
 
     return (
       <Navigator
@@ -57,7 +58,8 @@ var NavRedux = React.createClass({
   },
 
   renderScene(route) {
-    var Component = route.Component;
+    console.log('attempting to render a route: ' + route);
+    var Component = route.component;
     return (
       <Component {...route.props} />
     );
@@ -68,14 +70,39 @@ var NavRedux = React.createClass({
   },
 
   goBack() {
+    this.dispatch(/*TODO: Actions.popRoute()*/);
+  },
+
+  routeMapper: {
+
+    LeftButton(route, navigator, index) {
+      return (<TouchableHighlight style={{marginTop: 30}} onPress={() => {
+        if (index > 0) {
+          this.goBack();
+        }
+      }}>
+      <Text>Back</Text>
+      </TouchableHighlight>
+      );
+    },
+
+    RightButton() {
+      return;
+    },
+
+    Title(route) {
+      return (<Text>{route.title}</Text>);
+    },
 
   },
 
 });
 
 function select(state) {
+  var routes = state.routes.map((routeName) => Routes[routeName]());
+
   return {
-    routes: state.routes,
+    routes,
   };
 }
 

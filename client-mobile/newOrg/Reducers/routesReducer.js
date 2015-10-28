@@ -1,4 +1,4 @@
-function routes(state = ['hometabs'], action) {
+function routes(state = ['hometab'], action) {
   switch (action.type) {
   default:
     return state;

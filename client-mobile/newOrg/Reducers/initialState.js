@@ -7,6 +7,7 @@ var state = {
       bought: [], //[itemModel],
       pending: [], //[itemModel],
     },
+    roommates: null, //[{userModel}]
     reckonings: [], /*[
       {
         reckoning: reckoningModel,

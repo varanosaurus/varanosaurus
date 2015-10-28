@@ -22,7 +22,16 @@ authRouter.post('/login', function(request, response) {
           token = tokens.issue(user.id, user.householdId);
           db.Household.findOne({where: {id: user.householdId}})
             .then(function(household) {
-              return response.status(200).json({user: userData, household, token});
+              db.User.findAll({where: {householdId: household.id}, attributes: ['username', 'id']})
+                .then(function(roommates) {
+                  return response.status(201).json({
+                    userData,
+                    token,
+                    household,
+                    roommates,
+                  });
+                });
+              // return response.status(200).json({user: userData, household, token});
             });
         } else {
           token = tokens.issue(user.id);

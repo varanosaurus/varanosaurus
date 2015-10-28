@@ -29,7 +29,6 @@ var Items = React.createClass({
   },
 
   renderItemList() {
-    console.log('rendering item list');
     return <ItemList
       itemsFilter={this.props.itemsFilter}
       items={this.props.items}
@@ -40,9 +39,9 @@ var Items = React.createClass({
   },
 
   renderItemDetails() {
-    console.log('rendering itemDetails');
     return <ItemDetails
       item={this.props.selectedItem}
+      creator={this.props.creator}
     />;
   },
 
@@ -69,13 +68,22 @@ function select(state) {
     : state.data.items.bought;
 
   var selectedItem;
+  var creator;
   if (state.uiMode.selectedItemId) {
     for (var i = 0; i < items.length; i++) {
       if (items[i].id === state.uiMode.selectedItemId) {
         selectedItem = items[i];
+        for (var j = 0; j < state.data.roommates.length; j++) {
+          if (selectedItem.addingUserId === state.data.roommates[j].id) {
+            creator = state.data.roommates[j];
+          }
+        }
       }
     }
   }
+
+  console.log('selectedItem: ', selectedItem);
+  console.log('creator: ', creator);
 
   return {
     itemsViewMode: state.uiMode.itemsViewMode,
@@ -84,6 +92,7 @@ function select(state) {
     selectedItemId: state.uiMode.selectedItemId,
     items,
     selectedItem,
+    creator,
   };
 }
 

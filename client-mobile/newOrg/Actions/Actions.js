@@ -37,8 +37,9 @@ function loginSuccess(data) {
     type: 'LOGIN_SUCCESS',
     payload: {
       token: data.token,
-      user: data.user,
+      user: data.userData,
       household: data.household || null,
+      roommates: data.roommates || null,
     },
   };
 }
@@ -163,7 +164,6 @@ exports.setItemsFilter = function(filter) {
 };
 
 exports.selectItem = function(item) {
-  console.log('selectItem action was called with: ', item);
   return {
     type: 'SELECT_ITEM',
     payload: {itemId: item.id},

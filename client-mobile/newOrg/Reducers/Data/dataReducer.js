@@ -24,6 +24,15 @@ function household(state = null, action) {
   }
 }
 
+function roommates(state = null, action) {
+  switch (action.type) {
+  case 'LOGIN_SUCCESS':
+    return action.payload.roommates;
+  default:
+    return state;
+  }
+}
+
 function items(state, action) {
   if (state == null) {
     return {pending: [], bought: []};
@@ -64,4 +73,5 @@ module.exports = combineReducers({
   items,
   reckonings,
   invitations,
+  roommates,
 });

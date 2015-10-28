@@ -9,6 +9,7 @@ var {
   View,
   SegmentedControlIOS,
   TouchableHighlight,
+  Text,
 } = React;
 
 //TODO: add styles, add addItem functions

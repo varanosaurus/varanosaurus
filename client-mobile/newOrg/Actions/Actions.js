@@ -104,6 +104,29 @@ function signupFailure(message) {
   };
 }
 
+exports.fetchItemLists = function() {
+  return function(dispatch) {
+    Network.getItems()
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(fetchItemListsSuccess(body));
+            }
+          });
+      });
+  };
+};
+
+function fetchItemListsSuccess(data) {
+  return {
+    type: 'FETCH_ITEM_LISTS_SUCCESS',
+    payload: {
+      items: data,
+    },
+  };
+}
+
 // ENTRYMODE_LOGIN: set state.uiMode.entryMode to 'login'; navigate to login screen
 
 // ENTRYMODE_SIGNUP: set state.uiMode.entryMode to 'signup'; navigate to signup screen

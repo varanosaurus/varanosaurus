@@ -24,7 +24,7 @@ authRouter.post('/login', function(request, response) {
             .then(function(household) {
               db.User.findAll({where: {householdId: household.id}, attributes: ['username', 'id']})
                 .then(function(roommates) {
-                  return response.status(201).json({
+                  return response.status(200).json({
                     userData,
                     token,
                     household,
@@ -35,7 +35,7 @@ authRouter.post('/login', function(request, response) {
             });
         } else {
           token = tokens.issue(user.id);
-          return response.status(200).json({user: userData, token});
+          return response.status(200).json({userData, token});
         }
       } else {
         return response.status(403).send({error: 'Wrong password.'});

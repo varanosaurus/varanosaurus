@@ -37,8 +37,9 @@ function loginSuccess(data) {
     type: 'LOGIN_SUCCESS',
     payload: {
       token: data.token,
-      user: data.user,
+      user: data.userData,
       household: data.household || null,
+      roommates: data.roommates || null,
     },
   };
 }
@@ -147,13 +148,25 @@ exports.setHomeTab = function(mode) {
   };
 };
 
-// SET_ITEMS_VIEW_MODE, with payload of 'details' or 'list'
+exports.setItemsViewMode = function(mode) {
+  return {
+    type: 'SET_ITEMS_VIEW_MODE',
+    payload: {mode},
+  };
+};
 
 // SET_ITEMS_FILTER, with payload of 'pending' or 'bought' ?
 exports.setItemsFilter = function(filter) {
   return {
     type: 'SET_ITEMS_FILTER',
     payload: {filter},
+  };
+};
+
+exports.selectItem = function(item) {
+  return {
+    type: 'SELECT_ITEM',
+    payload: {itemId: item.id},
   };
 };
 

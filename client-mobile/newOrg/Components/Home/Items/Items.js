@@ -6,7 +6,7 @@ var {connect} = require('react-redux');
 var Actions = require('../../../Actions/Actions');
 
 var ItemList = require('./dumb/ItemList');
-// var ItemDetails = require('./dumb/ItemDetails');
+var ItemDetails = require('./dumb/ItemDetails');
 // var ItemAdd = require('./ItemAdd/ItemAdd');
 
 // var {
@@ -23,16 +23,25 @@ var Items = React.createClass({
     switch (this.props.itemsViewMode) {
     case 'list':
       return this.renderItemList();
+    case 'details':
+      return this.renderItemDetails();
     }
   },
 
   renderItemList() {
-    console.log('rendering item list');
     return <ItemList
       itemsFilter={this.props.itemsFilter}
       items={this.props.items}
       gotoPendingItemsList={this.gotoPendingItemsList}
       gotoBoughtItemsList={this.gotoBoughtItemsList}
+      goToItemDetailsView={this.goToItemDetailsView}
+    />;
+  },
+
+  renderItemDetails() {
+    return <ItemDetails
+      item={this.props.selectedItem}
+      creator={this.props.creator}
     />;
   },
 
@@ -44,6 +53,11 @@ var Items = React.createClass({
     this.props.dispatch(Actions.setItemsFilter('bought'));
   },
 
+  goToItemDetailsView(item) {
+    this.props.dispatch(Actions.setItemsViewMode('details'));
+    this.props.dispatch(Actions.selectItem(item));
+  },
+
 });
 
 
@@ -53,12 +67,32 @@ function select(state) {
     ? state.data.items.pending
     : state.data.items.bought;
 
+  var selectedItem;
+  var creator;
+  if (state.uiMode.selectedItemId) {
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].id === state.uiMode.selectedItemId) {
+        selectedItem = items[i];
+        for (var j = 0; j < state.data.roommates.length; j++) {
+          if (selectedItem.addingUserId === state.data.roommates[j].id) {
+            creator = state.data.roommates[j];
+          }
+        }
+      }
+    }
+  }
+
+  console.log('selectedItem: ', selectedItem);
+  console.log('creator: ', creator);
+
   return {
     itemsViewMode: state.uiMode.itemsViewMode,
     itemsFilter: state.uiMode.itemsFilter,
     itemDetails: state.uiMode.itemDetails,
-    items,
     selectedItemId: state.uiMode.selectedItemId,
+    items,
+    selectedItem,
+    creator,
   };
 }
 

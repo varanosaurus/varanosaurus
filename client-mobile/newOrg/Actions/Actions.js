@@ -140,6 +140,70 @@ exports.setEntryMode = function(mode) {
   };
 };
 
+//ADD HOUSEHOLD
+exports.addHousehold = function(householdName) {
+  return function(dispatch) {
+    return Network.addHousehold(householdName)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+             return dispatch(addHouseholdSuccess(body));
+            } else {
+             return dispatch(addHouseholdFailure(body));
+            }
+         });
+      })
+      .catch(function(error) {
+        console.log(error);
+        return dispatch(addHouseholdFailure(error.message));
+      });
+  };
+};
+
+// ADD_HOUSEHOLD_SUCCESS
+function addHouseholdSuccess(data) {
+  return {
+    type: 'ADD_HOUSEHOLD_SUCCESS',
+    payload: {
+      household: data.household,
+      token: data.token,
+    },
+  };
+}
+
+// ADD_HOUSEHOLD_FAILURE: display error message?
+
+function addHouseholdFailure(message) {
+  return {
+    type: 'ADD_HOUSEHOLD_FAILURE',
+    payload: {message},
+    error: true,
+  };
+}
+
+// (NEED TO FINISH) ACCEPT INVITATION: with payload of 'invitation'
+// exports.joinHousehold = function(status, invitationId) {
+
+//   return function(dispatch) {
+//     return Network.respondToInvitation(status, invitationId)
+//       .then(function(response) {
+//         return response.json()
+//           .then(function(body) {
+//             // if (response.ok) {
+//             //   return dispatch(signupSuccess(body));
+//             // } else {
+//             //   return dispatch(signupFailure(body));
+//             // }
+//           });
+//       })
+//       .catch(function(error) {
+//         console.log(error);
+//         // return dispatch(signupFailure(error.message));
+//       });
+//   };
+// };
+
 // SET_HOMETAB, with payload of 'items', 'reckonings', or 'settings' ?
 exports.setHomeTab = function(mode) {
   return {
@@ -170,6 +234,48 @@ exports.selectItem = function(item) {
   };
 };
 
+exports.updateItem = function(updates) {
+
+  console.log('updating item from Actions');
+
+  //Thunk
+  return function(dispatch) {
+    return Network.updateItem(updates)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(updateItemSuccess(body));
+            } else {
+              return dispatch(updateItemFailure(body));
+            }
+          });
+      })
+      .catch(function(error) {
+        console.log(error);
+        return dispatch(updateItemFailure(error.message));
+      });
+  };
+};
+
+function updateItemSuccess(data) {
+  console.log('making updateItemSuccess action');
+  return {
+    type: 'UPDATE_ITEM_SUCCESS',
+    payload: {
+      items: data,
+    },
+  };
+}
+
+function updateItemFailure(message) {
+  console.log('making updateItemFailure action');
+  return {
+    type: 'UPDATE_ITEM_FAILURE',
+    payload: {message},
+    error: true,
+  };
+}
 // GET_RECKONINGS: grab list of household's associated reckonings for display as list
 exports.fetchReckoningLists = function() {
   return function(dispatch) {

@@ -7,17 +7,17 @@ var seed = function() {
 
   return db.User.bulkCreate([
     {
-      username: 'brandonStark',
+      username: 'brandon',
       password: 'password',
       //id 1
     },
     {
-      username: 'lyannaStark',
+      username: 'lyanna',
       password: 'password',
       //id 2
     },
     {
-      username: 'rhaegarTargaryen',
+      username: 'rhaegar',
       password: 'password',
       //id 3
     },
@@ -27,7 +27,7 @@ var seed = function() {
       //id 4
     },
     {
-      username: 'danaerysTargaryen',
+      username: 'danaerys',
       password: 'password',
       //id 5
     },
@@ -51,12 +51,12 @@ var seed = function() {
 
   .then(function() {
     //add lyanna to targaryen house
-    return db.User.update({householdId: 2}, {where: {username: 'rhaegarTargaryen'}});
+    return db.User.update({householdId: 2}, {where: {username: 'rhaegar'}});
   })
 
   .then(function() {
     //add lyanna to targaryen house
-    return db.User.update({householdId: 2}, {where: {username: 'lyannaStark'}});
+    return db.User.update({householdId: 2}, {where: {username: 'lyanna'}});
   })
 
   .then(function() {
@@ -66,7 +66,7 @@ var seed = function() {
 
   .then(function() {
     //add jon to stark house
-    return db.User.update({householdId: 1}, {where: {username: 'brandonStark'}});
+    return db.User.update({householdId: 1}, {where: {username: 'brandon'}});
   })
 
   .then(function() {

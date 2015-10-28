@@ -19,6 +19,8 @@ function household(state = null, action) {
     return action.payload.household;
   case 'LOGOUT':
     return null;
+  case 'ADD_HOUSEHOLD_SUCCESS':
+    return action.payload.household;
   default:
     return state;
   }
@@ -40,6 +42,7 @@ function items(state, action) {
 
   switch (action.type) {
   case 'FETCH_ITEM_LISTS_SUCCESS':
+  case 'UPDATE_ITEM_SUCCESS':
     return {
       pending: action.payload.items.pending,
       bought: action.payload.items.bought,

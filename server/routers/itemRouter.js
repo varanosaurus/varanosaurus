@@ -81,6 +81,7 @@ router.put('/:itemId', function(request, response) {
 
   var id = request.params.itemId;
   var userId = request.decoded.userId;
+  var householdId = request.decoded.householdId;
 
   //we'll set the possible updates to an update object
   //then pass that into the update function
@@ -107,10 +108,23 @@ router.put('/:itemId', function(request, response) {
           item.setBuyingUser(userId);
         }
 
-        response.status(201).json({item});
+        return db.Item.findAll({where: {householdId, bought: false, reckoningId: null}})
+          .then(function(pending) {
+            if (!pending) {
+              return response.status(500).send({error: 'Error finding pending items'});
+            }
+
+            db.Item.findAll({where: {householdId, bought: true, reckoningId: null}})
+              .then(function(bought) {
+                if (!bought) {
+                  return response.status(500).send({error: 'Error finding bought items'});
+                }
+                return response.status(201).json({bought, pending});
+              });
+          });
 
       } else {
-        response.status(500).send({error: 'Item not found'});
+        return response.status(500).send({error: 'Item not found'});
       }
     })
 

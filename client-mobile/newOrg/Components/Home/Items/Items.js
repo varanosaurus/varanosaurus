@@ -6,7 +6,8 @@ var {connect} = require('react-redux');
 var Actions = require('../../../Actions/Actions');
 
 var ItemList = require('./dumb/ItemList');
-var ItemDetails = require('./dumb/ItemDetails');
+var BoughtItemDetails = require('./dumb/BoughtItemDetails');
+var PendingItemDetails = require('./dumb/PendingItemDetails');
 // var ItemAdd = require('./ItemAdd/ItemAdd');
 
 // var {
@@ -39,23 +40,39 @@ var Items = React.createClass({
   },
 
   renderItemDetails() {
-    return <ItemDetails
-      item={this.props.selectedItem}
-      creator={this.props.creator}
-    />;
+    if (this.props.itemsFilter === 'pending') {
+      return <PendingItemDetails
+        item={this.props.selectedItem}
+        creator={this.props.creator}
+        updateItem={this.updateItem}
+        gotoBoughtItemsList={this.gotoBoughtItemsList}
+      />;
+    } else {
+      return <BoughtItemDetails
+        item={this.props.selectedItem}
+        creator={this.props.creator}
+      />;
+    }
   },
 
   gotoPendingItemsList() {
     this.props.dispatch(Actions.setItemsFilter('pending'));
+    this.props.dispatch(Actions.setItemsViewMode('list'));
   },
 
   gotoBoughtItemsList() {
     this.props.dispatch(Actions.setItemsFilter('bought'));
+    this.props.dispatch(Actions.setItemsViewMode('list'));
   },
 
   goToItemDetailsView(item) {
     this.props.dispatch(Actions.setItemsViewMode('details'));
     this.props.dispatch(Actions.selectItem(item));
+  },
+
+  updateItem(updates) {
+    console.log('updating item in Items.js');
+    this.props.dispatch(Actions.updateItem(updates));
   },
 
 });

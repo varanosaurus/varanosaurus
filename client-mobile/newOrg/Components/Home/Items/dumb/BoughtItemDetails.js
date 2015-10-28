@@ -8,11 +8,7 @@ var {
   Text,
 } = React;
 
-var ItemDetail = React.createClass({
-
-  getInitialState() {
-    return {price: 0};
-  },
+var BoughtItemDetails = React.createClass({
 
   render() {
     return (
@@ -24,9 +20,10 @@ var ItemDetail = React.createClass({
       </View>
     );
   },
+
 });
 
-module.exports = ItemDetail;
+module.exports = BoughtItemDetails;
 
 var styles = StyleSheet.create({
   key: {

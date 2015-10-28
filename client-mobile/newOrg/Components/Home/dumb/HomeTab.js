@@ -8,6 +8,8 @@ var Settings = require('../Settings/Settings');
 
 var {
   TabBarIOS,
+  Text,
+  // StyleSheet,
 } = React;
 
 var HomeTab = React.createClass({
@@ -29,14 +31,16 @@ var HomeTab = React.createClass({
           title='Reckonings'
           onPress={this.props.gotoReckoningsTab}
         >
-          {this.renderReckoningsTabView()}
+        <Text>Reckonings View!!!</Text>
+          {/*this.renderReckoningsTabView()*/}
         </TabBarIOS.Item>
         <TabBarIOS.Item
           selected={this.props.selectedTab === 'settings'}
           title='Settings'
           onPress={this.props.gotoSettingsTab}
         >
-          {this.renderSettingsTabView()}
+        <Text>Settings View!!!</Text>
+          {/*this.renderSettingsTabView()*/}
         </TabBarIOS.Item>
       </TabBarIOS>
 

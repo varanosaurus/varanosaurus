@@ -13,6 +13,8 @@ function selectedHomeTab(state = 'items', action) {
   switch (action.type) {
   case 'SET_HOME_TAB':
     return action.payload.mode;
+  case 'ADD_HOUSEHOLD_SUCCESS':
+    return 'settings';
   default:
     return state;
   }
@@ -94,6 +96,8 @@ function settingsViewMode(state = 'options', action) {
   switch (action.type) {
   case 'SET_SETTINGS_VIEW_MODE':
     return action.payload.mode;
+  case 'ADD_HOUSEHOLD_SUCCESS':
+    return 'invite';
   default:
     return state;
   }

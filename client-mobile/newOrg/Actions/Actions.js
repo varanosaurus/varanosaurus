@@ -140,6 +140,70 @@ exports.setEntryMode = function(mode) {
   };
 };
 
+//ADD HOUSEHOLD
+exports.addHousehold = function(householdName) {
+  return function(dispatch) {
+    return Network.addHousehold(householdName)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+             return dispatch(addHouseholdSuccess(body));
+            } else {
+             return dispatch(addHouseholdFailure(body));
+            }
+         });
+      })
+      .catch(function(error) {
+        console.log(error);
+        return dispatch(addHouseholdFailure(error.message));
+      });
+  };
+};
+
+// ADD_HOUSEHOLD_SUCCESS
+function addHouseholdSuccess(data) {
+  return {
+    type: 'ADD_HOUSEHOLD_SUCCESS',
+    payload: {
+      household: data.household,
+      token: data.token,
+    },
+  };
+}
+
+// ADD_HOUSEHOLD_FAILURE: display error message?
+
+function addHouseholdFailure(message) {
+  return {
+    type: 'ADD_HOUSEHOLD_FAILURE',
+    payload: {message},
+    error: true,
+  };
+}
+
+// (NEED TO FINISH) ACCEPT INVITATION: with payload of 'invitation'
+// exports.joinHousehold = function(status, invitationId) {
+
+//   return function(dispatch) {
+//     return Network.respondToInvitation(status, invitationId)
+//       .then(function(response) {
+//         return response.json()
+//           .then(function(body) {
+//             // if (response.ok) {
+//             //   return dispatch(signupSuccess(body));
+//             // } else {
+//             //   return dispatch(signupFailure(body));
+//             // }
+//           });
+//       })
+//       .catch(function(error) {
+//         console.log(error);
+//         // return dispatch(signupFailure(error.message));
+//       });
+//   };
+// };
+
 // SET_HOMETAB, with payload of 'items', 'reckonings', or 'settings' ?
 exports.setHomeTab = function(mode) {
   return {

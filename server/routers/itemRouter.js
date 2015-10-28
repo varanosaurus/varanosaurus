@@ -4,26 +4,26 @@ var db = require('../db/interface.js');
 router.get('/', function(request, response) {
   var householdId = request.decoded.householdId;
   if (!householdId) {
-    response.status(400).send('No household saved in token');
+    response.status(400).send({error: 'No household saved in token'});
   }
 
   db.Item.findAll({where: {householdId, bought: false, reckoningId: null}})
     .then(function(pending) {
       if (!pending) {
-        response.status(500).send('Error finding pending items');
+        response.status(500).send({error: 'Error finding pending items'});
       }
 
       db.Item.findAll({where: {householdId, bought: true, reckoningId: null}})
         .then(function(bought) {
           if (!bought) {
-            response.status(500).send('Error finding bought items');
+            response.status(500).send({error: 'Error finding bought items'});
           }
           response.status(201).json({bought, pending});
         });
     })
 
     .catch(function(error) {
-      response.status(500).send(error);
+      response.status(500).send({error});
     });
 
 });
@@ -39,7 +39,7 @@ router.post('/', function(request, response) {
     .then(function(item) {
       if (item) {
         //this household already has the same item, so reject
-        response.status(409).send('Item already exists');
+        response.status(409).send({error: 'Item already exists'});
       } else {
         return db.Item.create(request.body);
       }
@@ -53,7 +53,7 @@ router.post('/', function(request, response) {
 
     .catch(function(error) {
       console.error(error);
-      response.status(500).send();
+      response.status(500).send({error});
     });
 });
 
@@ -67,13 +67,13 @@ router.get('/:itemId', function(request, response) {
       if (item) {
         response.status(201).json({item});
       } else {
-        response.status(500).send('Item not found');
+        response.status(500).send({error: 'Item not found'});
       }
     })
 
     .catch(function(error) {
       console.error(error);
-      response.status(500).send();
+      response.status(500).send({error});
     });
 });
 
@@ -110,13 +110,13 @@ router.put('/:itemId', function(request, response) {
         response.status(201).json({item});
 
       } else {
-        response.status(500).send('Item not found');
+        response.status(500).send({error: 'Item not found'});
       }
     })
 
     .catch(function(error) {
       console.error(error);
-      response.status(500).send();
+      response.status(500).send({error});
     });
 });
 
@@ -132,13 +132,13 @@ router.delete('/:itemId', function(request, response) {
           deletedItemId: id,
         });
       } else {
-        response.status(500).send('Error deleting item');
+        response.status(500).send({error: 'Error deleting item'});
       }
     })
 
     .catch(function(error) {
       console.error(error);
-      response.status(500).send();
+      response.status(500).send({error});
     });
 });
 

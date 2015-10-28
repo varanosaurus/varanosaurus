@@ -15,6 +15,10 @@ var ItemList = require('./dumb/ItemList');
 
 var Items = React.createClass({
 
+  componentWillMount() {
+    this.props.dispatch(Actions.fetchItemLists());
+  },
+
   render() {
     switch (this.props.itemsViewMode) {
     case 'list':

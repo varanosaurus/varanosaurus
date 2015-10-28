@@ -30,6 +30,11 @@ function items(state, action) {
   }
 
   switch (action.type) {
+  case 'FETCH_ITEM_LISTS_SUCCESS':
+    return {
+      pending: action.payload.items.pending,
+      bought: action.payload.items.bought,
+    };
   default:
     return state;
   }

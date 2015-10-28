@@ -19,16 +19,17 @@ var InviteRoommates = React.createClass({
 
   render() {
     var inputFields = this.state.inputField;
-    var self = this;
+    // var self = this;
     return (
       <View style={styles.container}>
+      <Text>THIS IS WORKING</Text>
         {
           inputFields.map(function() {
           return (<TextInput
                     style={styles.input}
                     keyboardType='default'
-                    placeholder="roommate's email address"
-                    onChangeText={(input) => self.setState({input: input})}
+                    placeholder="roommate name"
+                    onChangeText={(input) => this.setState({input: input})}
                   />);
           })
         }
@@ -46,6 +47,7 @@ var InviteRoommates = React.createClass({
 
   addRoomate() {
     this.state.inputField.push(true);
+    console.log(this.state.inputField);
     this.setState(this.state.inputField);
   },
 

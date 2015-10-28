@@ -10,10 +10,24 @@ var {
   TouchableHighlight,
 } = React;
 
+// {
+//   seen: true,
+//   seenAt: 2015-06-10,
+//   id: 1,
+//   createdAt: 2015-06-10,
+//   updatedAt: 2015-06-10,
+//   fromUserId: 25,
+//   toUserId: 2,
+//   householdId: 2,
+//   status: 'pending'
+// }
+
 var JoinOrCreateHousehold = React.createClass({
   getInitialState() {
     return ({
-      invitations: this.props.invitations.received,
+      invitations: [{householdName: 'householdName1'}, {householdName: 'householdName2'}],
+      // this.props.invitations.received,
+      // [{householdName: "householdName1"},{householdName: "householdName2"}]
       householdName: '',
       acceptedInvitation: '',
       declinedInvitation: '',
@@ -21,6 +35,7 @@ var JoinOrCreateHousehold = React.createClass({
   },
 
   render() {
+    var self = this;
     var invitations = this.state.invitations;
     if (invitations.length === 0) {
       return (
@@ -52,13 +67,15 @@ var JoinOrCreateHousehold = React.createClass({
           {
             invitations.map(function(invitation) {
               return (
-                <Text key={invitation.id}>You have been invited to the {invitation.householdName} household!</Text>
-                // <TouchableHighlight onPress={}>
-                //   <Text>Join</Text>
-                // </TouchableHighlight>
-                // <TouchableHighlight onPress={}>
-                //   <Text>Decline</Text>
-                // </TouchableHighlight>
+                <View>
+                  <Text key={invitation.householdName}>You have been invited to the {invitation.householdName} household!</Text>
+                  <TouchableHighlight onPress={() => {self.props.join(invitation);}}>
+                    <Text>Join</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight>
+                    <Text>Decline</Text>
+                  </TouchableHighlight>
+                </View>
               );
             })
           }

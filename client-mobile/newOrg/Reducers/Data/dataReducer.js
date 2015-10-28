@@ -19,6 +19,8 @@ function household(state = null, action) {
     return action.payload.household;
   case 'LOGOUT':
     return null;
+  case 'ADD_HOUSEHOLD_SUCCESS':
+    return action.payload.household;
   default:
     return state;
   }

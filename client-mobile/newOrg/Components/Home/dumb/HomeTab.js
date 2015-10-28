@@ -39,8 +39,7 @@ var HomeTab = React.createClass({
           title='Settings'
           onPress={this.props.gotoSettingsTab}
         >
-        <Text>Settings View!!!</Text>
-          {/*this.renderSettingsTabView()*/}
+          {this.renderSettingsTabView()}
         </TabBarIOS.Item>
       </TabBarIOS>
 

@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react-native');
-var ActionButton = require('react-native-action-button');
 // var Icon = require('react-native-vector-icons/Ionicons');
 
 var {
@@ -28,17 +27,25 @@ var ItemList = React.createClass({
     console.log(this.props.items);
     var dataSource = this.dataSource.cloneWithRows(this.props.items);
 
+    var selectedIndex;
+
+    if (this.props.itemsFilter === 'pending') {
+      selectedIndex = 0;
+    } else {
+      selectedIndex = 1;
+    }
+
     return (
       <View>
         <SegmentedControlIOS
           values={['Pending', 'Bought']}
-          selectedIndex={0}
+          selectedIndex={selectedIndex}
           tintColor={'#2fb4da'}
           onValueChange={(val) => {
             if (val === 'Pending') {
-              this.props.goToPendingItemsList();
+              this.props.gotoPendingItemsList();
             } else if (val === 'Bought') {
-              this.props.goToBoughtItemsList();
+              this.props.gotoBoughtItemsList();
             }
           }} />
         <ListView
@@ -47,12 +54,6 @@ var ItemList = React.createClass({
           automaticallyAdjustcontentInsets={false}
           contentInset={{bottom: 50}}
         />
-        <ActionButton
-          bgColor="rgba(23, 9, 107, 0.75)"
-          buttonColor="rgba(63,159,107,1)"
-          onPress={this.props.gotoAddItemView}
-        >
-        </ActionButton>
       </View>
     );
   },

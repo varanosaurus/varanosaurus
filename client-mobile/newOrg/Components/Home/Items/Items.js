@@ -6,7 +6,7 @@ var {connect} = require('react-redux');
 var Actions = require('../../../Actions/Actions');
 
 var ItemList = require('./dumb/ItemList');
-// var ItemDetails = require('./dumb/ItemDetails');
+var ItemDetails = require('./dumb/ItemDetails');
 // var ItemAdd = require('./ItemAdd/ItemAdd');
 
 // var {
@@ -23,6 +23,8 @@ var Items = React.createClass({
     switch (this.props.itemsViewMode) {
     case 'list':
       return this.renderItemList();
+    case 'details':
+      return this.renderItemDetails();
     }
   },
 
@@ -33,6 +35,14 @@ var Items = React.createClass({
       items={this.props.items}
       gotoPendingItemsList={this.gotoPendingItemsList}
       gotoBoughtItemsList={this.gotoBoughtItemsList}
+      goToItemDetailsView={this.goToItemDetailsView}
+    />;
+  },
+
+  renderItemDetails() {
+    console.log('rendering itemDetails');
+    return <ItemDetails
+      item={this.props.selectedItem}
     />;
   },
 
@@ -44,6 +54,11 @@ var Items = React.createClass({
     this.props.dispatch(Actions.setItemsFilter('bought'));
   },
 
+  goToItemDetailsView(item) {
+    this.props.dispatch(Actions.setItemsViewMode('details'));
+    this.props.dispatch(Actions.selectItem(item));
+  },
+
 });
 
 
@@ -53,12 +68,22 @@ function select(state) {
     ? state.data.items.pending
     : state.data.items.bought;
 
+  var selectedItem;
+  if (state.uiMode.selectedItemId) {
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].id === state.uiMode.selectedItemId) {
+        selectedItem = items[i];
+      }
+    }
+  }
+
   return {
     itemsViewMode: state.uiMode.itemsViewMode,
     itemsFilter: state.uiMode.itemsFilter,
     itemDetails: state.uiMode.itemDetails,
-    items,
     selectedItemId: state.uiMode.selectedItemId,
+    items,
+    selectedItem,
   };
 }
 

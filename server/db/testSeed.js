@@ -80,7 +80,7 @@ var seed = function() {
         addingUserId: 1,
         buyingUserId: 1,
         bought: true,
-        price: (Math.random()*100.00).toFixed(2),
+        price: (Math.random() * 100.00).toFixed(2),
       },
       {
         description: 'boiled leather',
@@ -98,7 +98,7 @@ var seed = function() {
         addingUserId: 4,
         buyingUserId: 4,
         bought: true,
-        price: (Math.random()*100.00).toFixed(2),
+        price: (Math.random() * 100.00).toFixed(2),
       },
       {
         description: 'dragon eggs',
@@ -106,7 +106,7 @@ var seed = function() {
         addingUserId: 2,
         buyingUserId: 2,
         bought: true,
-        price: (Math.random()*100.00).toFixed(2),
+        price: (Math.random() * 100.00).toFixed(2),
       },
       {
         description: 'crown of gold',
@@ -119,7 +119,7 @@ var seed = function() {
         addingUserId: 3,
         buyingUserId: 3,
         bought: true,
-        price: (Math.random()*100.00).toFixed(2),
+        price: (Math.random() * 100.00).toFixed(2),
       },
     ]);
   })
@@ -145,7 +145,7 @@ var seed = function() {
         addingUserId: 1,
         buyingUserId: 4,
         bought: true,
-        price: (Math.random()*100.00).toFixed(2),
+        price: (Math.random() * 100.00).toFixed(2),
       },
       {
         description: 'Ice',
@@ -163,7 +163,7 @@ var seed = function() {
         addingUserId: 4,
         buyingUserId: 4,
         bought: true,
-        price: (Math.random()*100.00).toFixed(2),
+        price: (Math.random() * 100.00).toFixed(2),
       },
       {
         description: 'Dark Sister',
@@ -171,7 +171,7 @@ var seed = function() {
         addingUserId: 2,
         buyingUserId: 2,
         bought: true,
-        price: (Math.random()*100.00).toFixed(2),
+        price: (Math.random() * 100.00).toFixed(2),
       },
       {
         description: 'Dawn',
@@ -183,7 +183,7 @@ var seed = function() {
         householdId: 2,
         addingUserId: 3,
       },
-    ])
+    ]);
   })
 
   .then(function() {
@@ -207,7 +207,7 @@ var seed = function() {
         addingUserId: 1,
         buyingUserId: 4,
         bought: true,
-        price: (Math.random()*100.00).toFixed(2),
+        price: (Math.random() * 100.00).toFixed(2),
       },
       {
         description: 'Oathkeeper',
@@ -225,7 +225,7 @@ var seed = function() {
         addingUserId: 4,
         buyingUserId: 4,
         bought: true,
-        price: (Math.random()*100.00).toFixed(2),
+        price: (Math.random() * 100.00).toFixed(2),
       },
       {
         description: 'Widow\'s Wail',
@@ -233,7 +233,7 @@ var seed = function() {
         addingUserId: 2,
         buyingUserId: 2,
         bought: true,
-        price: (Math.random()*100.00).toFixed(2),
+        price: (Math.random() * 100.00).toFixed(2),
       },
       {
         description: 'Lamentation',
@@ -245,7 +245,7 @@ var seed = function() {
         householdId: 2,
         addingUserId: 3,
       },
-    ])
+    ]);
   })
 
   .catch(function(error) {

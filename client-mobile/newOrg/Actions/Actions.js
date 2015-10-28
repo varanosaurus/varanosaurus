@@ -147,13 +147,26 @@ exports.setHomeTab = function(mode) {
   };
 };
 
-// SET_ITEMS_VIEW_MODE, with payload of 'details' or 'list'
+exports.setItemsViewMode = function(mode) {
+  return {
+    type: 'SET_ITEMS_VIEW_MODE',
+    payload: {mode},
+  };
+};
 
 // SET_ITEMS_FILTER, with payload of 'pending' or 'bought' ?
 exports.setItemsFilter = function(filter) {
   return {
     type: 'SET_ITEMS_FILTER',
     payload: {filter},
+  };
+};
+
+exports.selectItem = function(item) {
+  console.log('selectItem action was called with: ', item);
+  return {
+    type: 'SELECT_ITEM',
+    payload: {itemId: item.id},
   };
 };
 

@@ -18,7 +18,7 @@ var ItemDetail = React.createClass({
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{this.props.item.description}</Text>
-        <Text>Requested By: {this.props.creator}</Text>
+        <Text>Requested By: {this.props.item.creator}</Text>
         <Text>Details: {this.props.item.details}</Text>
         <Text style={styles.showing}>$ {}</Text>
       </View>

@@ -7,7 +7,8 @@ var Actions = require('../../../Actions/Actions');
 var Routes = require('../../../Services/Routes');
 
 var ItemList = require('./dumb/ItemList');
-var ItemDetails = require('./dumb/ItemDetails');
+var BoughtItemDetails = require('./dumb/BoughtItemDetails');
+var PendingItemDetails = require('./dumb/PendingItemDetails');
 // var ItemAdd = require('./ItemAdd/ItemAdd');
 
 // var {
@@ -43,23 +44,39 @@ var Items = React.createClass({
   },
 
   renderItemDetails() {
-    return <ItemDetails
-      item={this.props.selectedItem}
-      creator={this.props.creator}
-    />;
+    if (this.props.itemsFilter === 'pending') {
+      return <PendingItemDetails
+        item={this.props.selectedItem}
+        creator={this.props.creator}
+        updateItem={this.updateItem}
+        gotoBoughtItemsList={this.gotoBoughtItemsList}
+      />;
+    } else {
+      return <BoughtItemDetails
+        item={this.props.selectedItem}
+        creator={this.props.creator}
+      />;
+    }
   },
 
   gotoPendingItemsList() {
     this.props.dispatch(Actions.setItemsFilter('pending'));
+    this.props.dispatch(Actions.setItemsViewMode('list'));
   },
 
   gotoBoughtItemsList() {
     this.props.dispatch(Actions.setItemsFilter('bought'));
+    this.props.dispatch(Actions.setItemsViewMode('list'));
   },
 
   goToItemDetailsView(item) {
     // this.props.dispatch(Actions.selectItem(item));
     this.props.navigator.push(Routes.getItemDetailsView(item));
+  },
+
+  updateItem(updates) {
+    console.log('updating item in Items.js');
+    this.props.dispatch(Actions.updateItem(updates));
   },
 
 });
@@ -70,7 +87,6 @@ function select(state) {
   var items = (state.uiMode.itemsFilter === 'pending')
     ? state.data.items.pending
     : state.data.items.bought;
-
 
   return {
     itemsViewMode: state.uiMode.itemsViewMode,

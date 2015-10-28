@@ -67,6 +67,7 @@ var HomeTab = React.createClass({
 
   gotoItemsTab() {
     this.props.dispatch(Actions.setHomeTab('items'));
+    this.props.dispatch(Actions.setItemsViewMode('list'));
   },
   gotoReckoningsTab() {
     this.props.dispatch(Actions.setHomeTab('reckonings'));

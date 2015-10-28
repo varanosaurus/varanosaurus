@@ -120,7 +120,7 @@ var addItem = function(options) {
 
 var getItem = function() {
   var params = makeParams('GET');
-  return fetch(url + itemUrl + Store.getState().uiMode.selectedItem.id, params)
+  return fetch(url + itemUrl + Store.getState().uiMode.selectedItemId, params)
     .catch(function(error) {
       console.error(error);
     });
@@ -129,8 +129,9 @@ var getItem = function() {
 //getallItemsInHousehold --> necessary? Could just send back with login
 
 var updateItem = function(updates) {
+  console.log('updates: ', updates);
   var params = makeParams('PUT', updates);
-  return fetch(url + itemUrl + Store.getState().uiMode.selectedItem.id, params)
+  return fetch(url + itemUrl + Store.getState().uiMode.selectedItemId, params)
     .catch(function(error) {
       console.error(error);
     });

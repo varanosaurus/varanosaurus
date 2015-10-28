@@ -139,7 +139,7 @@ describe('itemRouter', function() {
 
   }); //closes 'should respond to a get request'
 
-  it('should update an item and send back the properties that were changed', function(done) {
+  it('should update an item and send back all items', function(done) {
 
     var context = this;
 
@@ -156,7 +156,8 @@ describe('itemRouter', function() {
 
         var parsedBody = JSON.parse(body);
 
-        expect(parsedBody.item.details).toEqual('good for beheading, will need soon');
+        expect(parsedBody.pending).toBeTruthy();
+        expect(parsedBody.bought).toBeTruthy();
 
         done();
 

@@ -17,10 +17,6 @@ var Home = React.createClass({
       : <Homeless />;
   },
 
-  // renderHomeless() {
-  //   return <Homeless />;
-  // },
-
 });
 
 function select(state) {

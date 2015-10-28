@@ -189,7 +189,8 @@
       buyingUserId: number, //optional
     },
     responseBody: {
-      item: Item,
+      bought: [Item],
+      pending: [Item],
     },
   },
 

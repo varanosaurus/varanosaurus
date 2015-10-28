@@ -12,7 +12,7 @@ var {
 
 var PendingItemDetails = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return ({
       details: this.props.item.details,
       isEditing: false,
@@ -23,23 +23,23 @@ var PendingItemDetails = React.createClass({
     });
   },
 
-  openModal: function() {
+  openModal() {
     this.refs.modal.open();
   },
 
-  edit: function() {
+  edit() {
     this.setState({isEditing: true});
   },
 
-  buy: function() {
+  buy() {
     this.setState({isBuying: true});
   },
 
-  saveChanges: function() {
+  saveChanges() {
     this.setState({isEditing: false});
   },
 
-  handleSubmit: function() {
+  handleSubmit() {
     var updates = {};
     if (this.state.details !== this.props.item.details) {
       updates.details = this.state.details;
@@ -54,7 +54,7 @@ var PendingItemDetails = React.createClass({
     this.saveChanges();
   },
 
-  render: function() {
+  render() {
 
     // not editing & not buying
     if (!this.state.isEditing && !this.state.isBuying) {

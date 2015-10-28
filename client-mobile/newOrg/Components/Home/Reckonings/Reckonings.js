@@ -11,7 +11,6 @@ var Reckoning = React.createClass({
 
   componentWillMount() {
     this.props.dispatch(Actions.fetchReckoningLists());
-    console.log(this.props.reckonings);
   },
 
   render() {
@@ -26,6 +25,7 @@ var Reckoning = React.createClass({
   },
 
   renderList() {
+    console.log('THIS IS "props.reckonings" FROM "Reckonings.js" :', this.props.reckonings);
     return (
       <ReckoningList
         reckonings={this.props.reckonings}

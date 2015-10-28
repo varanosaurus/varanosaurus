@@ -24,8 +24,6 @@ var ItemList = React.createClass({
 
   render() {
 
-    console.log('hello from inside itemlist:');
-    console.log(this.props.items);
     var dataSource = this.dataSource.cloneWithRows(this.props.items);
 
     var selectedIndex;

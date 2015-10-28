@@ -27,7 +27,6 @@ var Items = React.createClass({
   },
 
   renderItemList() {
-    console.log('rendering item list');
     return <ItemList
       itemsFilter={this.props.itemsFilter}
       items={this.props.items}

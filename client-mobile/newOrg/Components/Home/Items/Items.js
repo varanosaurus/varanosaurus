@@ -6,7 +6,8 @@ var {connect} = require('react-redux');
 var Actions = require('../../../Actions/Actions');
 
 var ItemList = require('./dumb/ItemList');
-var ItemDetails = require('./dumb/ItemDetails');
+var BoughtItemDetails = require('./dumb/BoughtItemDetails');
+var PendingItemDetails = require('./dumb/PendingItemDetails');
 // var ItemAdd = require('./ItemAdd/ItemAdd');
 
 // var {
@@ -39,10 +40,18 @@ var Items = React.createClass({
   },
 
   renderItemDetails() {
-    return <ItemDetails
-      item={this.props.selectedItem}
-      creator={this.props.creator}
-    />;
+    if (this.props.itemsFilter === 'pending') {
+      return <PendingItemDetails
+        item={this.props.selectedItem}
+        creator={this.props.creator}
+        updateItem={this.updateItem}
+      />;
+    } else {
+      return <BoughtItemDetails
+        item={this.props.selectedItem}
+        creator={this.props.creator}
+      />;
+    }
   },
 
   gotoPendingItemsList() {
@@ -56,6 +65,11 @@ var Items = React.createClass({
   goToItemDetailsView(item) {
     this.props.dispatch(Actions.setItemsViewMode('details'));
     this.props.dispatch(Actions.selectItem(item));
+  },
+
+  updateItem(updates) {
+    console.log('updating item in Items.js');
+    this.props.dispatch(Actions.updateItem(updates));
   },
 
 });
@@ -81,9 +95,6 @@ function select(state) {
       }
     }
   }
-
-  console.log('selectedItem: ', selectedItem);
-  console.log('creator: ', creator);
 
   return {
     itemsViewMode: state.uiMode.itemsViewMode,

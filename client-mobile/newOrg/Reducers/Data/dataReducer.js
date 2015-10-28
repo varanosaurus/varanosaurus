@@ -40,6 +40,7 @@ function items(state, action) {
 
   switch (action.type) {
   case 'FETCH_ITEM_LISTS_SUCCESS':
+  case 'UPDATE_ITEM_SUCCESS':
     return {
       pending: action.payload.items.pending,
       bought: action.payload.items.bought,

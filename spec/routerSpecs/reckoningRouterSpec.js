@@ -91,7 +91,7 @@ describe('itemRouter', function() {
                   body: JSON.stringify({description: 'dragon egg'}),
                 }, function(error, response, body) {
                   var parsedBody = JSON.parse(body);
-                  var itemId = parsedBody.id;
+                  var itemId = parsedBody.item.id;
 
                   //and now we'll update the item saying that jon bought it
                   request.put({
@@ -127,7 +127,7 @@ describe('itemRouter', function() {
     request.post({url, headers: context.headers}, function(error, response, body) {
       var parsedBody = JSON.parse(body);
 
-      expect(parsedBody.totalSpent).toEqual('100.00');
+      expect(parsedBody.reckoning.totalSpent).toEqual('100.00');
       done();
 
     });
@@ -154,15 +154,13 @@ describe('itemRouter', function() {
     var context = this;
     request.post({url, headers: context.headers}, function(error, response, body) {
       var parsedBody = JSON.parse(body);
-      var reckoningId = parsedBody.id;
+      var reckoningId = parsedBody.reckoning.id;
 
       request.get({url: url + reckoningId, headers: context.headers}, function(error, response, body) {
         var parsedBody = JSON.parse(body);
 
         expect(parsedBody.reckoning.id).toEqual(reckoningId);
         expect(parsedBody.reckoning.totalSpent).toEqual('100.00');
-
-        console.log(parsedBody.reckoning.users);
 
         done();
 

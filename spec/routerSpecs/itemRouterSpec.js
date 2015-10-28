@@ -76,8 +76,8 @@ describe('itemRouter', function() {
     request.post({url, headers: context.headers, body}, function(error, response, body) {
       var parsedBody = JSON.parse(body);
 
-      expect(parsedBody.description).toEqual('valyrian steel');
-      expect(parsedBody.addingUserId).toEqual(1);
+      expect(parsedBody.item.description).toEqual('valyrian steel');
+      expect(parsedBody.item.addingUserId).toEqual(1);
       done();
 
     });
@@ -91,15 +91,29 @@ describe('itemRouter', function() {
 
     request.post({url, headers: context.headers, body}, function() {
 
-      request.get({url, headers: context.headers}, function(error, response, body) {
-        var parsedBody = JSON.parse(body);
+      var body = JSON.stringify({description: 'dragon blood'});
 
-        expect(Array.isArray(parsedBody.items)).toBeTruthy();
-        done();
-      });
+      request.post({url, headers: context.headers, body}, function(error, response, body) {
 
-    });
-  });
+        var id = JSON.parse(body).item.id;
+        var buyingBody = JSON.stringify({bought: true});
+
+        request.put({url: url + id, headers: context.headers, body: buyingBody}, function() {
+
+          request.get({url, headers: context.headers}, function(error, response, body) {
+            var parsedBody = JSON.parse(body);
+
+            expect(Array.isArray(parsedBody.bought)).toBeTruthy();
+            expect(Array.isArray(parsedBody.pending)).toBeTruthy();
+            expect(parsedBody.bought[0].description).toEqual('dragon blood');
+            expect(parsedBody.pending[0].description).toEqual('valyrian steel');
+            done();
+
+          }); //closes get request
+        }); //closes put request
+      }); //closes second post request
+    }); //closes first post request
+  }); //closes 'should respond to a get request to /items'
 
   it('should respond to a get request with that item\'s information', function(done) {
 
@@ -111,7 +125,7 @@ describe('itemRouter', function() {
     request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
-      var itemId = parsedBody.id;
+      var itemId = parsedBody.item.id;
 
       request.get({url: url + itemId, headers: context.headers}, function(error, response, body) {
 
@@ -135,7 +149,7 @@ describe('itemRouter', function() {
     request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
-      var itemId = parsedBody.id;
+      var itemId = parsedBody.item.id;
       var updateBody = JSON.stringify({details: 'good for beheading, will need soon'});
 
       request.put({url: url + itemId, headers: context.headers, body: updateBody}, function(error, response, body) {
@@ -162,7 +176,7 @@ describe('itemRouter', function() {
     request.post({url, headers: context.headers, body}, function(error, response, body) {
 
       var parsedBody = JSON.parse(body);
-      var itemId = parsedBody.id;
+      var itemId = parsedBody.item.id;
 
       request.del({url: url + itemId, headers: context.headers}, function(error, response, body) {
 

@@ -79,6 +79,8 @@ var seed = function() {
         householdId: 1,
         addingUserId: 1,
         buyingUserId: 1,
+        bought: true,
+        price: (Math.random()*100.00).toFixed(2),
       },
       {
         description: 'boiled leather',
@@ -95,12 +97,16 @@ var seed = function() {
         householdId: 1,
         addingUserId: 4,
         buyingUserId: 4,
+        bought: true,
+        price: (Math.random()*100.00).toFixed(2),
       },
       {
         description: 'dragon eggs',
         householdId: 2,
         addingUserId: 2,
         buyingUserId: 2,
+        bought: true,
+        price: (Math.random()*100.00).toFixed(2),
       },
       {
         description: 'crown of gold',
@@ -112,6 +118,8 @@ var seed = function() {
         householdId: 2,
         addingUserId: 3,
         buyingUserId: 3,
+        bought: true,
+        price: (Math.random()*100.00).toFixed(2),
       },
     ]);
   })
@@ -136,6 +144,8 @@ var seed = function() {
         householdId: 1,
         addingUserId: 1,
         buyingUserId: 4,
+        bought: true,
+        price: (Math.random()*100.00).toFixed(2),
       },
       {
         description: 'Ice',
@@ -152,12 +162,16 @@ var seed = function() {
         householdId: 1,
         addingUserId: 4,
         buyingUserId: 4,
+        bought: true,
+        price: (Math.random()*100.00).toFixed(2),
       },
       {
         description: 'Dark Sister',
         householdId: 2,
         addingUserId: 2,
         buyingUserId: 2,
+        bought: true,
+        price: (Math.random()*100.00).toFixed(2),
       },
       {
         description: 'Dawn',
@@ -169,7 +183,69 @@ var seed = function() {
         householdId: 2,
         addingUserId: 3,
       },
-    ]);
+    ])
+  })
+
+  .then(function() {
+    //reckon the Starks
+    return reckon(1);
+  })
+
+  .then(function() {
+    //reckon the Targaryens
+    return reckon(2);
+  })
+
+  .then(function() {
+    //now add more items that won't have been reckoned
+    //household 1 has users 1 and 4
+    //household 2 has users 2 and 3
+    return db.Item.bulkCreate([
+      {
+        description: 'Lady Forlorn',
+        householdId: 1,
+        addingUserId: 1,
+        buyingUserId: 4,
+        bought: true,
+        price: (Math.random()*100.00).toFixed(2),
+      },
+      {
+        description: 'Oathkeeper',
+        householdId: 1,
+        addingUserId: 1,
+      },
+      {
+        description: 'Nightfall',
+        householdId: 1,
+        addingUserId: 1,
+      },
+      {
+        description: 'Red Rain',
+        householdId: 1,
+        addingUserId: 4,
+        buyingUserId: 4,
+        bought: true,
+        price: (Math.random()*100.00).toFixed(2),
+      },
+      {
+        description: 'Widow\'s Wail',
+        householdId: 2,
+        addingUserId: 2,
+        buyingUserId: 2,
+        bought: true,
+        price: (Math.random()*100.00).toFixed(2),
+      },
+      {
+        description: 'Lamentation',
+        householdId: 2,
+        addingUserId: 3,
+      },
+      {
+        description: 'Vigilance',
+        householdId: 2,
+        addingUserId: 3,
+      },
+    ])
   })
 
   .catch(function(error) {

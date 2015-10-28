@@ -10,6 +10,7 @@ var {
 
 var ReckoningCell = React.createClass({
   render() {
+    console.log('THIS IS "this.props.reckoning" FROM "ReckoningCell.js" :', this.props.reckoning);
     var TouchableElement = TouchableHighlight;
 
     return (

@@ -133,7 +133,7 @@ describe('authRouter', function() {
           var parsedBody = JSON.parse(body);
 
           expect(error).toBeFalsy();
-          expect(parsedBody.user).toBeTruthy();
+          expect(parsedBody.userData).toBeTruthy();
           expect(parsedBody.token).toBeTruthy();
           expect(parsedBody.household).toBeTruthy();
           done();

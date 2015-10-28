@@ -78,6 +78,6 @@ module.exports = ItemList;
 
 var styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    marginTop: 64,
   },
 });

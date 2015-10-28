@@ -39,7 +39,6 @@ var ReckoningList = React.createClass({
 
   render() {
     var dataSource = this.dataSource.cloneWithRows(this.props.reckonings);
-    console.log('dataSource is : ', dataSource);
     return (
         <View style={styles.reckoningList}>
           <ListView

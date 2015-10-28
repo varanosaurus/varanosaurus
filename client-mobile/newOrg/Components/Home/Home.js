@@ -6,14 +6,16 @@ var {connect} = require('react-redux');
 var Actions = require('../../Actions/Actions');
 
 var Homeless = require('./Homeless/Homeless');
-var HomeTab = require('./dumb/HomeTab');
+// var HomeTab = require('./dumb/HomeTab');
+var NavRedux = require('../NavRedux');
 
 var Home = React.createClass({
 
   render() {
-    return this.props.household
-      ? this.renderHomeTab()
-      : this.renderHomeless();
+    return <NavRedux />;
+    // return this.props.household
+    //   ? this.renderHomeTab()
+    //   : this.renderHomeless();
   },
 
   renderHomeless() {

@@ -79,6 +79,7 @@ var seed = function() {
         householdId: 1,
         addingUserId: 1,
         buyingUserId: 1,
+        bought: true,
       },
       {
         description: 'boiled leather',
@@ -95,12 +96,14 @@ var seed = function() {
         householdId: 1,
         addingUserId: 4,
         buyingUserId: 4,
+        bought: true,
       },
       {
         description: 'dragon eggs',
         householdId: 2,
         addingUserId: 2,
         buyingUserId: 2,
+        bought: true,
       },
       {
         description: 'crown of gold',
@@ -112,6 +115,7 @@ var seed = function() {
         householdId: 2,
         addingUserId: 3,
         buyingUserId: 3,
+        bought: true,
       },
     ]);
   })
@@ -136,6 +140,7 @@ var seed = function() {
         householdId: 1,
         addingUserId: 1,
         buyingUserId: 4,
+        bought: true,
       },
       {
         description: 'Ice',
@@ -152,12 +157,14 @@ var seed = function() {
         householdId: 1,
         addingUserId: 4,
         buyingUserId: 4,
+        bought: true,
       },
       {
         description: 'Dark Sister',
         householdId: 2,
         addingUserId: 2,
         buyingUserId: 2,
+        bought: true,
       },
       {
         description: 'Dawn',

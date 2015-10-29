@@ -69,9 +69,11 @@ var Items = React.createClass({
   },
 
   goToItemDetailsView(item) {
+    this.props.dispatch(Actions.selectItem(item));
+
     if (this.props.itemsFilter === 'pending') {
       this.props.navigator.push(Routes.getPendingItemDetailsView(item, {
-        updateItem: this.updateItem,
+        updateItem: this.updateItem.bind(this),
         gotoBoughtItemsList: this.gotoBoughtItemsList,
       }));
     } else {

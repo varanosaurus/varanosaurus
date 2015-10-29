@@ -209,6 +209,7 @@ function addHouseholdFailure(message) {
 
 // JOIN_HOUSEHOLD
 exports.updateInvitation = function(status, invitationId) {
+  console.log('upateInvitation in Actions being called with: ', status, invitationId);
   return function(dispatch) {
     return Network.respondToInvitation(status, invitationId)
       .then(function(response) {
@@ -230,11 +231,12 @@ exports.updateInvitation = function(status, invitationId) {
 
 // JOIN_HOUSEHOLD_SUCCESS
 function updateInvitationSuccess(data) {
+  console.log('updateInvitationSuccess action being created');
   return {
     type: 'UPDATE_INVITATION_SUCCESS',
     payload: {
-      invitation: data.invitation,
-      household: data.household,
+      invitations: data.invitations,
+      household: data.household || null,
       token: data.token,
     },
   };

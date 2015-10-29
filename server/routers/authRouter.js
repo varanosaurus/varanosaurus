@@ -31,7 +31,6 @@ authRouter.post('/login', function(request, response) {
                     roommates,
                   });
                 });
-              // return response.status(200).json({user: userData, household, token});
             });
         } else {
           token = tokens.issue(user.id);

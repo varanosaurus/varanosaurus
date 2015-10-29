@@ -163,6 +163,7 @@ var getInvitationOutbox = function() {
 };
 
 var respondToInvitation = function(status, invitationId) {
+  console.log('network respondToInvitation being called with: ', status, invitationId);
   var params = makeParams('PUT', {status});
   return fetch(url + invitationUrl + invitationId, params)
     .catch(function(error) {

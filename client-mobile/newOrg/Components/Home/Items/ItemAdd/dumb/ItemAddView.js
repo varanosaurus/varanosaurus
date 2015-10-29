@@ -29,11 +29,13 @@ var ItemAddView = React.createClass({
       <View style={styles.mainSection}>
         <Text>Enter a short description:</Text>
         <TextInput
+          style={styles.input}
           onChangeText={(description) => this.setState({description})}
           value={this.state.description}
         />
         <Text>Enter any additional details:</Text>
         <TextInput
+          style={styles.input}
           onChangeText={(details) => this.setState({details})}
           value={this.state.details}
         />
@@ -43,6 +45,10 @@ var ItemAddView = React.createClass({
       </View>
     );
 
+  },
+
+  handleSubmit() {
+    this.props.handleSubmit(this.state);
   },
 
 });
@@ -69,6 +75,11 @@ var styles = StyleSheet.create({
     marginTop: 64,
     padding: 10,
     backgroundColor: '#F5FCFF',
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
   },
   btn: {
     margin: 10,

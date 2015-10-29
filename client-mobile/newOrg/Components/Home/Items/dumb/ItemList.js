@@ -24,7 +24,8 @@ var ItemList = React.createClass({
   },
 
   render() {
-
+    console.log('props from itemList:');
+    console.dir(this.props);
     var dataSource = this.dataSource.cloneWithRows(this.props.items);
 
     var selectedIndex;
@@ -54,7 +55,7 @@ var ItemList = React.createClass({
           automaticallyAdjustcontentInsets={false}
           contentInset={{bottom: 50}}
         />
-      <Button onClick={this.props.gotoItemAddView}>Add an item</Button>
+      <Button onPress={this.props.gotoItemAddView}>Add an item</Button>
       </View>
     );
   },

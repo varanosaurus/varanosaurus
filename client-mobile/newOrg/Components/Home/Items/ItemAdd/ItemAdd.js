@@ -24,7 +24,7 @@ var ItemAdd = React.createClass({
 
   render() {
     return <ItemAddView
-      submit={this.handleSubmit}
+      handleSubmit={this.handleSubmit}
       status={this.props.addItemRequestStatus}
       error={this.props.addItemRequestError}
     />;
@@ -35,12 +35,12 @@ var ItemAdd = React.createClass({
       return;
     }
 
-    this.dispatch(Actions.addItem(item));
-    this.dispatch(Actions.setAddItemRequestStatus('pending'));
+    this.props.dispatch(Actions.addItem(item));
+    this.props.dispatch(Actions.setAddItemRequestStatus('pending'));
   },
 
   resetRequestStatus() {
-    this.dispatch(Actions.setAddItemRequestStatus(null));
+    this.props.dispatch(Actions.setAddItemRequestStatus(null));
   },
 
 });

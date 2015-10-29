@@ -33,7 +33,6 @@ var Items = React.createClass({
 
   renderItemList() {
     return (
-      <View>
       <ItemList
         itemsFilter={this.props.itemsFilter}
         items={this.props.items}
@@ -42,7 +41,6 @@ var Items = React.createClass({
         gotoItemDetailsView={this.gotoItemDetailsView}
         gotoItemAddView={this.gotoItemAddView}
       />
-      </View>
     );
   },
 
@@ -78,7 +76,7 @@ var Items = React.createClass({
 
     if (this.props.itemsFilter === 'pending') {
       this.props.navigator.push(Routes.getPendingItemDetailsView(item, {
-        updateItem: this.updateItem.bind(this),
+        updateItem: this.updateItem,
         gotoBoughtItemsList: this.gotoBoughtItemsList,
       }));
     } else {
@@ -87,6 +85,7 @@ var Items = React.createClass({
   },
 
   gotoItemAddView() {
+    console.log('pushing itemAddView');
     this.props.navigator.push(Routes.itemAddView);
   },
 

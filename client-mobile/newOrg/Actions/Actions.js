@@ -277,6 +277,36 @@ exports.setItemsFilter = function(filter) {
   };
 };
 
+exports.addItem = function(item) {
+  return function(dispatch) {
+    return Network.addItem(item)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(addItemSuccess(body.item));
+            } else {
+              return dispatch(addItemFailure(body.error));
+            }
+          });
+      });
+  };
+};
+
+function addItemSuccess(item) {
+  return {
+    type: 'ADD_ITEM_SUCCESS',
+    payload: {item},
+  };
+}
+
+function addItemFailure(error) {
+  return {
+    type: 'ADD_ITEM_FAILURE',
+    payload: {error},
+  };
+}
+
 exports.selectItem = function(item) {
   console.log('selecting item ' + item);
   return {

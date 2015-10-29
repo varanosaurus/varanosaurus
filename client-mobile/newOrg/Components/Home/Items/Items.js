@@ -37,7 +37,8 @@ var Items = React.createClass({
       items={this.props.items}
       gotoPendingItemsList={this.gotoPendingItemsList}
       gotoBoughtItemsList={this.gotoBoughtItemsList}
-      goToItemDetailsView={this.goToItemDetailsView}
+      gotoItemDetailsView={this.gotoItemDetailsView}
+      gotoItemAddView={this.gotoItemAddView}
     />;
   },
 
@@ -68,7 +69,7 @@ var Items = React.createClass({
     this.props.dispatch(Actions.setItemsViewMode('list'));
   },
 
-  goToItemDetailsView(item) {
+  gotoItemDetailsView(item) {
     this.props.dispatch(Actions.selectItem(item));
 
     if (this.props.itemsFilter === 'pending') {
@@ -79,6 +80,10 @@ var Items = React.createClass({
     } else {
       this.props.navigator.push(Routes.getItemDetailsView(item));
     }
+  },
+
+  gotoItemAddView() {
+    this.props.navigator.push(Routes.itemAddView);
   },
 
   updateItem(updates) {

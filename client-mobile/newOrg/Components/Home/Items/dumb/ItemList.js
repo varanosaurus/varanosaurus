@@ -62,7 +62,7 @@ var ItemList = React.createClass({
     return (
       <View>
         <TouchableHighlight
-          onPress={() => this.props.goToItemDetailsView(item)} >
+          onPress={() => this.props.gotoItemDetailsView(item)} >
           <View>
             <Text>{item.description}</Text>
           </View>

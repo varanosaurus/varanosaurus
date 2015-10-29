@@ -173,7 +173,6 @@ function addHouseholdSuccess(data) {
 }
 
 // ADD_HOUSEHOLD_FAILURE: display error message?
-
 function addHouseholdFailure(message) {
   return {
     type: 'ADD_HOUSEHOLD_FAILURE',
@@ -182,27 +181,89 @@ function addHouseholdFailure(message) {
   };
 }
 
-// (NEED TO FINISH) ACCEPT INVITATION: with payload of 'invitation'
-// exports.joinHousehold = function(status, invitationId) {
+// JOIN_HOUSEHOLD
+exports.joinHousehold = function(status, invitationId) {
+  return function(dispatch) {
+    return Network.respondToInvitation(status, invitationId)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(joinHouseholdSuccess(body));
+            } else {
+              return dispatch(joinHouseholdFailure(body));
+            }
+          });
+      })
+      .catch(function(error) {
+        console.log(error);
+        return dispatch(joinHouseholdFailure(error.message));
+      });
+  };
+};
 
-//   return function(dispatch) {
-//     return Network.respondToInvitation(status, invitationId)
-//       .then(function(response) {
-//         return response.json()
-//           .then(function(body) {
-//             // if (response.ok) {
-//             //   return dispatch(signupSuccess(body));
-//             // } else {
-//             //   return dispatch(signupFailure(body));
-//             // }
-//           });
-//       })
-//       .catch(function(error) {
-//         console.log(error);
-//         // return dispatch(signupFailure(error.message));
-//       });
-//   };
-// };
+// JOIN_HOUSEHOLD_SUCCESS
+function joinHouseholdSuccess(data) {
+  return {
+    type: 'JOIN_HOUSEHOLD_SUCCESS',
+    payload: {
+      invitation: data.invitation,
+      household: data.household,
+      token: data.token,
+    },
+  };
+}
+
+//JOIN_HOUSEHOLD_FAILURE
+function joinHouseholdFailure(message) {
+  return {
+    type: 'JOIN_HOUSEHOLD_FAILURE',
+    payload: {message},
+    error: true,
+  };
+}
+
+//REJECT_HOUSEHOLD
+exports.rejectHousehold = function(status, invitationId) {
+  return function(dispatch) {
+    return Network.respondToInvitation(status, invitationId)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(rejectHouseholdSuccess(body));
+            } else {
+              return dispatch(rejectHouseholdFailure(body));
+            }
+          });
+      })
+      .catch(function(error) {
+        console.log(error);
+        return dispatch(rejectHouseholdFailure(error.message));
+      });
+  };
+};
+
+// REJECT_HOUSEHOLD_SUCCESS
+function rejectHouseholdSuccess(data) {
+  return {
+    type: 'REJECT_HOUSEHOLD_SUCCESS',
+    payload: {
+      invitation: data.invitation,
+      household: data.household,
+      token: data.token,
+    },
+  };
+}
+
+//REJECT_HOUSEHOLD_FAILURE
+function rejectHouseholdFailure(message) {
+  return {
+    type: 'REJECT_HOUSEHOLD_FAILURE',
+    payload: {message},
+    error: true,
+  };
+}
 
 // SET_HOMETAB, with payload of 'items', 'reckonings', or 'settings' ?
 exports.setHomeTab = function(mode) {

@@ -21,12 +21,13 @@ var Homeless = React.createClass({
   handleJoinHousehold(data) {
     console.log(data);
     //dispatch action to store causing update of joined household (user belongs to household --> go to homeTab)
-    // this.props.dispatch(Actions.joinHousehold('accepted', data.id));
+    this.props.dispatch(Actions.joinHousehold('accepted', data.id));
   },
 
-  handleRejectHousehold(/*data*/) {
+  handleRejectHousehold(data) {
+    console.log(data);
     //dispatch action to store causing removal of household invitation (updates invitation list in invitations UI)
-    // this.props.dispatch(Actions.rejectHousehold('rejected'));
+    this.props.dispatch(Actions.rejectHousehold('rejected', data.id));
   },
 
   handleHouseholdCreation(data) {

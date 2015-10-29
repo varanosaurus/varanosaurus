@@ -27,6 +27,10 @@ var ItemAdd = React.createClass({
   },
 
   handleSubmit(item) {
+    if (this.props.addItemRequestStatus === 'pending') {
+      return;
+    }
+
     this.dispatch(Actions.addItem(item));
     this.dispatch(Actions.setAddItemRequestStatus('pending'));
   },

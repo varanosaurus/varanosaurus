@@ -51,6 +51,10 @@ function addItemRequestStatus(state = null, action) {
   switch (action.type) {
   case 'SET_ADD_ITEM_REQUEST_STATUS':
     return action.payload.status;
+  case 'ADD_ITEM_SUCCESS':
+    return 'succeeded';
+  case 'ADD_ITEM_FAILURE':
+    return 'failed';
   default:
     return state;
   }

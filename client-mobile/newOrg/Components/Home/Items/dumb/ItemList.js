@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var Button = require('react-native-button');
 // var Icon = require('react-native-vector-icons/Ionicons');
 
 var {
@@ -53,6 +54,7 @@ var ItemList = React.createClass({
           automaticallyAdjustcontentInsets={false}
           contentInset={{bottom: 50}}
         />
+      <Button onClick={this.props.gotoItemAddView}>Add an item</Button>
       </View>
     );
   },

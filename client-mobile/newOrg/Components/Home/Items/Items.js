@@ -32,14 +32,18 @@ var Items = React.createClass({
   },
 
   renderItemList() {
-    return <ItemList
-      itemsFilter={this.props.itemsFilter}
-      items={this.props.items}
-      gotoPendingItemsList={this.gotoPendingItemsList}
-      gotoBoughtItemsList={this.gotoBoughtItemsList}
-      gotoItemDetailsView={this.gotoItemDetailsView}
-      gotoItemAddView={this.gotoItemAddView}
-    />;
+    return (
+      <View>
+      <ItemList
+        itemsFilter={this.props.itemsFilter}
+        items={this.props.items}
+        gotoPendingItemsList={this.gotoPendingItemsList}
+        gotoBoughtItemsList={this.gotoBoughtItemsList}
+        gotoItemDetailsView={this.gotoItemDetailsView}
+        gotoItemAddView={this.gotoItemAddView}
+      />
+      </View>
+    );
   },
 
   // renderItemDetails() {

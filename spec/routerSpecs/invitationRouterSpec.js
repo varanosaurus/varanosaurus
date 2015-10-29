@@ -12,6 +12,7 @@ var tokens = require('../../server/services/tokens');
 //server instance before the next text
 var needRequire = require('really-need');
 
+//TODO: add spec testing that we get invitation householdName properly
 describe('invitationRouter', function() {
 
   var server;

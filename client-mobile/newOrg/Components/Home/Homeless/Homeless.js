@@ -33,7 +33,7 @@ var Homeless = React.createClass({
 
 function select(state) {
   return {
-    invitations: state.data.invitations,
+    invitations: state.data.invitations.received,
     house: state.data.user.householdId,
   };
 }

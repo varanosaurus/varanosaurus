@@ -12,8 +12,9 @@ var {
 
 var JoinOrCreateHousehold = React.createClass({
   getInitialState() {
+    console.log('invites: ', this.props.invitations);
     return ({
-      invitations: this.props.invitations.received,
+      invitations: this.props.invitations,
       householdName: '',
     });
   },

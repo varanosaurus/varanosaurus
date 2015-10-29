@@ -76,6 +76,8 @@ function invitations(state, action) {
   }
 
   switch (action.type) {
+  case 'LOGIN_SUCCESS':
+    return action.payload.invitations;
   default:
     return state;
   }

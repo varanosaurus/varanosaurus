@@ -19,10 +19,15 @@ router.post('/', function(request, response) {
         return response.status(404).send('User does not exist');
       }
 
-      return db.Invitation.create({toUserId: toUser.id, fromUserId, householdId})
+      db.Household.findOne({where: {id: householdId}})
+        .then(function(household) {
+          console.log('household: ', household);
+          return db.Invitation.create({toUserId: toUser.id, fromUserId, householdId, householdName: household.name})
 
-        .then(function(invitation) {
-          response.status(201).json({invitation});
+            .then(function(invitation) {
+              console.log('invitation: ', invitation);
+              response.status(201).json({invitation});
+            });
         });
 
     })

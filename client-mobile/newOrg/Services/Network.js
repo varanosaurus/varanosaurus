@@ -146,6 +146,7 @@ var inviteUser = function(toUsername) {
 };
 
 var getInvitationInbox = function() {
+  console.log('i am being called');
   var params = makeParams('GET');
   return fetch(url + invitationUrl + '/inbox', params)
     .catch(function(error) {

@@ -54,7 +54,6 @@ var JoinOrCreateHousehold = React.createClass({
             style={styles.button}
             onPress={() => {
               this.handleSubmit();
-              this.props.gotoInviteRoommates();
             }}
           >
             <Text style={styles.btnText}>Create household</Text>
@@ -92,7 +91,6 @@ var JoinOrCreateHousehold = React.createClass({
             style={styles.button}
             onPress={() => {
               this.handleSubmit();
-              this.props.gotoInviteRoommates();
             }}
           >
             <Text style={styles.btnText}>Create household</Text>

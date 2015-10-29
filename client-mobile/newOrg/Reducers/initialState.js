@@ -26,6 +26,7 @@ var state = {
     selectedHomeTab: 'itemsTab', //'reckoningsTab', 'settingsTab'
     itemsViewMode: 'details', //'list'
     itemsFilter: 'pending', //'bought'
+    addItemsRequestStatus: null, // 'pending', 'succeeded', 'failed'
     // itemDetails: 'list', //'details', 'add'
     reckoningsViewMode: 'list', //'details'
     selectedReckoning: null, //reckoningId; TODO: rename to reflect that it's an ID?

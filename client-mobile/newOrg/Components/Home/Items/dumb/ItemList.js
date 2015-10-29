@@ -4,7 +4,7 @@ var React = require('react-native');
 // var Icon = require('react-native-vector-icons/Ionicons');
 
 var {
-  // StyleSheet,
+  StyleSheet,
   ListView,
   View,
   SegmentedControlIOS,
@@ -35,7 +35,7 @@ var ItemList = React.createClass({
     }
 
     return (
-      <View>
+      <View style={styles.container}>
         <SegmentedControlIOS
           values={['Pending', 'Bought']}
           selectedIndex={selectedIndex}
@@ -75,3 +75,9 @@ var ItemList = React.createClass({
 });
 
 module.exports = ItemList;
+
+var styles = StyleSheet.create({
+  container: {
+    marginTop: 64,
+  },
+});

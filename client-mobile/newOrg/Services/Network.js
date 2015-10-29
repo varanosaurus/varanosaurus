@@ -181,6 +181,14 @@ var getReckoning = function() {
     });
 };
 
+var getSelectedReckoning = function() {
+  var params = makeParams('GET');
+  return fetch(url + reckoningUrl + Store.getState().uiMode.selectedReckoningId, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
+
 
 module.exports = {
   signup,
@@ -203,4 +211,5 @@ module.exports = {
   getItems,
 
   getReckoning,
+  getSelectedReckoning,
 };

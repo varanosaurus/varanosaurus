@@ -47,6 +47,28 @@ function selectedItemId(state = null, action) {
   }
 }
 
+function addItemRequestStatus(state = null, action) {
+  switch (action.type) {
+  case 'SET_ADD_ITEM_REQUEST_STATUS':
+    return action.payload.status;
+  case 'ADD_ITEM_SUCCESS':
+    return 'succeeded';
+  case 'ADD_ITEM_FAILURE':
+    return 'failed';
+  default:
+    return state;
+  }
+}
+
+function addItemRequestError(state = null, action) {
+  switch (action.type) {
+  case 'ADD_ITEM_FAILURE':
+    return action.payload.error;
+  default:
+    return state;
+  }
+}
+
 function reckoningsViewMode(state = 'list', action) {
   switch (action.type) {
   case 'SET_RECKONINGS_VIEW_MODE':
@@ -108,6 +130,8 @@ module.exports = combineReducers({
   selectedHomeTab,
   itemsViewMode,
   itemsFilter,
+  addItemRequestStatus,
+  addItemRequestError,
   selectedItemId,
   reckoningsViewMode,
   selectedReckoningId,

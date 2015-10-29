@@ -18,7 +18,7 @@ router.get('/', function(request, response) {
           if (!bought) {
             response.status(500).send({error: 'Error finding bought items'});
           }
-          response.status(201).json({bought, pending});
+          response.status(200).json({bought, pending});
         });
     })
 
@@ -65,7 +65,7 @@ router.get('/:itemId', function(request, response) {
 
     .then(function(item) {
       if (item) {
-        response.status(201).json({item});
+        response.status(200).json({item});
       } else {
         response.status(500).send({error: 'Item not found'});
       }

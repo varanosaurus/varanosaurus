@@ -50,6 +50,19 @@ function items(state, action) {
       pending: action.payload.items.pending,
       bought: action.payload.items.bought,
     };
+  case 'ADD_ITEM_SUCCESS':
+    if (action.payload.item.bought) {
+      return {
+        pending: state.pending,
+        bought: [...state.bought, action.payload.item],
+      };
+    } else {
+      return {
+        pending: [...state.pending, action.payload.item],
+        bought: state.bought,
+      };
+    }
+    break;
   default:
     return state;
   }
@@ -59,6 +72,15 @@ function reckonings(state = [], action) {
   switch (action.type) {
   case 'FETCH_RECKONING_LISTS_SUCCESS':
     return action.payload.reckonings.reckonings;
+  default:
+    return state;
+  }
+}
+
+function selectedReckoning(state = [], action) {
+  switch (action.type) {
+  case 'FETCH_SELECTED_RECKONING_SUCCESS':
+    return action.payload.reckoning;
   default:
     return state;
   }
@@ -86,4 +108,5 @@ module.exports = combineReducers({
   reckonings,
   invitations,
   roommates,
+  selectedReckoning,
 });

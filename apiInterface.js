@@ -241,7 +241,7 @@
     verb: 'GET',
     url: '/api/reckonings/:reckoningId',
     requestBody: null,
-    responseBody: Reckoning,
+    responseBody: Reckoning {including: User {including: userToReckoning}},
   },
 }
 

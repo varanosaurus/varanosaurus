@@ -216,7 +216,7 @@ describe('invitationRouter', function() {
         var parsedBody = JSON.parse(body);
         expect(parsedBody.household).toBeTruthy();
         expect(parsedBody.token).toBeTruthy();
-        expect(parsedBody.invitation.id).toEqual(1);
+        expect(parsedBody.invitations.length).toEqual(0);
         done();
 
       });
@@ -252,7 +252,7 @@ describe('invitationRouter', function() {
 
         var parsedBody = JSON.parse(body);
         expect(parsedBody.household).toBeFalsy();
-        expect(parsedBody.invitation.id).toEqual(1);
+        expect(parsedBody.invitations.length).toEqual(0);
         done();
 
       });

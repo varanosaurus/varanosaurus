@@ -1,5 +1,7 @@
 'use strict';
 
+//TODO: refactor this to only have the add household part here once
+
 var React = require('react-native');
 
 var {
@@ -11,18 +13,10 @@ var {
 } = React;
 
 var JoinOrCreateHousehold = React.createClass({
-  getInitialState() {
-    console.log('invites: ', this.props.invitations);
-    return ({
-      invitations: this.props.invitations,
-      householdName: '',
-    });
-  },
 
   render() {
     var self = this;
-    var invitations = this.state.invitations;
-    if (invitations.length === 0) {
+    if (this.props.invitations.length === 0) {
       return (
         <View>
           <Text>If you think you have been invited to a household, please check with your roommate and remind them to invite you.</Text>
@@ -49,7 +43,7 @@ var JoinOrCreateHousehold = React.createClass({
       return (
         <View>
           {
-            invitations.map(function(invitation) {
+            this.props.invitations.map(function(invitation) {
               return (
                 <View>
                   <Text key={invitation.householdName}>You have been invited to the {invitation.householdName} household!</Text>

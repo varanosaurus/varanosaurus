@@ -21,11 +21,8 @@ router.post('/', function(request, response) {
 
       db.Household.findOne({where: {id: householdId}})
         .then(function(household) {
-          console.log('household: ', household);
           return db.Invitation.create({toUserId: toUser.id, fromUserId, householdId, householdName: household.name})
-
             .then(function(invitation) {
-              console.log('invitation: ', invitation);
               response.status(201).json({invitation});
             });
         });
@@ -89,12 +86,15 @@ router.put('/:invitationId', function(request, response) {
                     .then(function(household) {
                       db.Invitation.findAll({where: {toUserId: userId, status: 'pending'}})
                         .then(function(invitations) {
-                          response.status(200).json({
-                            invitations,
-                            household,
-                            // roommates,
-                            token: tokens.issue(userId, invitationArray[1][0].householdId),
-                          });
+                          db.User.findAll({where: {householdId: household.id}, attributes: ['username', 'id']})
+                            .then(function(roommates) {
+                              return response.status(200).json({
+                                token: tokens.issue(userId, invitationArray[1][0].householdId),
+                                household,
+                                roommates,
+                                invitations,
+                              });
+                            });
                         });
                     });
                 });
@@ -103,7 +103,8 @@ router.put('/:invitationId', function(request, response) {
               db.Invitation.findAll({where: {toUserId: userId, status: 'pending'}})
                 .then(function(invitations) {
                   response.status(200).json({
-                    invitations: invitations,
+                    invitations,
+                    token: tokens.issue(userId),
                   });
                 });
             }

@@ -73,10 +73,10 @@ function selectedReckoning(state = [], action) {
   }
 }
 
-function invitations(state, action) {
-  if (state == null) {
-    return {sent: [], received: []};
-  }
+function invitations(state = {sent: [], received: []}, action) {
+  // if (state == null) {
+  //   return {sent: [], received: []};
+  // }
   switch (action.type) {
   case 'LOGIN_SUCCESS':
     return action.payload.invitations;

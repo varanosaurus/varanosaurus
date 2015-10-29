@@ -229,20 +229,23 @@ exports.updateInvitation = function(status, invitationId) {
   };
 };
 
-// JOIN_HOUSEHOLD_SUCCESS
+// UPDATE_INVITATION_SUCCESS
 function updateInvitationSuccess(data) {
   console.log('updateInvitationSuccess action being created');
   return {
     type: 'UPDATE_INVITATION_SUCCESS',
     payload: {
-      invitations: data.invitations,
+      invitations: {
+        sent: [],
+        received: data.invitations,
+      },
       household: data.household || null,
       token: data.token,
     },
   };
 }
 
-//JOIN_HOUSEHOLD_FAILURE
+// UPDATE_INVITATION_FAILURE
 function updateInvitationFailure(message) {
   return {
     type: 'UPDATE_INVITATION_FAILURE',
@@ -283,8 +286,6 @@ exports.selectItem = function(item) {
 };
 
 exports.updateItem = function(updates) {
-
-  console.log('updating item from Actions');
 
   //Thunk
   return function(dispatch) {

@@ -182,30 +182,30 @@ function addHouseholdFailure(message) {
 }
 
 // JOIN_HOUSEHOLD
-exports.joinHousehold = function(status, invitationId) {
+exports.updateInvitation = function(status, invitationId) {
   return function(dispatch) {
     return Network.respondToInvitation(status, invitationId)
       .then(function(response) {
         return response.json()
           .then(function(body) {
             if (response.ok) {
-              return dispatch(joinHouseholdSuccess(body));
+              return dispatch(updateInvitationSuccess(body));
             } else {
-              return dispatch(joinHouseholdFailure(body));
+              return dispatch(updateInvitationFailure(body));
             }
           });
       })
       .catch(function(error) {
         console.log(error);
-        return dispatch(joinHouseholdFailure(error.message));
+        return dispatch(updateInvitationFailure(error.message));
       });
   };
 };
 
 // JOIN_HOUSEHOLD_SUCCESS
-function joinHouseholdSuccess(data) {
+function updateInvitationSuccess(data) {
   return {
-    type: 'JOIN_HOUSEHOLD_SUCCESS',
+    type: 'UPDATE_INVITATION_SUCCESS',
     payload: {
       invitation: data.invitation,
       household: data.household,
@@ -215,51 +215,9 @@ function joinHouseholdSuccess(data) {
 }
 
 //JOIN_HOUSEHOLD_FAILURE
-function joinHouseholdFailure(message) {
+function updateInvitationFailure(message) {
   return {
-    type: 'JOIN_HOUSEHOLD_FAILURE',
-    payload: {message},
-    error: true,
-  };
-}
-
-//REJECT_HOUSEHOLD
-exports.rejectHousehold = function(status, invitationId) {
-  return function(dispatch) {
-    return Network.respondToInvitation(status, invitationId)
-      .then(function(response) {
-        return response.json()
-          .then(function(body) {
-            if (response.ok) {
-              return dispatch(rejectHouseholdSuccess(body));
-            } else {
-              return dispatch(rejectHouseholdFailure(body));
-            }
-          });
-      })
-      .catch(function(error) {
-        console.log(error);
-        return dispatch(rejectHouseholdFailure(error.message));
-      });
-  };
-};
-
-// REJECT_HOUSEHOLD_SUCCESS
-function rejectHouseholdSuccess(data) {
-  return {
-    type: 'REJECT_HOUSEHOLD_SUCCESS',
-    payload: {
-      invitation: data.invitation,
-      household: data.household,
-      token: data.token,
-    },
-  };
-}
-
-//REJECT_HOUSEHOLD_FAILURE
-function rejectHouseholdFailure(message) {
-  return {
-    type: 'REJECT_HOUSEHOLD_FAILURE',
+    type: 'UPDATE_INVITATION_FAILURE',
     payload: {message},
     error: true,
   };

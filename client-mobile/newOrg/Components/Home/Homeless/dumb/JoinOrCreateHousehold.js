@@ -52,10 +52,10 @@ var JoinOrCreateHousehold = React.createClass({
               return (
                 <View>
                   <Text key={invitation.householdName}>You have been invited to the {invitation.householdName} household!</Text>
-                  <TouchableHighlight onPress={() => {self.props.join(invitation);}}>
+                  <TouchableHighlight onPress={() => {self.props.respondToInvitation('accepted', invitation.id);}}>
                     <Text>Join</Text>
                   </TouchableHighlight>
-                  <TouchableHighlight onPress={() => {self.props.reject(invitation);}}>
+                  <TouchableHighlight onPress={() => {self.props.respondToInvitation('rejected', invitation.id);}}>
                     <Text>Decline</Text>
                   </TouchableHighlight>
                 </View>

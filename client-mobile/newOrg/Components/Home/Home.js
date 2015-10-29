@@ -15,7 +15,7 @@ var Home = React.createClass({
     return this.props.household
       ? <NavRedux />
       : <Homeless />;
-  };
+  },
 
 });
 

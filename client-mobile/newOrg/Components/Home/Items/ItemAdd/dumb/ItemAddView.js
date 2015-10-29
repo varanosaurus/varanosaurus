@@ -41,6 +41,20 @@ var ItemAddView = React.createClass({
         />
         <SwitchIOS onValueChange={(bought) => this.setState({bought})} value={this.state.bought} />
         <Text>Already bought</Text>
+        {(() => {
+            if (this.state.bought) {
+              return (
+                <View>
+                <Text>Price:</Text>
+                <TextInput
+                  style={styles.input}
+                  keyboardType='decimal-pad'
+                  onChangeText={(price) => this.setState({price})}
+                  value={this.state.price}
+                />
+                </View>);
+            }
+                })()}
         <Button style={styles.btn} onPress={this.handleSubmit}>Add item</Button>
       </View>
     );

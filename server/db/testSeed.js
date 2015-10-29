@@ -71,11 +71,11 @@ var seed = function() {
 
   //invite Dany to both houses
   .then(function() {
-    return db.Invitation.create({toUserId: 5, fromUserId: 1, householdId: 1});
+    return db.Invitation.create({toUserId: 5, fromUserId: 1, householdId: 1, householdName: 'Stark'});
   })
 
   .then(function() {
-    return db.Invitation.create({toUserId: 5, fromUserId: 3, householdId: 2});
+    return db.Invitation.create({toUserId: 5, fromUserId: 3, householdId: 2, householdName: 'Targaryen'});
   })
 
   .then(function() {

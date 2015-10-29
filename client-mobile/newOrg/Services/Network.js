@@ -146,6 +146,7 @@ var inviteUser = function(toUsername) {
 };
 
 var getInvitationInbox = function() {
+  console.log('i am being called');
   var params = makeParams('GET');
   return fetch(url + invitationUrl + '/inbox', params)
     .catch(function(error) {
@@ -162,6 +163,7 @@ var getInvitationOutbox = function() {
 };
 
 var respondToInvitation = function(status, invitationId) {
+  console.log('network respondToInvitation being called with: ', status, invitationId);
   var params = makeParams('PUT', {status});
   return fetch(url + invitationUrl + invitationId, params)
     .catch(function(error) {

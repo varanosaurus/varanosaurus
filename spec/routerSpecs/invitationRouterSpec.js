@@ -12,6 +12,8 @@ var tokens = require('../../server/services/tokens');
 //server instance before the next text
 var needRequire = require('really-need');
 
+//TODO: add spec testing that we get invitation householdName properly
+//TODO: add spec testing that we send back all invites upon update
 describe('invitationRouter', function() {
 
   var server;
@@ -214,7 +216,7 @@ describe('invitationRouter', function() {
         var parsedBody = JSON.parse(body);
         expect(parsedBody.household).toBeTruthy();
         expect(parsedBody.token).toBeTruthy();
-        expect(parsedBody.invitation.id).toEqual(1);
+        expect(parsedBody.invitations.length).toEqual(0);
         done();
 
       });
@@ -250,7 +252,7 @@ describe('invitationRouter', function() {
 
         var parsedBody = JSON.parse(body);
         expect(parsedBody.household).toBeFalsy();
-        expect(parsedBody.invitation.id).toEqual(1);
+        expect(parsedBody.invitations.length).toEqual(0);
         done();
 
       });

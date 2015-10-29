@@ -58,6 +58,8 @@ describe('authRouter', function() {
     server.close(done);
   });
 
+
+  //TODO: write spec for login for user w/o household and check that invites are being sent back
   it('should create a new user and send back the user, token, and household', function(done) {
 
     var context = this;

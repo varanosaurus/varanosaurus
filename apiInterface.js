@@ -29,8 +29,11 @@
       password: string,
     },
     responseBody: {
-      user: User,
+      userData: User, //doesn't include password
       token: token,
+      household: household, //only if part of HH
+      roommates: [User], //only if part of HH
+      invitations: [Invitation], //only if homeless, includes received invites
     },
   },
 
@@ -293,7 +296,7 @@
       status: string, //'accepted' or 'rejected'
     },
     responseBody: {
-      invitation: Invitation,
+      invitations: [Invitation],
       household: null, //if rejected, or Household model if accepted,
       token: null, //only present if accepted
     },

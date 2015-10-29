@@ -18,8 +18,6 @@ var Homeless = React.createClass({
   },
 
   handleUpdateInvitation(status, invitationId) {
-    console.log(status);
-    console.log(invitationId);
     //dispatch action to store causing update of joined household (user belongs to household --> go to homeTab)
     this.props.dispatch(Actions.updateInvitation(status, invitationId));
   },
@@ -32,8 +30,10 @@ var Homeless = React.createClass({
 });
 
 function select(state) {
+  console.log('invitations: ', state.data.invitations);
+  console.log('invitations.received: ', state.data.invitations.received);
   return {
-    invitations: state.data.invitations,
+    invitations: state.data.invitations.received,
     house: state.data.user.householdId,
   };
 }

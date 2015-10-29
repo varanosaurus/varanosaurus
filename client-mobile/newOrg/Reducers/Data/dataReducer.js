@@ -21,6 +21,9 @@ function household(state = null, action) {
     return null;
   case 'ADD_HOUSEHOLD_SUCCESS':
     return action.payload.household;
+  case 'UPDATE_INVITATION_SUCCESS':
+    console.log('household reducer being called on success with: ', action.payload);
+    return action.payload.household;
   default:
     return state;
   }
@@ -61,12 +64,16 @@ function reckonings(state = [], action) {
   }
 }
 
-function invitations(state, action) {
-  if (state == null) {
-    return {sent: [], received: []};
-  }
-
+function invitations(state = {sent: [], received: []}, action) {
+  // if (state == null) {
+  //   return {sent: [], received: []};
+  // }
   switch (action.type) {
+  case 'LOGIN_SUCCESS':
+    return action.payload.invitations;
+  case 'UPDATE_INVITATION_SUCCESS':
+    console.log('invitation reducer on success being called with: ', action.payload);
+    return action.payload.invitations;
   default:
     return state;
   }

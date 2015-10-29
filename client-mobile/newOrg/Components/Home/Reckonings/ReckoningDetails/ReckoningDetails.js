@@ -1,59 +1,102 @@
 'use strict';
 
 var React = require('react-native');
-var {connect} = require('react-redux');
 
-var ReckoningItemsDetails = require('./ReckoningItemsDetails/ReckoningItemsDetails');
-var ReckoningUsersDetails = require('./dumb/ReckoningUsersDetails');
+var {
+  View,
+  Text,
+} = React;
+var {connect} = require('react-redux'); // it became dumb component now
+
+// var ReckoningItemsDetails = require('./ReckoningItemsDetails/ReckoningItemsDetails');
+// var ReckoningUsersDetails = require('./dumb/ReckoningUsersDetails');
 var Actions = require('../../../../Actions/Actions');
 
 var ReckoningDetails = React.createClass({
 
-  // TODO: component fetches items and users data for reckoning upon mounting?
+  componentWillMount() {
+    this.props.dispatch(Actions.fetchSelectedReckoning());
+  },
 
   render() {
-    switch (this.props.reckoningsDetailsMode) {
-      case 'items':
-        return this.renderItemsDetails();
-      case 'users':
-        return this.renderUserDetails();
-      default:
-        return this.renderItemsDetails();
+    if (!this.props.selectedReckoning.users) {
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          <Text>This is a Reckoning Details View</Text>
+          <View>
+            {this.props.selectedReckoning.users.map((userData) => {
+
+              return (
+                <View>
+                  <Text>{userData.username} </Text>
+                  <Text>contributed ${userData.userToReckoning.contribution} to the total </Text>
+                  {this.getOwedText(userData.userToReckoning.debt)}
+                </View>
+              );
+
+            })}
+          </View>
+        </View>
+      );
+    }
+    // switch (this.props.reckoningsDetailsMode) {
+    //   case 'items':
+    //     return this.renderItemsDetails();
+    //   case 'users':
+    //     return this.renderUserDetails();
+    //   default:
+    //     return this.renderItemsDetails();
+    // }
+  },
+
+  getOwedText(debt) {
+    if (debt > 0) {
+      return <Text>and owes ${debt}</Text>;
+    } else if (debt < 0) {
+      return <Text>and is owed ${Math.abs(debt)}</Text>;
+    } else {
+      return <Text>and is square!</Text>;
     }
   },
 
-  renderItemsDetails() {
-    return (
-      <ReckoningItemsDetails
-        /* TODO: pass prop? */
-        items={this.props.reckoning}
-        onSelect={this.goToItemsDetailsView}
-      />
-    );
-  },
+  // renderItemsDetails() {
+  //   return (
+  //     <ReckoningItemsDetails
+  //       /* TODO: pass prop? */
+  //       items={this.props.reckoning}
+  //       onSelect={this.goToItemsDetailsView}
+  //     />
+  //   );
+  // },
 
-  renderUsersDetails() {
-    return (
-      <ReckoningUsersDetails
-        /* TODO: pass prop? */
-        figures={this.props.reckoning.userFigures}
-      />
-    );
-  },
+  // renderUsersDetails() {
+  //   return (
+  //     <ReckoningUsersDetails
+  //       /* TODO: pass prop? */
+  //       figures={this.props.reckoning.userFigures}
+  //     />
+  //   );
+  // },
 
-  goToItemsDetailsView() {
-    this.props.dispatch(Actions.setReckoningDetailsMode('items'));
-  },
+  // goToItemsDetailsView() {
+  //   this.props.dispatch(Actions.setReckoningDetailsMode('items'));
+  // },
 
-  goToUsersDetailsView() {
-    this.props.dispatch(Actions.setReckoningDetailsMode('users'));
-  },
+  // goToUsersDetailsView() {
+  //   this.props.dispatch(Actions.setReckoningDetailsMode('users'));
+  // },
 
 });
 
 function select(state) {
   return {
-    reckoningDetailsMode: state.uiMode.reckoningsDetailsMode,
+    selectedReckoning: state.data.selectedReckoning,
   };
 }
 

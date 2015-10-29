@@ -39,7 +39,7 @@ var Reckoning = React.createClass({
     var reckoning;
     console.log(this.props.reckonings);
     this.props.reckonings.forEach((dataReckoning) => {
-      if (dataReckoning.id === this.props.selectedReckoning) {
+      if (dataReckoning.id === this.props.selectedReckoningId) {
         reckoning = dataReckoning;
       }
     });
@@ -66,7 +66,7 @@ function select(state) {
   return {
     reckoningsViewMode: state.uiMode.reckoningsViewMode,
     reckonings: state.data.reckonings,
-    selectedReckoning: state.uiMode.selectedReckoning,
+    selectedReckoningId: state.uiMode.selectedReckoningId,
   };
 }
 

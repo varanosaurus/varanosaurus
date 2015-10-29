@@ -7,13 +7,8 @@ exports.hometab = {
     props: {},
   };
 
-var itemDetailsView = {
-  name: 'itemDetailsView',
-  component: require('../Components/Home/Items/dumb/ItemDetails'),
-  title: 'Item Details',
-};
 
-exports.getItemDetailsView = function(item) {
+var getBoughtItemDetailsView = exports.getItemDetailsView = function(item) {
   var state = store.getState();
   var roommates = state.data.roommates;
 
@@ -35,7 +30,27 @@ exports.getItemDetailsView = function(item) {
   };
 
   return {
-    ...itemDetailsView,
+    name: 'boughtItemDetailsView',
+    component: require('../Components/Home/Items/dumb/BoughtItemDetails'),
+    title: item.description,
+    props,
+  };
+
+
+};
+
+exports.getPendingItemDetailsView = function(item, props) {
+  var scene = getBoughtItemDetailsView(item);
+  scene.name = 'pendingItemDetailsView';
+  scene.component = require('../Components/Home/Items/dumb/PendingItemDetails');
+
+  props = {
+    ...scene.props,
+    ...props,
+  };
+
+  return {
+    ...scene,
     props,
   };
 };

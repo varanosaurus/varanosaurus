@@ -56,6 +56,15 @@ function addItemRequestStatus(state = null, action) {
   }
 }
 
+function addItemRequestError(state = null, action) {
+  switch (action.type) {
+  case 'ADD_ITEM_FAILURE':
+    return action.payload.error;
+  default:
+    return state;
+  }
+}
+
 function reckoningsViewMode(state = 'list', action) {
   switch (action.type) {
   case 'SET_RECKONINGS_VIEW_MODE':
@@ -118,6 +127,7 @@ module.exports = combineReducers({
   itemsViewMode,
   itemsFilter,
   addItemRequestStatus,
+  addItemRequestError,
   selectedItemId,
   reckoningsViewMode,
   selectedReckoningId,

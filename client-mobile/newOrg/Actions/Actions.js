@@ -307,6 +307,13 @@ function addItemFailure(error) {
   };
 }
 
+exports.setAddItemRequestStatus = function(status) {
+  return {
+    type: 'SET_ADD_ITEM_REQUEST_STATUS',
+    payload: {status},
+  };
+};
+
 exports.selectItem = function(item) {
   console.log('selecting item ' + item);
   return {

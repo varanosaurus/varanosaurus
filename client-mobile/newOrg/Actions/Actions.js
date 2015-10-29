@@ -181,7 +181,7 @@ function addHouseholdFailure(message) {
   };
 }
 
-// JOIN_HOUSEHOLD
+// UPDATE_INVITATION
 exports.updateInvitation = function(status, invitationId) {
   return function(dispatch) {
     return Network.respondToInvitation(status, invitationId)
@@ -202,7 +202,7 @@ exports.updateInvitation = function(status, invitationId) {
   };
 };
 
-// JOIN_HOUSEHOLD_SUCCESS
+// UPDATE_INVITATION_SUCCESS
 function updateInvitationSuccess(data) {
   return {
     type: 'UPDATE_INVITATION_SUCCESS',
@@ -214,7 +214,7 @@ function updateInvitationSuccess(data) {
   };
 }
 
-//JOIN_HOUSEHOLD_FAILURE
+// UPDATE_INVITATION_FAILURE
 function updateInvitationFailure(message) {
   return {
     type: 'UPDATE_INVITATION_FAILURE',

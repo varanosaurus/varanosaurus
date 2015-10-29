@@ -23,7 +23,11 @@ var ItemAdd = React.createClass({
   },
 
   render() {
-    return <ItemAddView submit={this.handleSubmit} status={this.props.addItemRequestStatus} />;
+    return <ItemAddView
+      submit={this.handleSubmit}
+      status={this.props.addItemRequestStatus}
+      error={this.props.addItemRequestError}
+    />;
   },
 
   handleSubmit(item) {

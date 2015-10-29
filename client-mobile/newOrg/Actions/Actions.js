@@ -277,6 +277,43 @@ exports.setItemsFilter = function(filter) {
   };
 };
 
+exports.addItem = function(item) {
+  return function(dispatch) {
+    return Network.addItem(item)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(addItemSuccess(body.item));
+            } else {
+              return dispatch(addItemFailure(body.error));
+            }
+          });
+      });
+  };
+};
+
+function addItemSuccess(item) {
+  return {
+    type: 'ADD_ITEM_SUCCESS',
+    payload: {item},
+  };
+}
+
+function addItemFailure(error) {
+  return {
+    type: 'ADD_ITEM_FAILURE',
+    payload: {error},
+  };
+}
+
+exports.setAddItemRequestStatus = function(status) {
+  return {
+    type: 'SET_ADD_ITEM_REQUEST_STATUS',
+    payload: {status},
+  };
+};
+
 exports.selectItem = function(item) {
   console.log('selecting item ' + item);
   return {
@@ -348,16 +385,41 @@ function fetchReckoningListsSuccess(data) {
     },
   };
 }
+
+exports.fetchSelectedReckoning = function() {
+  return function(dispatch) {
+    Network.getSelectedReckoning()
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            console.log('from fetchSelectedReckoning', body);
+            if (response.ok) {
+              return dispatch(fetchSelectedReckoningSuccess(body));
+            }
+          });
+      });
+  };
+};
+
+function fetchSelectedReckoningSuccess(data) {
+  return {
+    type: 'FETCH_SELECTED_RECKONING_SUCCESS',
+    payload: {
+      reckoning: data.reckoning,
+    },
+  };
+}
+
 // GET_HOME_ITEMS: grab list of household's current unreckoned items (split into bought and pending)
 // and set into state.data.items.bought and state.data.items.pending
 
 // GET_RECKONING_DATA: get associated users and items with reckoning; coordinate with server
 
 // SELECT_RECKONING: set state.uiMode.selectedReckoning to payload reckoning id
-exports.selectReckoning = function(id) {
+exports.selectReckoning = function(reckoning) {
   return {
     type: 'SELECT_RECKONING',
-    payload: {reckoningId: id},
+    payload: {reckoningId: reckoning.id},
   };
 };
 

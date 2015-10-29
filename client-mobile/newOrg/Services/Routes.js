@@ -1,5 +1,8 @@
 var store = require('./Store');
 
+// TODO: decide whether we should always mount smart components within navigator,
+// or prefer to mount dumb components with state snatched within route factory (here)
+
 exports.hometab = {
     name: 'hometab',
     component: require('../Components/Home/dumb/HomeTab'),
@@ -7,6 +10,12 @@ exports.hometab = {
     props: {},
   };
 
+exports.itemAddView = {
+  name: 'itemAdd',
+  component: require('../Components/Home/Items/ItemAdd/ItemAdd'),
+  title: 'Add Item',
+  props: {},
+};
 
 var getBoughtItemDetailsView = exports.getItemDetailsView = function(item) {
   var state = store.getState();

@@ -23,8 +23,12 @@ var Settings = React.createClass({
 
   renderInviteRoommates() {
     return (
-      <InviteRoommates />
+      <InviteRoommates submit={this.handleInviteRoommates} />
     );
+  },
+
+  handleInviteRoommates() {
+
   },
 
 });

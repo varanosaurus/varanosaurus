@@ -9,10 +9,10 @@ exports.login = function(username, password) {
       .then(function(response) {
         return response.json()
           .then(function(body) {
-            if (response.ok) {
-              return dispatch(loginSuccess(body));
-            } else {
+            if (!response.ok) {
               return dispatch(loginFailure(body));
+            } else {
+              return dispatch(loginSuccess(body));
             }
           });
         // if (response.ok) {
@@ -33,6 +33,7 @@ exports.login = function(username, password) {
 
 // LOGIN_SUCCESS: set token, user, and household(optional) from server's response into store
 function loginSuccess(data) {
+
   return {
     type: 'LOGIN_SUCCESS',
     payload: {
@@ -40,6 +41,10 @@ function loginSuccess(data) {
       user: data.userData,
       household: data.household || null,
       roommates: data.roommates || null,
+      invitations: {
+        sent: null,
+        received: data.invitations || null,
+      },
     },
   };
 }
@@ -180,6 +185,27 @@ function addHouseholdFailure(message) {
     error: true,
   };
 }
+
+// exports.fetchInvitationInbox = function(username, password) {
+
+//   return function(dispatch) {
+//     return Network.signup(username, password)
+//       .then(function(response) {
+//         return response.json()
+//           .then(function(body) {
+//             if (response.ok) {
+//               return dispatch(signupSuccess(body));
+//             } else {
+//               return dispatch(signupFailure(body));
+//             }
+//           });
+//       })
+//       .catch(function(error) {
+//         console.log(error);
+//         return dispatch(signupFailure(error.message));
+//       });
+//   };
+// };
 
 // JOIN_HOUSEHOLD
 exports.updateInvitation = function(status, invitationId) {

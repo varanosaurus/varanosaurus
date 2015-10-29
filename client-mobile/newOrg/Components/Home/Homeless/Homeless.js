@@ -15,20 +15,11 @@ var Homeless = React.createClass({
           join={this.handleJoinHousehold}
           reject={this.handleRejectHousehold}
           submit={this.handleHouseholdCreation}
-          gotoInviteRoommates={this.gotoInviteRoommates}
         />;
   },
 
-  // renderCreateHousehold() {
-  //   return (
-  //     <CreateHousehold
-  //       submit={this.handleHouseholdCreation}
-  //       gotoInviteRoommates={this.gotoInviteRoommates}
-  //     />
-  //   );
-  // },
-
-  handleJoinHousehold(/*data*/) {
+  handleJoinHousehold(data) {
+    console.log(data);
     //dispatch action to store causing update of joined household (user belongs to household --> go to homeTab)
     // this.props.dispatch(Actions.joinHousehold('accepted', data.id));
   },
@@ -41,11 +32,6 @@ var Homeless = React.createClass({
   handleHouseholdCreation(data) {
     // dispatch action to store causing creation of new household
     this.props.dispatch(Actions.addHousehold(data));
-  },
-
-  gotoInviteRoommates(/*TODO: payload*/) {
-    //dispatch action to store --> update store with creation of new invitation model in data.invitations
-    // this.props.dispatch(TODO: SEND INVITES);
   },
 
 });

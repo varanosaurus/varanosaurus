@@ -16,10 +16,9 @@ var InviteRoommates = React.createClass({
       inputField: [true, true, true],
     });
   },
-
   render() {
     var inputFields = this.state.inputField;
-    // var self = this;
+    var self = this;
     return (
       <View style={styles.container}>
       <Text>THIS IS WORKING</Text>
@@ -29,15 +28,17 @@ var InviteRoommates = React.createClass({
                     style={styles.input}
                     keyboardType='default'
                     placeholder="roommate name"
-                    onChangeText={(input) => this.setState({input: input})}
+                    onChangeText={(input) => {
+                      self.setState({input: input});
+                    }}
                   />);
           })
         }
-        <Text style={styles.hyperLink} onPress={this.addRoommate}>Invite More</Text>
-        <Text style={styles.errorHandling}>{this.state.error}</Text>
+        <Text style={styles.hyperLink} onPress={self.addRoommate}>Invite More</Text>
+        <Text style={styles.errorHandling}>{self.state.error}</Text>
         <TouchableHighlight
           style={styles.button}
-          onPress={this.submitRoommates}
+          onPress={self.submitRoommates}
         >
           <Text style={styles.btnText}>Invite Roommates</Text>
         </TouchableHighlight>
@@ -45,9 +46,8 @@ var InviteRoommates = React.createClass({
     );
   },
 
-  addRoomate() {
+  addRoommate() {
     this.state.inputField.push(true);
-    console.log(this.state.inputField);
     this.setState(this.state.inputField);
   },
 

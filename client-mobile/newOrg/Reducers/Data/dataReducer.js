@@ -61,6 +61,15 @@ function reckonings(state = [], action) {
   }
 }
 
+function selectedReckoning(state = [], action) {
+  switch (action.type) {
+  case 'FETCH_SELECTED_RECKONING_SUCCESS':
+    return action.payload.reckoning;
+  default:
+    return state;
+  }
+}
+
 function invitations(state, action) {
   if (state == null) {
     return {sent: [], received: []};
@@ -79,4 +88,5 @@ module.exports = combineReducers({
   reckonings,
   invitations,
   roommates,
+  selectedReckoning,
 });

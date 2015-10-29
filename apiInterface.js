@@ -296,7 +296,7 @@
       status: string, //'accepted' or 'rejected'
     },
     responseBody: {
-      invitation: Invitation,
+      invitations: [Invitation],
       household: null, //if rejected, or Household model if accepted,
       token: null, //only present if accepted
     },

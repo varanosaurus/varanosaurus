@@ -13,6 +13,7 @@ var tokens = require('../../server/services/tokens');
 var needRequire = require('really-need');
 
 //TODO: add spec testing that we get invitation householdName properly
+//TODO: add spec testing that we send back all invites upon update
 describe('invitationRouter', function() {
 
   var server;

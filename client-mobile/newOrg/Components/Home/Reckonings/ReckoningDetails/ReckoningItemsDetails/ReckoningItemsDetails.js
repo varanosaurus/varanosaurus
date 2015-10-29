@@ -10,7 +10,7 @@ var {connect} = require('react-redux');
 var ReckoningItemsDetails = React.createClass({
 
   render() {
-    console.log("this.props.mode in ReckoningItemsDetails is:", this.props.mode);
+    console.log('this.props.mode in ReckoningItemsDetails is:', this.props.mode);
     return this.props.mode === 'list'
       ? this.renderItemList()
       : this.renderItemDetails();

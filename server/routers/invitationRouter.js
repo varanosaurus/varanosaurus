@@ -22,8 +22,11 @@ router.post('/', function(request, response) {
       db.Household.findOne({where: {id: householdId}})
         .then(function(household) {
           return db.Invitation.create({toUserId: toUser.id, fromUserId, householdId, householdName: household.name})
-            .then(function(invitation) {
-              response.status(201).json({invitation});
+            .then(function() {
+              return db.Invitation.findAll({where: {fromUserId, status: 'pending'}})
+                .then(function(invitations) {
+                  response.status(201).json({invitations});
+                });
             });
         });
 

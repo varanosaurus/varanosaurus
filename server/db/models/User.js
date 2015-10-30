@@ -12,7 +12,7 @@ var hashPassword = function(user) {
 };
 
 var comparePassword = function(password) {
-	return bcrypt.compareAsync(password, this.password);
+	return bcrypt.compareSync(password, this.password);
 };
 
 module.exports = {

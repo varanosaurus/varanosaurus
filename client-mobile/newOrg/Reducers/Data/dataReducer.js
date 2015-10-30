@@ -29,12 +29,12 @@ function household(state = null, action) {
   }
 }
 
-function roommates(state = null, action) {
+function roommates(state = [], action) {
   switch (action.type) {
   case 'LOGIN_SUCCESS':
     return action.payload.roommates;
   case 'LOGOUT':
-    return null;
+    return [];
   default:
     return state;
   }
@@ -94,21 +94,29 @@ function selectedReckoning(state = [], action) {
   }
 }
 
-function invitations(state = {sent: [], received: []}, action) {
-  // if (state == null) {
-  //   return {sent: [], received: []};
-  // }
+function sent(state = [], action) {
+  switch (action.type) {
+  case 'ADD_INVITATION_SUCCESS':
+    return action.payload.invitations;
+  case 'LOGOUT':
+    return [];
+  default:
+    return state;
+  }
+}
+
+function received(state = [], action) {
   switch (action.type) {
   case 'LOGIN_SUCCESS':
     return action.payload.invitations;
   case 'UPDATE_INVITATION_SUCCESS':
-    console.log('invitation reducer on success being called with: ', action.payload);
     return action.payload.invitations;
   case 'LOGOUT':
-    return {sent: [], received: []};
+    return [];
   default:
     return state;
   }
+
 }
 
 module.exports = combineReducers({
@@ -116,7 +124,7 @@ module.exports = combineReducers({
   household,
   items,
   reckonings,
-  invitations,
+  invitations: combineReducers({sent, received}),
   roommates,
   selectedReckoning,
 });

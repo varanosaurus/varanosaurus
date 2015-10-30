@@ -1,4 +1,6 @@
 var store = require('./Store');
+var Actions = require('../Actions/Actions');
+var {SceneConfigs} = require('react-native').Navigator;
 
 // TODO: decide whether we should always mount smart components within navigator,
 // or prefer to mount dumb components with state snatched within route factory (here)
@@ -14,6 +16,7 @@ exports.itemAddView = {
   name: 'itemAdd',
   component: require('../Components/Home/Items/ItemAdd/ItemAdd'),
   title: 'Add Item',
+  sceneConfig: SceneConfigs.FloatFromBottom,
   props: {},
 };
 
@@ -25,12 +28,16 @@ var getBoughtItemDetailsView = exports.getItemDetailsView = function(item) {
 
   var i;
 
-
-  for (i = 0; i < roommates.length; i++) {
-    if (item.addingUserId == roommates[i].id) {
-      creator = roommates[i];
+  if (item.addingUserId === state.data.user.id) {
+    creator = state.data.user;
+  } else {
+    for (i = 0; i < roommates.length; i++) {
+      if (item.addingUserId == roommates[i].id) {
+        creator = roommates[i];
+      }
     }
   }
+
 
 
   var props = {
@@ -62,4 +69,27 @@ exports.getPendingItemDetailsView = function(item, props) {
     ...scene,
     props,
   };
+};
+
+exports.reckoningDetailsView = {
+    name: 'reckoningDetailsView',
+    component: require('../Components/Home/Reckonings/ReckoningDetails/ReckoningDetails'),
+    props: {},
+};
+
+exports.inviteRoommatesView = {
+  name: 'inviteRoommatesView',
+  component: require('../Components/Home/Settings/dumb/InviteRoommates'),
+  props: {
+    handleInviteRoommates(username) {
+      console.log('handleInviteRoommates from Routes being called with: ', username);
+      store.dispatch(Actions.addInvitation(username));
+    },
+
+    resetSettingsViewMode() {
+      store.dispatch(Actions.setSettingsViewMode('options'));
+    },
+
+  },
+  title: 'Invite roommates',
 };

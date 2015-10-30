@@ -4,9 +4,9 @@ var React = require('react-native');
 var {connect} = require('react-redux');
 
 var Actions = require('../../../Actions/Actions');
+var Routes = require('../../../Services/Routes');
 
 var ReckoningList = require('./dumb/ReckoningList');
-var ReckoningDetails = require('./ReckoningDetails/ReckoningDetails');
 
 var Reckoning = React.createClass({
 
@@ -15,14 +15,7 @@ var Reckoning = React.createClass({
   },
 
   render() {
-    switch (this.props.reckoningsViewMode) {
-      case 'list':
-        return this.renderList();
-      case 'details':
-        return this.renderDetails();
-      default:
-        return this.renderList();
-    }
+    return this.renderList();
   },
 
   renderList() {
@@ -30,32 +23,15 @@ var Reckoning = React.createClass({
       <ReckoningList
         reckonings={this.props.reckonings}
         //handleSelect={this.handleSelect}
-        goToReckoningDetailsView={this.goToReckoningDetailsView}
+        gotoReckoningDetailsView={this.gotoReckoningDetailsView}
       />
     );
   },
 
-  renderDetails() {
-    var reckoning;
-    this.props.reckonings.forEach((dataReckoning) => {
-      if (dataReckoning.id === this.props.selectedReckoningId.id) {
-        reckoning = dataReckoning;
-      }
-    });
-    return (
-      <ReckoningDetails
-        reckoning={reckoning}
-      />
-    );
-  },
-
-  // handleSelect(data) {
-  //   this.dispatch(Actions.selectReckoning(data));
-  // },
-
-  goToReckoningDetailsView(reckoning) {
-    this.props.dispatch(Actions.setReckoningsViewMode('details'));
+  gotoReckoningDetailsView(reckoning) {
     this.props.dispatch(Actions.selectReckoning(reckoning));
+    // this.props.dispatch(Actions.setReckoningsViewMode('details'));
+    this.props.navigator.push(Routes.reckoningDetailsView);
   },
 
 });

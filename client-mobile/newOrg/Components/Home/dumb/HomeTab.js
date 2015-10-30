@@ -18,9 +18,6 @@ var {
 var HomeTab = React.createClass({
 
   render() {
-    console.log('rendering hometabs, see props below');
-    console.dir(this.props);
-
     return (
 
       <TabBarIOS selectedTab={this.props.selectedTab}>

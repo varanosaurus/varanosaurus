@@ -24,7 +24,7 @@ var ReckoningList = React.createClass({
     return (
       <View>
         <TouchableHighlight
-          onPress={() => this.props.goToReckoningDetailsView(reckoning)} >
+          onPress={() => this.props.gotoReckoningDetailsView(reckoning)} >
           <View>
             <Text>{reckoning.date.toString()}</Text>
           </View>

@@ -14,7 +14,7 @@ var InviteRoommates = React.createClass({
 
   getInitialState() {
     return ({
-      inputField: true,
+      inputField: [],
     });
   },
 
@@ -30,24 +30,32 @@ var InviteRoommates = React.createClass({
           keyboardType='default'
           placeholder="roommate's username"
           onChangeText={(input) => this.setState({input: input})}
+          value={this.state.input}
         />
         <Text style={styles.errorHandling}>{this.state.error}</Text>
-        <Button onPress={this.submitRoommates} style={styles.btn}>Invite Roommate</Button>
+        <Button onPress={this.submitRoommate} style={styles.btn}>Invite Roommate</Button>
 
         <Text>Pending invitations to:</Text>
-        <Text>Pending roommate 1</Text>
-        <Text>Pending roommate 2</Text>
-        <Text>Pending roommate 3</Text>
+        {
+          this.state.inputField.map(function(roommateUsername) {
+            return (
+              <View>
+                <Text>{roommateUsername}</Text>
+              </View>
+            );
+          })
+        }
       </View>
     );
   },
 
-  submitRoommates() {
+  submitRoommate() {
     var username = this.state.input;
-    //Note: need to write better logic for error handling. right now if the user deletes all the text in the input fields, they won't get the error
     if (this.state.input === undefined) {
-      this.setState({error: 'Please add at least one roommate before submitting'});
+      this.setState({error: 'Please add a roommate before submitting'});
     } else {
+      this.state.inputField.push(username);
+      this.setState({input: ''});
       this.props.handleInviteRoommates(username);
     }
   },
@@ -77,7 +85,6 @@ var styles = StyleSheet.create({
   },
   input: {
     flex: 2,
-    height: 40,
     borderColor: 'gray',
     borderWidth: 1,
 

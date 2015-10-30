@@ -33,6 +33,11 @@ var InviteRoommates = React.createClass({
         />
         <Text style={styles.errorHandling}>{this.state.error}</Text>
         <Button onPress={this.submitRoommates} style={styles.btn}>Invite Roommate</Button>
+
+        <Text>Pending invitations to:</Text>
+        <Text>Pending roommate 1</Text>
+        <Text>Pending roommate 2</Text>
+        <Text>Pending roommate 3</Text>
       </View>
     );
   },

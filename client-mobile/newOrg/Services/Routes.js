@@ -82,7 +82,8 @@ exports.inviteRoommatesView = {
   component: require('../Components/Home/Settings/dumb/InviteRoommates'),
   props: {
     handleInviteRoommates(username) {
-      store.dispatch(Actions.inviteRoommate(username));
+      console.log('handleInviteRoommates from Routes being called with: ', username);
+      store.dispatch(Actions.addInvitation(username));
     },
 
     resetSettingsViewMode() {

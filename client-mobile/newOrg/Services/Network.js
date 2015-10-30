@@ -138,6 +138,7 @@ var updateItem = function(updates) {
 };
 
 var inviteUser = function(toUsername) {
+  console.log('inviteUser from Network being called with: ', toUsername);
   var params = makeParams('POST', {toUsername});
   return fetch(url + invitationUrl, params)
     .catch(function(error) {

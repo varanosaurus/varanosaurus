@@ -207,34 +207,35 @@ function addHouseholdFailure(message) {
 //   };
 // };
 
-// exports.addInvitation = function(username) {
-//   return function(dispatch) {
-//     return Network.addInvitation(username)
-//       .then(function(response) {
-//         return response.json()
-//           .then(function(body) {
-//             if (response.ok) {
-//               return dispatch(addInvitationSuccess(body));
-//             } else {
-//               return dispatch(addInvitationFailure(body));
-//             }
-//           });
-//       });
-//   };
-// };
+exports.addInvitation = function(toUsername) {
+  console.log('addinvitation from Actions being called with: ', toUsername);
+  return function(dispatch) {
+    return Network.inviteUser(toUsername)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(addInvitationSuccess(body));
+            } else {
+              return dispatch(addInvitationFailure(body));
+            }
+          });
+      });
+  };
+};
 
-// function addInvitationSuccess(data) {
-//   return {
-//     type: 'ADD_INVITATION_SUCCESS',
-//     //handle the data here eventually
-//   };
-// };
+function addInvitationSuccess() {
+  return {
+    type: 'ADD_INVITATION_SUCCESS',
+    //handle the data here eventually
+  };
+}
 
-// function addInvitationFailure(data) {
-//   return {
-//     type: 'ADD_INVITATION_FAILURE',
-//   };
-// };
+function addInvitationFailure() {
+  return {
+    type: 'ADD_INVITATION_FAILURE',
+  };
+}
 
 // JOIN_HOUSEHOLD
 exports.updateInvitation = function(status, invitationId) {

@@ -41,10 +41,7 @@ function loginSuccess(data) {
       user: data.userData,
       household: data.household || null,
       roommates: data.roommates || null,
-      invitations: {
-        sent: null,
-        received: data.invitations || null,
-      },
+      invitations: data.invitations || null,
     },
   };
 }
@@ -224,10 +221,10 @@ exports.addInvitation = function(toUsername) {
   };
 };
 
-function addInvitationSuccess() {
+function addInvitationSuccess(data) {
   return {
     type: 'ADD_INVITATION_SUCCESS',
-    //handle the data here eventually
+    payload: data.invitations,
   };
 }
 
@@ -264,10 +261,7 @@ function updateInvitationSuccess(data) {
   return {
     type: 'UPDATE_INVITATION_SUCCESS',
     payload: {
-      invitations: {
-        sent: [],
-        received: data.invitations,
-      },
+      invitations: data.invitations,
       household: data.household || null,
       token: data.token,
     },

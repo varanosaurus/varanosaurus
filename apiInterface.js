@@ -265,7 +265,7 @@
     requestBody: {
       toUsername: string,
     },
-    responseBody: {invitation: Invitation},
+    responseBody: {invitations: [Invitation]}, //all pending invitations sent by user
   },
 
   'get all sent invitations': {

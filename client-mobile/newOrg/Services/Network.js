@@ -129,7 +129,6 @@ var getItem = function() {
 //getallItemsInHousehold --> necessary? Could just send back with login
 
 var updateItem = function(updates) {
-  console.log('updates: ', updates);
   var params = makeParams('PUT', updates);
   return fetch(url + itemUrl + Store.getState().uiMode.selectedItemId, params)
     .catch(function(error) {
@@ -138,7 +137,6 @@ var updateItem = function(updates) {
 };
 
 var inviteUser = function(toUsername) {
-  console.log('inviteUser from Network being called with: ', toUsername);
   var params = makeParams('POST', {toUsername});
   return fetch(url + invitationUrl, params)
     .catch(function(error) {
@@ -164,7 +162,6 @@ var getInvitationOutbox = function() {
 };
 
 var respondToInvitation = function(status, invitationId) {
-  console.log('network respondToInvitation being called with: ', status, invitationId);
   var params = makeParams('PUT', {status});
   return fetch(url + invitationUrl + invitationId, params)
     .catch(function(error) {

@@ -27,10 +27,8 @@ var InviteRoommates = React.createClass({
           return (<TextInput
                     style={styles.input}
                     keyboardType='default'
-                    placeholder="roommate name"
-                    onChangeText={(input) => {
-                      self.setState({input: input});
-                    }}
+                    placeholder="roommate's username"
+                    onChangeText={(input) => self.setState({input: input})}
                   />);
           })
         }

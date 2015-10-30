@@ -26,8 +26,6 @@ var Items = React.createClass({
     // case 'details':
     //   return this.renderItemDetails();
     // }
-    console.log('rendering items view, see props below');
-    console.dir(this.props);
     return this.renderItemList();
   },
 
@@ -129,3 +127,4 @@ function select(state) {
 }
 
 module.exports = connect(select)(Items);
+

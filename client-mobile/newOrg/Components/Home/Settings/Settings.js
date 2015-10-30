@@ -3,21 +3,24 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-// var Actions = require('../../../Actions/Actions');
+var Actions = require('../../../Actions/Actions');
 
 var SettingsOptions = require('./dumb/SettingsOptions');
 var InviteRoommates = require('./dumb/InviteRoommates');
 
 var Settings = React.createClass({
   render() {
-    return this.props.uiMode === 'options'
+    return this.props.settingsViewMode === 'options'
       ? this.renderSettingsOptions()
       : this.renderInviteRoommates();
   },
 
   renderSettingsOptions() {
     return (
-      <SettingsOptions />
+      <SettingsOptions
+        logout={this.logout}
+        gotoInviteRoommates={this.gotoInviteRoommates}
+      />
     );
   },
 
@@ -31,12 +34,22 @@ var Settings = React.createClass({
 
   },
 
+  logout() {
+    console.log('called from logout in Settings.js');
+    this.props.dispatch(Actions.logout());
+  },
+
+  gotoInviteRoommates() {
+    this.props.dispatch(Actions.setSettingsViewMode('invite'));
+  },
+
 });
 
 function select(state) {
   return {
-    uiMode: state.uiMode.settingsViewMode,
+    settingsViewMode: state.uiMode.settingsViewMode,
   };
 }
 
 module.exports = connect(select)(Settings);
+

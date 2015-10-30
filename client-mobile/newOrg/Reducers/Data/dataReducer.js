@@ -17,13 +17,13 @@ function household(state = null, action) {
   switch (action.type) {
   case 'LOGIN_SUCCESS':
     return action.payload.household;
-  case 'LOGOUT':
-    return null;
   case 'ADD_HOUSEHOLD_SUCCESS':
     return action.payload.household;
   case 'UPDATE_INVITATION_SUCCESS':
     console.log('household reducer being called on success with: ', action.payload);
     return action.payload.household;
+  case 'LOGOUT':
+    return null;
   default:
     return state;
   }
@@ -33,6 +33,8 @@ function roommates(state = null, action) {
   switch (action.type) {
   case 'LOGIN_SUCCESS':
     return action.payload.roommates;
+  case 'LOGOUT':
+    return null;
   default:
     return state;
   }
@@ -63,6 +65,8 @@ function items(state, action) {
       };
     }
     break;
+  case 'LOGOUT':
+    return {pending: [], bought: []};
   default:
     return state;
   }
@@ -72,6 +76,8 @@ function reckonings(state = [], action) {
   switch (action.type) {
   case 'FETCH_RECKONING_LISTS_SUCCESS':
     return action.payload.reckonings.reckonings;
+  case 'LOGOUT':
+    return [];
   default:
     return state;
   }
@@ -81,6 +87,8 @@ function selectedReckoning(state = [], action) {
   switch (action.type) {
   case 'FETCH_SELECTED_RECKONING_SUCCESS':
     return action.payload.reckoning;
+  case 'LOGOUT':
+    return [];
   default:
     return state;
   }
@@ -96,6 +104,8 @@ function invitations(state = {sent: [], received: []}, action) {
   case 'UPDATE_INVITATION_SUCCESS':
     console.log('invitation reducer on success being called with: ', action.payload);
     return action.payload.invitations;
+  case 'LOGOUT':
+    return {sent: [], received: []};
   default:
     return state;
   }

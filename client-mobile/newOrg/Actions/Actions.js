@@ -41,10 +41,7 @@ function loginSuccess(data) {
       user: data.userData,
       household: data.household || null,
       roommates: data.roommates || null,
-      invitations: {
-        sent: null,
-        received: data.invitations || null,
-      },
+      invitations: data.invitations || null,
     },
   };
 }
@@ -207,9 +204,38 @@ function addHouseholdFailure(message) {
 //   };
 // };
 
+exports.addInvitation = function(toUsername) {
+  console.log('addinvitation from Actions being called with: ', toUsername);
+  return function(dispatch) {
+    return Network.inviteUser(toUsername)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(addInvitationSuccess(body));
+            } else {
+              return dispatch(addInvitationFailure(body));
+            }
+          });
+      });
+  };
+};
+
+function addInvitationSuccess(data) {
+  return {
+    type: 'ADD_INVITATION_SUCCESS',
+    payload: data.invitations,
+  };
+}
+
+function addInvitationFailure() {
+  return {
+    type: 'ADD_INVITATION_FAILURE',
+  };
+}
+
 // JOIN_HOUSEHOLD
 exports.updateInvitation = function(status, invitationId) {
-  console.log('upateInvitation in Actions being called with: ', status, invitationId);
   return function(dispatch) {
     return Network.respondToInvitation(status, invitationId)
       .then(function(response) {
@@ -235,10 +261,7 @@ function updateInvitationSuccess(data) {
   return {
     type: 'UPDATE_INVITATION_SUCCESS',
     payload: {
-      invitations: {
-        sent: [],
-        received: data.invitations,
-      },
+      invitations: data.invitations,
       household: data.household || null,
       token: data.token,
     },

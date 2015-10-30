@@ -34,6 +34,9 @@ var ItemAdd = React.createClass({
     if (this.props.addItemRequestStatus === 'pending') {
       return;
     }
+    if (item.bought) {
+      item.timeBought = Date.now();
+    }
 
     this.props.dispatch(Actions.addItem(item));
     this.props.dispatch(Actions.setAddItemRequestStatus('pending'));

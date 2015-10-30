@@ -22,20 +22,22 @@ router.post('/', function(request, response) {
           } else {
             return db.Household.create({name});
           }
+        })
+        .then(function(household) {
+          //set scheduler to call a reckoning once a month
+          scheduler.createMonthlyJob(household.id, reckon);
+
+          // associate creating user with the household
+          user.setHousehold(household);
+
+          household.setCreator(userId);
+          //set the creator as the default captain upon creation
+          household.setCaptain(userId);
+          response.status(201).json({
+            household,
+            token: tokens.issue(userId, household.id),
+          });
         });
-    })
-
-    .then(function(household) {
-      //set scheduler to call a reckoning once a month
-      scheduler.createMonthlyJob(household.id, reckon);
-
-      household.setCreator(userId);
-      //set the creator as the default captain upon creation
-      household.setCaptain(userId);
-      response.status(201).json({
-        household,
-        token: tokens.issue(userId, household.id),
-      });
     })
 
     .catch(function(error) {

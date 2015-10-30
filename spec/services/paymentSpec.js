@@ -134,18 +134,63 @@ var testCases = [
 
   },
 
-  /*{
+  {
     input: {
+
       owedUsers: [
+        {
+          id: 1,
+          owed: 97.41,
+        },
+        {
+          id: 2,
+          owed: 34.30,
+        },
       ],
+
       owingUsers: [
+        {
+          id: 3,
+          debt: 51.39,
+        },
+        {
+          id: 4,
+          debt: 44.05,
+        },
+        {
+          id: 5,
+          debt: 36.27,
+        },
       ],
+
     },
+
     expected: [
+      {
+        toUserId: 1,
+        fromUserId: 3,
+        amount: 51.39,
+      },
+      {
+        toUserId: 1,
+        fromUserId: 4,
+        amount: 44.05,
+      },
+      {
+        toUserId: 2,
+        fromUserId: 5,
+        amount: 34.30,
+      },
+      {
+        toUserId: 1,
+        fromUserId: 5,
+        amount: 1.97,
+      },
     ],
+
   },
 
-  {
+  /*{
     input: {
       owedUsers: [
       ],

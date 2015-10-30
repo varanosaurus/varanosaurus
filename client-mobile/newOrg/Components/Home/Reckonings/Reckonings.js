@@ -16,14 +16,6 @@ var Reckoning = React.createClass({
 
   render() {
     return this.renderList();
-    // switch (this.props.reckoningsViewMode) {
-    //   case 'list':
-    //     return this.renderList();
-    //   case 'details':
-    //     return this.renderDetails();
-    //   default:
-    //     return this.renderList();
-    // }
   },
 
   renderList() {
@@ -35,24 +27,6 @@ var Reckoning = React.createClass({
       />
     );
   },
-
-  // renderDetails() {
-  //   var reckoning;
-  //   this.props.reckonings.forEach((dataReckoning) => {
-  //     if (dataReckoning.id === this.props.selectedReckoningId.id) {
-  //       reckoning = dataReckoning;
-  //     }
-  //   });
-  //   return (
-  //     <ReckoningDetails
-  //       reckoning={reckoning}
-  //     />
-  //   );
-  // },
-
-  // handleSelect(data) {
-  //   this.dispatch(Actions.selectReckoning(data));
-  // },
 
   gotoReckoningDetailsView(reckoning) {
     this.props.dispatch(Actions.selectReckoning(reckoning));

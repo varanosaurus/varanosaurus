@@ -71,3 +71,14 @@ exports.reckoningDetailsView = {
     component: require('../Components/Home/Reckonings/ReckoningDetails/ReckoningDetails'),
     props: {},
 };
+
+exports.inviteRoommatesView = {
+  name: 'inviteRoommatesView',
+  component: require('../Components/Home/Settings/dumb/InviteRoommates'),
+  props: {
+    handleInviteRoommates() {
+
+    },
+  },
+  title: 'Invite roommates',
+};

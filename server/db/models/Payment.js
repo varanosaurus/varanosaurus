@@ -5,7 +5,7 @@ module.exports = {
   attributes: {
 
     amount: {
-      type: Sequelize.DECIMAL(5, 2),
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
 

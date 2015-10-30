@@ -25,25 +25,25 @@ var testCases = [
       owedUsers: [
         {
           id: 1,
-          owed: 30,
+          owed: 3000,
         },
         {
           id: 2,
-          owed: 20,
+          owed: 2000,
         },
         {
           id: 3,
-          owed: 10,
+          owed: 1000,
         },
       ],
       owingUsers: [
         {
           id: 4,
-          debt: 30,
+          debt: 3000,
         },
         {
           id: 5,
-          debt: 30,
+          debt: 3000,
         },
       ],
     },
@@ -51,17 +51,17 @@ var testCases = [
       {
         toUserId: 1,
         fromUserId: 4,
-        amount: 30,
+        amount: 3000,
       },
       {
         toUserId: 2,
         fromUserId: 5,
-        amount: 20,
+        amount: 2000,
       },
       {
         toUserId: 3,
         fromUserId: 5,
-        amount: 10,
+        amount: 1000,
       },
     ],
   },
@@ -72,34 +72,34 @@ var testCases = [
       owedUsers: [
         {
           id: 1,
-          owed: 70,
+          owed: 7000,
         },
         {
           id: 2,
-          owed: 60,
+          owed: 6000,
         },
         {
           id: 3,
-          owed: 60,
+          owed: 6000,
         },
         {
           id: 4,
-          owed: 60,
+          owed: 6000,
         },
       ],
 
       owingUsers: [
         {
           id: 5,
-          debt: 150,
+          debt: 15000,
         },
         {
           id: 6,
-          debt: 60,
+          debt: 6000,
         },
         {
           id: 7,
-          debt: 40,
+          debt: 4000,
         },
       ],
     },
@@ -108,27 +108,27 @@ var testCases = [
       {
         toUserId: 1,
         fromUserId: 5,
-        amount: 70,
+        amount: 7000,
       },
       {
         toUserId: 2,
         fromUserId: 5,
-        amount: 60,
+        amount: 6000,
       },
       {
         toUserId: 3,
         fromUserId: 6,
-        amount: 60,
+        amount: 6000,
       },
       {
         toUserId: 4,
         fromUserId: 7,
-        amount: 40,
+        amount: 4000,
       },
       {
         toUserId: 4,
         fromUserId: 5,
-        amount: 20,
+        amount: 2000,
       },
     ],
 
@@ -140,26 +140,26 @@ var testCases = [
       owedUsers: [
         {
           id: 1,
-          owed: 97.41,
+          owed: 9741,
         },
         {
           id: 2,
-          owed: 34.30,
+          owed: 3430,
         },
       ],
 
       owingUsers: [
         {
           id: 3,
-          debt: 51.39,
+          debt: 5139,
         },
         {
           id: 4,
-          debt: 44.05,
+          debt: 4405,
         },
         {
           id: 5,
-          debt: 36.27,
+          debt: 3627,
         },
       ],
 
@@ -169,22 +169,22 @@ var testCases = [
       {
         toUserId: 1,
         fromUserId: 3,
-        amount: 51.39,
+        amount: 5139,
       },
       {
         toUserId: 1,
         fromUserId: 4,
-        amount: 44.05,
+        amount: 4405,
       },
       {
         toUserId: 2,
         fromUserId: 5,
-        amount: 34.30,
+        amount: 3430,
       },
       {
         toUserId: 1,
         fromUserId: 5,
-        amount: 1.97,
+        amount: 197,
       },
     ],
 

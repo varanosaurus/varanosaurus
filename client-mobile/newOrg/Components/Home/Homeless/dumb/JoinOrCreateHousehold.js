@@ -14,6 +14,12 @@ var {
 
 var JoinOrCreateHousehold = React.createClass({
 
+  getInitialState() {
+    return {
+      householdName: '',
+    };
+  },
+
   render() {
     var self = this;
     if (this.props.invitations.length === 0) {

@@ -27,12 +27,16 @@ var getBoughtItemDetailsView = exports.getItemDetailsView = function(item) {
 
   var i;
 
-
-  for (i = 0; i < roommates.length; i++) {
-    if (item.addingUserId == roommates[i].id) {
-      creator = roommates[i];
+  if (item.addingUserId === state.data.user.id) {
+    creator = state.data.user;
+  } else {
+    for (i = 0; i < roommates.length; i++) {
+      if (item.addingUserId == roommates[i].id) {
+        creator = roommates[i];
+      }
     }
   }
+
 
 
   var props = {

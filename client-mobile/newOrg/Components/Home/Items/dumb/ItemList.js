@@ -6,7 +6,7 @@ var Styles = require('../../../../Styles/Styles');
 // var Icon = require('react-native-vector-icons/Ionicons');
 
 var {
-  StyleSheet,
+  // StyleSheet,
   ListView,
   View,
   SegmentedControlIOS,
@@ -63,10 +63,10 @@ var ItemList = React.createClass({
 
     return (
         <TouchableHighlight
-          style={styles.list.row}
+          style={Styles.list.row}
           onPress={() => this.props.gotoItemDetailsView(item)} >
           <View>
-            <Text style={styles.list.label}>{item.description}</Text>
+            <Text style={Styles.list.label}>{item.description}</Text>
           </View>
         </TouchableHighlight>
     );
@@ -77,8 +77,8 @@ var ItemList = React.createClass({
 
 module.exports = ItemList;
 
-var styles = StyleSheet.create({
-  container: {
-    marginTop: 64,
-  },
-});
+// var styles = StyleSheet.create({
+//   container: {
+//     marginTop: 64,
+//   },
+// });

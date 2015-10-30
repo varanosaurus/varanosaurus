@@ -118,9 +118,6 @@ var reckon = function(householdId) {
 
               var owedUsers = [];
               var owingUsers = [];
-              var owedUser;
-              var owingUser;
-              var paymentAmount;
 
               var i;
 
@@ -148,46 +145,7 @@ var reckon = function(householdId) {
               owedUsers.sort(compareProps('owed'));
               owingUsers.sort(compareProps('debt'));
 
-              while (owedUsers.length && owingUsers.length) {
-
-                owedUser = owedUsers[0];
-                owingUser = owingUsers[0];
-
-                if (owedUser.owed > owingUser.debt) {
-
-                  paymentAmount = owingUser.debt;
-
-                  owedUsers[0].owed -= paymentAmount;
-
-                  owingUsers.shift();
-
-                } else if (owedUser.debt < owingUser.debt) {
-
-                  paymentAmount = owedUser.owed;
-
-                  owingUser.debt -= paymentAmount;
-
-                  owedUsers.shift();
-
-                } else {
-
-                  paymentAmount = owedUser.owed;
-
-                  owedUsers.shift();
-                  owingUsers.shift();
-
-                }
-
-                promise = db.Payment.create({
-                  toUserId: owedUser.id,
-                  fromUserId: owingUser.id,
-                  reckoningId: reckoning.id,
-                  amount: paymentAmount,
-                });
-
-                promises.push(promise);
-
-              }
+              // TODO: use payment service to generate attributes for a bulkCreate of payments
 
               // Wait upon all of the promises in the array,
               // then resolve our entire chain to the reckoning model,

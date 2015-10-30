@@ -6,7 +6,6 @@ var Styles = require('../../../../Styles/Styles');
 // var Icon = require('react-native-vector-icons/Ionicons');
 
 var {
-  StyleSheet,
   ListView,
   View,
   SegmentedControlIOS,
@@ -78,9 +77,3 @@ var ItemList = React.createClass({
 });
 
 module.exports = ItemList;
-
-var styles = StyleSheet.create({
-  container: {
-    marginTop: 64,
-  },
-});

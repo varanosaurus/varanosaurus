@@ -79,24 +79,9 @@ describe('invitationRouter', function() {
 
       expect(err).toBeNull();
       expect(response.statusCode).toEqual(201);
-
-      db.User.findOne({where: {username: 'redstarter'}})
-        .then(function(user) {
-          return user.getReceivedInvitations();
-        })
-        .then(function(invitations) {
-          var invitation;
-
-          expect(invitations).toBeTruthy();
-          expect(invitations.length).toEqual(1);
-
-          invitation = invitations[0];
-
-          expect(invitation).toBeTruthy();
-          expect(invitation.id).toEqual(parsedBody.invitation.id);
-          done();
-        })
-        .catch(done.fail.bind(done));
+      expect(Array.isArray(parsedBody.invitations)).toBeTruthy();
+      expect(parsedBody.invitations[0].toUserId).toEqual(1);
+      done();
     });
 
   }); // 'should allow Gary to invite Michael to the household'
@@ -206,7 +191,7 @@ describe('invitationRouter', function() {
       request({
         method: 'PUT',
         headers: context.headers,
-        url: inviteUrl + parsedBody.invitation.id,
+        url: inviteUrl + parsedBody.invitations[0].id,
         body: JSON.stringify({
           status: 'accepted',
         }),
@@ -243,7 +228,7 @@ describe('invitationRouter', function() {
       request({
         method: 'PUT',
         headers: context.headers,
-        url: inviteUrl + parsedBody.invitation.id,
+        url: inviteUrl + parsedBody.invitations[0].id,
         body: JSON.stringify({
           status: 'rejected',
         }),
@@ -272,9 +257,9 @@ describe('invitationRouter', function() {
           body: JSON.stringify({
                       toUsername: 'redstarter',
                     }),
-    }, function(error, response) {
+    }, function(error, response, body) {
 
-      var invitation = JSON.parse(response.body).invitation;
+      var invitation = JSON.parse(body).invitations[0];
 
       if (error) {
         done.fail(error);

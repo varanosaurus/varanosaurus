@@ -31,6 +31,10 @@ var seed = function() {
       password: 'password',
       //id 5
     },
+    {
+      username: 'eddard',
+      password: 'password',
+    },
   ], {individualHooks: true})
 
   .then(function() {

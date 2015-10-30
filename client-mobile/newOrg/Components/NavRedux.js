@@ -24,7 +24,6 @@ var NavRedux = React.createClass({
   // },
 
   render() {
-    console.log('rendering navigator');
     return (
         <Navigator
           initialRoute={Routes.hometab}
@@ -38,8 +37,6 @@ var NavRedux = React.createClass({
 
   renderScene(route, navigator) {
     var Component = route.component;
-    console.log('rendering component:');
-    console.dir(Component);
     return <Component {...route.props} navigator={navigator} />;
   },
 

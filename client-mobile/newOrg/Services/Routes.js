@@ -1,4 +1,5 @@
 var store = require('./Store');
+var Actions = require('../Actions/Actions');
 var {SceneConfigs} = require('react-native').Navigator;
 
 // TODO: decide whether we should always mount smart components within navigator,
@@ -80,9 +81,15 @@ exports.inviteRoommatesView = {
   name: 'inviteRoommatesView',
   component: require('../Components/Home/Settings/dumb/InviteRoommates'),
   props: {
+
     handleInviteRoommates() {
 
     },
+
+    resetSettingsViewMode() {
+      store.dispatch(Actions.setSettingsViewMode('options'));
+    },
+
   },
   title: 'Invite roommates',
 };

@@ -16,6 +16,11 @@ var InviteRoommates = React.createClass({
       inputField: [true, true, true],
     });
   },
+
+  componentWillUnmount() {
+    this.props.resetSettingsViewMode();
+  },
+
   render() {
     var inputFields = this.state.inputField;
     var self = this;

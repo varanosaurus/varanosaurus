@@ -29,12 +29,12 @@ function household(state = null, action) {
   }
 }
 
-function roommates(state = null, action) {
+function roommates(state = [], action) {
   switch (action.type) {
   case 'LOGIN_SUCCESS':
     return action.payload.roommates;
   case 'LOGOUT':
-    return null;
+    return [];
   default:
     return state;
   }

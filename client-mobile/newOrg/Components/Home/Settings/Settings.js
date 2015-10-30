@@ -10,6 +10,9 @@ var SettingsOptions = require('./dumb/SettingsOptions');
 
 var Settings = React.createClass({
   render() {
+    if (this.props.settingsViewMode === 'invite') {
+      this.gotoInviteRoommates();
+    }
     return this.renderSettingsOptions();
   },
 

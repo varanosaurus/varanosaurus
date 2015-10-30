@@ -1,4 +1,5 @@
 var store = require('./Store');
+var {SceneConfigs} = require('react-native').Navigator;
 
 // TODO: decide whether we should always mount smart components within navigator,
 // or prefer to mount dumb components with state snatched within route factory (here)
@@ -14,6 +15,7 @@ exports.itemAddView = {
   name: 'itemAdd',
   component: require('../Components/Home/Items/ItemAdd/ItemAdd'),
   title: 'Add Item',
+  sceneConfig: SceneConfigs.FloatFromBottom,
   props: {},
 };
 
@@ -62,4 +64,21 @@ exports.getPendingItemDetailsView = function(item, props) {
     ...scene,
     props,
   };
+};
+
+exports.reckoningDetailsView = {
+    name: 'reckoningDetailsView',
+    component: require('../Components/Home/Reckonings/ReckoningDetails/ReckoningDetails'),
+    props: {},
+};
+
+exports.inviteRoommatesView = {
+  name: 'inviteRoommatesView',
+  component: require('../Components/Home/Settings/dumb/InviteRoommates'),
+  props: {
+    handleInviteRoommates() {
+
+    },
+  },
+  title: 'Invite roommates',
 };

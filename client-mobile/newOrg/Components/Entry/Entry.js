@@ -25,6 +25,7 @@ var Entry = React.createClass({
   renderLogin() {
     return (
       <Login
+          errorHandling={this.state.error}
           submit={this.handleLogin}
           gotoSignup={this.gotoSignup}
       />
@@ -42,8 +43,16 @@ var Entry = React.createClass({
   },
 
   handleLogin(data) {
+    var self = this;
     // dispatch action to store causing verification of user input
-    this.props.dispatch(Actions.login(data.username, data.password));
+    self.props.dispatch(Actions.login(data.username, data.password))
+      .then(function(result) {
+        if (result.type === 'LOGIN_FAILURE') {
+          self.setState({
+            error: 'Sorry, we do not recognize your username and/or password.',
+          });
+        }
+      });
   },
 
   handleSignup(data) {

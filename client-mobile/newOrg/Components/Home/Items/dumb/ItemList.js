@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var Button = require('react-native-button');
 // var Icon = require('react-native-vector-icons/Ionicons');
 
 var {
@@ -23,7 +24,8 @@ var ItemList = React.createClass({
   },
 
   render() {
-
+    console.log('props from itemList:');
+    console.dir(this.props);
     var dataSource = this.dataSource.cloneWithRows(this.props.items);
 
     var selectedIndex;
@@ -53,6 +55,7 @@ var ItemList = React.createClass({
           automaticallyAdjustcontentInsets={false}
           contentInset={{bottom: 50}}
         />
+      <Button onPress={this.props.gotoItemAddView}>Add an item</Button>
       </View>
     );
   },
@@ -62,7 +65,7 @@ var ItemList = React.createClass({
     return (
       <View>
         <TouchableHighlight
-          onPress={() => this.props.goToItemDetailsView(item)} >
+          onPress={() => this.props.gotoItemDetailsView(item)} >
           <View>
             <Text>{item.description}</Text>
           </View>

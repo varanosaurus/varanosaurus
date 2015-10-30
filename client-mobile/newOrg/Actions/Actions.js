@@ -9,10 +9,10 @@ exports.login = function(username, password) {
       .then(function(response) {
         return response.json()
           .then(function(body) {
-            if (response.ok) {
-              return dispatch(loginSuccess(body));
-            } else {
+            if (!response.ok) {
               return dispatch(loginFailure(body));
+            } else {
+              return dispatch(loginSuccess(body));
             }
           });
         // if (response.ok) {
@@ -33,6 +33,7 @@ exports.login = function(username, password) {
 
 // LOGIN_SUCCESS: set token, user, and household(optional) from server's response into store
 function loginSuccess(data) {
+
   return {
     type: 'LOGIN_SUCCESS',
     payload: {
@@ -40,6 +41,10 @@ function loginSuccess(data) {
       user: data.userData,
       household: data.household || null,
       roommates: data.roommates || null,
+      invitations: {
+        sent: null,
+        received: data.invitations || null,
+      },
     },
   };
 }
@@ -181,8 +186,9 @@ function addHouseholdFailure(message) {
   };
 }
 
-// UPDATE_INVITATION
+//UPDATE INVITATION
 exports.updateInvitation = function(status, invitationId) {
+  console.log('upateInvitation in Actions being called with: ', status, invitationId);
   return function(dispatch) {
     return Network.respondToInvitation(status, invitationId)
       .then(function(response) {
@@ -204,11 +210,15 @@ exports.updateInvitation = function(status, invitationId) {
 
 // UPDATE_INVITATION_SUCCESS
 function updateInvitationSuccess(data) {
+  console.log('updateInvitationSuccess action being created');
   return {
     type: 'UPDATE_INVITATION_SUCCESS',
     payload: {
-      invitation: data.invitation,
-      household: data.household,
+      invitations: {
+        sent: [],
+        received: data.invitations,
+      },
+      household: data.household || null,
       token: data.token,
     },
   };
@@ -246,6 +256,43 @@ exports.setItemsFilter = function(filter) {
   };
 };
 
+exports.addItem = function(item) {
+  return function(dispatch) {
+    return Network.addItem(item)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(addItemSuccess(body.item));
+            } else {
+              return dispatch(addItemFailure(body.error));
+            }
+          });
+      });
+  };
+};
+
+function addItemSuccess(item) {
+  return {
+    type: 'ADD_ITEM_SUCCESS',
+    payload: {item},
+  };
+}
+
+function addItemFailure(error) {
+  return {
+    type: 'ADD_ITEM_FAILURE',
+    payload: {error},
+  };
+}
+
+exports.setAddItemRequestStatus = function(status) {
+  return {
+    type: 'SET_ADD_ITEM_REQUEST_STATUS',
+    payload: {status},
+  };
+};
+
 exports.selectItem = function(item) {
   console.log('selecting item ' + item);
   return {
@@ -255,8 +302,6 @@ exports.selectItem = function(item) {
 };
 
 exports.updateItem = function(updates) {
-
-  console.log('updating item from Actions');
 
   //Thunk
   return function(dispatch) {
@@ -319,16 +364,41 @@ function fetchReckoningListsSuccess(data) {
     },
   };
 }
+
+exports.fetchSelectedReckoning = function() {
+  return function(dispatch) {
+    Network.getSelectedReckoning()
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            console.log('from fetchSelectedReckoning', body);
+            if (response.ok) {
+              return dispatch(fetchSelectedReckoningSuccess(body));
+            }
+          });
+      });
+  };
+};
+
+function fetchSelectedReckoningSuccess(data) {
+  return {
+    type: 'FETCH_SELECTED_RECKONING_SUCCESS',
+    payload: {
+      reckoning: data.reckoning,
+    },
+  };
+}
+
 // GET_HOME_ITEMS: grab list of household's current unreckoned items (split into bought and pending)
 // and set into state.data.items.bought and state.data.items.pending
 
 // GET_RECKONING_DATA: get associated users and items with reckoning; coordinate with server
 
 // SELECT_RECKONING: set state.uiMode.selectedReckoning to payload reckoning id
-exports.selectReckoning = function(id) {
+exports.selectReckoning = function(reckoning) {
   return {
     type: 'SELECT_RECKONING',
-    payload: {reckoningId: id},
+    payload: {reckoningId: reckoning.id},
   };
 };
 

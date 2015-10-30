@@ -31,11 +31,13 @@ authRouter.post('/login', function(request, response) {
                     roommates,
                   });
                 });
-              // return response.status(200).json({user: userData, household, token});
             });
         } else {
           token = tokens.issue(user.id);
-          return response.status(200).json({userData, token});
+          db.Invitation.findAll({where: {toUserId: user.id, status: 'pending'}})
+            .then(function(invitations) {
+              return response.status(200).json({userData, token, invitations});
+            });
         }
       } else {
         return response.status(403).send({error: 'Wrong password.'});

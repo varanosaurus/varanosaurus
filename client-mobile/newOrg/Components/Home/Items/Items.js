@@ -32,13 +32,17 @@ var Items = React.createClass({
   },
 
   renderItemList() {
-    return <ItemList
-      itemsFilter={this.props.itemsFilter}
-      items={this.props.items}
-      gotoPendingItemsList={this.gotoPendingItemsList}
-      gotoBoughtItemsList={this.gotoBoughtItemsList}
-      goToItemDetailsView={this.goToItemDetailsView}
-    />;
+
+    return (
+      <ItemList
+        itemsFilter={this.props.itemsFilter}
+        items={this.props.items}
+        gotoPendingItemsList={this.gotoPendingItemsList}
+        gotoBoughtItemsList={this.gotoBoughtItemsList}
+        gotoItemDetailsView={this.gotoItemDetailsView}
+        gotoItemAddView={this.gotoItemAddView}
+      />
+    );
   },
 
   // renderItemDetails() {
@@ -68,17 +72,22 @@ var Items = React.createClass({
     this.props.dispatch(Actions.setItemsViewMode('list'));
   },
 
-  goToItemDetailsView(item) {
+  gotoItemDetailsView(item) {
     this.props.dispatch(Actions.selectItem(item));
 
     if (this.props.itemsFilter === 'pending') {
       this.props.navigator.push(Routes.getPendingItemDetailsView(item, {
-        updateItem: this.updateItem.bind(this),
+        updateItem: this.updateItem,
         gotoBoughtItemsList: this.gotoBoughtItemsList,
       }));
     } else {
       this.props.navigator.push(Routes.getItemDetailsView(item));
     }
+  },
+
+  gotoItemAddView() {
+    console.log('pushing itemAddView');
+    this.props.navigator.push(Routes.itemAddView);
   },
 
   updateItem(updates) {
@@ -94,6 +103,21 @@ function select(state) {
   var items = (state.uiMode.itemsFilter === 'pending')
     ? state.data.items.pending
     : state.data.items.bought;
+
+  // var selectedItem;
+  // var creator;
+  // if (state.uiMode.selectedItemId) {
+  //   for (var i = 0; i < items.length; i++) {
+  //     if (items[i].id === state.uiMode.selectedItemId) {
+  //       selectedItem = items[i];
+  //       for (var j = 0; j < state.data.roommates.length; j++) {
+  //         if (selectedItem.addingUserId === state.data.roommates[j].id) {
+  //           creator = state.data.roommates[j];
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   return {
     itemsViewMode: state.uiMode.itemsViewMode,

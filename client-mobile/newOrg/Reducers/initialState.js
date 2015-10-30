@@ -1,4 +1,4 @@
-var state = {
+module.exports = initialState = {
 
   data: {
     user: null, //{userModel},

@@ -420,3 +420,12 @@ exports.setReckoningDetailsMode = function(mode) {
     payload: {mode},
   };
 };
+
+// SET_SETTINGS_VIEW_MODE
+exports.setSettingsViewMode = function(mode) {
+  return {
+    type: 'SET_SETTINGS_VIEW_MODE',
+    payload: {mode},
+  };
+};
+

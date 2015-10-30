@@ -207,9 +207,37 @@ function addHouseholdFailure(message) {
 //   };
 // };
 
+// exports.addInvitation = function(username) {
+//   return function(dispatch) {
+//     return Network.addInvitation(username)
+//       .then(function(response) {
+//         return response.json()
+//           .then(function(body) {
+//             if (response.ok) {
+//               return dispatch(addInvitationSuccess(body));
+//             } else {
+//               return dispatch(addInvitationFailure(body));
+//             }
+//           });
+//       });
+//   };
+// };
+
+// function addInvitationSuccess(data) {
+//   return {
+//     type: 'ADD_INVITATION_SUCCESS',
+//     //handle the data here eventually
+//   };
+// };
+
+// function addInvitationFailure(data) {
+//   return {
+//     type: 'ADD_INVITATION_FAILURE',
+//   };
+// };
+
 // JOIN_HOUSEHOLD
 exports.updateInvitation = function(status, invitationId) {
-  console.log('upateInvitation in Actions being called with: ', status, invitationId);
   return function(dispatch) {
     return Network.respondToInvitation(status, invitationId)
       .then(function(response) {

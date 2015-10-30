@@ -102,6 +102,7 @@ module.exports = {
   Reckoning,
   User,
   UserToReckoning,
+  Payment,
   Invitation,
   init,
 };

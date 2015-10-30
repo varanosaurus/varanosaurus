@@ -114,6 +114,14 @@ var reckon = function(householdId) {
               // `userStats` is drawn from enclosing scope.
               var u = userStats;
               var promises = [];
+              var promise;
+
+              var owedUsers = [];
+              var owingUsers = [];
+              var owedUser;
+              var owingUser;
+              var paymentAmount;
+
               var i;
 
               // For each key in `userStats`, which are themselves
@@ -124,7 +132,61 @@ var reckon = function(householdId) {
               // `addUser` returns a promise, which we immediately push to our
               // array of promises.
               for (i in u) {
-                promises.push(reckoning.addUser(u[i].user, {contribution: u[i].contribution, debt: u[i].debt}));
+
+                if (u[i].debt > 0) {
+                  owedUsers.push({id: u[i].user.id, owed: Math.abs(u[i].debt)});
+                } else if (u[i].debt < 0) {
+                  owingUsers.push({id: u[i].user.id, debt: u[i].debt});
+                }
+
+                promise = reckoning.addUser(u[i].user, {contribution: u[i].contribution, debt: u[i].debt});
+
+                promises.push(promise);
+              }
+
+              // Here, also create payments from user stats?
+              owedUsers.sort(compareProps('owed'));
+              owingUsers.sort(compareProps('debt'));
+
+              while (owedUsers.length && owingUsers.length) {
+
+                owedUser = owedUsers[0];
+                owingUser = owingUsers[0];
+
+                if (owedUser.owed > owingUser.debt) {
+
+                  paymentAmount = owingUser.debt;
+
+                  owedUsers[0].owed -= paymentAmount;
+
+                  owingUsers.shift();
+
+                } else if (owedUser.debt < owingUser.debt) {
+
+                  paymentAmount = owedUser.owed;
+
+                  owingUser.debt -= paymentAmount;
+
+                  owedUsers.shift();
+
+                } else {
+
+                  paymentAmount = owedUser.owed;
+
+                  owedUsers.shift();
+                  owingUsers.shift();
+
+                }
+
+                promise = db.Payment.create({
+                  toUserId: owedUser.id,
+                  fromUserId: owingUser.id,
+                  reckoningId: reckoning.id,
+                  amount: paymentAmount,
+                });
+
+                promises.push(promise);
+
               }
 
               // Wait upon all of the promises in the array,
@@ -149,5 +211,17 @@ var reckon = function(householdId) {
     });
 
 };
+
+function compareProps(prop) {
+
+  return function(a, b) {
+    if (a[prop] >= b[prop]) {
+      return -1;
+    } else {
+      return 1;
+    }
+  };
+
+}
 
 module.exports = reckon;

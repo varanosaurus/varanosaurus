@@ -20,7 +20,7 @@ var ItemAddView = React.createClass({
       description: '',
       details: '',
       bought: false,
-      price: 0.0,
+      price: 0,
     };
   },
 
@@ -62,7 +62,10 @@ var ItemAddView = React.createClass({
   },
 
   handleSubmit() {
-    this.props.handleSubmit(this.state);
+    this.props.handleSubmit({
+      ...this.state,
+      price: parseInt(this.state.price * 100, 10),
+    });
   },
 
 });

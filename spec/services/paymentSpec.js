@@ -117,23 +117,18 @@ var testCases = [
       },
       {
         toUserId: 3,
-        fromUserId: 5,
-        amount: 20,
-      },
-      {
-        toUserId: 3,
         fromUserId: 6,
-        amount: 40,
-      },
-      {
-        toUserId: 4,
-        fromUserId: 6,
-        amount: 20,
+        amount: 60,
       },
       {
         toUserId: 4,
         fromUserId: 7,
         amount: 40,
+      },
+      {
+        toUserId: 4,
+        fromUserId: 5,
+        amount: 20,
       },
     ],
 

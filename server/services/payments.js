@@ -10,13 +10,13 @@ function calculatePayments(owedUsers, owingUsers) {
   var owingUser;
   var paymentAmount;
 
-  var i = 0;
-  var j = 0;
+  while (owedUsers.length && owingUsers.length) {
 
-  while (i < owedUsers.length && j < owingUsers.length) {
+    owedUsers.sort(compareProps('owed'));
+    owingUsers.sort(compareProps('debt'));
 
-    owedUser = owedUsers[i];
-    owingUser = owingUsers[j];
+    owedUser = owedUsers[0];
+    owingUser = owingUsers[0];
 
 
     if (owedUser.owed > owingUser.debt) {
@@ -25,7 +25,7 @@ function calculatePayments(owedUsers, owingUsers) {
 
       owedUser.owed -= paymentAmount;
 
-      j++;
+      owingUsers.shift();
 
     } else if (owedUser.owed < owingUser.debt) {
 
@@ -33,14 +33,14 @@ function calculatePayments(owedUsers, owingUsers) {
 
       owingUser.debt -= paymentAmount;
 
-      i++;
+      owedUsers.shift();
 
     } else {
 
       paymentAmount = owedUser.owed;
 
-      i++;
-      j++;
+      owingUsers.shift();
+      owedUsers.shift();
 
     }
 
@@ -53,6 +53,17 @@ function calculatePayments(owedUsers, owingUsers) {
   }
 
   return payments;
+}
+
+function compareProps(prop) {
+
+  return function(a, b) {
+    if (a[prop] >= b[prop]) {
+      return -1;
+    } else {
+      return 1;
+    }
+  };
 
 }
 

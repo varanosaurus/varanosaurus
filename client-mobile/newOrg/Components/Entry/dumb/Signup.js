@@ -1,10 +1,10 @@
 'use strict';
 
 var React = require('react-native');
+var Button = require('react-native-button');
 
 var {
   StyleSheet,
-  TouchableHighlight,
   View,
   Text,
   TextInput,
@@ -16,7 +16,6 @@ var Signup = React.createClass({
     return ({
        username: '',
        password: '',
-       error: '',
     });
   },
 
@@ -38,14 +37,13 @@ var Signup = React.createClass({
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
           />
-          <TouchableHighlight style={styles.button} onPress={this.handleSubmit}>
-            <Text style={styles.btnText}>Sign up</Text>
-          </TouchableHighlight>
-
+          <Button style={styles.button} onPress={this.handleSubmit}>
+            Sign up
+          </Button>
           <Text>Already have an account?</Text>
-          <TouchableHighlight style={styles.button} onPress={this.props.gotoLogin}>
-            <Text style={styles.btnText}>Log in</Text>
-          </TouchableHighlight>
+          <Button style={styles.button} onPress={this.props.gotoLogin}>
+            Log in
+          </Button>
         </View>);
   },
 
@@ -71,13 +69,11 @@ var styles = StyleSheet.create({
     borderWidth: 1,
   },
   button: {
-    flex: 1,
-    paddingTop: 10,
-    paddingBottom: 10,
-    backgroundColor: 'black',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    position: 'absolute',
+    margin: 10,
+    backgroundColor: '#3B5998',
+    color: 'white',
+    padding: 10,
+    borderRadius: 20,
   },
   btnText: {
     fontSize: 18,

@@ -22,10 +22,10 @@ module.exports = {
 		},
 
 		price: {
-			type: Sequelize.DECIMAL(5, 2),
+			type: Sequelize.INTEGER,
 			// Do we want users to be able to add prices later, but require them for reckoning?
 			// allowNull: false,
-			defaultValue: 0.0,
+			defaultValue: 0,
 		},
 
 		timeBought: {

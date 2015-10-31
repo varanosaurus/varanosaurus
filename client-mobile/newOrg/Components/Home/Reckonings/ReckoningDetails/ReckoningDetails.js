@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var Styles = require('../../../../Styles/Styles');
 
 var {
   View,
@@ -21,23 +22,21 @@ var ReckoningDetails = React.createClass({
   render() {
     if (!this.props.selectedReckoning.users) {
       return (
-        <View>
+        <View style={Styles.default.container}>
           <Text>Loading...</Text>
         </View>
       );
     } else {
       console.log('in reckdeets, selectedReckoning is: ', this.props.selectedReckoning);
       return (
-        <View>
-          <Text>This is a Reckoning Details View</Text>
+        <View style={Styles.default.container}>
+          <Text style={Styles.default.label}>This is a Reckoning Details View</Text>
           <View>
             {this.props.selectedReckoning.users.map((userData) => {
 
               return (
                 <View>
-                  <Text>{userData.username} </Text>
-                  <Text>contributed ${userData.userToReckoning.contribution} to the total </Text>
-                  {this.getOwedText(userData.userToReckoning.debt)}
+                  <Text style={Styles.default.label}>{userData.username} contributed ${userData.userToReckoning.contribution} to the total {this.getOwedText(userData.userToReckoning.debt)}</Text>
                 </View>
               );
 

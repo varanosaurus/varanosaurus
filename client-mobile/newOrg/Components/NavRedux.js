@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var Styles = require('../Styles/Styles');
 
 // var Actions = require('../Actions/Actions');
 var Routes = require('../Services/Routes');
@@ -66,7 +67,7 @@ var NavRedux = React.createClass({
     },
 
     Title(route) {
-      return (<Text>{route.title}</Text>);
+      return (<Text style={Styles.default.label}>{route.title}</Text>);
     },
 
   },

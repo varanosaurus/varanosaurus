@@ -75,12 +75,3 @@ var ItemList = React.createClass({
 });
 
 module.exports = ItemList;
-<<<<<<< HEAD
-=======
-
-// var styles = StyleSheet.create({
-//   container: {
-//     marginTop: 64,
-//   },
-// });
->>>>>>> 20eef36141f6d80aa23746d5256ff33a6ffcc3dc

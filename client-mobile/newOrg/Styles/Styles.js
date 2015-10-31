@@ -18,7 +18,8 @@ Styles.default = StyleSheet.create({
 
 Styles.navbar = StyleSheet.create({
   container: {
-    flex: 1,
+    borderBottomWidth: 1,
+    borderColor: 'black',
   },
 });
 

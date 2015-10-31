@@ -102,6 +102,9 @@ var reckon = function(householdId) {
           return reckoning
             .setHousehold(household)
             .then(function() {
+              return reckoning.addItems(household.items);
+            })
+            .then(function() {
               // After household is set, we need to associate the reckoning
               // with the appropriate users, as well as store the related
               // monetary figures as columns in the join table.

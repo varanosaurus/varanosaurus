@@ -61,8 +61,8 @@ Household.hasMany(User);
 Payment.belongsTo(User, {as: 'toUser'});
 Payment.belongsTo(User, {as: 'fromUser'});
 
-User.hasMany(Payment, {as: 'toUser'});
-User.hasMany(Payment, {as: 'fromUser'});
+User.hasMany(Payment, {as: 'toUser', foreignKey: 'toUserId'});
+User.hasMany(Payment, {as: 'fromUser', foreignKey: 'fromUserId'});
 
 Payment.belongsTo(Reckoning);
 Reckoning.hasMany(Payment);

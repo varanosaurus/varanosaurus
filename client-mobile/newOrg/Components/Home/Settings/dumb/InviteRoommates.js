@@ -1,63 +1,54 @@
 'use strict';
 
 var React = require('react-native');
+var Button = require('react-native-button');
 
 var {
   StyleSheet,
   View,
   Text,
   TextInput,
-  TouchableHighlight,
 } = React;
 
 var InviteRoommates = React.createClass({
-  getInitialState: function() {
+
+  getInitialState() {
     return ({
-      inputField: [true, true, true],
+      inputField: true,
     });
   },
+
+  componentWillUnmount() {
+    this.props.resetSettingsViewMode();
+  },
+
   render() {
-    var inputFields = this.state.inputField;
-    var self = this;
     return (
-      <View style={styles.container}>
-      <Text>THIS IS WORKING</Text>
-        {
-          inputFields.map(function() {
-          return (<TextInput
-                    style={styles.input}
-                    keyboardType='default'
-                    placeholder="roommate name"
-                    onChangeText={(input) => {
-                      self.setState({input: input});
-                    }}
-                  />);
-          })
-        }
-        <Text style={styles.hyperLink} onPress={self.addRoommate}>Invite More</Text>
-        <Text style={styles.errorHandling}>{self.state.error}</Text>
-        <TouchableHighlight
-          style={styles.button}
-          onPress={self.submitRoommates}
-        >
-          <Text style={styles.btnText}>Invite Roommates</Text>
-        </TouchableHighlight>
+      <View style={styles.mainSection}>
+        <TextInput
+          style={styles.input}
+          keyboardType='default'
+          placeholder="roommate's username"
+          onChangeText={(input) => this.setState({input: input})}
+        />
+        <Text style={styles.errorHandling}>{this.state.error}</Text>
+        <Button onPress={this.submitRoommates} style={styles.btn}>Invite Roommate</Button>
+
+        <Text>Pending invitations to:</Text>
+        <Text>Pending roommate 1</Text>
+        <Text>Pending roommate 2</Text>
+        <Text>Pending roommate 3</Text>
       </View>
     );
   },
 
-  addRoommate() {
-    this.state.inputField.push(true);
-    this.setState(this.state.inputField);
-  },
-
   submitRoommates() {
-    var data = this.state.inputs;
+    var username = this.state.input;
     //Note: need to write better logic for error handling. right now if the user deletes all the text in the input fields, they won't get the error
     if (this.state.input === undefined) {
       this.setState({error: 'Please add at least one roommate before submitting'});
     } else {
-      this.props.submit(data);
+      this.props.handleInviteRoommates(username);
     }
   },
 
@@ -66,32 +57,41 @@ var InviteRoommates = React.createClass({
 module.exports = InviteRoommates;
 
 var styles = StyleSheet.create({
-  container: {
-    marginTop: 64,
+  contentContainer: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'white',
+  },
+  title: {
+    fontFamily: 'Arial',
+    fontSize: 39,
+    color: 'gray',
+  },
+  itemName: {
+    flex: 1,
+    flexDirection: 'row',
+    fontSize: 16,
+    fontWeight: '500',
   },
   input: {
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
   },
-  hyperLink: {
-    color: 'blue',
-  },
-  button: {
+  mainSection: {
     flex: 1,
-    paddingTop: 10,
-    paddingBottom: 10,
-    backgroundColor: 'black',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    position: 'absolute',
+    marginTop: 64,
+    padding: 10,
+    backgroundColor: '#F5FCFF',
   },
-  btnText: {
-    fontSize: 18,
+  btn: {
+    margin: 10,
+    backgroundColor: '#3B5998',
     color: 'white',
+    padding: 10,
+    borderRadius: 20,
+  },
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   errorHandling: {
     color: 'red',

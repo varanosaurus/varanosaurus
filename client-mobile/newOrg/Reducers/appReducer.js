@@ -1,10 +1,18 @@
 var {combineReducers} = require('redux');
-var tokenReducer = require('./tokenReducer');
-var uiModeReducer = require('./State/uiModeReducer');
-var dataReducer = require('./Data/dataReducer');
+var token = require('./tokenReducer');
+var routes = require('./routesReducer');
+var uiMode = require('./State/uiModeReducer');
+var data = require('./Data/dataReducer');
+// var initialState = require('./initialState');
+
+function initialRoute(state = 'hometab') {
+  return state;
+}
 
 module.exports = combineReducers({
-  token: tokenReducer,
-  uiMode: uiModeReducer,
-  data: dataReducer,
+  token,
+  routes,
+  initialRoute,
+  uiMode,
+  data,
 });

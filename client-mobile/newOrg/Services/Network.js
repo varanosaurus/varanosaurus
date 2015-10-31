@@ -129,7 +129,6 @@ var getItem = function() {
 //getallItemsInHousehold --> necessary? Could just send back with login
 
 var updateItem = function(updates) {
-  console.log('updates: ', updates);
   var params = makeParams('PUT', updates);
   return fetch(url + itemUrl + Store.getState().uiMode.selectedItemId, params)
     .catch(function(error) {
@@ -146,6 +145,7 @@ var inviteUser = function(toUsername) {
 };
 
 var getInvitationInbox = function() {
+  console.log('i am being called');
   var params = makeParams('GET');
   return fetch(url + invitationUrl + '/inbox', params)
     .catch(function(error) {

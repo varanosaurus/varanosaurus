@@ -9,10 +9,10 @@ exports.login = function(username, password) {
       .then(function(response) {
         return response.json()
           .then(function(body) {
-            if (response.ok) {
-              return dispatch(loginSuccess(body));
-            } else {
+            if (!response.ok) {
               return dispatch(loginFailure(body));
+            } else {
+              return dispatch(loginSuccess(body));
             }
           });
         // if (response.ok) {
@@ -33,6 +33,7 @@ exports.login = function(username, password) {
 
 // LOGIN_SUCCESS: set token, user, and household(optional) from server's response into store
 function loginSuccess(data) {
+
   return {
     type: 'LOGIN_SUCCESS',
     payload: {
@@ -40,6 +41,7 @@ function loginSuccess(data) {
       user: data.userData,
       household: data.household || null,
       roommates: data.roommates || null,
+      invitations: data.invitations || null,
     },
   };
 }
@@ -173,7 +175,6 @@ function addHouseholdSuccess(data) {
 }
 
 // ADD_HOUSEHOLD_FAILURE: display error message?
-
 function addHouseholdFailure(message) {
   return {
     type: 'ADD_HOUSEHOLD_FAILURE',
@@ -182,27 +183,99 @@ function addHouseholdFailure(message) {
   };
 }
 
-// (NEED TO FINISH) ACCEPT INVITATION: with payload of 'invitation'
-// exports.joinHousehold = function(status, invitationId) {
+// exports.fetchInvitationInbox = function(username, password) {
 
 //   return function(dispatch) {
-//     return Network.respondToInvitation(status, invitationId)
+//     return Network.signup(username, password)
 //       .then(function(response) {
 //         return response.json()
 //           .then(function(body) {
-//             // if (response.ok) {
-//             //   return dispatch(signupSuccess(body));
-//             // } else {
-//             //   return dispatch(signupFailure(body));
-//             // }
+//             if (response.ok) {
+//               return dispatch(signupSuccess(body));
+//             } else {
+//               return dispatch(signupFailure(body));
+//             }
 //           });
 //       })
 //       .catch(function(error) {
 //         console.log(error);
-//         // return dispatch(signupFailure(error.message));
+//         return dispatch(signupFailure(error.message));
 //       });
 //   };
 // };
+
+exports.addInvitation = function(toUsername) {
+  console.log('addinvitation from Actions being called with: ', toUsername);
+  return function(dispatch) {
+    return Network.inviteUser(toUsername)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(addInvitationSuccess(body));
+            } else {
+              return dispatch(addInvitationFailure(body));
+            }
+          });
+      });
+  };
+};
+
+function addInvitationSuccess(data) {
+  return {
+    type: 'ADD_INVITATION_SUCCESS',
+    payload: data.invitations,
+  };
+}
+
+function addInvitationFailure() {
+  return {
+    type: 'ADD_INVITATION_FAILURE',
+  };
+}
+
+// JOIN_HOUSEHOLD
+exports.updateInvitation = function(status, invitationId) {
+  return function(dispatch) {
+    return Network.respondToInvitation(status, invitationId)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(updateInvitationSuccess(body));
+            } else {
+              return dispatch(updateInvitationFailure(body));
+            }
+          });
+      })
+      .catch(function(error) {
+        console.log(error);
+        return dispatch(updateInvitationFailure(error.message));
+      });
+  };
+};
+
+// UPDATE_INVITATION_SUCCESS
+function updateInvitationSuccess(data) {
+  console.log('updateInvitationSuccess action being created');
+  return {
+    type: 'UPDATE_INVITATION_SUCCESS',
+    payload: {
+      invitations: data.invitations,
+      household: data.household || null,
+      token: data.token,
+    },
+  };
+}
+
+// UPDATE_INVITATION_FAILURE
+function updateInvitationFailure(message) {
+  return {
+    type: 'UPDATE_INVITATION_FAILURE',
+    payload: {message},
+    error: true,
+  };
+}
 
 // SET_HOMETAB, with payload of 'items', 'reckonings', or 'settings' ?
 exports.setHomeTab = function(mode) {
@@ -227,7 +300,45 @@ exports.setItemsFilter = function(filter) {
   };
 };
 
+exports.addItem = function(item) {
+  return function(dispatch) {
+    return Network.addItem(item)
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(addItemSuccess(body.item));
+            } else {
+              return dispatch(addItemFailure(body.error));
+            }
+          });
+      });
+  };
+};
+
+function addItemSuccess(item) {
+  return {
+    type: 'ADD_ITEM_SUCCESS',
+    payload: {item},
+  };
+}
+
+function addItemFailure(error) {
+  return {
+    type: 'ADD_ITEM_FAILURE',
+    payload: {error},
+  };
+}
+
+exports.setAddItemRequestStatus = function(status) {
+  return {
+    type: 'SET_ADD_ITEM_REQUEST_STATUS',
+    payload: {status},
+  };
+};
+
 exports.selectItem = function(item) {
+  console.log('selecting item ' + item);
   return {
     type: 'SELECT_ITEM',
     payload: {itemId: item.id},
@@ -235,8 +346,6 @@ exports.selectItem = function(item) {
 };
 
 exports.updateItem = function(updates) {
-
-  console.log('updating item from Actions');
 
   //Thunk
   return function(dispatch) {
@@ -355,3 +464,12 @@ exports.setReckoningDetailsMode = function(mode) {
     payload: {mode},
   };
 };
+
+// SET_SETTINGS_VIEW_MODE
+exports.setSettingsViewMode = function(mode) {
+  return {
+    type: 'SET_SETTINGS_VIEW_MODE',
+    payload: {mode},
+  };
+};
+

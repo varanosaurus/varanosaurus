@@ -19,10 +19,15 @@ router.post('/', function(request, response) {
         return response.status(404).send('User does not exist');
       }
 
-      return db.Invitation.create({toUserId: toUser.id, fromUserId, householdId})
-
-        .then(function(invitation) {
-          response.status(201).json({invitation});
+      db.Household.findOne({where: {id: householdId}})
+        .then(function(household) {
+          return db.Invitation.create({toUserId: toUser.id, fromUserId, householdId, householdName: household.name})
+            .then(function() {
+              return db.Invitation.findAll({where: {fromUserId, status: 'pending'}})
+                .then(function(invitations) {
+                  response.status(201).json({invitations});
+                });
+            });
         });
 
     })
@@ -69,36 +74,42 @@ router.get('/outbox', function(request, response) {
 
 router.put('/:invitationId', function(request, response) {
   var userId = request.decoded.userId;
-  var householdId = request.decoded.householdId;
   var invitationId = request.params.invitationId;
   var status = request.body.status;
 
   db.Invitation.findOne({where: {id: invitationId}})
-
     .then(function() {
-
       if (status === 'accepted' || status === 'rejected') {
         db.Invitation.update(request.body, {where: {id: invitationId}, returning: true})
           .then(function(invitationArray) {
             if (status === 'accepted') {
-
-              db.User.update({householdId}, {where: {id: userId}})
+              db.User.update({householdId: invitationArray[1][0].householdId}, {where: {id: userId}})
                 .then(function() {
-
-                  db.Household.findOne({where: {id: householdId}})
+                  db.Household.findOne({where: {id: invitationArray[1][0].householdId}})
                     .then(function(household) {
-                      response.status(200).json({
-                        invitation: invitationArray[1][0],
-                        household,
-                        token: tokens.issue(userId, householdId),
-                      });
+                      db.Invitation.findAll({where: {toUserId: userId, status: 'pending'}})
+                        .then(function(invitations) {
+                          db.User.findAll({where: {householdId: household.id}, attributes: ['username', 'id']})
+                            .then(function(roommates) {
+                              return response.status(200).json({
+                                token: tokens.issue(userId, invitationArray[1][0].householdId),
+                                household,
+                                roommates,
+                                invitations,
+                              });
+                            });
+                        });
                     });
                 });
 
             } else {
-              response.status(200).json({
-                invitation: invitationArray[1][0],
-              });
+              db.Invitation.findAll({where: {toUserId: userId, status: 'pending'}})
+                .then(function(invitations) {
+                  response.status(200).json({
+                    invitations,
+                    token: tokens.issue(userId),
+                  });
+                });
             }
           });
 

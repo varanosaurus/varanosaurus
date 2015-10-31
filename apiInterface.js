@@ -29,8 +29,11 @@
       password: string,
     },
     responseBody: {
-      user: User,
+      userData: User, //doesn't include password
       token: token,
+      household: household, //only if part of HH
+      roommates: [User], //only if part of HH
+      invitations: [Invitation], //only if homeless, includes received invites
     },
   },
 
@@ -238,7 +241,7 @@
     verb: 'GET',
     url: '/api/reckonings/:reckoningId',
     requestBody: null,
-    responseBody: Reckoning,
+    responseBody: Reckoning {including: User {including: userToReckoning}},
   },
 }
 
@@ -262,7 +265,7 @@
     requestBody: {
       toUsername: string,
     },
-    responseBody: {invitation: Invitation},
+    responseBody: {invitations: [Invitation]}, //all pending invitations sent by user
   },
 
   'get all sent invitations': {
@@ -293,7 +296,7 @@
       status: string, //'accepted' or 'rejected'
     },
     responseBody: {
-      invitation: Invitation,
+      invitations: [Invitation],
       household: null, //if rejected, or Household model if accepted,
       token: null, //only present if accepted
     },

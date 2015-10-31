@@ -1,10 +1,12 @@
 'use strict';
 
 var React = require('react-native');
+var Button = require('react-native-button');
+var Styles = require('../../../../Styles/Styles');
 // var Icon = require('react-native-vector-icons/Ionicons');
 
 var {
-  // StyleSheet,
+  StyleSheet,
   ListView,
   View,
   SegmentedControlIOS,
@@ -23,7 +25,6 @@ var ItemList = React.createClass({
   },
 
   render() {
-
     var dataSource = this.dataSource.cloneWithRows(this.props.items);
 
     var selectedIndex;
@@ -35,7 +36,8 @@ var ItemList = React.createClass({
     }
 
     return (
-      <View>
+      <View style={Styles.list.container}>
+      <Button onPress={this.props.gotoItemAddView}>Add an item</Button>
         <SegmentedControlIOS
           values={['Pending', 'Bought']}
           selectedIndex={selectedIndex}
@@ -60,14 +62,13 @@ var ItemList = React.createClass({
   renderRow(item) {
 
     return (
-      <View>
         <TouchableHighlight
-          onPress={() => this.props.goToItemDetailsView(item)} >
+          style={Styles.list.row}
+          onPress={() => this.props.gotoItemDetailsView(item)} >
           <View>
-            <Text>{item.description}</Text>
+            <Text style={Styles.list.label}>{item.description}</Text>
           </View>
         </TouchableHighlight>
-      </View>
     );
 
   },
@@ -75,3 +76,9 @@ var ItemList = React.createClass({
 });
 
 module.exports = ItemList;
+
+var styles = StyleSheet.create({
+  container: {
+    marginTop: 64,
+  },
+});

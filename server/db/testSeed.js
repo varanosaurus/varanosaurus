@@ -27,9 +27,13 @@ var seed = function() {
       //id 4
     },
     {
-      username: 'danaerys',
+      username: 'danyTarg',
       password: 'password',
       //id 5
+    },
+    {
+      username: 'eddard',
+      password: 'password',
     },
   ], {individualHooks: true})
 
@@ -67,6 +71,15 @@ var seed = function() {
   .then(function() {
     //add jon to stark house
     return db.User.update({householdId: 1}, {where: {username: 'brandon'}});
+  })
+
+  //invite Dany to both houses
+  .then(function() {
+    return db.Invitation.create({toUserId: 5, fromUserId: 1, householdId: 1, householdName: 'Stark'});
+  })
+
+  .then(function() {
+    return db.Invitation.create({toUserId: 5, fromUserId: 3, householdId: 2, householdName: 'Targaryen'});
   })
 
   .then(function() {

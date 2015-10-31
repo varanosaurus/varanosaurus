@@ -25,6 +25,11 @@ module.exports = {
       defaultValue: 'pending',
     },
 
+    householdName: {
+      type: Sequelize.STRING,
+      defaultValue: null,
+    },
+
   },
 
   options: {

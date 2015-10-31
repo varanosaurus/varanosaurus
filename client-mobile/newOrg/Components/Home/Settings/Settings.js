@@ -3,40 +3,56 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-// var Actions = require('../../../Actions/Actions');
+var Actions = require('../../../Actions/Actions');
+var Routes = require('../../../Services/Routes');
 
 var SettingsOptions = require('./dumb/SettingsOptions');
-var InviteRoommates = require('./dumb/InviteRoommates');
 
 var Settings = React.createClass({
   render() {
-    return this.props.uiMode === 'options'
-      ? this.renderSettingsOptions()
-      : this.renderInviteRoommates();
+    if (this.props.settingsViewMode === 'invite') {
+      this.gotoInviteRoommates();
+    }
+    return this.renderSettingsOptions();
   },
 
   renderSettingsOptions() {
     return (
-      <SettingsOptions />
+      <SettingsOptions
+        logout={this.logout}
+        gotoInviteRoommates={this.gotoInviteRoommates}
+      />
     );
   },
 
-  renderInviteRoommates() {
-    return (
-      <InviteRoommates submit={this.handleInviteRoommates} />
-    );
+  // renderInviteRoommates() {
+  //   return (
+  //     <InviteRoommates submit={this.handleInviteRoommates} />
+  //   );
+  // },
+
+  // TODO: Roommate invitation handler should be passed from Routes service
+  // handleInviteRoommates() {
+
+  // },
+
+  logout() {
+    console.log('called from logout in Settings.js');
+    this.props.dispatch(Actions.logout());
   },
 
-  handleInviteRoommates() {
-
+  gotoInviteRoommates() {
+    // this.props.dispatch(Actions.setSettingsViewMode('invite'));
+    this.props.navigator.push(Routes.inviteRoommatesView);
   },
 
 });
 
 function select(state) {
   return {
-    uiMode: state.uiMode.settingsViewMode,
+    settingsViewMode: state.uiMode.settingsViewMode,
   };
 }
 
 module.exports = connect(select)(Settings);
+

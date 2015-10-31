@@ -93,7 +93,7 @@ var seed = function() {
         addingUserId: 1,
         buyingUserId: 1,
         bought: true,
-        price: (Math.random() * 100.00).toFixed(2),
+        price: (Math.random() * 10000),
       },
       {
         description: 'boiled leather',
@@ -111,7 +111,7 @@ var seed = function() {
         addingUserId: 4,
         buyingUserId: 4,
         bought: true,
-        price: (Math.random() * 100.00).toFixed(2),
+        price: (Math.random() * 10000),
       },
       {
         description: 'dragon eggs',
@@ -119,7 +119,7 @@ var seed = function() {
         addingUserId: 2,
         buyingUserId: 2,
         bought: true,
-        price: (Math.random() * 100.00).toFixed(2),
+        price: (Math.random() * 10000),
       },
       {
         description: 'crown of gold',
@@ -132,7 +132,7 @@ var seed = function() {
         addingUserId: 3,
         buyingUserId: 3,
         bought: true,
-        price: (Math.random() * 100.00).toFixed(2),
+        price: (Math.random() * 10000),
       },
     ]);
   })
@@ -158,7 +158,7 @@ var seed = function() {
         addingUserId: 1,
         buyingUserId: 4,
         bought: true,
-        price: (Math.random() * 100.00).toFixed(2),
+        price: (Math.random() * 10000),
       },
       {
         description: 'Ice',
@@ -176,7 +176,7 @@ var seed = function() {
         addingUserId: 4,
         buyingUserId: 4,
         bought: true,
-        price: (Math.random() * 100.00).toFixed(2),
+        price: (Math.random() * 10000),
       },
       {
         description: 'Dark Sister',
@@ -184,7 +184,7 @@ var seed = function() {
         addingUserId: 2,
         buyingUserId: 2,
         bought: true,
-        price: (Math.random() * 100.00).toFixed(2),
+        price: (Math.random() * 10000),
       },
       {
         description: 'Dawn',
@@ -220,7 +220,7 @@ var seed = function() {
         addingUserId: 1,
         buyingUserId: 4,
         bought: true,
-        price: (Math.random() * 100.00).toFixed(2),
+        price: (Math.random() * 10000),
       },
       {
         description: 'Oathkeeper',
@@ -238,7 +238,7 @@ var seed = function() {
         addingUserId: 4,
         buyingUserId: 4,
         bought: true,
-        price: (Math.random() * 100.00).toFixed(2),
+        price: (Math.random() * 10000),
       },
       {
         description: 'Widow\'s Wail',
@@ -246,7 +246,7 @@ var seed = function() {
         addingUserId: 2,
         buyingUserId: 2,
         bought: true,
-        price: (Math.random() * 100.00).toFixed(2),
+        price: (Math.random() * 10000),
       },
       {
         description: 'Lamentation',

@@ -47,7 +47,7 @@ function calculatePayments(owedUsers, owingUsers) {
     payments.push({
       toUserId: owedUser.id,
       fromUserId: owingUser.id,
-      amount: paymentAmount,
+      amount: parseInt(paymentAmount, 10),
     });
 
   }

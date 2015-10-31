@@ -135,9 +135,9 @@ var reckon = function(householdId) {
               for (i in u) {
 
                 if (u[i].debt > 0) {
-                  owedUsers.push({id: u[i].user.id, owed: Math.abs(u[i].debt)});
-                } else if (u[i].debt < 0) {
                   owingUsers.push({id: u[i].user.id, debt: u[i].debt});
+                } else if (u[i].debt < 0) {
+                  owedUsers.push({id: u[i].user.id, owed: Math.abs(u[i].debt)});
                 }
 
                 promise = reckoning.addUser(u[i].user, {contribution: u[i].contribution, debt: u[i].debt});

@@ -216,6 +216,9 @@ exports.addInvitation = function(toUsername) {
             } else {
               return dispatch(addInvitationFailure(body));
             }
+          })
+          .catch(function(error) {
+            console.log(error);
           });
       });
   };

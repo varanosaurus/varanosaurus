@@ -55,7 +55,7 @@ var InviteRoommates = React.createClass({
       this.setState({error: 'Please add a roommate before submitting'});
     } else {
       this.state.inputField.push(username);
-      this.setState({input: ''});
+      this.setState({input: undefined, error: ''});
       this.props.handleInviteRoommates(username);
     }
   },

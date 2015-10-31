@@ -6,6 +6,7 @@ Styles.default = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
+    backgroundColor: '#F5FCFF',
   },
   label: {
     fontFamily: 'Helvetica',
@@ -25,6 +26,7 @@ Styles.list = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
+    backgroundColor: '#F5FCFF',
   },
   row: {
     flex: 1,

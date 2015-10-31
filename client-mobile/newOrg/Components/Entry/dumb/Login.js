@@ -5,7 +5,6 @@ var Button = require('react-native-button');
 
 var {
   StyleSheet,
-  TouchableHighlight,
   View,
   Text,
   TextInput,

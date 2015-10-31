@@ -6,30 +6,29 @@ var Button = require('react-native-button');
 var {
   StyleSheet,
   View,
-  // Text,
+  Text,
 } = React;
 
-var SettingsOptions = React.createClass({
+var ReckonAndLeave = React.createClass({
+
   render() {
     return (
       <View style={styles.mainSection}>
-        <Button onPress={this.props.logout} style={styles.btn}>
-          Logout
+        <Text>
+          Cool. Before you go, we crunched your numbers.
+          This month, you contributed ${this.props.contribution}
+          and you'll owe your roommates ${this.props.debt}
+        </Text>
+        <Button style={styles.btn} onPress={this.props.gotoReckonAndLeave}>
+          Ok, got it. Get me outta here!
         </Button>
-        <Button onPress={this.props.gotoInviteRoommates} style={styles.btn}>
-          Invite Roommates
-        </Button>
-        <Button onPress={this.props.gotoConfirmLeave} style={styles.btn}>
-          Leave Household
-        </Button>
-
       </View>
     );
   },
 
 });
 
-module.exports = SettingsOptions;
+module.exports = ReckonAndLeave;
 
 var styles = StyleSheet.create({
   contentContainer: {

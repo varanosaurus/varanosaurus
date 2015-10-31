@@ -179,9 +179,18 @@ var getReckoning = function() {
     });
 };
 
-var getSelectedReckoning = function() {
+var getSelectedReckoning = function(id) {
+  id = id || Store.getState().uiMode.selectedReckoningId;
   var params = makeParams('GET');
-  return fetch(url + reckoningUrl + Store.getState().uiMode.selectedReckoningId, params)
+  return fetch(url + reckoningUrl + id, params)
+    .catch(function(error) {
+      console.error(error);
+    });
+};
+
+var initiateReckoning = function() {
+  var params = makeParams('POST');
+  return fetch(url + reckoningUrl, params)
     .catch(function(error) {
       console.error(error);
     });
@@ -210,4 +219,5 @@ module.exports = {
 
   getReckoning,
   getSelectedReckoning,
+  initiateReckoning,
 };

@@ -10,16 +10,16 @@ module.exports = {
   attributes: {
 
     contribution: {
-      type: Sequelize.DECIMAL(5, 2),
+      type: Sequelize.INTEGER,
       validate: {
         min: 0,
       },
-      defaultValue: 0.0,
+      defaultValue: 0,
     },
 
     debt: {
-      type: Sequelize.DECIMAL(5, 2),
-      defaultValue: 0.0,
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
     },
 
   },

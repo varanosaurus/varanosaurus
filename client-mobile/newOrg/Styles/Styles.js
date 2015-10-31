@@ -2,6 +2,20 @@ var {StyleSheet} = require('react-native');
 
 var Styles = {};
 
+Styles.default = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 64,
+    backgroundColor: '#F5FCFF',
+  },
+  label: {
+    fontFamily: 'Helvetica',
+    fontSize: 18,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+});
+
 Styles.navbar = StyleSheet.create({
   container: {
     flex: 1,
@@ -12,6 +26,7 @@ Styles.list = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
+    backgroundColor: '#F5FCFF',
   },
   row: {
     flex: 1,

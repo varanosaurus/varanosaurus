@@ -59,7 +59,6 @@ var InviteRoommates = React.createClass({
       this.props.handleInviteRoommates(username);
     }
   },
-
 });
 
 module.exports = InviteRoommates;

@@ -16,7 +16,6 @@ var Login = React.createClass({
     return ({
        username: '',
        password: '',
-       error: '',
     });
   },
 
@@ -41,7 +40,6 @@ var Login = React.createClass({
           <Button style={styles.button} onPress={this.handleSubmit}>
             Log in
           </Button>
-
           <Text>Don't have an account?</Text>
           <Button style={styles.button} onPress={this.props.gotoSignup}>
             Sign Up

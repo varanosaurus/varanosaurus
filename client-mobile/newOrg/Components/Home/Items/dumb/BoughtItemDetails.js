@@ -16,7 +16,7 @@ var BoughtItemDetails = React.createClass({
         <Text style={styles.title}>{this.props.item.description}</Text>
         <Text>Requested By: {this.props.creator.username}</Text>
         <Text>Details: {this.props.item.details}</Text>
-        <Text style={styles.showing}>$ {this.props.item.price}</Text>
+        <Text style={styles.showing}>$ {centsToPriceString(this.props.item.price)}</Text>
       </View>
     );
   },
@@ -73,3 +73,7 @@ var styles = StyleSheet.create({
     color: 'white',
   },
 });
+
+function centsToPriceString(cents) {
+  return cents.toString().replace(/(\d{2})$/, '.$1');
+}

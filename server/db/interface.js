@@ -7,6 +7,7 @@ var householdConfig = require('./models/Household');
 var reckoningConfig = require('./models/Reckoning');
 var userConfig = require('./models/User');
 var userToReckoningConfig = require('./models/UserToReckoning');
+var paymentConfig = require('./models/Payment');
 var invitationConfig = require('./models/Invitation');
 
 var dbEnvironment = process.env.NODE_ENV;
@@ -35,6 +36,8 @@ var User = db.define('user', userConfig.attributes, userConfig.options);
 
 var UserToReckoning = db.define('userToReckoning', userToReckoningConfig.attributes, userToReckoningConfig.options);
 
+var Payment = db.define('payment', paymentConfig.attributes, paymentConfig.options);
+
 var Invitation = db.define('invitation', invitationConfig.attributes, invitationConfig.options);
 
 Item.belongsTo(Household);
@@ -54,6 +57,15 @@ Household.hasMany(Reckoning);
 
 User.belongsTo(Household);
 Household.hasMany(User);
+
+Payment.belongsTo(User, {as: 'toUser'});
+Payment.belongsTo(User, {as: 'fromUser'});
+
+User.hasMany(Payment, {as: 'toUser', foreignKey: 'toUserId'});
+User.hasMany(Payment, {as: 'fromUser', foreignKey: 'fromUserId'});
+
+Payment.belongsTo(Reckoning);
+Reckoning.hasMany(Payment);
 
 Household.belongsTo(User, {as: 'creator', constraints: false});
 Household.belongsTo(User, {as: 'captain', constraints: false});
@@ -91,6 +103,7 @@ module.exports = {
   Reckoning,
   User,
   UserToReckoning,
+  Payment,
   Invitation,
   init,
 };

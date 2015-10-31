@@ -45,7 +45,7 @@ var PendingItemDetails = React.createClass({
       updates.details = this.state.details;
     }
     if (this.state.price) {
-      updates.price = +this.state.price;
+      updates.price = parseInt(this.state.price * 100, 10);
       updates.bought = true;
       updates.timeBought = new Date();
       this.props.gotoBoughtItemsList();

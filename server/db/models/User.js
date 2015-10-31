@@ -15,7 +15,7 @@ var comparePassword = function(password) {
 	return bcrypt.compareSync(password, this.password);
 };
 
-module.exports = {
+var config = {
 
 	attributes: {
 
@@ -63,4 +63,8 @@ module.exports = {
 
 	},
 
+};
+
+module.exports = function(db) {
+	return db.define('user', config.attributes, config.options);
 };

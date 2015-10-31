@@ -20,7 +20,7 @@ exports.itemAddView = {
   props: {},
 };
 
-var getBoughtItemDetailsView = exports.getItemDetailsView = function(item) {
+var getBoughtItemDetailsView = exports.getBoughtItemDetailsView = function(item) {
   var state = store.getState();
   var roommates = state.data.roommates;
 
@@ -37,8 +37,6 @@ var getBoughtItemDetailsView = exports.getItemDetailsView = function(item) {
       }
     }
   }
-
-
 
   var props = {
     item,

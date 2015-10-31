@@ -1,4 +1,5 @@
 var db = require('../db/interface');
+var calculatePayments = require('./payments');
 
 var reckon = function(householdId) {
 
@@ -141,20 +142,24 @@ var reckon = function(householdId) {
                 promises.push(promise);
               }
 
-              // Here, also create payments from user stats?
-              owedUsers.sort(compareProps('owed'));
-              owingUsers.sort(compareProps('debt'));
+              // Use payment service to generate attributes for a bulkCreate of payments
+              var payments = calculatePayments(owedUsers, owingUsers);
 
-              // TODO: use payment service to generate attributes for a bulkCreate of payments
+              return db.Payment.bulkCreate(payments, {returning: true})
+                .then(function(payments) {
+                  return reckoning.addPayments(payments);
+                })
+                .then(function() {
+                  return Promise.all(promises);
+                })
+                .then(function() {
+                  return reckoning;
+                });
 
               // Wait upon all of the promises in the array,
               // then resolve our entire chain to the reckoning model,
               // which now has all of its associations and is
               // ready for action.
-              return Promise.all(promises)
-                      .then(function() {
-                        return reckoning;
-                      });
             });
         });
 
@@ -169,17 +174,5 @@ var reckon = function(householdId) {
     });
 
 };
-
-function compareProps(prop) {
-
-  return function(a, b) {
-    if (a[prop] >= b[prop]) {
-      return -1;
-    } else {
-      return 1;
-    }
-  };
-
-}
 
 module.exports = reckon;

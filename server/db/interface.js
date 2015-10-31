@@ -65,6 +65,7 @@ User.hasMany(Payment, {as: 'toUser'});
 User.hasMany(Payment, {as: 'fromUser'});
 
 Payment.belongsTo(Reckoning);
+Reckoning.hasMany(Payment);
 
 Household.belongsTo(User, {as: 'creator', constraints: false});
 Household.belongsTo(User, {as: 'captain', constraints: false});

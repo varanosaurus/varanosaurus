@@ -15,15 +15,6 @@ var {
 
 var NavRedux = React.createClass({
 
-  // componentWillMount() {
-  //   this.navigator = <Navigator
-  //     initialRoute={Routes.hometab}
-  //     renderScene={this.renderScene}
-  //     configureScene={this.configureScene}
-  //     ref='navigator'
-  //     />;
-  // },
-
   render() {
     return (
         <Navigator

@@ -10,7 +10,7 @@ exports.hometab = {
     component: require('../Components/Home/dumb/HomeTab'),
     title: 'Home',
     props: {},
-  };
+};
 
 exports.itemAddView = {
   name: 'itemAdd',
@@ -32,7 +32,7 @@ var getBoughtItemDetailsView = exports.getItemDetailsView = function(item) {
     creator = state.data.user;
   } else {
     for (i = 0; i < roommates.length; i++) {
-      if (item.addingUserId == roommates[i].id) {
+      if (item.addingUserId === roommates[i].id) {
         creator = roommates[i];
       }
     }

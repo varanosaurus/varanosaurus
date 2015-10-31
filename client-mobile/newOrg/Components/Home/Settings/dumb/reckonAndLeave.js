@@ -15,12 +15,11 @@ var ReckonAndLeave = React.createClass({
     return (
       <View style={styles.mainSection}>
         <Text>
-          Cool. Before you go, we crunched your numbers.
-          This month, you contributed ${this.props.contribution}
-          and you'll owe your roommates ${this.props.debt}
+          Ok, {this.props.username}. Before you go, we crunched your numbers.
+          This month, you contributed ${this.props.contribution} and you'll owe your roommates ${this.props.debt}.
         </Text>
         <Button style={styles.btn} onPress={this.props.gotoReckonAndLeave}>
-          Ok, got it. Get me outta here!
+          Got it. Get me outta here!
         </Button>
       </View>
     );

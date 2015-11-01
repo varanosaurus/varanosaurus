@@ -2,7 +2,7 @@
 
 var Sequelize = require('sequelize');
 
-module.exports = {
+var config = {
 
 	attributes: {
 
@@ -25,4 +25,8 @@ module.exports = {
 
 	options: {},
 
+};
+
+module.exports = function(db) {
+	return db.define('household', config.attributes, config.options);
 };

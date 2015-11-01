@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 
-module.exports = {
+var config = {
 
   attributes: {
 
@@ -36,4 +36,8 @@ module.exports = {
 
   },
 
+};
+
+module.exports = function(db) {
+  return db.define('invitation', config.attributes, config.options);
 };

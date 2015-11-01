@@ -111,6 +111,8 @@ function sent(state = [], action) {
   switch (action.type) {
   case 'ADD_INVITATION_SUCCESS':
     return action.payload.invitations;
+  // case 'FETCH_PENDING_INVITES_SUCCESS':
+  //   return action.payload.data;
   case 'LOGOUT':
     return [];
   case 'LEAVE_HOUSEHOLD_SUCCESS':

@@ -14,12 +14,20 @@ Styles.default = StyleSheet.create({
     marginBottom: 8,
     textAlign: 'center',
   },
+  floatView: {
+    position: 'absolute',
+    // width: 70,
+    // height: 70,
+    bottom: 80,
+    right: 20,
+    borderRadius: 35,
+  },
 });
 
 Styles.navbar = StyleSheet.create({
   container: {
     borderBottomWidth: 1,
-    borderColor: 'black',
+    borderColor: '#ACAEB0',
   },
 });
 
@@ -27,7 +35,7 @@ Styles.list = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
-    backgroundColor: '#F5FCFF',
+    // backgroundColor: '#F5FCFF',
   },
   row: {
     flex: 1,

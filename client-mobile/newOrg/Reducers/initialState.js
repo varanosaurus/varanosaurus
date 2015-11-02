@@ -33,8 +33,7 @@ module.exports = initialState = {
     reckoningsViewMode: 'list', //'details'
     selectedReckoning: null, //reckoningId; TODO: rename to reflect that it's an ID?
     selectedItem: null, //itemId; TODO: rename to reflect that it's an ID?
-    reckoningsDetailsMode: 'items', //'users'
-    reckoningsDetailsItemMode: '',
+    reckoningDetailsMode: 'totals', //'payments'
     reckoningsSelectedItem: null, //itemId; TODO: rename to reflect that it's an ID?
     settingsViewMode: 'options', //'invite', 'confirm', 'leave'},
 

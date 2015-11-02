@@ -29,9 +29,9 @@ var Reckoning = React.createClass({
   },
 
   gotoReckoningDetailsView(reckoning) {
+    this.props.dispatch(Actions.fetchSelectedReckoning());
     this.props.dispatch(Actions.selectReckoning(reckoning));
-    // this.props.dispatch(Actions.setReckoningsViewMode('details'));
-    this.props.navigator.push(Routes.reckoningDetailsView);
+    this.props.navigator.push(Routes.getReckoningDetailsView());
   },
 
 });
@@ -40,7 +40,8 @@ function select(state) {
   return {
     reckoningsViewMode: state.uiMode.reckoningsViewMode,
     reckonings: state.data.reckonings,
-    selectedReckoningId: state.uiMode.selectedReckoningId,
+    selectedReckoning: state.data.selectedReckoning,
+    reckoningDetailsMode: state.uiMode.reckoningDetailsMode,
   };
 }
 

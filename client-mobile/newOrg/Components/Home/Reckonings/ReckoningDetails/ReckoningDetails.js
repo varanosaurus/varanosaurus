@@ -2,6 +2,9 @@
 
 var React = require('react-native');
 
+var {connect} = require('react-redux');
+
+var Actions = require('../../../../Actions/Actions');
 var Styles = require('../../../../Styles/Styles');
 
 var ReckoningTabBar = require('./dumb/TabBar');
@@ -14,6 +17,7 @@ var {
 var ReckoningDetails = React.createClass({
 
   componentWillMount() {
+    this.props.dispatch(Actions.fetchSelectedReckoning());
   },
 
   render() {
@@ -28,12 +32,27 @@ var ReckoningDetails = React.createClass({
       return <ReckoningTabBar
                 selectedTab={this.props.reckoningDetailsMode}
                 reckoning={this.props.selectedReckoning}
-                gotoTotals={this.props.gotoTotals}
-                gotoPayments={this.props.gotoPayments}
+                gotoTotals={this.gotoTotals}
+                gotoPayments={this.gotoPayments}
               />;
     }
   },
 
+  gotoTotals() {
+    this.props.dispatch(Actions.setReckoningDetailsMode('totals'));
+  },
+
+  gotoPayments() {
+    this.props.dispatch(Actions.setReckoningDetailsMode('payments'));
+  },
+
 });
 
-module.exports = ReckoningDetails;
+function select(state) {
+  return {
+    reckoningDetailsMode: state.uiMode.reckoningDetailsMode,
+    selectedReckoning: state.data.selectedReckoning,
+  };
+}
+
+module.exports = connect(select)(ReckoningDetails);

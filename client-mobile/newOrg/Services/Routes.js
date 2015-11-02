@@ -69,31 +69,12 @@ exports.getPendingItemDetailsView = function(item, props) {
   };
 };
 
-exports.getReckoningDetailsView = function() {
-  var state = store.getState();
-
-  var props = {
-    selectedReckoning: state.data.selectedReckoning,
-    reckoningDetailsMode: state.uiMode.reckoningDetailsMode,
-  };
-
-  props.gotoTotals = function() {
-    store.dispatch(Actions.setReckoningDetailsMode('totals'));
-  };
-
-  props.gotoPayments = function() {
-    store.dispatch(Actions.setReckoningDetailsMode('payments'));
-  };
-
-  return {
-    name: 'reckoningDetailsView',
-    title: 'Reckoning Details',
-    component: require('../Components/Home/Reckonings/ReckoningDetails/ReckoningDetails'),
-    props,
-  };
+exports.reckoningDetailsView = {
+  name: 'reckoningDetailsView',
+  title: 'Reckoning Details',
+  component: require('../Components/Home/Reckonings/ReckoningDetails/ReckoningDetails'),
+  props: {},
 };
-
-
 
 exports.inviteRoommatesView = {
   name: 'inviteRoommatesView',

@@ -29,9 +29,9 @@ var Reckoning = React.createClass({
   },
 
   gotoReckoningDetailsView(reckoning) {
-    this.props.dispatch(Actions.fetchSelectedReckoning());
     this.props.dispatch(Actions.selectReckoning(reckoning));
-    this.props.navigator.push(Routes.getReckoningDetailsView());
+    this.props.dispatch(Actions.fetchSelectedReckoning());
+    this.props.navigator.push(Routes.reckoningDetailsView);
   },
 
 });

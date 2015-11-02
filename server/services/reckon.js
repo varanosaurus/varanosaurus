@@ -23,7 +23,7 @@ var reckon = function(householdId) {
       {
         model: db.Item,
         // ... where there is no associated reckoning yet...
-        where: {reckoningId: null},
+        where: {reckoningId: null, bought: true},
         // ... and include the users who bought the item.
         include: [
           {

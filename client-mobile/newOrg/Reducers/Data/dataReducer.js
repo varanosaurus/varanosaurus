@@ -83,12 +83,12 @@ function reckonings(state = [], action) {
   }
 }
 
-function selectedReckoning(state = [], action) {
+function selectedReckoning(state = null, action) {
   switch (action.type) {
   case 'FETCH_SELECTED_RECKONING_SUCCESS':
     return action.payload.reckoning;
   case 'LOGOUT':
-    return [];
+    return null;
   case 'INITIATE_RECKONING_SUCCESS':
     return action.payload.household.reckoning;
   default:

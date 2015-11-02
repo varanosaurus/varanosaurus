@@ -49,7 +49,11 @@ router.get('/:reckoningId', function(request, response) {
   var householdId = request.decoded.householdId;
   var id = request.params.reckoningId;
 
-  db.Reckoning.findById(id, {include: [{model: db.User, attributes: {exclude: ['password']}}, {model: db.Item}]})
+  db.Reckoning.findById(id, {include: [
+      {model: db.User, attributes: {include: ['id', 'username']}},
+      {model: db.Item},
+      {model: db.Payment},
+    ]})
 
     .then(function(reckoning) {
       if (reckoning || reckoning.householdId === householdId) {

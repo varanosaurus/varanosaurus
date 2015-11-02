@@ -46,7 +46,7 @@ Styles.list = StyleSheet.create({
     marginRight: 6,
     padding: 6,
     borderBottomWidth: 1,
-    borderColor: '#2fb4da',
+    borderColor: '327CCB',
   },
   label: {
     fontFamily: 'Helvetica',

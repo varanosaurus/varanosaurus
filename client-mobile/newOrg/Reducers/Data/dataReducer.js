@@ -89,6 +89,8 @@ function selectedReckoning(state = [], action) {
     return action.payload.reckoning;
   case 'LOGOUT':
     return [];
+  case 'INITIATE_RECKONING_SUCCESS':
+    return action.payload.household.reckoning;
   default:
     return state;
   }
@@ -116,8 +118,17 @@ function received(state = [], action) {
   default:
     return state;
   }
-
 }
+
+// function finalReckoning(state = null, action) {
+//   switch (action.type) {
+//   case 'INITIATE_RECKONING_SUCCESS':
+//     console.log('action received is: ', action);
+//     return state;
+//   default:
+//     return state;
+//   }
+// }
 
 module.exports = combineReducers({
   user,
@@ -127,4 +138,8 @@ module.exports = combineReducers({
   invitations: combineReducers({sent, received}),
   roommates,
   selectedReckoning,
+  // finalReckoning,
 });
+
+
+

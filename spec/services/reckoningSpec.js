@@ -33,26 +33,32 @@ var testItems =
     {
       description: 'Thing 1',
       price: 500,
+      bought: true,
     },
     {
       description: 'Thing 2',
       price: 500,
+      bought: true,
     },
     {
       description: 'Thing 3',
       price: 500,
+      bought: true,
     },
     {
       description: 'Thing 4',
       price: 500,
+      bought: true,
     },
     {
       description: 'Thing 5',
       price: 500,
+      bought: true,
     },
     {
       description: 'Thing 6',
       price: 500,
+      bought: true,
     },
   ];
 
@@ -160,7 +166,7 @@ describe('Reckoning service', function() {
 
     var household = this.household;
 
-    household.createItem({description: 'Thing 7', price: 20000}, {returning: true})
+    household.createItem({description: 'Thing 7', price: 20000, bought: true}, {returning: true})
 
       .then(function(item) {
         return item.setBuyingUser(1);

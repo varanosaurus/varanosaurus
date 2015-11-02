@@ -48,6 +48,7 @@ var Login = React.createClass({
   },
 
   handleSubmit() {
+    console.log('LOGIN is submitted.');
     var data = {username: this.state.username, password: this.state.password};
     this.props.submit(data);
   },

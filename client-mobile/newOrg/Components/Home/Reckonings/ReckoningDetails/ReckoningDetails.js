@@ -48,6 +48,11 @@ var ReckoningDetails = React.createClass({
             )}>
             Amazon
           </Text>
+          <Text onPress={() => LinkingIOS.openURL(
+            'venmo://payments'
+            )}>
+            Pay by Venmo
+          </Text>
         </View>
       );
     }

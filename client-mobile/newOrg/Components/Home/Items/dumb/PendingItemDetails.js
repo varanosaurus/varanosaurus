@@ -8,6 +8,7 @@ var {
   View,
   Text,
   TextInput,
+  LinkingIOS,
 } = React;
 
 var PendingItemDetails = React.createClass({
@@ -33,6 +34,13 @@ var PendingItemDetails = React.createClass({
 
   buy() {
     this.setState({isBuying: true});
+  },
+
+  browse() {
+    var queryStr = this.props.item.description.split(' ').join('+');
+    LinkingIOS.openURL(
+      'http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=' + queryStr
+    );
   },
 
   saveChanges() {
@@ -66,6 +74,7 @@ var PendingItemDetails = React.createClass({
             <Text>Details: {this.props.item.details}</Text>
             <Button onPress={this.edit} style={styles.btn}>Edit</Button>
             <Button onPress={this.buy} style={styles.btn}>Buy</Button>
+            <Button onPress={this.browse} style={styles.btn}>Browse Amazon</Button>
           </View>
         </View>
       );

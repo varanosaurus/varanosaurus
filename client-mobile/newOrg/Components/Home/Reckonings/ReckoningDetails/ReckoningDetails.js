@@ -37,7 +37,7 @@ var ReckoningDetails = React.createClass({
 
               return (
                 <View>
-                  <Text style={Styles.default.label}>{userData.username} contributed ${userData.userToReckoning.contribution} to the total {this.getOwedText(userData.userToReckoning.debt)}</Text>
+                  <Text style={Styles.default.label}>{userData.username} contributed ${centsToPriceString(userData.userToReckoning.contribution)} to the total {this.getOwedText(userData.userToReckoning.debt)}</Text>
                 </View>
               );
 
@@ -63,9 +63,9 @@ var ReckoningDetails = React.createClass({
 
   getOwedText(debt) {
     if (debt > 0) {
-      return <Text>and owes ${debt}</Text>;
+      return <Text>and owes ${centsToPriceString(debt)}</Text>;
     } else if (debt < 0) {
-      return <Text>and is owed ${Math.abs(debt)}</Text>;
+      return <Text>and is owed ${centsToPriceString(Math.abs(debt))}</Text>;
     } else {
       return <Text>and is square!</Text>;
     }
@@ -107,3 +107,7 @@ function select(state) {
 }
 
 module.exports = connect(select)(ReckoningDetails);
+
+function centsToPriceString(cents) {
+  return cents.toString().replace(/(\d{2})$/, '.$1');
+}

@@ -6,6 +6,7 @@ var Styles = require('../../../../Styles/Styles');
 var {
   View,
   Text,
+  LinkingIOS,
 } = React;
 var {connect} = require('react-redux'); // it became dumb component now
 
@@ -41,6 +42,11 @@ var ReckoningDetails = React.createClass({
 
             })}
           </View>
+          <Text onPress={() => LinkingIOS.openURL(
+            'http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=pencil'
+            )}>
+            Amazon
+          </Text>
         </View>
       );
     }

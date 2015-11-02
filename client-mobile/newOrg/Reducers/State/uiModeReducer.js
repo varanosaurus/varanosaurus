@@ -107,12 +107,12 @@ function selectedReckoningId(state = null, action) {
   }
 }
 
-function reckoningDetailsMode(state = 'items', action) {
+function reckoningDetailsMode(state = 'totals', action) {
   switch (action.type) {
-  case 'SET_RECKONINGS_DETAILS_MODE':
+  case 'SET_RECKONING_DETAILS_MODE':
     return action.payload.mode;
   case 'LOGOUT':
-    return 'items';
+    return 'totals';
   default:
     return state;
   }

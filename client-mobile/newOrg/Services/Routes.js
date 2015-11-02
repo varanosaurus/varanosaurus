@@ -70,9 +70,10 @@ exports.getPendingItemDetailsView = function(item, props) {
 };
 
 exports.reckoningDetailsView = {
-    name: 'reckoningDetailsView',
-    component: require('../Components/Home/Reckonings/ReckoningDetails/ReckoningDetails'),
-    props: {},
+  name: 'reckoningDetailsView',
+  title: 'Reckoning Details',
+  component: require('../Components/Home/Reckonings/ReckoningDetails/ReckoningDetails'),
+  props: {},
 };
 
 exports.inviteRoommatesView = {

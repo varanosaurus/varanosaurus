@@ -97,7 +97,7 @@ describe('itemRouter', function() {
                   request.put({
                     url: itemUrl + itemId,
                     headers: context.headers,
-                    body: JSON.stringify({buyingUserId: jonId, price: 10000}),
+                    body: JSON.stringify({buyingUserId: jonId, bought: true, price: 10000}),
                   },
                   function() {
                     done();

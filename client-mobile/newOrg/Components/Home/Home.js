@@ -3,10 +3,7 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-// var Actions = require('../../Actions/Actions');
-
 var Homeless = require('./Homeless/Homeless');
-// var HomeTab = require('./dumb/HomeTab');
 var NavRedux = require('../NavRedux');
 
 var Home = React.createClass({

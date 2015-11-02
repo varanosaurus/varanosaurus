@@ -2,6 +2,7 @@
 'use strict';
 
 var React = require('react-native');
+var Styles = require('../../../../../Styles/Styles');
 
 var {
   View,
@@ -15,14 +16,14 @@ var Payments = React.createClass({
     var users = this.props.users;
 
     return (
-      <ScrollView>
+      <ScrollView style={Styles.default.container}>
         {this.props.payments.map(paymentData => {
           var toUsername = mapUser(users, paymentData.toUserId);
           var fromUsername = mapUser(users, paymentData.fromUserId);
 
           return (
             <View>
-              <Text>
+              <Text style={Styles.default.label}>
               {fromUsername} owes {toUsername} ${centsToPriceString(paymentData.amount)}
               </Text>
             </View>

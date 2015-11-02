@@ -4,7 +4,6 @@
 var React = require('react-native');
 var Styles = require('../../../../../Styles/Styles');
 
-
 var {
   View,
   ScrollView,

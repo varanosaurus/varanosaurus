@@ -21,7 +21,7 @@ var TabBar = React.createClass({
           onPress={this.props.gotoTotals}
           title='Totals'
           iconSize={40}
-          iconName={'torsos-female-male'}
+          iconName={'list'}
         >
           {this.renderTotals()}
         </Icon.TabBarItem>

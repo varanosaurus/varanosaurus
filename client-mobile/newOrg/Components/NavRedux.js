@@ -22,7 +22,9 @@ var NavRedux = React.createClass({
           renderScene={this.renderScene}
           configureScene={this.configureScene}
           ref='navigator'
-          navigationBar={<Navigator.NavigationBar routeMapper={this.routeMapper} />}
+          navigationBar={<Navigator.NavigationBar
+            style={Styles.navbar.container}
+            routeMapper={this.routeMapper} />}
         />
       );
   },
@@ -43,7 +45,7 @@ var NavRedux = React.createClass({
         return null;
       }
 
-      return (<TouchableHighlight style={{marginTop: 30}} onPress={() => {
+      return (<TouchableHighlight style={{marginTop: 10}} onPress={() => {
         if (index > 0) {
           navigator.pop();
         }

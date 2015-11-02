@@ -5,6 +5,7 @@ var React = require('react-native');
 var {connect} = require('react-redux');
 
 var Actions = require('../../../Actions/Actions');
+var Icon = require('react-native-vector-icons/Foundation');
 
 var Items = require('../Items/Items');
 var Reckonings = require('../Reckonings/Reckonings');
@@ -21,27 +22,33 @@ var HomeTab = React.createClass({
     return (
 
       <TabBarIOS selectedTab={this.props.selectedTab}>
-        <TabBarIOS.Item
+        <Icon.TabBarItem
           selected={this.props.selectedTab === 'items'}
           title='Items'
+          iconName={'shopping-cart'}
+          iconSize={30}
           onPress={this.gotoItemsTab}
         >
           {this.renderItemsTabView()}
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
+        </Icon.TabBarItem>
+        <Icon.TabBarItem
           selected={this.props.selectedTab === 'reckonings'}
           title='Reckonings'
+          iconName={'graph-pie'}
+          iconSize={30}
           onPress={this.gotoReckoningsTab}
         >
           {this.renderReckoningsTabView()}
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
+        </Icon.TabBarItem>
+        <Icon.TabBarItem
           selected={this.props.selectedTab === 'settings'}
           title='Settings'
+          iconName={'widget'}
+          iconSize={30}
           onPress={this.gotoSettingsTab}
         >
           {this.renderSettingsTabView()}
-        </TabBarIOS.Item>
+        </Icon.TabBarItem>
       </TabBarIOS>
 
     );

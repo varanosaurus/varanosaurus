@@ -1,9 +1,9 @@
 'use strict';
 
 var React = require('react-native');
-var Button = require('react-native-button');
 var Styles = require('../../../../Styles/Styles');
-// var Icon = require('react-native-vector-icons/Ionicons');
+// var Button = require('react-native-button');
+var Icon = require('react-native-vector-icons/Foundation');
 
 var {
   ListView,
@@ -34,13 +34,17 @@ var ItemList = React.createClass({
       selectedIndex = 1;
     }
 
+      //  <TouchableHighlight
+      //    style={Styles.default.floatView}
+      //    onPress={}>Add an item
+      //  </TouchableHighlight>
+
     return (
       <View style={Styles.list.container}>
-      <Button onPress={this.props.gotoItemAddView}>Add an item</Button>
         <SegmentedControlIOS
           values={['Pending', 'Bought']}
           selectedIndex={selectedIndex}
-          tintColor={'#2fb4da'}
+          tintColor={'327CCB'}
           onValueChange={(val) => {
             if (val === 'Pending') {
               this.props.gotoPendingItemsList();
@@ -52,8 +56,12 @@ var ItemList = React.createClass({
           dataSource={dataSource}
           renderRow={this.renderRow}
           automaticallyAdjustcontentInsets={false}
-          contentInset={{bottom: 50}}
         />
+        <TouchableHighlight
+          style={Styles.default.floatView}
+          onPress={this.props.gotoItemAddView} >
+          <Icon name='clipboard-pencil' size={70} color="327CCB" />
+        </TouchableHighlight>
       </View>
     );
   },

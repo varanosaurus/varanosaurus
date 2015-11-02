@@ -7,11 +7,17 @@ var Actions = require('../../../Actions/Actions');
 var Routes = require('../../../Services/Routes');
 
 var SettingsOptions = require('./dumb/SettingsOptions');
+var ConfirmLeave = require('./dumb/confirmLeave');
+var ReckonAndLeave = require('./dumb/reckonAndLeave');
 
 var Settings = React.createClass({
   render() {
     if (this.props.settingsViewMode === 'invite') {
-      this.gotoInviteRoommates();
+      return this.gotoInviteRoommates();
+    } else if (this.props.settingsViewMode === 'confirm') {
+      return this.renderConfirmLeave();
+    } else if (this.props.settingsViewMode === 'leave') {
+      return this.renderReckonAndLeave();
     }
     return this.renderSettingsOptions();
   },
@@ -21,23 +27,32 @@ var Settings = React.createClass({
       <SettingsOptions
         logout={this.logout}
         gotoInviteRoommates={this.gotoInviteRoommates}
+        gotoConfirmLeave={this.gotoConfirmLeave}
       />
     );
   },
 
-  // renderInviteRoommates() {
-  //   return (
-  //     <InviteRoommates submit={this.handleInviteRoommates} />
-  //   );
-  // },
+  renderConfirmLeave() {
+    return (
+      <ConfirmLeave
+        gotoReckonAndLeave={this.gotoReckonAndLeave}
+        gotoSettingsOptions={this.gotoSettingsOptions}
+      />
+    );
+  },
 
-  // TODO: Roommate invitation handler should be passed from Routes service
-  // handleInviteRoommates() {
-
-  // },
+  renderReckonAndLeave() {
+    return (
+      <ReckonAndLeave
+        selectedReckoning={this.props.selectedReckoning}
+        username={this.props.username}
+        contribution={this.props.contribution}
+        debt={this.props.debt}
+      />
+    );
+  },
 
   logout() {
-    console.log('called from logout in Settings.js');
     this.props.dispatch(Actions.logout());
   },
 
@@ -46,11 +61,41 @@ var Settings = React.createClass({
     this.props.navigator.push(Routes.inviteRoommatesView);
   },
 
+  gotoConfirmLeave() {
+    this.props.dispatch(Actions.setSettingsViewMode('confirm'));
+  },
+
+  gotoReckonAndLeave() {
+    // this.props.dispatch(Actions.initiateReckoning());
+    this.props.dispatch(Actions.setSettingsViewMode('leave'));
+    // this.props.dispatch(Actions.fetchSelectedReckoning());
+  },
+
+  gotoSettingsOptions() {
+    this.props.dispatch(Actions.setSettingsViewMode('options'));
+  },
+
 });
 
 function select(state) {
+
+  var contribution = null;
+  var debt = null;
+  if (state.data.selectedReckoning.users) {
+    for (var i = 0; i < state.data.selectedReckoning.users.length; i++) {
+      if (state.data.selectedReckoning.users[i].username === state.data.user.username) {
+        contribution = state.data.selectedReckoning.users[i].userToReckoning.contribution;
+        debt = state.data.selectedReckoning.users[i].userToReckoning.debt;
+      }
+    }
+  }
+
   return {
     settingsViewMode: state.uiMode.settingsViewMode,
+    selectedReckoning: state.data.selectedReckoning,
+    username: state.data.user.username,
+    contribution,
+    debt,
   };
 }
 

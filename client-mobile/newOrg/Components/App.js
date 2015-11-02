@@ -13,7 +13,7 @@ var App = React.createClass({
   },
 
   render() {
-    switch (this.props.token == '') {
+    switch (this.props.token === '') {
     case true:
       return this.renderEntry();
     case false:

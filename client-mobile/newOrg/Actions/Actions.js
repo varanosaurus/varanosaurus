@@ -470,9 +470,61 @@ exports.setReckoningDetailsMode = function(mode) {
 
 // SET_SETTINGS_VIEW_MODE
 exports.setSettingsViewMode = function(mode) {
+  if (mode === 'leave') {
+    return exports.initiateReckoning(true);
+  } else {
+    return settingsViewMode(mode);
+  }
+};
+
+function settingsViewMode(mode) {
   return {
     type: 'SET_SETTINGS_VIEW_MODE',
     payload: {mode},
   };
+}
+
+exports.initiateReckoning = function(shouldSetSettingsViewModeToLeave) {
+
+  return function(dispatch) {
+    return Network.initiateReckoning()
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              if (shouldSetSettingsViewModeToLeave) {
+                dispatch(settingsViewMode('leave'));
+                dispatch(exports.selectReckoning(body.reckoning));
+              }
+              return dispatch(initiateReckoningSuccess(body));
+            } else {
+              return dispatch(initiateReckoningFailure(body));
+            }
+          });
+      })
+      .catch(function(error) {
+        console.log(error);
+        return dispatch(signupFailure(error.message));
+      });
+  };
 };
+
+// INITIATE_RECKONING_SUCCESS
+function initiateReckoningSuccess(data) {
+  return {
+    type: 'INITIATE_RECKONING_SUCCESS',
+    payload: {
+      household: data,
+    },
+  };
+}
+
+// INITIATE_RECKONING_FAILURE
+function initiateReckoningFailure(message) {
+  return {
+    type: 'INITIATE_RECKONING_FAILURE',
+    payload: {message},
+    error: true,
+  };
+}
 

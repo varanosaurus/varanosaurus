@@ -79,7 +79,7 @@ var Items = React.createClass({
         gotoBoughtItemsList: this.gotoBoughtItemsList,
       }));
     } else {
-      this.props.navigator.push(Routes.getItemDetailsView(item));
+      this.props.navigator.push(Routes.getBoughtItemDetailsView(item));
     }
   },
 

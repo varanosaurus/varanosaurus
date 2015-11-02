@@ -28,6 +28,7 @@ var ReckoningDetails = React.createClass({
         </View>
       );
     } else {
+      console.log('in reckdeets, selectedReckoning is: ', this.props.selectedReckoning);
       return (
         <View style={Styles.default.container}>
           <Text style={Styles.default.label}>This is a Reckoning Details View</Text>

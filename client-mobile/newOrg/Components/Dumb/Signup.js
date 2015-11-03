@@ -38,6 +38,7 @@ var Signup = React.createClass({
             value={this.state.password}
           />
           <Button style={Styles.btn.btn} onPress={this.handleSubmit}>
+          <Text style={Styles.alert.error}>{this.props.errorHandling}</Text>
             Sign up
           </Button>
           <Text style={Styles.alert.info}>Already have an account?</Text>

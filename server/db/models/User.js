@@ -26,7 +26,7 @@ var config = {
 				// Must be between 4-12 chars long
 				len: [4, 20],
 				// Must be letters or numbers; case-insensitive for letters
-				isAlphanumeric: true,
+				is: ['^[a-z_\\.\\d]+$', 'i'],
 			},
 		},
 

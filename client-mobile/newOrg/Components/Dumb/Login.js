@@ -44,6 +44,7 @@ var Login = React.createClass({
             value={this.state.password}
           />
           <Button style={Styles.btn.btn} onPress={this.handleSubmit}>
+          <Text style={Styles.alert.error}>{this.props.errorHandling}</Text>
             Log in
           </Button>
           <Text style={Styles.alert.info}>Don't have an account?</Text>

@@ -6,7 +6,6 @@ var Button = require('react-native-button');
 var Icon = require('react-native-vector-icons/Foundation');
 
 var {
-  StyleSheet,
   View,
   Text,
   TextInput,

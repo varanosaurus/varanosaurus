@@ -219,6 +219,7 @@ function addHouseholdSuccess(data) {
   return {
     type: 'ADD_HOUSEHOLD_SUCCESS',
     payload: {
+      user: data.user,
       household: data.household,
       token: data.token,
     },

@@ -11,8 +11,8 @@ function user(state = {}, action) {
   case 'LOGOUT':
     return {};
   // updates user model to have householdId
-  // case 'ADD_HOUSEHOLD_SUCCESS':
-  //   return action.payload.user;
+  case 'ADD_HOUSEHOLD_SUCCESS':
+    return action.payload.user;
   default:
     return state;
   }

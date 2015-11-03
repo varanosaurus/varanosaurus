@@ -1,6 +1,6 @@
 // LOGIN: submit username/password to server for verification, and handle success or failure
 
-var Network = require('../Services/Network');
+var Network = require('./Network');
 
 exports.login = function(username, password) {
   // Thunk
@@ -418,7 +418,6 @@ exports.fetchSelectedReckoning = function() {
       .then(function(response) {
         return response.json()
           .then(function(body) {
-            console.log('from fetchSelectedReckoning', body);
             if (response.ok) {
               return dispatch(fetchSelectedReckoningSuccess(body));
             }

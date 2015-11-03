@@ -52,7 +52,10 @@ router.get('/:reckoningId', function(request, response) {
   db.Reckoning.findById(id, {include: [
       {model: db.User, attributes: {include: ['id', 'username']}},
       {model: db.Item},
-      {model: db.Payment},
+      {model: db.Payment, include: [
+        {model: db.User, as: 'toUser', attributes: {include: ['id', 'username']}},
+        {model: db.User, as: 'fromUser', attributes: {include: ['id', 'username']}},
+      ]},
     ]})
 
     .then(function(reckoning) {

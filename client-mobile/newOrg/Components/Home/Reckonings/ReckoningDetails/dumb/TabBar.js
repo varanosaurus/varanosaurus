@@ -45,10 +45,7 @@ var TabBar = React.createClass({
   },
 
   renderPayments() {
-    return <Payments
-      users={this.props.reckoning.users}
-      payments={this.props.reckoning.payments}
-    />;
+    return <Payments payments={this.props.reckoning.payments} />;
   },
 
 });

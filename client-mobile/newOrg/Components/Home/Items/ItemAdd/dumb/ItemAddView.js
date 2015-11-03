@@ -10,7 +10,6 @@ var {
   Text,
   TextInput,
   SwitchIOS,
-  StyleSheet,
 } = React;
 
 // TODO: input validation
@@ -91,38 +90,3 @@ var ItemAddView = React.createClass({
 });
 
 module.exports = ItemAddView;
-
-var styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-  },
-  title: {
-    fontFamily: 'Arial',
-    fontSize: 39,
-    color: 'gray',
-  },
-  itemName: {
-    flex: 1,
-    flexDirection: 'row',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  mainSection: {
-    flex: 1,
-    marginTop: 64,
-    padding: 10,
-    backgroundColor: '#F5FCFF',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  btn: {
-    margin: 10,
-    backgroundColor: '#3B5998',
-    color: 'white',
-    padding: 10,
-    borderRadius: 20,
-  },
-});

@@ -76,12 +76,18 @@ var Entry = React.createClass({
   },
 
   gotoLogin() {
+    this.setState({
+      error: '',
+    });
     // dispatch action to store to change
     // state.entryMode -> 'login'
     this.props.dispatch(Actions.setEntryMode('login'));
   },
 
   gotoSignup() {
+    this.setState({
+      error: '',
+    });
     // dispatch action to store to change
     // state.entryMode -> 'signup'
     this.props.dispatch(Actions.setEntryMode('signup'));

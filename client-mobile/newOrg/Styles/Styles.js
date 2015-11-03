@@ -27,6 +27,27 @@ Styles.default = StyleSheet.create({
     marginTop: 8,
     marginBottom: 8,
   },
+  boughtTitle: {
+    margin: 20,
+    fontFamily: 'Arial',
+    fontSize: 30,
+    color: '#327CCB',
+  },
+  boughtBy: {
+    margin: 20,
+    fontFamily: 'Helvetica',
+    fontSize: 24,
+  },
+  boughtDetails: {
+    margin: 20,
+    fontFamily: 'Helvetica',
+    fontSize: 24,
+  },
+  boughtDollar: {
+    margin: 20,
+    fontFamily: 'Helvetica',
+    fontSize: 70,
+  },
   extraInfo: {
     fontFamily: 'Helvetica',
     fontSize: 14,

@@ -3,11 +3,10 @@
 //TODO: refactor this to only have the add household part here once
 
 var React = require('react-native');
-var Button = require('react-native-button');
 var Styles = require('../../Styles/Styles');
+var Button = require('react-native-button');
 
 var {
-  StyleSheet,
   View,
   Text,
   TextInput,
@@ -25,19 +24,19 @@ var JoinOrCreateHousehold = React.createClass({
     var self = this;
     if (this.props.invitations.length === 0) {
       return (
-        <View>
+        <View style={Styles.default.container}>
           <Text>If you think you have been invited to a household, please check with your roommate and remind them to invite you.</Text>
           <Text> ----- OR ----- </Text>
           <Text> Create a household </Text>
           <TextInput
-            style={styles.input}
+            style={Styles.input.textboxField}
             keyboardType='default'
             placeholder='What is your household name?'
             onChangeText={(householdName) => this.setState({householdName: householdName})}
             value={this.state.householdName}
           />
           <Button
-            style={styles.default.btn}
+            style={Styles.btn.btn}
             onPress={this.handleSubmit} >
             Create household
           </Button>
@@ -45,19 +44,19 @@ var JoinOrCreateHousehold = React.createClass({
       );
     } else {
       return (
-        <View>
+        <View style={Styles.default.container}>
           {
             this.props.invitations.map(function(invitation) {
               return (
                 <View>
                   <Text key={invitation.householdName}>You have been invited to the {invitation.householdName} household!</Text>
                   <Button
-                    style={Styles.default.btn}
+                    style={Styles.btn.btn}
                     onPress={self.props.respondToInvitation('accepted', invitation.id)}>
                     Join
                   </Button>
                   <Button
-                    style={Styles.default.btn}
+                    style={Styles.btn.btn}
                     onPress={self.props.respondToInvitation('rejected', invitation.id)}>
                     Decline
                   </Button>
@@ -68,14 +67,14 @@ var JoinOrCreateHousehold = React.createClass({
           <Text>----- OR-----</Text>
           <Text>Create a household</Text>
           <TextInput
-            style={styles.input}
+            style={Styles.input.textboxField}
             keyboardType='default'
             placeholder='What is your household name?'
             onChangeText={(householdName) => this.setState({householdName: householdName})}
             value={this.state.householdName}
           />
           <Button
-            style={styles.default.btn}
+            style={Styles.btn.btn}
             onPress={this.handleSubmit} >
             Create household
           </Button>
@@ -92,35 +91,3 @@ var JoinOrCreateHousehold = React.createClass({
 });
 
 module.exports = JoinOrCreateHousehold;
-
-var styles = StyleSheet.create({
-  container: {
-    marginTop: 64,
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'white',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  button: {
-    flex: 1,
-    paddingTop: 10,
-    paddingBottom: 10,
-    margin: 2,
-    backgroundColor: 'black',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    position: 'absolute',
-  },
-  btnText: {
-    fontSize: 18,
-    color: 'white',
-  },
-  errorHandling: {
-    color: 'red',
-  },
-});
-

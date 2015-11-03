@@ -2,7 +2,6 @@
 
 var React = require('react-native');
 var Styles = require('../../Styles/Styles');
-// var Button = require('react-native-button');
 var Icon = require('react-native-vector-icons/Foundation');
 
 var {
@@ -34,11 +33,6 @@ var ItemList = React.createClass({
       selectedIndex = 1;
     }
 
-      //  <TouchableHighlight
-      //    style={Styles.default.floatView}
-      //    onPress={}>Add an item
-      //  </TouchableHighlight>
-
     return (
       <View style={Styles.list.container}>
         <SegmentedControlIOS
@@ -58,7 +52,7 @@ var ItemList = React.createClass({
           automaticallyAdjustcontentInsets={false}
         />
         <TouchableHighlight
-          style={Styles.default.floatView}
+          style={Styles.btn.floatBtn}
           onPress={this.props.gotoItemAddView} >
           <Icon name='clipboard-pencil' size={70} color="327CCB" />
         </TouchableHighlight>

@@ -7,7 +7,7 @@ var {SceneConfigs} = require('react-native').Navigator;
 
 exports.hometab = {
     name: 'hometab',
-    component: require('../Components/Dumb/HomeTab'),
+    component: require('../Components/Smart/HomeTab'),
     title: 'Home',
     props: {},
 };

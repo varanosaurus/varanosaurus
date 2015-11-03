@@ -1,11 +1,10 @@
 'use strict';
 
 var React = require('react-native');
-var Button = require('react-native-button');
 var Styles = require('../../Styles/Styles');
+var Button = require('react-native-button');
 
 var {
-  StyleSheet,
   View,
   Text,
   TextInput,
@@ -72,62 +71,56 @@ var PendingItemDetails = React.createClass({
     // not editing & not buying
     if (!this.state.isEditing && !this.state.isBuying) {
       return (
-        <View style={styles.contentContainer}>
-          <View style={Styles.default.container}>
-            <Text style={styles.title}>Product: {this.props.item.description}</Text>
-            <Text style={Styles.default.textboxLabel}>Requested By: {this.props.creator.username}</Text>
-            <Text style={Styles.default.textboxLabel}>Details: {this.state.details}</Text>
-            <Button onPress={this.edit} style={Styles.default.btn}>Edit</Button>
-            <Button onPress={this.buy} style={Styles.default.btn}>Buy</Button>
-            <Button onPress={this.browse} style={Styles.default.btn}>Browse Amazon</Button>
-          </View>
+        <View style={Styles.default.container}>
+          <Text style={Styles.page.pendingTitle}>Product: {this.props.item.description}</Text>
+          <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username}</Text>
+          <Text style={Styles.input.textboxLabel}>Details: {this.state.details}</Text>
+          <Button onPress={this.edit} style={Styles.btn.btn}>Edit</Button>
+          <Button onPress={this.buy} style={Styles.btn.btn}>Buy</Button>
+          <Button onPress={this.browse} style={Styles.btn.btn}>Browse Amazon</Button>
         </View>
       );
     // editing & not buying
     } else if (this.state.isEditing && !this.state.isBuying) {
       return (
-        <View style={styles.contentContainer}>
-          <View style={Styles.default.container}>
-            <Text style={styles.title}>Product: {this.props.item.description}</Text>
-            <Text style={Styles.default.textboxLabel}>Requested By: {this.props.creator.username} </Text>
-            <Text style={Styles.default.textboxLabel}>Details: {this.state.details}</Text>
-            <TextInput
-              style={Styles.default.textbox}
-              placeholder='Update description here'
-              onChangeText={(details) => this.setState({details})}
-              value={this.state.details}
-            />
-            <Button
-              onPress={this.handleSubmit}
-              style={Styles.default.btn}>
-              Submit Changes
-            </Button>
-            <Button onPress={this.cancel} style={Styles.default.btn}>Cancel</Button>
-          </View>
+        <View style={Styles.default.container}>
+          <Text style={Styles.page.pendingTitle}>Product: {this.props.item.description}</Text>
+          <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username} </Text>
+          <Text style={Styles.input.textboxLabel}>Details: {this.state.details}</Text>
+          <TextInput
+            style={Styles.input.textboxField}
+            placeholder='Update description here'
+            onChangeText={(details) => this.setState({details})}
+            value={this.state.details}
+          />
+          <Button
+            onPress={this.handleSubmit}
+            style={Styles.btn.btn}>
+            Submit Changes
+          </Button>
+          <Button onPress={this.cancel} style={Styles.btn.btn}>Cancel</Button>
         </View>
       );
     // not editing & buying
     } else if (!this.state.isEditing && this.state.isBuying) {
       return (
-        <View style={styles.contentContainer}>
-          <View style={Styles.default.container}>
-            <Text style={styles.title}>Product: {this.props.item.description}</Text>
-            <Text style={Styles.default.textboxLabel}>Requested By: {this.props.creator.username} </Text>
-            <Text style={Styles.default.textboxLabel}>Details: {this.state.details} </Text>
-            <TextInput
-              keyboardType='decimal-pad'
-              style={Styles.default.textbox}
-              placeholder='Price'
-              onChangeText={(price) => this.setState({price})}
-              value={this.state.price}
-            />
-            <Button
-              onPress={this.handleSubmit}
-              style={Styles.default.btn}>
-              Enter Price
-            </Button>
-            <Button onPress={this.cancel} style={Styles.default.btn}>Cancel</Button>
-          </View>
+        <View style={Styles.default.container}>
+          <Text style={Styles.page.pendingTitle}>Product: {this.props.item.description}</Text>
+          <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username} </Text>
+          <Text style={Styles.input.textboxLabel}>Details: {this.state.details} </Text>
+          <TextInput
+            keyboardType='decimal-pad'
+            style={Styles.input.textboxField}
+            placeholder='Price'
+            onChangeText={(price) => this.setState({price})}
+            value={this.state.price}
+          />
+          <Button
+            onPress={this.handleSubmit}
+            style={Styles.btn.btn}>
+            Enter Price
+          </Button>
+          <Button onPress={this.cancel} style={Styles.btn.btn}>Cancel</Button>
         </View>
       ); //closes return
     } //closes editing and not buying
@@ -135,30 +128,3 @@ var PendingItemDetails = React.createClass({
 }); //closes class
 
 module.exports = PendingItemDetails;
-
-var styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-  },
-  title: {
-    fontFamily: 'Arial',
-    fontSize: 39,
-    color: 'gray',
-  },
-  itemName: {
-    flex: 1,
-    flexDirection: 'row',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  mainSection: {
-    flex: 1,
-    marginTop: 64,
-    padding: 10,
-    backgroundColor: '#F5FCFF',
-  },
-  modal: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

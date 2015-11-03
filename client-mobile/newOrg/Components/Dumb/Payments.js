@@ -27,7 +27,7 @@ var Payments = React.createClass({
               <Text style={Styles.default.label}>
               {fromUsername} owes {toUsername} ${centsToPriceString(paymentData.amount)}
               </Text>
-              <Button onPress={this.settle} style={Styles.default.btn}>Pay or Request via Venmo</Button>
+              <Button onPress={this.settle} style={Styles.btn.btn}>Pay or Request via Venmo</Button>
             </View>
             );
 

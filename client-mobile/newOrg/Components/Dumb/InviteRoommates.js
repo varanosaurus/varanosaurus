@@ -1,10 +1,10 @@
 'use strict';
 
 var React = require('react-native');
+var Styles = require('../../Styles/Styles');
 var Button = require('react-native-button');
 
 var {
-  StyleSheet,
   View,
   Text,
   TextInput,
@@ -24,16 +24,16 @@ var InviteRoommates = React.createClass({
 
   render() {
     return (
-      <View style={styles.mainSection}>
+      <View style={Styles.default.container}>
         <TextInput
-          style={styles.input}
+          style={Styles.input.textboxField}
           keyboardType='default'
           placeholder="roommate's username"
           onChangeText={(input) => this.setState({input: input})}
           value={this.state.input}
         />
-        <Text style={styles.errorHandling}>{this.state.error}</Text>
-        <Button onPress={this.submitRoommate} style={styles.btn}>Invite Roommate</Button>
+        <Text style={Styles.alert.error}>{this.state.error}</Text>
+        <Button onPress={this.submitRoommate} style={Styles.btn.btn}>Invite Roommate</Button>
 
         <Text>Pending invitations to:</Text>
         {
@@ -63,49 +63,3 @@ var InviteRoommates = React.createClass({
 
 module.exports = InviteRoommates;
 
-var styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-  },
-  title: {
-    fontFamily: 'Arial',
-    fontSize: 39,
-    color: 'gray',
-  },
-  itemName: {
-    flex: 1,
-    flexDirection: 'row',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  inputLine: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  input: {
-    flex: 2,
-    borderColor: 'gray',
-    borderWidth: 1,
-
-  },
-  mainSection: {
-    flex: 1,
-    marginTop: 64,
-    padding: 10,
-    backgroundColor: '#F5FCFF',
-  },
-  btn: {
-    margin: 10,
-    backgroundColor: '#3B5998',
-    color: 'white',
-    padding: 10,
-    borderRadius: 20,
-  },
-  modal: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  errorHandling: {
-    color: 'red',
-  },
-});

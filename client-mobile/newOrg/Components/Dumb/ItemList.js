@@ -50,6 +50,7 @@ var ItemList = React.createClass({
           dataSource={dataSource}
           renderRow={this.renderRow}
           automaticallyAdjustcontentInsets={false}
+          showVerticalScrollIndicator={true}
         />
         <TouchableHighlight
           style={Styles.btn.floatBtn}

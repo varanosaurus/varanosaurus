@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var Button = require('react-native-button');
+var Styles = require('../../Styles/Styles');
 
 var {
   StyleSheet,
@@ -24,24 +25,24 @@ var Signup = React.createClass({
           <View style={styles.container}>
           <TextInput
             keyboardType='default'
-            style={styles.input}
+            style={Styles.default.textbox}
             placeholder='username'
             onChangeText={(username) => this.setState({username})}
             value={this.state.username}
           />
           <TextInput
             keyboardType='default'
-            style={styles.input}
+            style={Styles.default.textbox}
             placeholder='password'
             secureTextEntry={true}
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
           />
-          <Button style={styles.button} onPress={this.handleSubmit}>
+          <Button style={Styles.default.btn} onPress={this.handleSubmit}>
             Sign up
           </Button>
-          <Text>Already have an account?</Text>
-          <Button style={styles.button} onPress={this.props.gotoLogin}>
+          <Text style={Styles.default.extraInfo}>Already have an account?</Text>
+          <Button style={Styles.default.btn} onPress={this.props.gotoLogin}>
             Log in
           </Button>
         </View>);

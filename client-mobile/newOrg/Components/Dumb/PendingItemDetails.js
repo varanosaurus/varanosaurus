@@ -2,12 +2,14 @@
 
 var React = require('react-native');
 var Button = require('react-native-button');
+var Styles = require('../../Styles/Styles');
 
 var {
   StyleSheet,
   View,
   Text,
   TextInput,
+  LinkingIOS,
 } = React;
 
 var PendingItemDetails = React.createClass({
@@ -35,6 +37,17 @@ var PendingItemDetails = React.createClass({
     this.setState({isBuying: true});
   },
 
+  cancel() {
+    this.setState({isEditing: false, isBuying: false});
+  },
+
+  browse() {
+    var queryStr = this.props.item.description.split(' ').join('+');
+    LinkingIOS.openURL(
+      'http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=' + queryStr
+    );
+  },
+
   saveChanges() {
     this.setState({isEditing: false});
   },
@@ -60,12 +73,13 @@ var PendingItemDetails = React.createClass({
     if (!this.state.isEditing && !this.state.isBuying) {
       return (
         <View style={styles.contentContainer}>
-          <View style={styles.mainSection}>
+          <View style={Styles.default.container}>
             <Text style={styles.title}>Product: {this.props.item.description}</Text>
-            <Text>Requested By: {this.props.creator.username}</Text>
-            <Text>Details: {this.props.item.details}</Text>
-            <Button onPress={this.edit} style={styles.btn}>Edit</Button>
-            <Button onPress={this.buy} style={styles.btn}>Buy</Button>
+            <Text style={Styles.default.textboxLabel}>Requested By: {this.props.creator.username}</Text>
+            <Text style={Styles.default.textboxLabel}>Details: {this.state.details}</Text>
+            <Button onPress={this.edit} style={Styles.default.btn}>Edit</Button>
+            <Button onPress={this.buy} style={Styles.default.btn}>Buy</Button>
+            <Button onPress={this.browse} style={Styles.default.btn}>Browse Amazon</Button>
           </View>
         </View>
       );
@@ -73,20 +87,22 @@ var PendingItemDetails = React.createClass({
     } else if (this.state.isEditing && !this.state.isBuying) {
       return (
         <View style={styles.contentContainer}>
-          <View style={styles.mainSection}>
+          <View style={Styles.default.container}>
             <Text style={styles.title}>Product: {this.props.item.description}</Text>
-            <Text>Requested By: {this.props.creator.username} </Text>
-            <Text>Details: </Text>
+            <Text style={Styles.default.textboxLabel}>Requested By: {this.props.creator.username} </Text>
+            <Text style={Styles.default.textboxLabel}>Details: {this.state.details}</Text>
             <TextInput
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+              style={Styles.default.textbox}
+              placeholder='Update description here'
               onChangeText={(details) => this.setState({details})}
               value={this.state.details}
             />
             <Button
               onPress={this.handleSubmit}
-              style={styles.btn}>
+              style={Styles.default.btn}>
               Submit Changes
             </Button>
+            <Button onPress={this.cancel} style={Styles.default.btn}>Cancel</Button>
           </View>
         </View>
       );
@@ -94,21 +110,23 @@ var PendingItemDetails = React.createClass({
     } else if (!this.state.isEditing && this.state.isBuying) {
       return (
         <View style={styles.contentContainer}>
-          <View style={styles.mainSection}>
+          <View style={Styles.default.container}>
             <Text style={styles.title}>Product: {this.props.item.description}</Text>
-            <Text>Requested By: {this.props.creator.username} </Text>
-            <Text>Details: {this.props.item.details} </Text>
+            <Text style={Styles.default.textboxLabel}>Requested By: {this.props.creator.username} </Text>
+            <Text style={Styles.default.textboxLabel}>Details: {this.state.details} </Text>
             <TextInput
-              keyboardType='number-pad'
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+              keyboardType='decimal-pad'
+              style={Styles.default.textbox}
+              placeholder='Price'
               onChangeText={(price) => this.setState({price})}
               value={this.state.price}
             />
             <Button
               onPress={this.handleSubmit}
-              style={styles.btn}>
+              style={Styles.default.btn}>
               Enter Price
             </Button>
+            <Button onPress={this.cancel} style={Styles.default.btn}>Cancel</Button>
           </View>
         </View>
       ); //closes return
@@ -138,13 +156,6 @@ var styles = StyleSheet.create({
     marginTop: 64,
     padding: 10,
     backgroundColor: '#F5FCFF',
-  },
-  btn: {
-    margin: 10,
-    backgroundColor: '#3B5998',
-    color: 'white',
-    padding: 10,
-    borderRadius: 20,
   },
   modal: {
     justifyContent: 'center',

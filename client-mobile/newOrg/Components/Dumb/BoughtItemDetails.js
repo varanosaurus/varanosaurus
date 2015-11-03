@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var Styles = require('../../../../Styles/Styles');
+var Styles = require('../../Styles/Styles');
 var Icon = require('react-native-vector-icons/Foundation');
 
 var {

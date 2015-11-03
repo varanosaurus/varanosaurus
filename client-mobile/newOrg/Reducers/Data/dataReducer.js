@@ -10,6 +10,7 @@ function user(state = {}, action) {
     return action.payload.user;
   case 'LOGOUT':
     return {};
+  // case 'ADD_HOUSEHOLD_SUCCESS':
   default:
     return state;
   }

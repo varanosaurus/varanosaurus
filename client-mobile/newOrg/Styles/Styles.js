@@ -98,7 +98,7 @@ Styles.list = StyleSheet.create({
     marginRight: 6,
     padding: 6,
     borderBottomWidth: 1,
-    borderColor: '327CCB',
+    borderColor: '#327CCB',
   },
   label: {
     fontFamily: 'Helvetica',

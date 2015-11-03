@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var Styles = require('../../../../Styles/Styles');
 var Button = require('react-native-button');
 
 var {
@@ -13,13 +14,13 @@ var SettingsOptions = React.createClass({
   render() {
     return (
       <View style={styles.mainSection}>
-        <Button onPress={this.props.logout} style={styles.btn}>
+        <Button onPress={this.props.logout} style={Styles.default.btn}>
           Logout
         </Button>
-        <Button onPress={this.props.gotoInviteRoommates} style={styles.btn}>
+        <Button onPress={this.props.gotoInviteRoommates} style={Styles.default.btn}>
           Invite Roommates
         </Button>
-        <Button onPress={this.props.gotoConfirmLeave} style={styles.btn}>
+        <Button onPress={this.props.gotoConfirmLeave} style={Styles.default.btn}>
           Leave Household
         </Button>
 

@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var Styles = require('../Styles/Styles');
+var Icon = require('react-native-vector-icons/Foundation');
 
 // var Actions = require('../Actions/Actions');
 var Routes = require('../Services/Routes');
@@ -40,7 +41,7 @@ var NavRedux = React.createClass({
 
   routeMapper: {
 
-    LeftButton(route, navigator, index, navState) {
+    LeftButton(route, navigator, index) {
       if (index === 0) {
         return null;
       }
@@ -50,7 +51,7 @@ var NavRedux = React.createClass({
           navigator.pop();
         }
       }}>
-        <Text>{navState.routeStack[index - 1].title}</Text>
+        <Icon stype={{marginTop: 15, marginLeft: 10}} name='arrow-left' size={30} color="327CCB" />
       </TouchableHighlight>
       );
     },
@@ -59,8 +60,8 @@ var NavRedux = React.createClass({
       return null;
     },
 
-    Title(route) {
-      return (<Text style={Styles.default.label}>{route.title}</Text>);
+    Title() {
+      return (<Text style={{marginTop: 10, fontSize: 20, fontFamily: 'Helvetica'}}>Knead</Text>);
     },
 
   },

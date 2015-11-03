@@ -3,11 +3,13 @@
 
 var React = require('react-native');
 var Styles = require('../../../../../Styles/Styles');
+var Button = require('react-native-button');
 
 var {
   View,
   ScrollView,
   Text,
+  LinkingIOS,
 } = React;
 
 var Payments = React.createClass({
@@ -25,12 +27,19 @@ var Payments = React.createClass({
               <Text style={Styles.default.label}>
               {fromUsername} owes {toUsername} ${centsToPriceString(paymentData.amount)}
               </Text>
+              <Button onPress={this.settle} style={Styles.default.btn}>Pay or Request via Venmo</Button>
             </View>
             );
 
         })}
       </ScrollView>
       );
+  },
+
+  settle() {
+    LinkingIOS.openURL(
+      'venmo://payments'
+    );
   },
 
 });

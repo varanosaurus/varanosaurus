@@ -13,7 +13,7 @@ var {
 var SettingsOptions = React.createClass({
   render() {
     return (
-      <View style={styles.mainSection}>
+      <View style={Styles.default.container}>
         <Button onPress={this.props.logout} style={Styles.default.btn}>
           Logout
         </Button>

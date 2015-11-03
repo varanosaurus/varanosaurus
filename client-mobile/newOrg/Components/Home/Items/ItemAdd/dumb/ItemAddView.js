@@ -63,7 +63,7 @@ var ItemAddView = React.createClass({
                 </View>);
             }
                 })()}
-        <Button style={styles.btn} onPress={this.handleSubmit}>Add item</Button>
+        <Button style={Styles.default.btn} onPress={this.handleSubmit}>Add item</Button>
         {(() => {
           if (this.state.error !== null) {
             return <Text>{this.state.error}</Text>;

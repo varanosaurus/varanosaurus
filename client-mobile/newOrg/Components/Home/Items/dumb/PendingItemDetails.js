@@ -73,10 +73,10 @@ var PendingItemDetails = React.createClass({
     if (!this.state.isEditing && !this.state.isBuying) {
       return (
         <View style={styles.contentContainer}>
-          <View style={styles.mainSection}>
+          <View style={Styles.default.container}>
             <Text style={styles.title}>Product: {this.props.item.description}</Text>
-            <Text>Requested By: {this.props.creator.username}</Text>
-            <Text>Details: {this.props.item.details}</Text>
+            <Text style={Styles.default.textboxLabel}>Requested By: {this.props.creator.username}</Text>
+            <Text style={Styles.default.textboxLabel}>Details: {this.state.details}</Text>
             <Button onPress={this.edit} style={Styles.default.btn}>Edit</Button>
             <Button onPress={this.buy} style={Styles.default.btn}>Buy</Button>
             <Button onPress={this.browse} style={Styles.default.btn}>Browse Amazon</Button>
@@ -87,12 +87,13 @@ var PendingItemDetails = React.createClass({
     } else if (this.state.isEditing && !this.state.isBuying) {
       return (
         <View style={styles.contentContainer}>
-          <View style={styles.mainSection}>
+          <View style={Styles.default.container}>
             <Text style={styles.title}>Product: {this.props.item.description}</Text>
-            <Text>Requested By: {this.props.creator.username} </Text>
-            <Text>Details: </Text>
+            <Text style={Styles.default.textboxLabel}>Requested By: {this.props.creator.username} </Text>
+            <Text style={Styles.default.textboxLabel}>Details: {this.state.details}</Text>
             <TextInput
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+              style={Styles.default.textbox}
+              placeholder='Update description here'
               onChangeText={(details) => this.setState({details})}
               value={this.state.details}
             />
@@ -109,13 +110,14 @@ var PendingItemDetails = React.createClass({
     } else if (!this.state.isEditing && this.state.isBuying) {
       return (
         <View style={styles.contentContainer}>
-          <View style={styles.mainSection}>
+          <View style={Styles.default.container}>
             <Text style={styles.title}>Product: {this.props.item.description}</Text>
-            <Text>Requested By: {this.props.creator.username} </Text>
-            <Text>Details: {this.props.item.details} </Text>
+            <Text style={Styles.default.textboxLabel}>Requested By: {this.props.creator.username} </Text>
+            <Text style={Styles.default.textboxLabel}>Details: {this.state.details} </Text>
             <TextInput
               keyboardType='number-pad'
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+              style={Styles.default.textbox}
+              placeholder='Price'
               onChangeText={(price) => this.setState({price})}
               value={this.state.price}
             />

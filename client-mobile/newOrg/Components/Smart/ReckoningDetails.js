@@ -16,10 +16,6 @@ var {
 
 var ReckoningDetails = React.createClass({
 
-  componentWillMount() {
-    this.props.dispatch(Actions.fetchSelectedReckoning());
-  },
-
   render() {
     if (!this.props.selectedReckoning) {
       return (

@@ -214,8 +214,8 @@ exports.addHousehold = function(householdName) {
 
 // ADD_HOUSEHOLD_SUCCESS
 function addHouseholdSuccess(data) {
-  // console.log("DATA");
-  // console.log(data);
+  console.log('DATA');
+  console.log(data);
   return {
     type: 'ADD_HOUSEHOLD_SUCCESS',
     payload: {

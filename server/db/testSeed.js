@@ -44,11 +44,11 @@ var seed = function() {
     return db.Household.bulkCreate([
       {
         name: 'Stark',
-        creatorId: 1,
+        creatorId: userIds['brandon'],
       },
       {
         name: 'Targaryen',
-        creatorId: 3,
+        creatorId: userIds['rhaegar'],
       },
     ], {returning: true});
   })
@@ -155,12 +155,12 @@ var seed = function() {
 
   .then(function() {
     //reckon the Starks
-    return reckon(1);
+    return reckon(householdIds['Stark']);
   })
 
   .then(function() {
     //reckon the Targaryens
-    return reckon(2);
+    return reckon(householdIds['Targaryen']);
   })
 
   .then(function() {
@@ -217,12 +217,12 @@ var seed = function() {
 
   .then(function() {
     //reckon the Starks
-    return reckon(1);
+    return reckon(householdIds['Stark']);
   })
 
   .then(function() {
     //reckon the Targaryens
-    return reckon(2);
+    return reckon(householdIds['Targaryen']);
   })
 
   .then(function() {

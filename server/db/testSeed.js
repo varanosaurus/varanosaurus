@@ -45,14 +45,10 @@ var seed = function() {
       {
         name: 'Stark',
         creatorId: 1,
-        id: 1,
-        //id 1
       },
       {
         name: 'Targaryen',
         creatorId: 3,
-        id: 2,
-        //id 2
       },
     ], {returning: true});
   })

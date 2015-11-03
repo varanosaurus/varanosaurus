@@ -115,7 +115,7 @@ var PendingItemDetails = React.createClass({
             <Text style={Styles.default.textboxLabel}>Requested By: {this.props.creator.username} </Text>
             <Text style={Styles.default.textboxLabel}>Details: {this.state.details} </Text>
             <TextInput
-              keyboardType='number-pad'
+              keyboardType='decimal-pad'
               style={Styles.default.textbox}
               placeholder='Price'
               onChangeText={(price) => this.setState({price})}

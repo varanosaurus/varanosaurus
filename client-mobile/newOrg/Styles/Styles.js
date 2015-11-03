@@ -55,6 +55,7 @@ Styles.default = StyleSheet.create({
     right: 20,
     borderRadius: 35,
   },
+<<<<<<< HEAD
   btn: {
     margin: 10,
     backgroundColor: '#327CCB',
@@ -74,6 +75,8 @@ Styles.default = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 5,
   },
+=======
+>>>>>>> 902485301fe82cc66e1985b0846f4be7a4a681b5
 });
 
 Styles.navbar = StyleSheet.create({
@@ -98,7 +101,7 @@ Styles.list = StyleSheet.create({
     marginRight: 6,
     padding: 6,
     borderBottomWidth: 1,
-    borderColor: '#327CCB',
+    borderColor: '327CCB',
   },
   label: {
     fontFamily: 'Helvetica',

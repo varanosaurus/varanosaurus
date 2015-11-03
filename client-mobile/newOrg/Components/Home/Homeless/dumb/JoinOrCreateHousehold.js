@@ -3,14 +3,13 @@
 //TODO: refactor this to only have the add household part here once
 
 var React = require('react-native');
-var Button = require('react-native-button');
-var Styles = require('../../../../Styles/Styles');
 
 var {
   StyleSheet,
   View,
   Text,
   TextInput,
+  TouchableHighlight,
 } = React;
 
 var JoinOrCreateHousehold = React.createClass({
@@ -36,11 +35,14 @@ var JoinOrCreateHousehold = React.createClass({
             onChangeText={(householdName) => this.setState({householdName: householdName})}
             value={this.state.householdName}
           />
-          <Button
-            style={styles.default.btn}
-            onPress={this.handleSubmit} >
-            Create household
-          </Button>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={() => {
+              this.handleSubmit();
+            }}
+          >
+            <Text style={styles.btnText}>Create household</Text>
+          </TouchableHighlight>
         </View>
       );
     } else {
@@ -51,16 +53,12 @@ var JoinOrCreateHousehold = React.createClass({
               return (
                 <View>
                   <Text key={invitation.householdName}>You have been invited to the {invitation.householdName} household!</Text>
-                  <Button
-                    style={Styles.default.btn}
-                    onPress={self.props.respondToInvitation('accepted', invitation.id)}>
-                    Join
-                  </Button>
-                  <Button
-                    style={Styles.default.btn}
-                    onPress={self.props.respondToInvitation('rejected', invitation.id)}>
-                    Decline
-                  </Button>
+                  <TouchableHighlight onPress={() => {self.props.respondToInvitation('accepted', invitation.id);}}>
+                    <Text>Join</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight onPress={() => {self.props.respondToInvitation('rejected', invitation.id);}}>
+                    <Text>Decline</Text>
+                  </TouchableHighlight>
                 </View>
               );
             })
@@ -74,11 +72,14 @@ var JoinOrCreateHousehold = React.createClass({
             onChangeText={(householdName) => this.setState({householdName: householdName})}
             value={this.state.householdName}
           />
-          <Button
-            style={styles.default.btn}
-            onPress={this.handleSubmit} >
-            Create household
-          </Button>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={() => {
+              this.handleSubmit();
+            }}
+          >
+            <Text style={styles.btnText}>Create household</Text>
+          </TouchableHighlight>
         </View>
       );
     }

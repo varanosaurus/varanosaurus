@@ -2,8 +2,8 @@
 
 var Store = require('./Store');
 
-// var testUrl = 'http://localhost:8080/'; // For Local Machine
-var testUrl = 'http://10.8.3.1:8080/'; // For Mobile
+// var testUrl = 'http://10.8.3.1:8080/'; // For Mobile
+var testUrl = 'http://localhost:8080/';
 
 var deployUrl;
 
@@ -51,8 +51,6 @@ var login = function(username, password) {
 
   return fetch(url + 'auth/login', params)
     .catch(function(error) {
-      console.log('url From Network is:', url);
-      console.log('params From Network is:', params);
       console.error(error);
     });
 };
@@ -65,11 +63,10 @@ var updateUser = function(updates) {
   return fetch(url + userUrl + Store.getState().data.user.id, params)
     //make sure to tell the other thing to reset the token
     .catch(function(error) {
+      console.log('in updateUser in Network, caught error: ', error);
       console.error(error);
     });
 };
-
-//getUser --> necessary? should be returned with login/signup/updateUser
 
 var deleteUser = function() {
   var params = makeParams('DELETE');

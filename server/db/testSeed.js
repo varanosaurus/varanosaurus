@@ -5,81 +5,97 @@ var seed = function() {
   var db = require('./interface');
   var reckon = require('../services/reckon');
 
+  var userIds = {};
+  var householdIds = {};
+
   return db.User.bulkCreate([
     {
       username: 'brandon',
       password: 'password',
-      //id 1
     },
     {
       username: 'lyanna',
       password: 'password',
-      //id 2
     },
     {
       username: 'rhaegar',
       password: 'password',
-      //id 3
     },
     {
       username: 'jonSnow',
       password: 'password',
-      //id 4
     },
     {
       username: 'danyTarg',
       password: 'password',
-      //id 5
     },
     {
       username: 'eddard',
       password: 'password',
     },
-  ], {individualHooks: true})
+  ], {returning: true, individualHooks: true})
 
-  .then(function() {
+  .then(function(users) {
+
+    users.forEach(function(user) {
+      userIds[user.username] = user.id;
+    });
 
     return db.Household.bulkCreate([
       {
         name: 'Stark',
         creatorId: 1,
-        //id 1
       },
       {
         name: 'Targaryen',
         creatorId: 3,
-        //id 2
       },
-    ]);
+    ], {returning: true});
+  })
+
+  .then(function(households) {
+    households.forEach(function(household) {
+      householdIds[household.name] = household.id;
+    });
   })
 
   .then(function() {
     //add lyanna to targaryen house
-    return db.User.update({householdId: 2}, {where: {username: 'rhaegar'}});
+    return db.User.update({householdId: householdIds['Targaryen']}, {where: {username: 'rhaegar'}});
   })
 
   .then(function() {
     //add lyanna to targaryen house
-    return db.User.update({householdId: 2}, {where: {username: 'lyanna'}});
+    return db.User.update({householdId: householdIds['Targaryen']}, {where: {username: 'lyanna'}});
   })
 
   .then(function() {
     //add jon to stark house
-    return db.User.update({householdId: 1}, {where: {username: 'jonSnow'}});
+    return db.User.update({householdId: householdIds['Stark']}, {where: {username: 'jonSnow'}});
   })
 
   .then(function() {
     //add jon to stark house
-    return db.User.update({householdId: 1}, {where: {username: 'brandon'}});
+    return db.User.update({householdId: householdIds['Stark']}, {where: {username: 'brandon'}});
   })
 
   //invite Dany to both houses
   .then(function() {
-    return db.Invitation.create({toUserId: 5, fromUserId: 1, householdId: 1, householdName: 'Stark'});
+    return db.Invitation.create({
+      toUserId: userIds['danyTarg'],
+      fromUserId: userIds['brandon'],
+      householdId: householdIds['Stark'],
+      householdName: 'Stark',
+    });
   })
 
   .then(function() {
-    return db.Invitation.create({toUserId: 5, fromUserId: 3, householdId: 2, householdName: 'Targaryen'});
+    return db.Invitation.create({
+      toUserId: userIds['danyTarg'],
+      fromUserId: userIds['rhaegar'],
+      householdId: householdIds['Targaryen'],
+      householdName: 'Targaryen',
+    });
   })
 
   .then(function() {
@@ -89,48 +105,48 @@ var seed = function() {
     return db.Item.bulkCreate([
       {
         description: 'valyrian steel',
-        householdId: 1,
-        addingUserId: 1,
-        buyingUserId: 1,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['brandon'],
+        buyingUserId: userIds['brandon'],
         bought: true,
         price: (Math.random() * 10000),
       },
       {
         description: 'boiled leather',
-        householdId: 1,
-        addingUserId: 1,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['brandon'],
       },
       {
         description: 'dragon glass',
-        householdId: 1,
-        addingUserId: 4,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['jonSnow'],
       },
       {
         description: 'albino wolf cub',
-        householdId: 1,
-        addingUserId: 4,
-        buyingUserId: 4,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['jonSnow'],
+        buyingUserId: userIds['jonSnow'],
         bought: true,
         price: (Math.random() * 10000),
       },
       {
         description: 'dragon eggs',
-        householdId: 2,
-        addingUserId: 2,
-        buyingUserId: 2,
+        householdId: householdIds['Targaryen'],
+        addingUserId: userIds['lyanna'],
+        buyingUserId: userIds['lyanna'],
         bought: true,
         price: (Math.random() * 10000),
       },
       {
         description: 'crown of gold',
-        householdId: 2,
-        addingUserId: 3,
+        householdId: householdIds['Targaryen'],
+        addingUserId: userIds['rhaegar'],
       },
       {
         description: 'dragon\'s blood',
-        householdId: 2,
-        addingUserId: 3,
-        buyingUserId: 3,
+        householdId: householdIds['Targaryen'],
+        addingUserId: userIds['rhaegar'],
+        buyingUserId: userIds['rhaegar'],
         bought: true,
         price: (Math.random() * 10000),
       },
@@ -154,47 +170,47 @@ var seed = function() {
     return db.Item.bulkCreate([
       {
         description: 'Needle',
-        householdId: 1,
-        addingUserId: 1,
-        buyingUserId: 4,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['brandon'],
+        buyingUserId: userIds['jonSnow'],
         bought: true,
         price: (Math.random() * 10000),
       },
       {
         description: 'Ice',
-        householdId: 1,
-        addingUserId: 1,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['brandon'],
       },
       {
         description: 'Blackfyre',
-        householdId: 1,
-        addingUserId: 1,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['brandon'],
       },
       {
         description: 'Bright Roar',
-        householdId: 1,
-        addingUserId: 4,
-        buyingUserId: 4,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['jonSnow'],
+        buyingUserId: userIds['jonSnow'],
         bought: true,
         price: (Math.random() * 10000),
       },
       {
         description: 'Dark Sister',
-        householdId: 2,
-        addingUserId: 2,
-        buyingUserId: 2,
+        householdId: householdIds['Targaryen'],
+        addingUserId: userIds['lyanna'],
+        buyingUserId: userIds['lyanna'],
         bought: true,
         price: (Math.random() * 10000),
       },
       {
         description: 'Dawn',
-        householdId: 2,
-        addingUserId: 3,
+        householdId: householdIds['Targaryen'],
+        addingUserId: userIds['rhaegar'],
       },
       {
         description: 'Heartsbane',
-        householdId: 2,
-        addingUserId: 3,
+        householdId: householdIds['Targaryen'],
+        addingUserId: userIds['rhaegar'],
       },
     ]);
   })
@@ -216,47 +232,47 @@ var seed = function() {
     return db.Item.bulkCreate([
       {
         description: 'Lady Forlorn',
-        householdId: 1,
-        addingUserId: 1,
-        buyingUserId: 4,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['brandon'],
+        buyingUserId: userIds['jonSnow'],
         bought: true,
         price: (Math.random() * 10000),
       },
       {
         description: 'Oathkeeper',
-        householdId: 1,
-        addingUserId: 1,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['brandon'],
       },
       {
         description: 'Nightfall',
-        householdId: 1,
-        addingUserId: 1,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['brandon'],
       },
       {
         description: 'Red Rain',
-        householdId: 1,
-        addingUserId: 4,
-        buyingUserId: 4,
+        householdId: householdIds['Stark'],
+        addingUserId: userIds['jonSnow'],
+        buyingUserId: userIds['jonSnow'],
         bought: true,
         price: (Math.random() * 10000),
       },
       {
         description: 'Widow\'s Wail',
-        householdId: 2,
-        addingUserId: 2,
-        buyingUserId: 2,
+        householdId: householdIds['Targaryen'],
+        addingUserId: userIds['lyanna'],
+        buyingUserId: userIds['lyanna'],
         bought: true,
         price: (Math.random() * 10000),
       },
       {
         description: 'Lamentation',
-        householdId: 2,
-        addingUserId: 3,
+        householdId: householdIds['Targaryen'],
+        addingUserId: userIds['rhaegar'],
       },
       {
         description: 'Vigilance',
-        householdId: 2,
-        addingUserId: 3,
+        householdId: householdIds['Targaryen'],
+        addingUserId: userIds['rhaegar'],
       },
     ]);
   })
@@ -267,4 +283,3 @@ var seed = function() {
 };
 
 module.exports = seed;
-

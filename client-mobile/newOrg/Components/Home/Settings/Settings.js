@@ -11,15 +11,21 @@ var ConfirmLeave = require('./dumb/confirmLeave');
 var ReckonAndLeave = require('./dumb/reckonAndLeave');
 
 var Settings = React.createClass({
+
   render() {
-    if (this.props.settingsViewMode === 'invite') {
-      return this.gotoInviteRoommates();
-    } else if (this.props.settingsViewMode === 'confirm') {
-      return this.renderConfirmLeave();
-    } else if (this.props.settingsViewMode === 'leave') {
-      return this.renderReckonAndLeave();
+    switch (this.props.settingsViewMode) {
+      case 'invite':
+        this.navigateToInviteRoommates();
+        // FALLTHROUGH
+      case 'options':
+        return this.renderSettingsOptions();
+      case 'confirm':
+        return this.renderConfirmLeave();
+      case 'leave':
+        return this.renderReckonAndLeave();
+      default:
+        return this.renderSettingsOptions();
     }
-    return this.renderSettingsOptions();
   },
 
   renderSettingsOptions() {
@@ -48,6 +54,7 @@ var Settings = React.createClass({
         username={this.props.username}
         contribution={this.props.contribution}
         debt={this.props.debt}
+        leaveHousehold={this.leaveHousehold}
       />
     );
   },
@@ -56,9 +63,12 @@ var Settings = React.createClass({
     this.props.dispatch(Actions.logout());
   },
 
-  gotoInviteRoommates() {
-    // this.props.dispatch(Actions.setSettingsViewMode('invite'));
+  navigateToInviteRoommates() {
     this.props.navigator.push(Routes.inviteRoommatesView);
+  },
+
+  gotoInviteRoommates() {
+    this.props.dispatch(Actions.setSettingsViewMode('invite'));
   },
 
   gotoConfirmLeave() {
@@ -75,13 +85,17 @@ var Settings = React.createClass({
     this.props.dispatch(Actions.setSettingsViewMode('options'));
   },
 
+  leaveHousehold() {
+    this.props.dispatch(Actions.leaveHousehold());
+  },
+
 });
 
 function select(state) {
 
   var contribution = null;
   var debt = null;
-  if (state.data.selectedReckoning.users) {
+  if (state.data.selectedReckoning) {
     for (var i = 0; i < state.data.selectedReckoning.users.length; i++) {
       if (state.data.selectedReckoning.users[i].username === state.data.user.username) {
         contribution = state.data.selectedReckoning.users[i].userToReckoning.contribution;

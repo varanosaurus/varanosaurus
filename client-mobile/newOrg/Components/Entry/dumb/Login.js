@@ -2,8 +2,11 @@
 
 var React = require('react-native');
 var Button = require('react-native-button');
+<<<<<<< HEAD
 var Styles = require('../../../Styles/Styles');
 var Icon = require('react-native-vector-icons/Foundation');
+=======
+>>>>>>> 902485301fe82cc66e1985b0846f4be7a4a681b5
 
 var {
   StyleSheet,
@@ -44,7 +47,7 @@ var Login = React.createClass({
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
           />
-          <Button style={Styles.default.btn} onPress={this.handleSubmit}>
+          <Button style={styles.button} onPress={this.handleSubmit}>
             Log in
           </Button>
           <Text style={Styles.default.extraInfo}>Don't have an account?</Text>

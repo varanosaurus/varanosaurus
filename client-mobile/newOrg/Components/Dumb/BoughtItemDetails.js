@@ -1,9 +1,10 @@
 'use strict';
 
 var React = require('react-native');
+var Styles = require('../../Styles/Styles');
+var Icon = require('react-native-vector-icons/Foundation');
 
 var {
-  StyleSheet,
   View,
   Text,
 } = React;
@@ -12,68 +13,20 @@ var BoughtItemDetails = React.createClass({
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>{this.props.item.description}</Text>
-        <Text>Requested By: {this.props.creator.username}</Text>
-        <Text>Details: {this.props.item.details}</Text>
-        <Text style={styles.showing}>$ {centsToPriceString(this.props.item.price)}</Text>
+      <View style={Styles.default.container}>
+        <Text style={Styles.default.boughtTitle}><Icon stype={{margin: 20}} name='shopping-cart' size={50} color="327CCB" /> {this.props.item.description}</Text>
+        <Text style={Styles.default.boughtBy}><Icon stype={{margin: 20}} name='torso' size={50} color="327CCB" /> Requested By: {this.props.creator.username}</Text>
+        <Text style={Styles.default.boughtDetails}><Icon stype={{margin: 20}} name='pricetag-multiple' size={50} color="327CCB" /> Details: {this.props.item.details}</Text>
+        <Text style={Styles.default.boughtDollar}><Icon stype={{margin: 20}} name='credit-card' size={50} color="327CCB" /> $ {centsToPriceString(this.props.item.price)}</Text>
       </View>
     );
   },
 
 });
 
-module.exports = BoughtItemDetails;
-
-var styles = StyleSheet.create({
-  key: {
-    backgroundColor: 'blue',
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    marginTop: 64,
-  },
-  title: {
-    fontFamily: 'Arial',
-    fontSize: 39,
-    color: 'gray',
-  },
-  board: {
-    padding: 1,
-    backgroundColor: '#000000',
-  },
-  rows: {
-    flexDirection: 'row',
-  },
-  cell: {
-    height: 90,
-    width: 90,
-    backgroundColor: '#f1f1f1',
-    margin: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  showing: {
-    marginTop: 10,
-    marginBottom: 10,
-    fontSize: 50,
-    fontFamily: 'Arial',
-  },
-  textInside: {
-    fontFamily: 'Arial',
-    fontSize: 30,
-  },
-  functionalButton: {
-    backgroundColor: '#2fb4da',
-  },
-  functionalText: {
-    color: 'white',
-  },
-});
-
 function centsToPriceString(cents) {
   return cents.toString().replace(/(\d{2})$/, '.$1');
 }
+
+module.exports = BoughtItemDetails;
+

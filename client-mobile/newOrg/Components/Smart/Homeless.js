@@ -3,9 +3,9 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var Actions = require('../../../Actions/Actions');
+var Actions = require('../../Services/Actions');
 
-var JoinOrCreateHousehold = require('./dumb/JoinOrCreateHousehold');
+var JoinOrCreateHousehold = require('../Dumb/JoinOrCreateHousehold');
 
 var Homeless = React.createClass({
 
@@ -30,8 +30,6 @@ var Homeless = React.createClass({
 });
 
 function select(state) {
-  console.log('invitations: ', state.data.invitations);
-  console.log('invitations.received: ', state.data.invitations.received);
   return {
     invitations: state.data.invitations.received,
     house: state.data.user.householdId,

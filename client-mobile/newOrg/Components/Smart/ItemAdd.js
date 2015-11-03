@@ -3,9 +3,9 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var Actions = require('../../../../Actions/Actions');
+var Actions = require('../../Services/Actions');
 
-var ItemAddView = require('./dumb/ItemAddView');
+var ItemAddView = require('../Dumb/ItemAddView');
 
 var ItemAdd = React.createClass({
 

@@ -3,10 +3,10 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var Actions = require('../../Actions/Actions');
+var Actions = require('../../Services/Actions');
 
-var Login = require('./dumb/Login');
-var Signup = require('./dumb/Signup');
+var Login = require('../Dumb/Login');
+var Signup = require('../Dumb/Signup');
 
 var Entry = React.createClass({
 

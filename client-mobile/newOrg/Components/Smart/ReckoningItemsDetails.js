@@ -2,8 +2,8 @@
 
 var React = require('react-native');
 
-var ItemList = require('./dumb/ReckoningItemList');
-var ItemDetail = require('./dumb/ReckoningItemDetail');
+var ItemList = require('../Dumb/ReckoningItemList');
+var ItemDetail = require('../Dumb/ReckoningItemDetail');
 
 var {connect} = require('react-redux');
 

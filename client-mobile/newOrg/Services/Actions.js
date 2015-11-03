@@ -1,6 +1,6 @@
 // LOGIN: submit username/password to server for verification, and handle success or failure
 
-var Network = require('../Services/Network');
+var Network = require('./Network');
 
 exports.login = function(username, password) {
   // Thunk
@@ -418,7 +418,6 @@ exports.fetchSelectedReckoning = function() {
       .then(function(response) {
         return response.json()
           .then(function(body) {
-            console.log('from fetchSelectedReckoning', body);
             if (response.ok) {
               return dispatch(fetchSelectedReckoningSuccess(body));
             }
@@ -528,3 +527,42 @@ function initiateReckoningFailure(message) {
   };
 }
 
+exports.leaveHousehold = function() {
+  return function(dispatch) {
+    return Network.updateUser({householdId: null})
+      .then(function(response) {
+        return response.json()
+          .then(function(body) {
+            if (response.ok) {
+              return dispatch(leaveHouseholdSuccess(body));
+            } else {
+              return dispatch(leaveHouseholdFailure(body));
+            }
+          })
+          .catch(function(error) {
+            return dispatch(leaveHouseholdFailure(error.message));
+          });
+      })
+      .catch(function(error) {
+        return dispatch(leaveHouseholdFailure(error.message));
+      });
+  };
+};
+
+function leaveHouseholdSuccess(body) {
+  return {
+    type: 'LEAVE_HOUSEHOLD_SUCCESS',
+    payload: {
+      user: body.user,
+      token: body.token,
+    },
+  };
+}
+
+function leaveHouseholdFailure(message) {
+  return {
+    type: 'LEAVE_HOUSEHOLD_FAILURE',
+    payload: {message},
+    error: true,
+  };
+}

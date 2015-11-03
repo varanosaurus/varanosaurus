@@ -9,31 +9,37 @@ var seed = function() {
     {
       username: 'brandon',
       password: 'password',
+      id: 1,
       //id 1
     },
     {
       username: 'lyanna',
       password: 'password',
+      id: 2,
       //id 2
     },
     {
       username: 'rhaegar',
       password: 'password',
+      id: 3,
       //id 3
     },
     {
       username: 'jonSnow',
       password: 'password',
+      id: 4,
       //id 4
     },
     {
       username: 'danyTarg',
       password: 'password',
+      id: 5,
       //id 5
     },
     {
       username: 'eddard',
       password: 'password',
+      id: 6,
     },
   ], {individualHooks: true})
 
@@ -43,11 +49,13 @@ var seed = function() {
       {
         name: 'Stark',
         creatorId: 1,
+        id: 1,
         //id 1
       },
       {
         name: 'Targaryen',
         creatorId: 3,
+        id: 2,
         //id 2
       },
     ]);

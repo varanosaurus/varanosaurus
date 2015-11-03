@@ -1,11 +1,11 @@
 'use strict';
 
 var React = require('react-native');
-var Styles = require('../Styles/Styles');
+var Styles = require('../../Styles/Styles');
 var Icon = require('react-native-vector-icons/Foundation');
 
 // var Actions = require('../Actions/Actions');
-var Routes = require('../Services/Routes');
+var Routes = require('../../Services/Routes');
 
 var {
   Navigator,

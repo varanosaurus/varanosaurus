@@ -4,10 +4,10 @@ var React = require('react-native');
 
 var {connect} = require('react-redux');
 
-var Actions = require('../../../../Actions/Actions');
-var Styles = require('../../../../Styles/Styles');
+var Actions = require('../../Services/Actions');
+var Styles = require('../../Styles/Styles');
 
-var ReckoningTabBar = require('./dumb/TabBar');
+var ReckoningTabBar = require('../Dumb/TabBar');
 
 var {
   View,

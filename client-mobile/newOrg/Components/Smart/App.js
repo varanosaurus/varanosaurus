@@ -3,8 +3,8 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var Entry = require('./Entry/Entry');
-var Home = require('./Home/Home');
+var Entry = require('./Entry');
+var Home = require('./Home');
 
 var App = React.createClass({
 

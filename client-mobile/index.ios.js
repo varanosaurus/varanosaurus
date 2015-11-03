@@ -3,7 +3,7 @@
 var React = require('react-native');
 var {Provider} = require('react-redux');
 
-var App = require('./newOrg/Components/App');
+var App = require('./newOrg/Components/Smart/App');
 var Store = require('./newOrg/Services/Store');
 
 var {

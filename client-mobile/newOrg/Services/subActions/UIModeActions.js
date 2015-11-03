@@ -1,3 +1,5 @@
+var ReckoningActions = require('./ReckoningActions');
+
 exports.setEntryMode = function(mode) {
   return {
     type: 'SET_ENTRY_MODE',
@@ -70,7 +72,7 @@ exports.setReckoningDetailsMode = function(mode) {
 // SET_SETTINGS_VIEW_MODE
 exports.setSettingsViewMode = function(mode) {
   if (mode === 'leave') {
-    return exports.initiateReckoning(true);
+    return ReckoningActions.initiateReckoning(true);
   } else {
     return settingsViewMode(mode);
   }

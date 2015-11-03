@@ -6,6 +6,40 @@ Styles.default = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
+    backgroundColor: 'white',
+  },
+  title: {
+    fontFamily: 'Arial',
+    fontSize: 40,
+    color: '#327CCB',
+    textAlign: 'center',
+  },
+  subheading: {
+    fontFamily: 'Helvetica',
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  textboxLabel: {
+    fontFamily: 'Helvetica',
+    fontSize: 20,
+    color: '#327CCB',
+    marginLeft: 10,
+    marginTop: 8,
+    marginBottom: 8,
+  },
+  extraInfo: {
+    fontFamily: 'Helvetica',
+    fontSize: 14,
+    marginLeft: 10,
+    textAlign: 'center',
+    color: '#cccccc',
+  },
+  alreadyBought: {
+    fontFamily: 'Helvetica',
+    fontSize: 14,
+    margin: 10,
+    textAlign: 'left',
+    color: '#cccccc',
   },
   label: {
     fontFamily: 'Helvetica',
@@ -26,6 +60,19 @@ Styles.default = StyleSheet.create({
     backgroundColor: '#327CCB',
     color: 'white',
     padding: 10,
+    borderRadius: 20,
+  },
+  textbox: {
+    marginLeft: 10,
+    marginRight: 10,
+    color: '#000000',
+    fontSize: 17,
+    height: 36,
+    padding: 7,
+    borderRadius: 4,
+    borderColor: '#cccccc',
+    borderWidth: 1,
+    marginBottom: 5,
   },
 });
 

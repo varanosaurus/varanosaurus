@@ -31,8 +31,8 @@
    * on the same Wi-Fi network.
    */
 
-  // jsCodeLocation = [NSURL URLWithString:@"http://10.8.3.1:8081/index.ios.bundle?platform=ios&dev=true"]; // For Mobile
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"]; // For Local Machine
+  // jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"]; // For Local Machine
+  jsCodeLocation = [NSURL URLWithString:@"http://10.8.3.1:8081/index.ios.bundle?platform=ios&dev=true"]; // For Mobile
 
   /**
    * OPTION 2

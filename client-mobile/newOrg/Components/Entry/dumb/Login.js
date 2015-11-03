@@ -3,6 +3,7 @@
 var React = require('react-native');
 var Button = require('react-native-button');
 var Styles = require('../../../Styles/Styles');
+var Icon = require('react-native-vector-icons/Foundation');
 
 var {
   StyleSheet,
@@ -23,16 +24,21 @@ var Login = React.createClass({
   render() {
     return (
           <View style={styles.container}>
+          <Text style={Styles.default.title}>Knead</Text>
+          <Text style={Styles.default.subheading}>Happy roommates!</Text>
+          <Text style={{textAlign: 'center'}}>
+            <Icon name='home' size={100} color="327CCB" />
+          </Text>
           <TextInput
             keyboardType='default'
-            style={styles.input}
+            style={Styles.default.textbox}
             placeholder='username'
             onChangeText={(username) => this.setState({username})}
             value={this.state.username}
           />
           <TextInput
             keyboardType='default'
-            style={styles.input}
+            style={Styles.default.textbox}
             placeholder='password'
             secureTextEntry={true}
             onChangeText={(password) => this.setState({password})}
@@ -41,7 +47,7 @@ var Login = React.createClass({
           <Button style={Styles.default.btn} onPress={this.handleSubmit}>
             Log in
           </Button>
-          <Text>Don't have an account?</Text>
+          <Text style={Styles.default.extraInfo}>Don't have an account?</Text>
           <Button style={Styles.default.btn} onPress={this.props.gotoSignup}>
             Sign Up
           </Button>

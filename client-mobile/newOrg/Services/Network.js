@@ -2,8 +2,8 @@
 
 var Store = require('./Store');
 
-// var testUrl = 'http://localhost:8080/'; // For Local Machine
-var testUrl = 'http://10.8.3.1:8080/'; // For Mobile
+var testUrl = 'http://localhost:8080/'; // For Local Machine
+// var testUrl = 'http://10.8.3.1:8080/'; // For Mobile
 
 var deployUrl;
 

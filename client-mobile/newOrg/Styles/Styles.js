@@ -6,7 +6,6 @@ Styles.default = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
-    backgroundColor: '#F5FCFF',
   },
   label: {
     fontFamily: 'Helvetica',
@@ -21,6 +20,12 @@ Styles.default = StyleSheet.create({
     bottom: 80,
     right: 20,
     borderRadius: 35,
+  },
+  btn: {
+    margin: 10,
+    backgroundColor: '#327CCB',
+    color: 'white',
+    padding: 10,
   },
 });
 
@@ -46,7 +51,7 @@ Styles.list = StyleSheet.create({
     marginRight: 6,
     padding: 6,
     borderBottomWidth: 1,
-    borderColor: '327CCB',
+    borderColor: '#327CCB',
   },
   label: {
     fontFamily: 'Helvetica',

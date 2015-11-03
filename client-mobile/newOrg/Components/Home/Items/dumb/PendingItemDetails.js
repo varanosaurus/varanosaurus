@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var Button = require('react-native-button');
+var Styles = require('../../../../Styles/Styles');
 
 var {
   StyleSheet,
@@ -34,6 +35,10 @@ var PendingItemDetails = React.createClass({
 
   buy() {
     this.setState({isBuying: true});
+  },
+
+  cancel() {
+    this.setState({isEditing: false, isBuying: false});
   },
 
   browse() {
@@ -72,9 +77,9 @@ var PendingItemDetails = React.createClass({
             <Text style={styles.title}>Product: {this.props.item.description}</Text>
             <Text>Requested By: {this.props.creator.username}</Text>
             <Text>Details: {this.props.item.details}</Text>
-            <Button onPress={this.edit} style={styles.btn}>Edit</Button>
-            <Button onPress={this.buy} style={styles.btn}>Buy</Button>
-            <Button onPress={this.browse} style={styles.btn}>Browse Amazon</Button>
+            <Button onPress={this.edit} style={Styles.default.btn}>Edit</Button>
+            <Button onPress={this.buy} style={Styles.default.btn}>Buy</Button>
+            <Button onPress={this.browse} style={Styles.default.btn}>Browse Amazon</Button>
           </View>
         </View>
       );
@@ -93,9 +98,10 @@ var PendingItemDetails = React.createClass({
             />
             <Button
               onPress={this.handleSubmit}
-              style={styles.btn}>
+              style={Styles.default.btn}>
               Submit Changes
             </Button>
+            <Button onPress={this.cancel} style={Styles.default.btn}>Cancel</Button>
           </View>
         </View>
       );
@@ -115,9 +121,10 @@ var PendingItemDetails = React.createClass({
             />
             <Button
               onPress={this.handleSubmit}
-              style={styles.btn}>
+              style={Styles.default.btn}>
               Enter Price
             </Button>
+            <Button onPress={this.cancel} style={Styles.default.btn}>Cancel</Button>
           </View>
         </View>
       ); //closes return
@@ -147,13 +154,6 @@ var styles = StyleSheet.create({
     marginTop: 64,
     padding: 10,
     backgroundColor: '#F5FCFF',
-  },
-  btn: {
-    margin: 10,
-    backgroundColor: '#3B5998',
-    color: 'white',
-    padding: 10,
-    borderRadius: 20,
   },
   modal: {
     justifyContent: 'center',

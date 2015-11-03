@@ -1,10 +1,10 @@
 'use strict';
 
 var React = require('react-native');
-var Styles = require('../Styles/Styles');
+var Styles = require('../../Styles/Styles');
 
 // var Actions = require('../Actions/Actions');
-var Routes = require('../Services/Routes');
+var Routes = require('../../Services/Routes');
 
 var {
   Navigator,

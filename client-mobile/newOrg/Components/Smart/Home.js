@@ -3,8 +3,8 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var Homeless = require('./Homeless/Homeless');
-var NavRedux = require('../NavRedux');
+var Homeless = require('./Homeless');
+var NavRedux = require('./NavRedux');
 
 var Home = React.createClass({
 

@@ -3,12 +3,12 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var Actions = require('../../../Actions/Actions');
-var Routes = require('../../../Services/Routes');
+var Actions = require('../../Services/Actions');
+var Routes = require('../../Services/Routes');
 
-var SettingsOptions = require('./dumb/SettingsOptions');
-var ConfirmLeave = require('./dumb/confirmLeave');
-var ReckonAndLeave = require('./dumb/reckonAndLeave');
+var SettingsOptions = require('../Dumb/SettingsOptions');
+var ConfirmLeave = require('../Dumb/confirmLeave');
+var ReckonAndLeave = require('../Dumb/reckonAndLeave');
 
 var Settings = React.createClass({
 

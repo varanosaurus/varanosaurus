@@ -3,9 +3,9 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var Actions = require('../../../Actions/Actions');
+var Actions = require('../../Services/Actions');
 
-var JoinOrCreateHousehold = require('./dumb/JoinOrCreateHousehold');
+var JoinOrCreateHousehold = require('../Dumb/JoinOrCreateHousehold');
 
 var Homeless = React.createClass({
 

@@ -3,10 +3,10 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
-var Actions = require('../../../Actions/Actions');
-var Routes = require('../../../Services/Routes');
+var Actions = require('../../Services/Actions');
+var Routes = require('../../Services/Routes');
 
-var ItemList = require('./dumb/ItemList');
+var ItemList = require('../Dumb/ItemList');
 // var ItemAdd = require('./ItemAdd/ItemAdd');
 
 // var {

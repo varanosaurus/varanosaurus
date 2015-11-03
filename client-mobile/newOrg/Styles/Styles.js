@@ -55,7 +55,6 @@ Styles.default = StyleSheet.create({
     right: 20,
     borderRadius: 35,
   },
-<<<<<<< HEAD
   btn: {
     margin: 10,
     backgroundColor: '#327CCB',
@@ -75,8 +74,6 @@ Styles.default = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 5,
   },
-=======
->>>>>>> 902485301fe82cc66e1985b0846f4be7a4a681b5
 });
 
 Styles.navbar = StyleSheet.create({

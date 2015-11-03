@@ -2,6 +2,13 @@ var {StyleSheet} = require('react-native');
 
 var Styles = {};
 
+Styles.navbar = StyleSheet.create({
+  container: {
+    borderBottomWidth: 1,
+    borderColor: '#ACAEB0',
+  },
+});
+
 Styles.default = StyleSheet.create({
   container: {
     flex: 1,
@@ -19,6 +26,39 @@ Styles.default = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
+  label: {
+    fontFamily: 'Helvetica',
+    fontSize: 18,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+});
+
+Styles.alert = StyleSheet.create({
+  info: {
+    fontFamily: 'Helvetica',
+    fontSize: 14,
+    marginLeft: 10,
+    textAlign: 'center',
+    color: '#cccccc',
+  },
+  infoLeft: {
+    fontFamily: 'Helvetica',
+    fontSize: 14,
+    margin: 10,
+    textAlign: 'left',
+    color: '#cccccc',
+  },
+  error: {
+    fontFamily: 'Helvetica',
+    fontSize: 14,
+    marginLeft: 10,
+    textAlign: 'center',
+    color: 'red',
+  },
+});
+
+Styles.input = StyleSheet.create({
   textboxLabel: {
     fontFamily: 'Helvetica',
     fontSize: 20,
@@ -26,6 +66,42 @@ Styles.default = StyleSheet.create({
     marginLeft: 10,
     marginTop: 8,
     marginBottom: 8,
+  },
+  textboxField: {
+    marginLeft: 10,
+    marginRight: 10,
+    color: '#000000',
+    fontSize: 17,
+    height: 36,
+    padding: 7,
+    borderRadius: 4,
+    borderColor: '#cccccc',
+    borderWidth: 1,
+    marginBottom: 5,
+  },
+});
+
+Styles.btn = StyleSheet.create({
+  btn: {
+    margin: 10,
+    backgroundColor: '#327CCB',
+    color: 'white',
+    padding: 10,
+    borderRadius: 20,
+  },
+  floatBtn: {
+    position: 'absolute',
+    bottom: 80,
+    right: 20,
+    borderRadius: 35,
+  },
+});
+
+Styles.page = StyleSheet.create({
+  pendingTitle: {
+    fontFamily: 'Arial',
+    fontSize: 39,
+    color: 'gray',
   },
   boughtTitle: {
     margin: 20,
@@ -47,60 +123,6 @@ Styles.default = StyleSheet.create({
     margin: 20,
     fontFamily: 'Helvetica',
     fontSize: 70,
-  },
-  extraInfo: {
-    fontFamily: 'Helvetica',
-    fontSize: 14,
-    marginLeft: 10,
-    textAlign: 'center',
-    color: '#cccccc',
-  },
-  alreadyBought: {
-    fontFamily: 'Helvetica',
-    fontSize: 14,
-    margin: 10,
-    textAlign: 'left',
-    color: '#cccccc',
-  },
-  label: {
-    fontFamily: 'Helvetica',
-    fontSize: 18,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  floatView: {
-    position: 'absolute',
-    // width: 70,
-    // height: 70,
-    bottom: 80,
-    right: 20,
-    borderRadius: 35,
-  },
-  btn: {
-    margin: 10,
-    backgroundColor: '#327CCB',
-    color: 'white',
-    padding: 10,
-    borderRadius: 20,
-  },
-  textbox: {
-    marginLeft: 10,
-    marginRight: 10,
-    color: '#000000',
-    fontSize: 17,
-    height: 36,
-    padding: 7,
-    borderRadius: 4,
-    borderColor: '#cccccc',
-    borderWidth: 1,
-    marginBottom: 5,
-  },
-});
-
-Styles.navbar = StyleSheet.create({
-  container: {
-    borderBottomWidth: 1,
-    borderColor: '#ACAEB0',
   },
 });
 
@@ -127,10 +149,6 @@ Styles.list = StyleSheet.create({
     marginBottom: 8,
     textAlign: 'center',
   },
-});
-
-Styles.page = StyleSheet.create({
-
 });
 
 module.exports = Styles;

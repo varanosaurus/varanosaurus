@@ -1,19 +1,17 @@
 'use strict';
 
 var React = require('react-native');
-
 var {connect} = require('react-redux');
 
 var Actions = require('../../Services/Actions');
 var Icon = require('react-native-vector-icons/Foundation');
 
-var Items = require('../Smart/Items');
-var Reckonings = require('../Smart/Reckonings');
-var Settings = require('../Smart/Settings');
+var Items = require('./Items');
+var Reckonings = require('./Reckonings');
+var Settings = require('./Settings');
 
 var {
   TabBarIOS,
-  // StyleSheet,
 } = React;
 
 var HomeTab = React.createClass({

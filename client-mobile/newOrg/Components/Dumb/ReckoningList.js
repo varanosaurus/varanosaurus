@@ -48,33 +48,4 @@ var ReckoningList = React.createClass({
 
 });
 
-// var styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   listView: {
-//     backgroundColor: '#F5FCFF',
-//   },
-//   Cell: {
-//     flex: 1,
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//     alignItems: 'center',
-//     marginLeft: 6,
-//     marginRight: 6,
-//     padding: 6,
-//     borderBottomWidth: .5,
-//     borderColor: 'lightgray',
-//   },
-//   statementName: {
-//     fontSize: 20,
-//     marginBottom: 8,
-//     textAlign: 'center',
-//   },
-//   reckoningList: {
-//     flex: 1,
-//     marginTop: 64,
-//   },
-// });
-
 module.exports = ReckoningList;

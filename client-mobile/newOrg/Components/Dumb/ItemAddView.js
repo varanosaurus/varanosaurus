@@ -28,21 +28,21 @@ var ItemAddView = React.createClass({
   render() {
     return (
       <View style={Styles.default.container}>
-        <Text style={Styles.default.textboxLabel}>Enter a Product</Text>
+        <Text style={Styles.input.textboxLabel}>Enter a Product</Text>
         <TextInput
-          style={Styles.default.textbox}
+          style={Styles.input.textboxField}
           placeholder='Write a name of a product'
           onChangeText={(description) => this.setState({description})}
           value={this.state.description}
         />
-        <Text style={Styles.default.textboxLabel}>Leave a Memo</Text>
+        <Text style={Styles.input.textboxLabel}>Leave a Memo</Text>
         <TextInput
-          style={Styles.default.textbox}
+          style={Styles.input.textboxField}
           placeholder='Write additional description'
           onChangeText={(details) => this.setState({details})}
           value={this.state.details}
         />
-        <Text style={Styles.default.alreadyBought}>Already bought?</Text>
+        <Text style={Styles.alert.infoLeft}>Already bought?</Text>
         <SwitchIOS
           style={{margin: 10}}
           onValueChange={(bought) => this.setState({bought})}
@@ -51,9 +51,9 @@ var ItemAddView = React.createClass({
             if (this.state.bought) {
               return (
                 <View>
-                <Text style={Styles.default.textboxLabel}>Enter a Price</Text>
+                <Text style={Styles.input.textboxLabel}>Enter a Price</Text>
                 <TextInput
-                  style={Styles.default.textbox}
+                  style={Styles.input.textboxField}
                   placeholder='Price'
                   keyboardType='decimal-pad'
                   onChangeText={(price) => this.setState({price})}
@@ -62,7 +62,7 @@ var ItemAddView = React.createClass({
                 </View>);
             }
                 })()}
-        <Button style={Styles.default.btn} onPress={this.handleSubmit}>Add item</Button>
+        <Button style={Styles.btn.btn} onPress={this.handleSubmit}>Add item</Button>
         {(() => {
           if (this.state.error !== null) {
             return <Text>{this.state.error}</Text>;

@@ -1,11 +1,10 @@
 'use strict';
 
 var React = require('react-native');
+var {connect} = require('react-redux');
 
 var ItemList = require('../Dumb/ReckoningItemList');
 var ItemDetail = require('../Dumb/ReckoningItemDetail');
-
-var {connect} = require('react-redux');
 
 var ReckoningItemsDetails = React.createClass({
 

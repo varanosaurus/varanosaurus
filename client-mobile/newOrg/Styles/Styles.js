@@ -93,7 +93,7 @@ Styles.btn = StyleSheet.create({
     position: 'absolute',
     bottom: 80,
     right: 20,
-    borderRadius: 35,
+    // borderRadius: 35,
   },
 });
 

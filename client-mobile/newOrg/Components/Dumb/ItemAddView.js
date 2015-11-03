@@ -65,9 +65,9 @@ var ItemAddView = React.createClass({
         <Button style={Styles.btn.btn} onPress={this.handleSubmit}>Add item</Button>
         {(() => {
           if (this.state.error !== null) {
-            return <Text>{this.state.error}</Text>;
+            return <Text style={Styles.alert.error}>{this.state.error}</Text>;
           } else if (this.props.error !== null) {
-            return <Text>{this.props.error}</Text>;
+            return <Text style={Styles.alert.error}>{this.props.error}</Text>;
           }
         })()}
       </View>
@@ -77,7 +77,7 @@ var ItemAddView = React.createClass({
 
   handleSubmit() {
     if (this.state.description === '') {
-      return this.setState({error: 'Please enter a short description of the item.'});
+      return this.setState({error: 'Please enter a product name of the item.'});
     } else {
       this.setState({error: null});
       this.props.handleSubmit({

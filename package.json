@@ -6,7 +6,8 @@
   "scripts": {
     "start": "TOKEN_SECRET=testing NODE_ENV=development node server/server.js",
     "test": "node jasmine-runner.js",
-    "test-db": "jasmine spec/dbSpec.js"
+    "test-db": "jasmine spec/dbSpec.js",
+    "coverage": "istanbul cover jasmine-runner.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "webpack": "^1.12.2"
   },
   "devDependencies": {
+    "istanbul": "^0.4.0",
     "jasmine": "^2.3.2",
     "jasmine-spec-reporter": "^2.4.0",
     "morgan": "^1.6.1",

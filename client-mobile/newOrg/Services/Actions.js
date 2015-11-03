@@ -414,7 +414,7 @@ function fetchReckoningListsSuccess(data) {
 
 exports.fetchSelectedReckoning = function() {
   return function(dispatch) {
-    Network.getSelectedReckoning()
+    return Network.getSelectedReckoning()
       .then(function(response) {
         return response.json()
           .then(function(body) {

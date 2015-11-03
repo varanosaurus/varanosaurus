@@ -10,16 +10,16 @@ var {
   Text,
 } = React;
 
-var UsersDetails = React.createClass({
+var UserTotals = React.createClass({
 
   render() {
 
     return (
       <ScrollView style={Styles.default.container}>
-        {this.props.users.map((userData) => {
+        {this.props.users.map((userData, i) => {
 
           return (
-            <View>
+            <View key={i}>
               <Text style={Styles.default.label}>{userData.username} </Text>
               <Text style={Styles.default.label}>contributed ${centsToPriceString(userData.userToReckoning.contribution)} to the total </Text>
               {this.getOwedText(userData.userToReckoning.debt)}
@@ -44,7 +44,7 @@ var UsersDetails = React.createClass({
 
 });
 
-module.exports = UsersDetails;
+module.exports = UserTotals;
 
 function centsToPriceString(cents) {
   return cents.toString().replace(/(\d{2})$/, '.$1');

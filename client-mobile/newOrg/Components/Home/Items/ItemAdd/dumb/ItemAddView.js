@@ -21,6 +21,7 @@ var ItemAddView = React.createClass({
       details: '',
       bought: false,
       price: 0,
+      error: null,
     };
   },
 
@@ -56,16 +57,28 @@ var ItemAddView = React.createClass({
             }
                 })()}
         <Button style={styles.btn} onPress={this.handleSubmit}>Add item</Button>
+        {(() => {
+          if (this.state.error !== null) {
+            return <Text>{this.state.error}</Text>;
+          } else if (this.props.error !== null) {
+            return <Text>{this.props.error}</Text>;
+          }
+        })()}
       </View>
     );
 
   },
 
   handleSubmit() {
-    this.props.handleSubmit({
-      ...this.state,
-      price: parseInt(this.state.price * 100, 10),
-    });
+    if (this.state.description === '') {
+      return this.setState({error: 'Please enter a short description of the item.'});
+    } else {
+      this.setState({error: null});
+      this.props.handleSubmit({
+        ...this.state,
+        price: parseInt(this.state.price * 100, 10),
+      });
+    }
   },
 
 });

@@ -13,16 +13,15 @@ var {
 var Payments = React.createClass({
 
   render() {
-    var users = this.props.users;
-
     return (
       <ScrollView style={Styles.default.container}>
-        {this.props.payments.map(paymentData => {
-          var toUsername = mapUser(users, paymentData.toUserId);
-          var fromUsername = mapUser(users, paymentData.fromUserId);
+        {this.props.payments.map((paymentData, i) => {
+
+          var toUsername = paymentData.toUser.username;
+          var fromUsername = paymentData.fromUser.username;
 
           return (
-            <View>
+            <View key={i}>
               <Text style={Styles.default.label}>
               {fromUsername} owes {toUsername} ${centsToPriceString(paymentData.amount)}
               </Text>
@@ -38,15 +37,15 @@ var Payments = React.createClass({
 
 module.exports = Payments;
 
-function mapUser(users, id) {
-  var i;
+// function mapUser(users, id) {
+//   var i;
 
-  for (i = 0; i < users.length; i++) {
-    if (users[i].id === id) {
-      return users[i].username;
-    }
-  }
-}
+//   for (i = 0; i < users.length; i++) {
+//     if (users[i].id === id) {
+//       return users[i].username;
+//     }
+//   }
+// }
 
 function centsToPriceString(cents) {
   return cents.toString().replace(/(\d{2})$/, '.$1');

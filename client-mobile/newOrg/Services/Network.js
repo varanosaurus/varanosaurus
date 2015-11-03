@@ -2,9 +2,7 @@
 
 var Store = require('./Store');
 
-var testUrl = 'http://localhost:8080/'; // For Local Machine
-// var testUrl = 'http://10.8.3.1:8080/'; // For Mobile
-
+var testUrl = 'http://localhost:8080/';
 var deployUrl;
 
 var url = deployUrl || testUrl;
@@ -51,8 +49,6 @@ var login = function(username, password) {
 
   return fetch(url + 'auth/login', params)
     .catch(function(error) {
-      console.log('url From Network is:', url);
-      console.log('params From Network is:', params);
       console.error(error);
     });
 };

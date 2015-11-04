@@ -12,6 +12,10 @@ var ReckonAndLeave = require('../Dumb/reckonAndLeave');
 
 var Settings = React.createClass({
 
+  // componentWillMount() {
+  //   this.props.dispatch(Actions.fetchPendingInvites());
+  // },
+
   render() {
     switch (this.props.settingsViewMode) {
       case 'invite':
@@ -103,7 +107,6 @@ function select(state) {
       }
     }
   }
-
   return {
     settingsViewMode: state.uiMode.settingsViewMode,
     selectedReckoning: state.data.selectedReckoning,

@@ -37,9 +37,9 @@ var InviteRoommates = React.createClass({
 
         <Text>Pending invitations to:</Text>
         {
-          this.state.inputField.map(function(roommateUsername) {
+          this.state.inputField.map(function(roommateUsername, i) {
             return (
-              <View>
+              <View key={i}>
                 <Text>{roommateUsername}</Text>
               </View>
             );

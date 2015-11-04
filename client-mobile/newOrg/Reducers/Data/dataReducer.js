@@ -10,6 +10,9 @@ function user(state = {}, action) {
     return action.payload.user;
   case 'LOGOUT':
     return {};
+  // updates user model to have householdId
+  case 'ADD_HOUSEHOLD_SUCCESS':
+    return action.payload.user;
   default:
     return state;
   }
@@ -111,6 +114,8 @@ function sent(state = [], action) {
   switch (action.type) {
   case 'ADD_INVITATION_SUCCESS':
     return action.payload.invitations;
+  // case 'FETCH_PENDING_INVITES_SUCCESS':
+  //   return action.payload.data;
   case 'LOGOUT':
     return [];
   case 'LEAVE_HOUSEHOLD_SUCCESS':

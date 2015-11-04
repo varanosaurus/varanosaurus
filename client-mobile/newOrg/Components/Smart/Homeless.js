@@ -23,7 +23,7 @@ var Homeless = React.createClass({
   },
 
   handleHouseholdCreation(data) {
-    // dispatch action to store causing creation of new household
+    // dispatch action to store causing creation of new household && add householdId to user model
     this.props.dispatch(Actions.addHousehold(data));
   },
 

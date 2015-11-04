@@ -33,6 +33,7 @@ router.post('/', function(request, response) {
           household.setCreator(userId);
           //set the creator as the default captain upon creation
           household.setCaptain(userId);
+
           response.status(201).json({
             user,
             household,

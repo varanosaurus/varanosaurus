@@ -51,7 +51,7 @@ var NavRedux = React.createClass({
           navigator.pop();
         }
       }}>
-        <Icon stype={{marginTop: 15, marginLeft: 10}} name='arrow-left' size={30} color="327CCB" />
+        <Icon stype={{marginTop: 15, marginLeft: 10}} name='arrow-left' size={30} color="{Styles.secondaryColor}" />
       </TouchableHighlight>
       );
     },

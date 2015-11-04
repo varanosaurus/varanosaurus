@@ -2,10 +2,37 @@ var {StyleSheet} = require('react-native');
 
 var Styles = {};
 
+var primaryColor = '#CFD8DC';
+var accentColor = '#E65100';
+var secondaryColor = '#546E7A';
+var neutralColor = 'rgb(92, 87, 93)';
+
+Styles.iconColor = accentColor;
+Styles.secondaryColor = secondaryColor;
+Styles.background = StyleSheet.create({
+  navbarArea: {
+    flex: 1,
+    marginTop: 20,
+  },
+  belowNavbarArea: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  transparentBackground: {
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
+  authArea: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderRadius: 10,
+    margin: 20,
+  },
+});
+
 Styles.navbar = StyleSheet.create({
   container: {
     borderBottomWidth: 1,
-    borderColor: '#ACAEB0',
+    borderColor: secondaryColor,
+    backgroundColor: primaryColor,
   },
 });
 
@@ -13,17 +40,18 @@ Styles.default = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
-    backgroundColor: 'white',
+    // backgroundColor: primaryColor,
   },
   title: {
-    fontFamily: 'Arial',
-    fontSize: 40,
-    color: '#327CCB',
+    fontFamily: 'Helvetica',
+    fontSize: 50,
+    color: 'white',
     textAlign: 'center',
   },
   subheading: {
     fontFamily: 'Helvetica',
     fontSize: 20,
+    color: 'white',
     textAlign: 'center',
   },
   label: {
@@ -40,14 +68,14 @@ Styles.alert = StyleSheet.create({
     fontSize: 14,
     marginLeft: 10,
     textAlign: 'center',
-    color: '#cccccc',
+    color: accentColor,
   },
   infoLeft: {
     fontFamily: 'Helvetica',
     fontSize: 14,
     margin: 10,
     textAlign: 'left',
-    color: '#cccccc',
+    color: accentColor,
   },
   error: {
     fontFamily: 'Helvetica',
@@ -62,7 +90,7 @@ Styles.input = StyleSheet.create({
   textboxLabel: {
     fontFamily: 'Helvetica',
     fontSize: 20,
-    color: '#327CCB',
+    color: primaryColor,
     marginLeft: 10,
     marginTop: 8,
     marginBottom: 8,
@@ -75,7 +103,7 @@ Styles.input = StyleSheet.create({
     height: 36,
     padding: 7,
     borderRadius: 4,
-    borderColor: '#cccccc',
+    borderColor: secondaryColor,
     borderWidth: 1,
     marginBottom: 5,
   },
@@ -84,7 +112,7 @@ Styles.input = StyleSheet.create({
 Styles.btn = StyleSheet.create({
   btn: {
     margin: 10,
-    backgroundColor: '#327CCB',
+    backgroundColor: secondaryColor,
     color: 'white',
     padding: 10,
     borderRadius: 20,
@@ -107,7 +135,7 @@ Styles.page = StyleSheet.create({
     margin: 20,
     fontFamily: 'Arial',
     fontSize: 30,
-    color: '#327CCB',
+    color: primaryColor,
   },
   boughtBy: {
     margin: 20,
@@ -141,7 +169,7 @@ Styles.list = StyleSheet.create({
     marginRight: 6,
     padding: 6,
     borderBottomWidth: 1,
-    borderColor: '#327CCB',
+    borderColor: primaryColor,
   },
   label: {
     fontFamily: 'Helvetica',

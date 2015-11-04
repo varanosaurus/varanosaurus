@@ -38,7 +38,7 @@ var ItemList = React.createClass({
         <SegmentedControlIOS
           values={['Pending', 'Bought']}
           selectedIndex={selectedIndex}
-          tintColor={'327CCB'}
+          tintColor={Styles.secondaryColor}
           onValueChange={(val) => {
             if (val === 'Pending') {
               this.props.gotoPendingItemsList();
@@ -55,7 +55,7 @@ var ItemList = React.createClass({
         <TouchableHighlight
           style={Styles.btn.floatBtn}
           onPress={this.props.gotoItemAddView} >
-          <Icon name='clipboard-pencil' size={70} color="327CCB" />
+          <Icon name='clipboard-pencil' size={70} color={Styles.secondaryColor} />
         </TouchableHighlight>
       </View>
     );

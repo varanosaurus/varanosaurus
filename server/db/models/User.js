@@ -23,7 +23,7 @@ var config = {
 			type: Sequelize.STRING,
 			allowNull: false,
 			validate: {
-				// Must be between 4-12 chars long
+				// Must be between 4-20 chars long
 				len: [4, 20],
 				// Must be letters or numbers; case-insensitive for letters
 				is: ['^[a-z_\\.\\d]+$', 'i'],

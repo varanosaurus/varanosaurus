@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -31,6 +33,8 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Lobster-Regular.ttf</string>
+		<string>JosefinSans-Regular.ttf</string>
 		<string>Ionicons.ttf</string>
 		<string>Foundation.ttf</string>
 	</array>

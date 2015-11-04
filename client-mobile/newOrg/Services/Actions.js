@@ -214,8 +214,6 @@ exports.addHousehold = function(householdName) {
 
 // ADD_HOUSEHOLD_SUCCESS
 function addHouseholdSuccess(data) {
-  console.log('DATA');
-  console.log(data);
   return {
     type: 'ADD_HOUSEHOLD_SUCCESS',
     payload: {
@@ -261,22 +259,15 @@ exports.addInvitation = function(toUsername) {
   return function(dispatch) {
     return Network.inviteUser(toUsername)
       .then(function(response) {
-        // console.log("RESPONSE")
-        // console.log(response)
         return response.json()
           .then(function(body) {
-            // console.log("BODY")
-            // console.log(body)
             if (response.ok) {
-              // console.log("add invitation success")
               return dispatch(addInvitationSuccess(body));
             } else {
-              // console.log("add invitation fail in then")
               return dispatch(addInvitationFailure(body));
             }
           })
           .catch(function(error) {
-            // console.log("add invitation fail in catch")
             console.log(error);
           });
       });
@@ -286,7 +277,9 @@ exports.addInvitation = function(toUsername) {
 function addInvitationSuccess(data) {
   return {
     type: 'ADD_INVITATION_SUCCESS',
-    payload: data.invitations,
+    payload: {
+      invitations: data.invitations,
+    },
   };
 }
 

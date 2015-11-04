@@ -4,6 +4,8 @@ function token(state = '', action) {
     return '' + action.payload.token;
   case 'SIGNUP_SUCCESS':
     return '' + action.payload.token;
+  case 'ADD_HOUSEHOLD_SUCCESS':
+    return '' + action.payload.token;
   case 'LOGOUT':
     return '';
   case 'ADD_HOUSEHOLD_SUCCESS':

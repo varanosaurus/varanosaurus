@@ -4,7 +4,6 @@ var db = require('../db/interface');
 var tokens = require('../services/tokens');
 
 router.post('/', function(request, response) {
-
   var fromUserId = request.decoded.userId;
   var householdId = request.decoded.householdId;
 

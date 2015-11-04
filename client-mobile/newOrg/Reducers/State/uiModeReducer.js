@@ -112,8 +112,6 @@ function selectedReckoningId(state = null, action) {
   switch (action.type) {
   case 'SELECT_RECKONING':
     return action.payload.reckoningId;
-  case 'INITIATE_RECKONING_SUCCESS':
-    return action.payload.household.reckoning.id;
   case 'LEAVE_HOUSEHOLD_SUCCESS':
     return null;
   case 'LOGOUT':

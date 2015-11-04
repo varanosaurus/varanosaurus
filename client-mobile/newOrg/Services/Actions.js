@@ -506,32 +506,37 @@ exports.initiateReckoning = function(shouldSetSettingsViewModeToLeave) {
   return function(dispatch) {
     return Network.initiateReckoning()
       .then(function(response) {
-        return response.json()
-          .then(function(body) {
-            if (response.ok) {
+        console.log(response);
+        if (response.status === 204) {
+          if (shouldSetSettingsViewModeToLeave) {
+            dispatch(settingsViewMode('leave'));
+          }
+          dispatch(initiateReckoningSuccess());
+        } else if (response.status === 201) {
+          return response.json()
+            .then(function(body) {
               if (shouldSetSettingsViewModeToLeave) {
                 dispatch(settingsViewMode('leave'));
                 dispatch(exports.selectReckoning(body.reckoning));
               }
-              return dispatch(initiateReckoningSuccess(body));
-            } else {
-              return dispatch(initiateReckoningFailure(body));
-            }
-          });
+              dispatch(initiateReckoningSuccess(body));
+            });
+        }
       })
       .catch(function(error) {
         console.log(error);
-        return dispatch(signupFailure(error.message));
+        return dispatch(initiateReckoningFailure(error.message));
       });
   };
 };
 
 // INITIATE_RECKONING_SUCCESS
 function initiateReckoningSuccess(data) {
+  var reckoning = data == null ? null : data.reckoning;
   return {
     type: 'INITIATE_RECKONING_SUCCESS',
     payload: {
-      household: data,
+      reckoning: reckoning || null,
     },
   };
 }

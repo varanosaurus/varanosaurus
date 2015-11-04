@@ -5,7 +5,7 @@ var Styles = {};
 var primaryColor = '#CFD8DC';
 var accentColor = '#E65100';
 var secondaryColor = '#546E7A';
-var neutralColor = 'rgb(92, 87, 93)';
+// var neutralColor = 'rgb(92, 87, 93)';
 
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;

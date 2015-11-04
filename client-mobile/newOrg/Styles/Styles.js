@@ -63,7 +63,7 @@ Styles.background = StyleSheet.create({
 
 Styles.navbar = StyleSheet.create({
   container: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 0,
     borderColor: secondaryColor,
     backgroundColor: primaryColor,
   },
@@ -201,9 +201,12 @@ Styles.list = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 6,
     marginRight: 6,
-    padding: 6,
-    borderBottomWidth: 1,
+    marginBottom: 6,
+    padding: 7,
+    borderWidth: 2,
+    borderRadius: 3,
     borderColor: primaryColor,
+    backgroundColor: 'white',
   },
   label: {
     fontFamily: mainFont,

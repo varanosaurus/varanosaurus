@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var Icon = require('react-native-vector-icons/Foundation');
+var Icon = require('react-native-vector-icons/Ionicons');
 
 var Totals = require('./UserTotals');
 var Payments = require('./Payments');

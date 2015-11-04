@@ -123,11 +123,12 @@ Styles.alert = StyleSheet.create({
 Styles.input = StyleSheet.create({
   textboxLabel: {
     fontFamily: mainFont,
-    fontSize: 20,
+    fontSize: 15,
     color: primaryColor,
     marginLeft: 10,
     marginTop: 8,
     marginBottom: 8,
+    textAlign: 'center',
   },
   textboxField: {
     marginLeft: 10,
@@ -164,6 +165,7 @@ Styles.page = StyleSheet.create({
     fontFamily: mainFont,
     fontSize: 39,
     color: 'gray',
+    textAlign: 'center',
   },
   boughtTitle: {
     margin: 20,

@@ -9,6 +9,7 @@ var {
   Text,
   TextInput,
   LinkingIOS,
+  StyleSheet,
 } = React;
 
 var PendingItemDetails = React.createClass({
@@ -72,12 +73,14 @@ var PendingItemDetails = React.createClass({
     if (!this.state.isEditing && !this.state.isBuying) {
       return (
         <View style={Styles.default.container}>
-          <Text style={Styles.page.pendingTitle}>Product: {this.props.item.description}</Text>
-          <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username}</Text>
+          <Text style={Styles.page.pendingTitle} style={stylesheet.title}>{this.props.item.description}</Text>
+          <Text style={Styles.input.textboxLabel}>Requested by: {this.props.creator.username}</Text>
           <Text style={Styles.input.textboxLabel}>Details: {this.state.details}</Text>
-          <Button onPress={this.edit} style={Styles.btn.btn}>Edit</Button>
-          <Button onPress={this.buy} style={Styles.btn.btn}>Buy</Button>
-          <Button onPress={this.browse} style={Styles.btn.btn}>Browse Amazon</Button>
+          <View style={stylesheet.btnContainer}>
+            <Button onPress={this.edit} style={Styles.btn.btn}>Edit details</Button>
+            <Button onPress={this.buy} style={Styles.btn.btn}>Mark as bought</Button>
+          </View>
+          <Button onPress={this.browse} style={Styles.btn.btn} style={stylesheet.amazonBtn}>Search {this.props.item.description} on Amazon</Button>
         </View>
       );
     // editing & not buying
@@ -126,5 +129,24 @@ var PendingItemDetails = React.createClass({
     } //closes editing and not buying
   }, //closes render
 }); //closes class
+
+var stylesheet = StyleSheet.create({
+  title: {
+    backgroundColor: 'pink',
+    fontSize: 39,
+    color: 'white',
+    textAlign: 'center',
+  },
+  // btnContainer: {
+  //   flexDirection: 'row',
+  //   flex: 2,
+  //   marginLeft: 10,
+  //   marginRight: 10,
+  //   justifyContent: 'center',
+  // },
+  // amazonBtn: {
+  //   backgroundColor: 'red',
+  // }
+});
 
 module.exports = PendingItemDetails;

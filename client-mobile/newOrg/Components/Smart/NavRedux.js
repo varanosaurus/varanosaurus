@@ -2,7 +2,7 @@
 
 var React = require('react-native');
 var Styles = require('../../Styles/Styles');
-var Icon = require('react-native-vector-icons/Foundation');
+var Icon = require('react-native-vector-icons/Ionicons');
 
 // var Actions = require('../Actions/Actions');
 var Routes = require('../../Services/Routes');
@@ -12,7 +12,6 @@ var {
   TouchableHighlight,
   Text,
 } = React;
-
 
 var NavRedux = React.createClass({
 
@@ -46,14 +45,16 @@ var NavRedux = React.createClass({
         return null;
       }
 
-      return (<TouchableHighlight style={{marginTop: 10}} onPress={() => {
-        if (index > 0) {
-          navigator.pop();
-        }
-      }}>
-        <Icon stype={{marginTop: 15, marginLeft: 10}} name='arrow-left' size={30} color="{Styles.secondaryColor}" />
-      </TouchableHighlight>
-      );
+      return (<TouchableHighlight
+                style={{marginTop: 8, marginLeft: 15, width:100}}
+                onPress={() => {
+                if (index > 0) {
+                  navigator.pop();
+                }
+              }}>
+                <Icon name='ios-arrow-back' size={30} color="{Styles.secondaryColor}" />
+              </TouchableHighlight>
+              );
     },
 
     RightButton() {

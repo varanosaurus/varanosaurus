@@ -2,7 +2,7 @@
 
 var React = require('react-native');
 var Styles = require('../../Styles/Styles');
-var Icon = require('react-native-vector-icons/Foundation');
+var Icon = require('react-native-vector-icons/Ionicons');
 
 var {
   View,

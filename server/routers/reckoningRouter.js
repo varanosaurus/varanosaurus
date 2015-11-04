@@ -32,9 +32,14 @@ router.post('/', function(request, response) {
 
   reckon(householdId)
     .then(function(reckoning) {
-      db.Reckoning.findById(reckoning.id, {include: [{model: db.User, attributes: {exclude: ['password']}}, {model: db.Item}]})
+
+      if (reckoning == null) {
+        return response.status(204).json({reckoning});
+      }
+
+      return db.Reckoning.findById(reckoning.id, {include: [{model: db.User, attributes: {exclude: ['password']}}, {model: db.Item}]})
         .then(function(reckoning) {
-          response.status(201).json({reckoning});
+          return response.status(201).json({reckoning});
         });
     })
 

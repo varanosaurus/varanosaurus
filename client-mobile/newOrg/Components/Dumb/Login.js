@@ -22,13 +22,13 @@ var Login = React.createClass({
 
   render() {
     return (
-        <View style={Styles.background.navbarArea}>
-          <Image
-            source={{uri: Styles.imageURI}}
-            style={Styles.background.belowNavbarArea}>
-            <View style={Styles.background.transparentBackground}>
+      <View style={Styles.background.navbarArea}>
+        <Image
+          source={{uri: Styles.imageURI}}
+          style={Styles.background.belowNavbarArea}>
+          <View style={Styles.background.transparentBackground}>
             <View style={Styles.background.authArea}>
-              <Text style={Styles.default.title}>Knead</Text>
+              <Text style={Styles.default.knead}>Knead</Text>
               <TextInput
                 keyboardType='default'
                 style={[Styles.input.textboxField, {marginTop: 10}, {color: 'white'}, {borderColor: 'white'}]}
@@ -48,7 +48,7 @@ var Login = React.createClass({
               />
               <Text style={Styles.alert.error}>{this.props.errorHandling}</Text>
               <Button style={Styles.btn.btn} onPress={this.handleSubmit}>
-                Log in
+                Log In
               </Button>
               <Text style={Styles.alert.info}>Don't have an account?</Text>
               <Button style={Styles.btn.btn} onPress={this.props.gotoSignup}>

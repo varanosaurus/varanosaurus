@@ -12,9 +12,9 @@ var ReckonAndLeave = require('../Dumb/reckonAndLeave');
 
 var Settings = React.createClass({
 
-  componentWillMount() {
-    this.props.dispatch(Actions.fetchPendingInvites());
-  },
+  // componentWillMount() {
+  //   this.props.dispatch(Actions.fetchPendingInvites());
+  // },
 
   render() {
     switch (this.props.settingsViewMode) {

@@ -74,12 +74,12 @@ var PendingItemDetails = React.createClass({
       return (
         <View style={Styles.default.container}>
           <Text style={Styles.page.pendingTitle} style={stylesheet.title}>{this.props.item.description}</Text>
-          <Text style={Styles.input.textboxLabel}>Requested by: {this.props.creator.username}</Text>
-          <Text style={Styles.input.textboxLabel}>Details: {this.state.details}</Text>
-          <View style={stylesheet.btnContainer}>
-            <Button onPress={this.edit} style={Styles.btn.btn}>Edit details</Button>
-            <Button onPress={this.buy} style={Styles.btn.btn}>Mark as bought</Button>
+          <Text style={Styles.input.textboxLabel} style={stylesheet.requestedBy}>Requested by: {this.props.creator.username}</Text>
+          <View style={stylesheet.textboxField}>
+            <Text style={Styles.input.textboxLabel} style={stylesheet.text} placeholder='Add notes...'>Add details here...{this.state.details}</Text>
           </View>
+          <Button onPress={this.edit} style={Styles.btn.btn} style={stylesheet.btn}>Edit details</Button>
+          <Button onPress={this.buy} style={Styles.btn.btn} style={stylesheet.btn}>Mark as bought</Button>
           <Button onPress={this.browse} style={Styles.btn.btn} style={stylesheet.amazonBtn}>Search {this.props.item.description} on Amazon</Button>
         </View>
       );
@@ -132,21 +132,46 @@ var PendingItemDetails = React.createClass({
 
 var stylesheet = StyleSheet.create({
   title: {
-    backgroundColor: 'pink',
+    backgroundColor: '3d4e5b',
     fontSize: 39,
     color: 'white',
     textAlign: 'center',
   },
-  // btnContainer: {
-  //   flexDirection: 'row',
-  //   flex: 2,
-  //   marginLeft: 10,
-  //   marginRight: 10,
-  //   justifyContent: 'center',
-  // },
-  // amazonBtn: {
-  //   backgroundColor: 'red',
-  // }
+  requestedBy: {
+    color: 'grey',
+    textAlign: 'center',
+    paddingTop: 7,
+    paddingBottom: 15,
+  },
+  textboxField: {
+    marginLeft: 10,
+    marginRight: 10,
+    height: 100,
+    borderRadius: 10,
+    borderColor: 'grey',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    marginBottom: 10,
+  },
+  text: {
+    color: 'grey',
+    textAlign: 'left',
+  },
+  amazonBtn: {
+    margin: 10,
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: 'cc5251',
+    color: 'white',
+  },
+  btn: {
+    margin: 10,
+    backgroundColor: '899ea3',
+    color: 'white',
+    padding: 10,
+    borderRadius: 20,
+  },
+
 });
 
 module.exports = PendingItemDetails;

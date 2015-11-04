@@ -153,8 +153,8 @@ Styles.btn = StyleSheet.create({
   },
   floatBtn: {
     position: 'absolute',
-    bottom: 80,
-    right: 20,
+    bottom: 75,
+    right: 25,
     // borderRadius: 35,
   },
 });
@@ -197,16 +197,25 @@ Styles.list = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
+  },
+  rowContainer: {
     marginLeft: 6,
     marginRight: 6,
     marginBottom: 6,
-    padding: 7,
+    paddingLeft: 15,
+    paddingTop: 9,
+    paddingBottom: 7,
     borderWidth: 2,
     borderRadius: 3,
     borderColor: primaryColor,
     backgroundColor: 'white',
+  },
+  rightContainer: {
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingRight: 20,
   },
   label: {
     fontFamily: mainFont,

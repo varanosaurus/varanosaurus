@@ -24,7 +24,7 @@ var Login = React.createClass({
     return (
         <View style={Styles.background.navbarArea}>
           <Image
-            source={{uri: 'https://s-media-cache-ak0.pinimg.com/736x/31/de/02/31de023159a3cc9b021c7331e4359738.jpg'}}
+            source={{uri: Styles.imageURIs[Math.floor(Math.random() * Styles.imageURIs.length)]}}
             style={Styles.background.belowNavbarArea}>
             <View style={Styles.background.transparentBackground}>
             <Text style={Styles.default.title}>Knead</Text>

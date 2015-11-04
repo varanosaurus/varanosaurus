@@ -7,11 +7,13 @@ var primaryColor = '#CFD8DC';
 var accentColor = '#E65100';
 var secondaryColor = '#546E7A';
 // var neutralColor = 'rgb(92, 87, 93)';
+var mainFont = 'Heiti TC';
 
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;
+Styles.mainFont = mainFont;
 
-Styles.imageURIs = [
+var imageURIs = [
   'https://s-media-cache-ak0.pinimg.com/736x/31/de/02/31de023159a3cc9b021c7331e4359738.jpg',
   'https://s-media-cache-ak0.pinimg.com/736x/d5/15/09/d51509c9bafcc89c09bcadc11298f115.jpg',
   'https://s-media-cache-ak0.pinimg.com/736x/b8/3f/3c/b83f3ce2b06d4044c6c2ca7a5085ec22.jpg',
@@ -31,7 +33,13 @@ Styles.imageURIs = [
   'https://s-media-cache-ak0.pinimg.com/736x/7a/75/17/7a75170fd17b8929609f05ee97309699.jpg',
   'https://s-media-cache-ak0.pinimg.com/736x/54/8e/ea/548eea7c9647dc098c3989c33b1f2332.jpg',
   'https://s-media-cache-ak0.pinimg.com/736x/62/5a/78/625a78b41263d6734374c941b7799138.jpg',
+  'http://blogof.francescomugnai.com/wp-content/uploads/2014/06/door_cool.jpg',
+  'http://blogof.francescomugnai.com/wp-content/uploads/2014/06/red.jpg',
+  'http://blogof.francescomugnai.com/wp-content/uploads/2014/06/metz.jpg',
+
 ];
+
+Styles.imageURI = imageURIs[Math.floor(Math.random() * imageURIs.length)];
 
 Styles.background = StyleSheet.create({
   navbarArea: {
@@ -46,9 +54,10 @@ Styles.background = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   authArea: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.7)',
     borderRadius: 10,
     margin: 20,
+    marginTop: 150,
   },
 });
 
@@ -67,19 +76,20 @@ Styles.default = StyleSheet.create({
     // backgroundColor: primaryColor,
   },
   title: {
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 50,
+    fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
   },
   subheading: {
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 20,
     color: 'white',
     textAlign: 'center',
   },
   label: {
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 18,
     marginBottom: 8,
     textAlign: 'center',
@@ -88,21 +98,21 @@ Styles.default = StyleSheet.create({
 
 Styles.alert = StyleSheet.create({
   info: {
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 14,
     marginLeft: 10,
     textAlign: 'center',
-    color: accentColor,
+    color: 'white',
   },
   infoLeft: {
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 14,
     margin: 10,
     textAlign: 'left',
     color: accentColor,
   },
   error: {
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 14,
     marginLeft: 10,
     textAlign: 'center',
@@ -112,7 +122,7 @@ Styles.alert = StyleSheet.create({
 
 Styles.input = StyleSheet.create({
   textboxLabel: {
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 20,
     color: primaryColor,
     marginLeft: 10,
@@ -122,7 +132,7 @@ Styles.input = StyleSheet.create({
   textboxField: {
     marginLeft: 10,
     marginRight: 10,
-    color: '#000000',
+    color: '#00000',
     fontSize: 17,
     height: 36,
     padding: 7,
@@ -151,29 +161,29 @@ Styles.btn = StyleSheet.create({
 
 Styles.page = StyleSheet.create({
   pendingTitle: {
-    fontFamily: 'Arial',
+    fontFamily: mainFont,
     fontSize: 39,
     color: 'gray',
   },
   boughtTitle: {
     margin: 20,
-    fontFamily: 'Arial',
+    fontFamily: mainFont,
     fontSize: 30,
     color: primaryColor,
   },
   boughtBy: {
     margin: 20,
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 24,
   },
   boughtDetails: {
     margin: 20,
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 24,
   },
   boughtDollar: {
     margin: 20,
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 70,
   },
 });
@@ -196,7 +206,7 @@ Styles.list = StyleSheet.create({
     borderColor: primaryColor,
   },
   label: {
-    fontFamily: 'Heiti TC',
+    fontFamily: mainFont,
     fontSize: 18,
     marginBottom: 8,
     textAlign: 'center',

@@ -62,9 +62,11 @@ Styles.background = StyleSheet.create({
   },
   authArea: {
     backgroundColor: 'rgba(0,0,0,0.5)',
-    borderRadius: 10,
-    margin: 20,
+    borderRadius: 7,
+    paddingBottom: 14,
     marginTop: 150,
+    marginRight: 30,
+    marginLeft: 30,
   },
 });
 
@@ -158,8 +160,8 @@ Styles.input = StyleSheet.create({
     textAlign: 'center',
   },
   textboxField: {
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 22,
+    marginRight: 22,
     color: 'black',
     fontSize: 17,
     height: 36,
@@ -173,8 +175,8 @@ Styles.input = StyleSheet.create({
   textboxDetails: {
     backgroundColor: 'white',
     fontSize: 15,
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 22,
+    marginRight: 22,
     height: 150,
     borderRadius: 5,
     borderColor: '#323232',
@@ -191,8 +193,8 @@ Styles.btn = StyleSheet.create({
   btn: {
     marginTop: 5,
     marginBottom: 10,
-    marginRight: 30,
-    marginLeft: 30,
+    marginRight: 22,
+    marginLeft: 22,
     backgroundColor: primaryColor,
     color: 'white',
     padding: 10,
@@ -202,8 +204,8 @@ Styles.btn = StyleSheet.create({
   accentBtn: {
     marginTop: 5,
     marginBottom: 10,
-    marginRight: 30,
-    marginLeft: 30,
+    marginRight: 22,
+    marginLeft: 22,
     backgroundColor: accentColor,
     color: 'white',
     padding: 10,
@@ -374,8 +376,16 @@ Styles.reckoningTotals = StyleSheet.create({
 
 Styles.reckoningPayments = StyleSheet.create({
   container: {
-    flexDirection: 'column',
+    // flex: 1,
     marginTop: 64,
+    backgroundColor: 'black',
+    opacity: .7,
+    marginBottom: 48,
+    paddingTop: 10,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingBottom: 15,
+    flexDirection: 'column',
   },
 
   list: {
@@ -383,8 +393,28 @@ Styles.reckoningPayments = StyleSheet.create({
     height: 450,
   },
 
+  row: {
+    flex: 1,
+    alignSelf: 'center',
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    borderWidth: 0,
+  },
+
+  text: {
+    flex: 1,
+    color: 'black',
+    fontSize: 20,
+  },
+
+  amount: {
+    color: '#FF4500',
+  },
+
   button: {
     flex: 1,
+    backgroundColor: accentColor,
   },
 });
 

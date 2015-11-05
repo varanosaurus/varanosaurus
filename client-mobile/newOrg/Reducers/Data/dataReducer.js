@@ -6,8 +6,13 @@ function user(state = {}, action) {
     return action.payload.user;
   case 'SIGNUP_SUCCESS':
     return action.payload.user;
+  case 'LEAVE_HOUSEHOLD_SUCCESS':
+    return action.payload.user;
   case 'LOGOUT':
     return {};
+  // updates user model to have householdId
+  case 'ADD_HOUSEHOLD_SUCCESS':
+    return action.payload.user;
   default:
     return state;
   }
@@ -20,8 +25,9 @@ function household(state = null, action) {
   case 'ADD_HOUSEHOLD_SUCCESS':
     return action.payload.household;
   case 'UPDATE_INVITATION_SUCCESS':
-    console.log('household reducer being called on success with: ', action.payload);
     return action.payload.household;
+  case 'LEAVE_HOUSEHOLD_SUCCESS':
+    return null;
   case 'LOGOUT':
     return null;
   default:
@@ -33,6 +39,8 @@ function roommates(state = [], action) {
   switch (action.type) {
   case 'LOGIN_SUCCESS':
     return action.payload.roommates;
+  case 'LEAVE_HOUSEHOLD_SUCCESS':
+    return [];
   case 'LOGOUT':
     return [];
   default:
@@ -65,6 +73,8 @@ function items(state, action) {
       };
     }
     break;
+  case 'LEAVE_HOUSEHOLD_SUCCESS':
+    return {pending: [], bought: []};
   case 'LOGOUT':
     return {pending: [], bought: []};
   default:
@@ -78,17 +88,23 @@ function reckonings(state = [], action) {
     return action.payload.reckonings.reckonings;
   case 'LOGOUT':
     return [];
+  case 'LEAVE_HOUSEHOLD_SUCCESS':
+    return [];
   default:
     return state;
   }
 }
 
-function selectedReckoning(state = [], action) {
+function selectedReckoning(state = null, action) {
   switch (action.type) {
   case 'FETCH_SELECTED_RECKONING_SUCCESS':
     return action.payload.reckoning;
+  case 'INITIATE_RECKONING_SUCCESS':
+    return action.payload.reckoning;
   case 'LOGOUT':
-    return [];
+    return null;
+  case 'LEAVE_HOUSEHOLD_SUCCESS':
+    return null;
   default:
     return state;
   }
@@ -98,7 +114,11 @@ function sent(state = [], action) {
   switch (action.type) {
   case 'ADD_INVITATION_SUCCESS':
     return action.payload.invitations;
+  // case 'FETCH_PENDING_INVITES_SUCCESS':
+  //   return action.payload.data;
   case 'LOGOUT':
+    return [];
+  case 'LEAVE_HOUSEHOLD_SUCCESS':
     return [];
   default:
     return state;
@@ -111,12 +131,13 @@ function received(state = [], action) {
     return action.payload.invitations;
   case 'UPDATE_INVITATION_SUCCESS':
     return action.payload.invitations;
+  case 'LEAVE_HOUSEHOLD_SUCCESS':
+    return [];
   case 'LOGOUT':
     return [];
   default:
     return state;
   }
-
 }
 
 module.exports = combineReducers({
@@ -128,3 +149,6 @@ module.exports = combineReducers({
   roommates,
   selectedReckoning,
 });
+
+
+

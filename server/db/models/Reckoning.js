@@ -2,14 +2,14 @@
 
 var Sequelize = require('sequelize');
 
-module.exports = {
+var config = {
 
 	attributes: {
 
 		totalSpent: {
-			type: Sequelize.DECIMAL(5, 2),
+			type: Sequelize.INTEGER,
 			allowNull: false,
-			defaultValue: 0.0,
+			defaultValue: 0,
 		},
 
 		date: {
@@ -27,4 +27,8 @@ module.exports = {
 
 	options: {},
 
+};
+
+module.exports = function(db) {
+	return db.define('reckoning', config.attributes, config.options);
 };

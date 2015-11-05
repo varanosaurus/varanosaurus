@@ -1,4 +1,5 @@
 var db = require('../db/interface');
+var calculatePayments = require('./payments');
 
 var reckon = function(householdId) {
 
@@ -22,7 +23,7 @@ var reckon = function(householdId) {
       {
         model: db.Item,
         // ... where there is no associated reckoning yet...
-        where: {reckoningId: null},
+        where: {reckoningId: null, bought: true},
         // ... and include the users who bought the item.
         include: [
           {
@@ -101,6 +102,9 @@ var reckon = function(householdId) {
           return reckoning
             .setHousehold(household)
             .then(function() {
+              return reckoning.addItems(household.items);
+            })
+            .then(function() {
               // After household is set, we need to associate the reckoning
               // with the appropriate users, as well as store the related
               // monetary figures as columns in the join table.
@@ -114,6 +118,11 @@ var reckon = function(householdId) {
               // `userStats` is drawn from enclosing scope.
               var u = userStats;
               var promises = [];
+              var promise;
+
+              var owedUsers = [];
+              var owingUsers = [];
+
               var i;
 
               // For each key in `userStats`, which are themselves
@@ -124,17 +133,36 @@ var reckon = function(householdId) {
               // `addUser` returns a promise, which we immediately push to our
               // array of promises.
               for (i in u) {
-                promises.push(reckoning.addUser(u[i].user, {contribution: u[i].contribution, debt: u[i].debt}));
+
+                if (u[i].debt > 0) {
+                  owingUsers.push({id: u[i].user.id, debt: u[i].debt});
+                } else if (u[i].debt < 0) {
+                  owedUsers.push({id: u[i].user.id, owed: Math.abs(u[i].debt)});
+                }
+
+                promise = reckoning.addUser(u[i].user, {contribution: u[i].contribution, debt: u[i].debt});
+
+                promises.push(promise);
               }
+
+              // Use payment service to generate attributes for a bulkCreate of payments
+              var payments = calculatePayments(owedUsers, owingUsers);
+
+              return db.Payment.bulkCreate(payments, {returning: true})
+                .then(function(payments) {
+                  return reckoning.addPayments(payments);
+                })
+                .then(function() {
+                  return Promise.all(promises);
+                })
+                .then(function() {
+                  return reckoning;
+                });
 
               // Wait upon all of the promises in the array,
               // then resolve our entire chain to the reckoning model,
               // which now has all of its associations and is
               // ready for action.
-              return Promise.all(promises)
-                      .then(function() {
-                        return reckoning;
-                      });
             });
         });
 

@@ -15,6 +15,7 @@ module.exports = initialState = {
         userFigures: [], //same as above
       },
     ],*/
+    finalReckoning: null,
     invitations: {
       sent: [], //[invitationModel],
       received: [], //[invitationModel],
@@ -32,11 +33,9 @@ module.exports = initialState = {
     reckoningsViewMode: 'list', //'details'
     selectedReckoning: null, //reckoningId; TODO: rename to reflect that it's an ID?
     selectedItem: null, //itemId; TODO: rename to reflect that it's an ID?
-    reckoningsDetailsMode: 'items', //'users'
-    reckoningsDetailsItemMode: '',
+    reckoningDetailsMode: 'totals', //'payments'
     reckoningsSelectedItem: null, //itemId; TODO: rename to reflect that it's an ID?
-    settingsViewMode: 'options', //'invite'
-  },
+    settingsViewMode: 'options', //'invite', 'confirm', 'leave'},
 
   token: null,
 

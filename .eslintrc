@@ -33,6 +33,7 @@
     "eol-last": 2,
     "no-console": 1,
     "object-shorthand": [1, "always"],
+    "eqeqeq": [2, "allow-null"],
   },
   "globals": {
     "GLOBAL": true,

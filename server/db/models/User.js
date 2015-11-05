@@ -15,7 +15,7 @@ var comparePassword = function(password) {
 	return bcrypt.compareSync(password, this.password);
 };
 
-module.exports = {
+var config = {
 
 	attributes: {
 
@@ -23,10 +23,10 @@ module.exports = {
 			type: Sequelize.STRING,
 			allowNull: false,
 			validate: {
-				// Must be between 4-12 chars long
+				// Must be between 4-20 chars long
 				len: [4, 20],
 				// Must be letters or numbers; case-insensitive for letters
-				isAlphanumeric: true,
+				is: ['^[a-z_\\.\\d]+$', 'i'],
 			},
 		},
 
@@ -63,4 +63,8 @@ module.exports = {
 
 	},
 
+};
+
+module.exports = function(db) {
+	return db.define('user', config.attributes, config.options);
 };

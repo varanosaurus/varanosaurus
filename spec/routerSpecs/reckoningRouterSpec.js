@@ -97,7 +97,7 @@ describe('itemRouter', function() {
                   request.put({
                     url: itemUrl + itemId,
                     headers: context.headers,
-                    body: JSON.stringify({buyingUserId: jonId, price: 100.00}),
+                    body: JSON.stringify({buyingUserId: jonId, bought: true, price: 10000}),
                   },
                   function() {
                     done();
@@ -127,7 +127,7 @@ describe('itemRouter', function() {
     request.post({url, headers: context.headers}, function(error, response, body) {
       var parsedBody = JSON.parse(body);
 
-      expect(parsedBody.reckoning.totalSpent).toEqual('100.00');
+      expect(parsedBody.reckoning.totalSpent).toEqual(10000);
       done();
 
     });
@@ -160,7 +160,7 @@ describe('itemRouter', function() {
         var parsedBody = JSON.parse(body);
 
         expect(parsedBody.reckoning.id).toEqual(reckoningId);
-        expect(parsedBody.reckoning.totalSpent).toEqual('100.00');
+        expect(parsedBody.reckoning.totalSpent).toEqual(10000);
 
         done();
 

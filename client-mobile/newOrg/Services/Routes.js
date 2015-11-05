@@ -1,5 +1,5 @@
 var store = require('./Store');
-var Actions = require('../Actions/Actions');
+var Actions = require('./Actions');
 var {SceneConfigs} = require('react-native').Navigator;
 
 // TODO: decide whether we should always mount smart components within navigator,
@@ -7,20 +7,20 @@ var {SceneConfigs} = require('react-native').Navigator;
 
 exports.hometab = {
     name: 'hometab',
-    component: require('../Components/Home/dumb/HomeTab'),
+    component: require('../Components/Smart/HomeTab'),
     title: 'Home',
     props: {},
-  };
+};
 
 exports.itemAddView = {
   name: 'itemAdd',
-  component: require('../Components/Home/Items/ItemAdd/ItemAdd'),
+  component: require('../Components/Smart/ItemAdd'),
   title: 'Add Item',
   sceneConfig: SceneConfigs.FloatFromBottom,
   props: {},
 };
 
-var getBoughtItemDetailsView = exports.getItemDetailsView = function(item) {
+var getBoughtItemDetailsView = exports.getBoughtItemDetailsView = function(item) {
   var state = store.getState();
   var roommates = state.data.roommates;
 
@@ -32,13 +32,11 @@ var getBoughtItemDetailsView = exports.getItemDetailsView = function(item) {
     creator = state.data.user;
   } else {
     for (i = 0; i < roommates.length; i++) {
-      if (item.addingUserId == roommates[i].id) {
+      if (item.addingUserId === roommates[i].id) {
         creator = roommates[i];
       }
     }
   }
-
-
 
   var props = {
     item,
@@ -47,18 +45,17 @@ var getBoughtItemDetailsView = exports.getItemDetailsView = function(item) {
 
   return {
     name: 'boughtItemDetailsView',
-    component: require('../Components/Home/Items/dumb/BoughtItemDetails'),
+    component: require('../Components/Dumb/BoughtItemDetails'),
     title: item.description,
     props,
   };
-
 
 };
 
 exports.getPendingItemDetailsView = function(item, props) {
   var scene = getBoughtItemDetailsView(item);
   scene.name = 'pendingItemDetailsView';
-  scene.component = require('../Components/Home/Items/dumb/PendingItemDetails');
+  scene.component = require('../Components/Dumb/PendingItemDetails');
 
   props = {
     ...scene.props,
@@ -72,17 +69,17 @@ exports.getPendingItemDetailsView = function(item, props) {
 };
 
 exports.reckoningDetailsView = {
-    name: 'reckoningDetailsView',
-    component: require('../Components/Home/Reckonings/ReckoningDetails/ReckoningDetails'),
-    props: {},
+  name: 'reckoningDetailsView',
+  title: 'Reckoning Details',
+  component: require('../Components/Smart/ReckoningDetails'),
+  props: {},
 };
 
 exports.inviteRoommatesView = {
   name: 'inviteRoommatesView',
-  component: require('../Components/Home/Settings/dumb/InviteRoommates'),
+  component: require('../Components/Dumb/InviteRoommates'),
   props: {
     handleInviteRoommates(username) {
-      console.log('handleInviteRoommates from Routes being called with: ', username);
       store.dispatch(Actions.addInvitation(username));
     },
 

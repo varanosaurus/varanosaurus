@@ -32,27 +32,33 @@ var testItems =
   [
     {
       description: 'Thing 1',
-      price: 5.00,
+      price: 500,
+      bought: true,
     },
     {
       description: 'Thing 2',
-      price: 5.00,
+      price: 500,
+      bought: true,
     },
     {
       description: 'Thing 3',
-      price: 5.00,
+      price: 500,
+      bought: true,
     },
     {
       description: 'Thing 4',
-      price: 5.00,
+      price: 500,
+      bought: true,
     },
     {
       description: 'Thing 5',
-      price: 5.00,
+      price: 500,
+      bought: true,
     },
     {
       description: 'Thing 6',
-      price: 5.00,
+      price: 500,
+      bought: true,
     },
   ];
 
@@ -124,7 +130,7 @@ describe('Reckoning service', function() {
     reckon(this.household.id)
       .then(function(reckoning) {
         expect(reckoning).toBeTruthy();
-        expect(+reckoning.totalSpent).toEqual(30);
+        expect(reckoning.totalSpent).toEqual(3000);
       })
       .catch(done.fail.bind(done))
       .then(done);
@@ -160,7 +166,7 @@ describe('Reckoning service', function() {
 
     var household = this.household;
 
-    household.createItem({description: 'Thing 7', price: 200}, {returning: true})
+    household.createItem({description: 'Thing 7', price: 20000, bought: true}, {returning: true})
 
       .then(function(item) {
         return item.setBuyingUser(1);
@@ -172,7 +178,7 @@ describe('Reckoning service', function() {
 
       .then(function(reckoning) {
         expect(reckoning).toBeTruthy();
-        expect(+reckoning.totalSpent).toEqual(230);
+        expect(reckoning.totalSpent).toEqual(23000);
         return reckoning.getUsers();
       })
 

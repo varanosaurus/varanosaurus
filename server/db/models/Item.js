@@ -2,7 +2,7 @@
 
 var Sequelize = require('sequelize');
 
-module.exports = {
+var config = {
 
 	attributes: {
 
@@ -22,10 +22,10 @@ module.exports = {
 		},
 
 		price: {
-			type: Sequelize.DECIMAL(5, 2),
+			type: Sequelize.INTEGER,
 			// Do we want users to be able to add prices later, but require them for reckoning?
 			// allowNull: false,
-			defaultValue: 0.0,
+			defaultValue: 0,
 		},
 
 		timeBought: {
@@ -43,4 +43,8 @@ module.exports = {
 
 	options: {},
 
+};
+
+module.exports = function(db) {
+	return db.define('item', config.attributes, config.options);
 };

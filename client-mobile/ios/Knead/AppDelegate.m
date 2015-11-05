@@ -16,6 +16,24 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
+  
+  for (NSString* family in [UIFont familyNames])
+  {
+    NSLog(@"%@", family);
+    for (NSString* name in [UIFont fontNamesForFamilyName: family])
+    {
+      NSLog(@"%@", name);
+    }
+  }
+  
+//  for (NSString* family in [UIFont familyNames])
+//  {
+//    NSLog(@”%@”, family);
+//    for (NSString* name in [UIFont fontNamesForFamilyName: family])
+//    {
+//      NSLog(@” %@”, name);
+//    }
+//  }
 
   /**
    * Loading JavaScript code - uncomment the one you want.
@@ -31,6 +49,7 @@
    * on the same Wi-Fi network.
    */
 
+  // jsCodeLocation = [NSURL URLWithString:@"http://10.8.3.1:8081/index.ios.bundle?platform=ios&dev=true"]; // For Mobile
   jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
 
   /**

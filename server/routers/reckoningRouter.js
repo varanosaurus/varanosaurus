@@ -32,7 +32,15 @@ router.post('/', function(request, response) {
 
   reckon(householdId)
     .then(function(reckoning) {
-      response.status(201).json({reckoning});
+
+      if (reckoning == null) {
+        return response.status(204).json({reckoning});
+      }
+
+      return db.Reckoning.findById(reckoning.id, {include: [{model: db.User, attributes: {exclude: ['password']}}, {model: db.Item}]})
+        .then(function(reckoning) {
+          return response.status(201).json({reckoning});
+        });
     })
 
     .catch(function(error) {
@@ -46,7 +54,14 @@ router.get('/:reckoningId', function(request, response) {
   var householdId = request.decoded.householdId;
   var id = request.params.reckoningId;
 
-  db.Reckoning.findById(id, {include: [{model: db.User, attributes: {exclude: ['password']}}, {model: db.Item}]})
+  db.Reckoning.findById(id, {include: [
+      {model: db.User, attributes: {include: ['id', 'username']}},
+      {model: db.Item},
+      {model: db.Payment, include: [
+        {model: db.User, as: 'toUser', attributes: {include: ['id', 'username']}},
+        {model: db.User, as: 'fromUser', attributes: {include: ['id', 'username']}},
+      ]},
+    ]})
 
     .then(function(reckoning) {
       if (reckoning || reckoning.householdId === householdId) {

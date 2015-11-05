@@ -2,6 +2,7 @@ node_modules/
 bower_components/
 *.log
 *.js.save
+coverage/
 
 **/npm-debug*
 

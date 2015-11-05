@@ -1,14 +1,5 @@
 var Sequelize = require('sequelize');
 
-// var config = require('./postgres.config.js');
-
-var itemConfig = require('./models/Item');
-var householdConfig = require('./models/Household');
-var reckoningConfig = require('./models/Reckoning');
-var userConfig = require('./models/User');
-var userToReckoningConfig = require('./models/UserToReckoning');
-var invitationConfig = require('./models/Invitation');
-
 var dbEnvironment = process.env.NODE_ENV;
 var testSeed = require('./testSeed');
 
@@ -23,49 +14,25 @@ if (dbEnvironment === 'testing' || dbEnvironment === 'development') {
 
 var schema = 'knead';
 
+var defineModels = require('./models/models');
+var createAssociations = require('./associations');
+
 var db = new Sequelize(url, {ssl: true, logging: false, define: {schema}});
 
-var Item = db.define('item', itemConfig.attributes, itemConfig.options);
+// Pass sequelize instance to have models defined upon it
+defineModels(db);
 
-var Household = db.define('household', householdConfig.attributes, householdConfig.options);
+// Pass sequelize instance to have associations created among its models
+createAssociations(db);
 
-var Reckoning = db.define('reckoning', reckoningConfig.attributes, reckoningConfig.options);
-
-var User = db.define('user', userConfig.attributes, userConfig.options);
-
-var UserToReckoning = db.define('userToReckoning', userToReckoningConfig.attributes, userToReckoningConfig.options);
-
-var Invitation = db.define('invitation', invitationConfig.attributes, invitationConfig.options);
-
-Item.belongsTo(Household);
-Household.hasMany(Item);
-
-Item.belongsTo(User, {as: 'addingUser'});
-Item.belongsTo(User, {as: 'buyingUser'});
-
-Item.belongsTo(Reckoning);
-Reckoning.hasMany(Item);
-
-User.belongsToMany(Reckoning, {through: UserToReckoning});
-Reckoning.belongsToMany(User, {through: UserToReckoning});
-
-Reckoning.belongsTo(Household);
-Household.hasMany(Reckoning);
-
-User.belongsTo(Household);
-Household.hasMany(User);
-
-Household.belongsTo(User, {as: 'creator', constraints: false});
-Household.belongsTo(User, {as: 'captain', constraints: false});
-
-Invitation.belongsTo(User, {as: 'toUser'});
-Invitation.belongsTo(User, {as: 'fromUser'});
-
-User.hasMany(Invitation, {as: 'sentInvitations', foreignKey: 'fromUserId'});
-User.hasMany(Invitation, {as: 'receivedInvitations', foreignKey: 'toUserId'});
-
-Invitation.belongsTo(Household);
-Household.hasMany(Invitation);
+// Alias models for convenient export
+var Household = db.models.household;
+var Invitation = db.models.invitation;
+var Item = db.models.item;
+var Payment = db.models.payment;
+var Reckoning = db.models.reckoning;
+var User = db.models.user;
+var UserToReckoning = db.models.userToReckoning;
 
 if (dbEnvironment === 'reset' || dbEnvironment === 'testing' || dbEnvironment === 'development') {
   shouldForce = true;
@@ -91,6 +58,7 @@ module.exports = {
   Reckoning,
   User,
   UserToReckoning,
+  Payment,
   Invitation,
   init,
 };

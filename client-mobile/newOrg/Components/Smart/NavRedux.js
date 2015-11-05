@@ -63,7 +63,7 @@ var NavRedux = React.createClass({
     },
 
     Title() {
-      return (<Text style={{marginTop: 10, fontSize: 20, fontFamily: Styles.kneadFont}}>Knead</Text>);
+      return (<Text style={{marginTop: 10, fontSize: 26, fontFamily: Styles.kneadFont, color: Styles.accentColor}}>Knead</Text>);
     },
 
   },

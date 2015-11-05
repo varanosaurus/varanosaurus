@@ -34,7 +34,6 @@ var imageURIs = [
   'https://s-media-cache-ak0.pinimg.com/736x/31/59/a0/3159a048ff333683a373bc6537ecb3a7.jpg',
   'https://s-media-cache-ak0.pinimg.com/736x/08/be/99/08be993f205f517ea7b76ffd681f6c19.jpg',
   'https://s-media-cache-ak0.pinimg.com/736x/ad/0d/11/ad0d1165a1497c01bbf74568643708f8.jpg',
-  'https://s-media-cache-ak0.pinimg.com/736x/28/bf/b7/28bfb78867de8c0cc0023d28aefb99c4.jpg',
   'https://s-media-cache-ak0.pinimg.com/736x/5b/22/05/5b2205d551cab819062389c025051d4b.jpg',
   'https://s-media-cache-ak0.pinimg.com/736x/e5/0f/cf/e50fcf9491e16b1e62d91a8805c76d4a.jpg',
   'https://s-media-cache-ak0.pinimg.com/736x/7a/75/17/7a75170fd17b8929609f05ee97309699.jpg',

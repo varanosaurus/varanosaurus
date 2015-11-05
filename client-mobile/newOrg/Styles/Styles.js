@@ -3,9 +3,9 @@ var {StyleSheet} = require('react-native');
 
 var Styles = {};
 
-var primaryColor = '#CFD8DC';
-var accentColor = '#E65100';
-var secondaryColor = '#546E7A';
+var primaryColor = '#899EA3';
+var accentColor = '#CC5251';
+var secondaryColor = '#323232';
 // var neutralColor = 'rgb(92, 87, 93)';
 var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
@@ -116,6 +116,11 @@ Styles.default = StyleSheet.create({
     alignItems: 'flex-end',
     paddingRight: 20,
   },
+  text: {
+    fontFamily: mainFont,
+    fontSize: 18,
+    textAlign: 'left',
+  },
 });
 
 Styles.alert = StyleSheet.create({
@@ -123,6 +128,7 @@ Styles.alert = StyleSheet.create({
     fontFamily: mainFont,
     fontSize: 14,
     marginLeft: 10,
+    marginTop: 6,
     textAlign: 'center',
     color: 'white',
   },
@@ -146,15 +152,15 @@ Styles.input = StyleSheet.create({
   textboxLabel: {
     fontFamily: mainFont,
     fontSize: 15,
-    color: primaryColor,
+    color: secondaryColor,
     marginLeft: 10,
     marginTop: 8,
     marginBottom: 8,
     textAlign: 'center',
   },
   textboxField: {
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 30,
+    marginRight: 30,
     color: 'black',
     fontSize: 17,
     height: 36,
@@ -165,12 +171,41 @@ Styles.input = StyleSheet.create({
     marginBottom: 5,
     backgroundColor: 'white',
   },
+  textboxDetails: {
+    backgroundColor: 'white',
+    fontSize: 15,
+    marginLeft: 30,
+    marginRight: 30,
+    height: 150,
+    borderRadius: 5,
+    borderColor: '#323232',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    marginBottom: 15,
+    textAlign: 'left',
+    paddingTop: 10,
+    paddingLeft: 10,
+  },
 });
 
 Styles.btn = StyleSheet.create({
   btn: {
-    margin: 10,
-    backgroundColor: secondaryColor,
+    marginTop: 5,
+    marginBottom: 10,
+    marginRight: 30,
+    marginLeft: 30,
+    backgroundColor: primaryColor,
+    color: 'white',
+    padding: 10,
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
+  accentBtn: {
+    marginTop: 5,
+    marginBottom: 10,
+    marginRight: 30,
+    marginLeft: 30,
+    backgroundColor: accentColor,
     color: 'white',
     padding: 10,
     borderRadius: 5,
@@ -187,21 +222,29 @@ Styles.btn = StyleSheet.create({
 Styles.page = StyleSheet.create({
   pendingTitle: {
     fontFamily: titleFont,
-    fontSize: 39,
-    color: 'gray',
+    backgroundColor: '3d4e5b',
+    paddingTop: 6,
+    paddingBottom: 3,
+    fontSize: 37,
+    color: 'white',
     textAlign: 'center',
   },
   boughtTitle: {
-    margin: 20,
     fontFamily: titleFont,
-    fontSize: 30,
-    color: accentColor,
+    backgroundColor: '3d4e5b',
+    paddingTop: 6,
+    paddingBottom: 3,
+    fontSize: 37,
+    color: 'white',
     textAlign: 'center',
   },
   boughtBy: {
     margin: 20,
+    paddingTop: 15,
     fontFamily: mainFont,
     fontSize: 24,
+    textAlign: 'center',
+    color: secondaryColor,
   },
   boughtDetails: {
     margin: 20,
@@ -226,6 +269,122 @@ Styles.page = StyleSheet.create({
     fontSize: 37,
     color: 'white',
     textAlign: 'center',
+  },
+  priceBox: {
+    flexDirection: 'column',
+    marginTop: 20,
+    marginLeft: 100,
+    marginRight: 100,
+    height: 150,
+    borderRadius: 5,
+    backgroundColor: primaryColor,
+    borderColor: primaryColor,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    paddingTop: 10,
+    paddingLeft: 10,
+  },
+  priceText: {
+    paddingTop: 15,
+    paddingBottom: 9,
+    fontSize: 15,
+    color: 'white',
+    textAlign: 'center',
+  },
+  priceAmount: {
+    fontSize: 40,
+    color: 'white',
+    textAlign: 'center',
+  },
+});
+
+Styles.reckoningTotals = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    marginTop: 64,
+    backgroundColor: 'black',
+    opacity: .7,
+    padding: 10,
+  },
+
+  name: {
+    flex: .6,
+    alignItems: 'center',
+    alignSelf: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+
+  nameText: {
+    alignSelf: 'center',
+    fontSize: 24,
+    marginBottom: 0,
+  },
+
+  row: {
+    flexDirection: 'row',
+    marginLeft: 6,
+    marginRight: 6,
+    marginBottom: 6,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingTop: 9,
+    paddingBottom: 7,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'black',
+    backgroundColor: 'white',
+  },
+
+  text: {
+
+  },
+
+  numbers: {
+    margin: 3,
+  },
+
+  number: {
+    fontSize: 21,
+  },
+
+  numbersContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+
+  contributed: {
+    textAlign: 'right',
+  },
+
+  owes: {
+    color: 'red',
+    alignSelf: 'center',
+    textAlign: 'right',
+  },
+
+  owed: {
+    color: 'green',
+    alignSelf: 'center',
+    textAlign: 'right',
+  },
+});
+
+Styles.reckoningPayments = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    marginTop: 64,
+  },
+
+  list: {
+    flex: 6,
+    height: 450,
+  },
+
+  button: {
+    flex: 1,
   },
 });
 

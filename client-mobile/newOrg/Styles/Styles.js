@@ -205,6 +205,26 @@ Styles.page = StyleSheet.create({
   },
 });
 
+Styles.reckoningTotals = StyleSheet.create({
+  name: {
+    flex: .6,
+  },
+
+  numbersContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'center',
+  },
+
+  numbers: {
+
+  },
+});
+
+Styles.reckoningPayments = StyleSheet.create({
+
+});
+
 Styles.list = StyleSheet.create({
   container: {
     flex: 1,

@@ -60,6 +60,7 @@ var ItemList = React.createClass({
             />
             <TouchableHighlight
               style={Styles.btn.floatBtn}
+              underlayColor={'transparent'}
               onPress={this.props.gotoItemAddView} >
               <Icon name='ios-plus' size={70} color={Styles.secondaryColor} />
             </TouchableHighlight>
@@ -70,10 +71,10 @@ var ItemList = React.createClass({
   },
 
   renderRow(item) {
-
     return (
         <TouchableHighlight
           style={Styles.list.rowContainer}
+          underlayColor={Styles.listRowIsTouchedColor}
           onPress={() => this.props.gotoItemDetailsView(item)} >
           <View style={Styles.list.row}>
             <Text style={Styles.list.label}>{item.description}</Text>

@@ -25,6 +25,7 @@ var ReckoningList = React.createClass({
     return (
       <TouchableHighlight
         style={Styles.list.rowContainer}
+        underlayColor={Styles.listRowIsTouchedColor}
         onPress={() => this.props.gotoReckoningDetailsView(reckoning)} >
         <View style={Styles.list.row}>
           <Text style={Styles.list.label}>{Dates(reckoning.date.toString())}</Text>

@@ -47,6 +47,7 @@ var NavRedux = React.createClass({
 
       return (<TouchableHighlight
                 style={{marginTop: 8, marginLeft: 15, width:100}}
+                underlayColor={'transparent'}
                 onPress={() => {
                 if (index > 0) {
                   navigator.pop();

@@ -106,6 +106,11 @@ Styles.default = StyleSheet.create({
     marginBottom: 8,
     textAlign: 'center',
   },
+  text: {
+    fontFamily: mainFont,
+    fontSize: 18,
+    textAlign: 'left',
+  },
 });
 
 Styles.alert = StyleSheet.create({
@@ -267,6 +272,98 @@ Styles.page = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
   },
+});
+
+Styles.reckoningTotals = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    marginTop: 64,
+    backgroundColor: 'black',
+    opacity: .7,
+    padding: 10,
+  },
+
+  name: {
+    flex: .6,
+    alignItems: 'center',
+    alignSelf: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+
+  nameText: {
+    alignSelf: 'center',
+    fontSize: 24,
+    marginBottom: 0,
+  },
+
+  row: {
+    flexDirection: 'row',
+    marginLeft: 6,
+    marginRight: 6,
+    marginBottom: 6,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingTop: 9,
+    paddingBottom: 7,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'black',
+    backgroundColor: 'white',
+  },
+
+  text: {
+
+  },
+
+  numbers: {
+    margin: 3,
+  },
+
+  number: {
+    fontSize: 21,
+  },
+
+  numbersContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+
+  contributed: {
+    textAlign: 'right',
+  },
+
+  owes: {
+    color: 'red',
+    alignSelf: 'center',
+    textAlign: 'right',
+  },
+
+  owed: {
+    color: 'green',
+    alignSelf: 'center',
+    textAlign: 'right',
+  },
+});
+
+Styles.reckoningPayments = StyleSheet.create({
+
+  container: {
+    flexDirection: 'column',
+    marginTop: 64,
+  },
+
+  list: {
+    flex: 6,
+    height: 450,
+  },
+
+  button: {
+    flex: 1,
+  },
+
 });
 
 Styles.list = StyleSheet.create({

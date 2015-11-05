@@ -8,10 +8,14 @@ var accentColor = '#E65100';
 var secondaryColor = '#546E7A';
 // var neutralColor = 'rgb(92, 87, 93)';
 var mainFont = 'Heiti TC';
+var titleFont = 'Josefin Sans';
+var kneadFont = 'Lobster';
 
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;
 Styles.mainFont = mainFont;
+Styles.titleFont = titleFont;
+Styles.kneadFont = kneadFont;
 
 var imageURIs = [
   'https://s-media-cache-ak0.pinimg.com/736x/31/de/02/31de023159a3cc9b021c7331e4359738.jpg',
@@ -36,7 +40,6 @@ var imageURIs = [
   'http://blogof.francescomugnai.com/wp-content/uploads/2014/06/door_cool.jpg',
   'http://blogof.francescomugnai.com/wp-content/uploads/2014/06/red.jpg',
   'http://blogof.francescomugnai.com/wp-content/uploads/2014/06/metz.jpg',
-
 ];
 
 Styles.imageURI = imageURIs[Math.floor(Math.random() * imageURIs.length)];
@@ -76,9 +79,15 @@ Styles.default = StyleSheet.create({
     // backgroundColor: primaryColor,
   },
   title: {
-    fontFamily: mainFont,
+    fontFamily: titleFont,
     fontSize: 50,
     fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+  },
+  knead: {
+    fontFamily: kneadFont,
+    fontSize: 50,
     color: 'white',
     textAlign: 'center',
   },
@@ -162,16 +171,17 @@ Styles.btn = StyleSheet.create({
 
 Styles.page = StyleSheet.create({
   pendingTitle: {
-    fontFamily: mainFont,
+    fontFamily: titleFont,
     fontSize: 39,
     color: 'gray',
     textAlign: 'center',
   },
   boughtTitle: {
     margin: 20,
-    fontFamily: mainFont,
+    fontFamily: titleFont,
     fontSize: 30,
     color: primaryColor,
+    textAlign: 'center',
   },
   boughtBy: {
     margin: 20,

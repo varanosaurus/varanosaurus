@@ -32,6 +32,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		85F270B31BEACE8900118E29 /* JosefinSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85F270B11BEACE8900118E29 /* JosefinSans-Regular.ttf */; settings = {ASSET_TAGS = (); }; };
+		85F270B41BEACE8900118E29 /* Lobster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85F270B21BEACE8900118E29 /* Lobster-Regular.ttf */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +154,8 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		85F270B11BEACE8900118E29 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-Regular.ttf"; path = "../../../../Downloads/JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
+		85F270B21BEACE8900118E29 /* Lobster-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lobster-Regular.ttf"; path = "../../../../Downloads/Lobster-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -339,6 +343,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				85F270B11BEACE8900118E29 /* JosefinSans-Regular.ttf */,
+				85F270B21BEACE8900118E29 /* Lobster-Regular.ttf */,
 				07CC6AD41BE4663000CA9DEA /* Fonts */,
 				13B07FAE1A68108700A75B9A /* Knead */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -572,6 +578,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07CC6AE31BE4663000CA9DEA /* Octicons.ttf in Resources */,
+				85F270B31BEACE8900118E29 /* JosefinSans-Regular.ttf in Resources */,
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				07CC6AE01BE4663000CA9DEA /* Foundation.ttf in Resources */,
 				07CC6AE11BE4663000CA9DEA /* Ionicons.ttf in Resources */,
@@ -580,6 +587,7 @@
 				07CC6AE41BE4663000CA9DEA /* Zocial.ttf in Resources */,
 				07CC6AE21BE4663000CA9DEA /* MaterialIcons.ttf in Resources */,
 				07CC6ADE1BE4663000CA9DEA /* EvilIcons.ttf in Resources */,
+				85F270B41BEACE8900118E29 /* Lobster-Regular.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				07CC6ADF1BE4663000CA9DEA /* FontAwesome.ttf in Resources */,
 			);

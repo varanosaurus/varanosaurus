@@ -75,10 +75,7 @@ var PendingItemDetails = React.createClass({
         <View style={Styles.default.container}>
           <Text style={Styles.page.pendingTitle} style={stylesheet.title}>{this.props.item.description}</Text>
           <Text style={Styles.input.textboxLabel} style={stylesheet.requestedBy}>Requested by: {this.props.creator.username}</Text>
-          <View style={stylesheet.textboxField}>
-            <Text style={Styles.input.textboxLabel} style={stylesheet.text} placeholder='Add notes...'>Add details here...{this.state.details}</Text>
-          </View>
-          <Button onPress={this.edit} style={Styles.btn.btn} style={stylesheet.btn}>Edit details</Button>
+            <TextInput style={Styles.input.textboxLabel} style={stylesheet.textboxField} keyboardType='default'multiline='true' placeholder='Tap to add notes...' />
           <Button onPress={this.buy} style={Styles.btn.btn} style={stylesheet.btn}>Mark as bought</Button>
           <Button onPress={this.browse} style={Styles.btn.btn} style={stylesheet.amazonBtn}>Search {this.props.item.description} on Amazon</Button>
         </View>
@@ -87,7 +84,7 @@ var PendingItemDetails = React.createClass({
     } else if (this.state.isEditing && !this.state.isBuying) {
       return (
         <View style={Styles.default.container}>
-          <Text style={Styles.page.pendingTitle}>Product: {this.props.item.description}</Text>
+          <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
           <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username} </Text>
           <Text style={Styles.input.textboxLabel}>Details: {this.state.details}</Text>
           <TextInput
@@ -108,7 +105,7 @@ var PendingItemDetails = React.createClass({
     } else if (!this.state.isEditing && this.state.isBuying) {
       return (
         <View style={Styles.default.container}>
-          <Text style={Styles.page.pendingTitle}>Product: {this.props.item.description}</Text>
+          <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
           <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username} </Text>
           <Text style={Styles.input.textboxLabel}>Details: {this.state.details} </Text>
           <TextInput
@@ -133,25 +130,31 @@ var PendingItemDetails = React.createClass({
 var stylesheet = StyleSheet.create({
   title: {
     backgroundColor: '3d4e5b',
-    fontSize: 39,
+    paddingTop: 3,
+    paddingBottom: 3,
+    fontSize: 37,
     color: 'white',
     textAlign: 'center',
   },
   requestedBy: {
-    color: 'grey',
+    color: '3d4e5b',
     textAlign: 'center',
-    paddingTop: 7,
+    paddingTop: 15,
     paddingBottom: 15,
   },
   textboxField: {
-    marginLeft: 10,
-    marginRight: 10,
-    height: 100,
-    borderRadius: 10,
-    borderColor: 'grey',
+    fontSize: 15,
+    marginLeft: 30,
+    marginRight: 30,
+    height: 150,
+    borderRadius: 5,
+    borderColor: '#323232',
     borderStyle: 'solid',
     borderWidth: 1,
-    marginBottom: 10,
+    marginBottom: 15,
+    textAlign: 'left',
+    paddingTop: 10,
+    paddingLeft: 10,
   },
   text: {
     color: 'grey',
@@ -160,16 +163,20 @@ var stylesheet = StyleSheet.create({
   amazonBtn: {
     margin: 10,
     padding: 10,
-    borderRadius: 20,
+    borderRadius: 5,
     backgroundColor: 'cc5251',
     color: 'white',
+    marginRight: 30,
+    marginLeft: 30,
   },
   btn: {
     margin: 10,
     backgroundColor: '899ea3',
     color: 'white',
     padding: 10,
-    borderRadius: 20,
+    marginRight: 30,
+    marginLeft: 30,
+    borderRadius: 5,
   },
 
 });

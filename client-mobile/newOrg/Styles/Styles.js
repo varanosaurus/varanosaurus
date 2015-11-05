@@ -3,7 +3,7 @@ var {StyleSheet} = require('react-native');
 
 var Styles = {};
 
-var primaryColor = '#899EA3';
+var primaryColor = '#A6B6B9';
 var accentColor = '#CC5251';
 var secondaryColor = '#323232';
 // var neutralColor = 'rgb(92, 87, 93)';

@@ -24,20 +24,18 @@ var UserTotals = React.createClass({
           return (
             <View style={Styles.list.row} key={i}>
               <View style={Styles.reckoningTotals.name}>
-                <Text style={Styles.default.label}>{userData.username} </Text>
+                <Text style={[Styles.default.label, Styles.reckoningTotals.nameText]}>{userData.username} </Text>
               </View>
               <View style={Styles.reckoningTotals.numbersContainer}>
 
                 <View style={Styles.reckoningTotals.numbers}>
-                  <Text style={Styles.default.label}>
-                    contributed ${centsToPriceString(userData.userToReckoning.contribution)}
+                  <Text style={[Styles.default.text, Styles.reckoningTotals.contributed]}>
+                    contributed <Text style={Styles.reckoningTotals.number}>${centsToPriceString(userData.userToReckoning.contribution)}</Text>
                   </Text>
                 </View>
 
                 <View style={Styles.reckoningTotals.numbers}>
-                  <Text style={Styles.default.label}>
                     {this.getOwedText(userData.userToReckoning.debt)}
-                  </Text>
                 </View>
 
               </View>
@@ -54,11 +52,11 @@ var UserTotals = React.createClass({
 
   getOwedText(debt) {
     if (debt > 0) {
-      return <Text style={Styles.default.label}>and owes ${centsToPriceString(debt)}</Text>;
+      return <Text style={[Styles.default.text, Styles.reckoningTotals.owes]}>and owes <Text style={Styles.reckoningTotals.number}>${centsToPriceString(debt)}</Text></Text>;
     } else if (debt < 0) {
-      return <Text style={Styles.default.label}>and is owed ${centsToPriceString(Math.abs(debt))}</Text>;
+      return <Text style={[Styles.default.text, Styles.reckoningTotals.owed]}>and is owed <Text style={Styles.reckoningTotals.number}>${centsToPriceString(Math.abs(debt))}</Text></Text>;
     } else {
-      return <Text style={Styles.default.label}>and is square!</Text>;
+      return <Text style={Styles.default.text}>and is square!</Text>;
     }
   },
 

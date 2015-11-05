@@ -106,6 +106,11 @@ Styles.default = StyleSheet.create({
     marginBottom: 8,
     textAlign: 'center',
   },
+  text: {
+    fontFamily: mainFont,
+    fontSize: 18,
+    textAlign: 'left',
+  },
 });
 
 Styles.alert = StyleSheet.create({
@@ -210,14 +215,43 @@ Styles.reckoningTotals = StyleSheet.create({
     flex: .6,
   },
 
-  numbersContainer: {
-    flexDirection: 'column',
-    flex: 1,
-    alignItems: 'center',
+  nameText: {
+    fontSize: 24,
+    marginBottom: 0,
+  },
+
+  text: {
+
   },
 
   numbers: {
+    margin: 3,
+  },
 
+  number: {
+    fontSize: 21,
+  },
+
+  numbersContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+
+  contributed: {
+    textAlign: 'right',
+  },
+
+  owes: {
+    color: 'red',
+    alignSelf: 'center',
+    textAlign: 'right',
+  },
+
+  owed: {
+    color: 'green',
+    alignSelf: 'center',
+    textAlign: 'right',
   },
 });
 

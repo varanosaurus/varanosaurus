@@ -41,7 +41,7 @@ var ItemList = React.createClass({
           style={Styles.background.belowNavbarArea}>
           <View style={Styles.list.container}>
             <SegmentedControlIOS
-              style={{backgroundColor: 'white'}}
+              style={Styles.segmentedControl.control}
               values={['Pending', 'Bought']}
               selectedIndex={selectedIndex}
               tintColor={Styles.secondaryColor}

@@ -30,6 +30,8 @@ var InviteRoommates = React.createClass({
           source={{uri: Styles.patternURI}}
           style={Styles.background.belowNavbarArea}>
           <View style={Styles.list.container}>
+            <View style={{marginTop: 30}}>
+            </View>
             <TextInput
               style={Styles.input.textboxField}
               keyboardType='default'

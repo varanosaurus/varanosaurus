@@ -31,20 +31,20 @@ var Signup = React.createClass({
               <Text style={Styles.default.knead}>Knead</Text>
               <TextInput
                 keyboardType='default'
-                style={[Styles.input.textboxField, {marginTop: 10}, {color: 'white'}, {borderColor: 'white'}]}
+                style={[Styles.input.textboxField, {marginTop: 10}, {color: 'black'}, {borderColor: 'white'}]}
                 placeholder='username (4-20 characters)'
                 onChangeText={(username) => this.setState({username})}
                 value={this.state.username}
-                placeholderTextColor={'white'}
+                placeholderTextColor={'#cccccc'}
               />
               <TextInput
                 keyboardType='default'
-                style={[Styles.input.textboxField, {color: 'white'}, {borderColor: 'white'}]}
+                style={[Styles.input.textboxField, {color: 'black'}, {borderColor: 'white'}]}
                 placeholder='password (6-28 characters)'
                 secureTextEntry={true}
                 onChangeText={(password) => this.setState({password})}
                 value={this.state.password}
-                placeholderTextColor={'white'}
+                placeholderTextColor={'#cccccc'}
               />
               <Text style={Styles.alert.error}>{this.props.errorHandling}</Text>
               <Button style={Styles.btn.btn} onPress={this.handleSubmit}>

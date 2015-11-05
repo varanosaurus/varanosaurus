@@ -15,7 +15,6 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* KneadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* KneadTests.m */; };
 		078C7B341BEAD7D500162AA2 /* JosefinSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 078C7B321BEAD7D500162AA2 /* JosefinSans-Regular.ttf */; };
-		078C7B351BEAD7D500162AA2 /* Lobster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 078C7B331BEAD7D500162AA2 /* Lobster-Regular.ttf */; };
 		07CC6ADD1BE4663000CA9DEA /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07CC6AD51BE4663000CA9DEA /* Entypo.ttf */; };
 		07CC6ADE1BE4663000CA9DEA /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07CC6AD61BE4663000CA9DEA /* EvilIcons.ttf */; };
 		07CC6ADF1BE4663000CA9DEA /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07CC6AD71BE4663000CA9DEA /* FontAwesome.ttf */; };
@@ -136,7 +135,6 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* KneadTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KneadTests.m; sourceTree = "<group>"; };
 		078C7B321BEAD7D500162AA2 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-Regular.ttf"; path = "../../../../../Downloads/JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
-		078C7B331BEAD7D500162AA2 /* Lobster-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lobster-Regular.ttf"; path = "../../../../../Downloads/Lobster-Regular.ttf"; sourceTree = "<group>"; };
 		07CC6AD51BE4663000CA9DEA /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		07CC6AD61BE4663000CA9DEA /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		07CC6AD71BE4663000CA9DEA /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };

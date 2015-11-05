@@ -3,9 +3,9 @@ var {StyleSheet} = require('react-native');
 
 var Styles = {};
 
-var primaryColor = '#CFD8DC';
-var accentColor = '#E65100';
-var secondaryColor = '#546E7A';
+var primaryColor = '#899EA3';
+var accentColor = '#CC5251';
+var secondaryColor = '#323232';
 // var neutralColor = 'rgb(92, 87, 93)';
 var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
@@ -113,6 +113,7 @@ Styles.alert = StyleSheet.create({
     fontFamily: mainFont,
     fontSize: 14,
     marginLeft: 10,
+    marginTop: 6,
     textAlign: 'center',
     color: 'white',
   },
@@ -136,15 +137,15 @@ Styles.input = StyleSheet.create({
   textboxLabel: {
     fontFamily: mainFont,
     fontSize: 15,
-    color: primaryColor,
+    color: secondaryColor,
     marginLeft: 10,
     marginTop: 8,
     marginBottom: 8,
     textAlign: 'center',
   },
   textboxField: {
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 30,
+    marginRight: 30,
     color: 'black',
     fontSize: 17,
     height: 36,
@@ -155,12 +156,41 @@ Styles.input = StyleSheet.create({
     marginBottom: 5,
     backgroundColor: 'white',
   },
+  textboxDetails: {
+    backgroundColor: 'white',
+    fontSize: 15,
+    marginLeft: 30,
+    marginRight: 30,
+    height: 150,
+    borderRadius: 5,
+    borderColor: '#323232',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    marginBottom: 15,
+    textAlign: 'left',
+    paddingTop: 10,
+    paddingLeft: 10,
+  },
 });
 
 Styles.btn = StyleSheet.create({
   btn: {
-    margin: 10,
-    backgroundColor: secondaryColor,
+    marginTop: 5,
+    marginBottom: 10,
+    marginRight: 30,
+    marginLeft: 30,
+    backgroundColor: primaryColor,
+    color: 'white',
+    padding: 10,
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
+  accentBtn: {
+    marginTop: 5,
+    marginBottom: 10,
+    marginRight: 30,
+    marginLeft: 30,
+    backgroundColor: accentColor,
     color: 'white',
     padding: 10,
     borderRadius: 5,
@@ -177,21 +207,29 @@ Styles.btn = StyleSheet.create({
 Styles.page = StyleSheet.create({
   pendingTitle: {
     fontFamily: titleFont,
-    fontSize: 39,
-    color: 'gray',
+    backgroundColor: '3d4e5b',
+    paddingTop: 6,
+    paddingBottom: 3,
+    fontSize: 37,
+    color: 'white',
     textAlign: 'center',
   },
   boughtTitle: {
-    margin: 20,
     fontFamily: titleFont,
-    fontSize: 30,
-    color: primaryColor,
+    backgroundColor: '3d4e5b',
+    paddingTop: 6,
+    paddingBottom: 3,
+    fontSize: 37,
+    color: 'white',
     textAlign: 'center',
   },
   boughtBy: {
     margin: 20,
+    paddingTop: 15,
     fontFamily: mainFont,
     fontSize: 24,
+    textAlign: 'center',
+    color: secondaryColor,
   },
   boughtDetails: {
     margin: 20,
@@ -202,6 +240,32 @@ Styles.page = StyleSheet.create({
     margin: 20,
     fontFamily: mainFont,
     fontSize: 70,
+  },
+  priceBox: {
+    flexDirection: 'column',
+    marginTop: 20,
+    marginLeft: 100,
+    marginRight: 100,
+    height: 150,
+    borderRadius: 5,
+    backgroundColor: primaryColor,
+    borderColor: primaryColor,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    paddingTop: 10,
+    paddingLeft: 10,
+  },
+  priceText: {
+    paddingTop: 15,
+    paddingBottom: 9,
+    fontSize: 15,
+    color: 'white',
+    textAlign: 'center',
+  },
+  priceAmount: {
+    fontSize: 40,
+    color: 'white',
+    textAlign: 'center',
   },
 });
 

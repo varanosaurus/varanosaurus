@@ -8,6 +8,7 @@ var {
   View,
   Text,
   TextInput,
+  Image,
 } = React;
 
 var InviteRoommates = React.createClass({
@@ -24,28 +25,34 @@ var InviteRoommates = React.createClass({
 
   render() {
     return (
-      <View style={Styles.default.container}>
-        <TextInput
-          style={Styles.input.textboxField}
-          keyboardType='default'
-          placeholder="roommate's username"
-          onChangeText={(input) => this.setState({input: input})}
-          value={this.state.input}
-        />
-        <Text style={Styles.alert.error}>{this.state.error}</Text>
-        <Button onPress={this.submitRoommate} style={Styles.btn.btn}>Invite Roommate</Button>
+      <View style={{flex: 1}}>
+        <Image
+          source={{uri: Styles.patternURI}}
+          style={Styles.background.belowNavbarArea}>
+          <View style={Styles.list.container}>
+            <TextInput
+              style={Styles.input.textboxField}
+              keyboardType='default'
+              placeholder="roommate's username"
+              onChangeText={(input) => this.setState({input: input})}
+              value={this.state.input}
+            />
+            <Text style={Styles.alert.error}>{this.state.error}</Text>
+            <Button onPress={this.submitRoommate} style={Styles.btn.btn}>Invite Roommate</Button>
 
-        <Text>Pending invitations to:</Text>
-        {
-          this.state.inputField.map(function(roommateUsername, i) {
-            return (
-              <View key={i}>
-                <Text>{roommateUsername}</Text>
-              </View>
-            );
-          })
-        }
-      </View>
+            <Text>Pending invitations to:</Text>
+            {
+              this.state.inputField.map(function(roommateUsername, i) {
+                return (
+                  <View key={i}>
+                    <Text>{roommateUsername}</Text>
+                  </View>
+                );
+              })
+            }
+          </View>
+      </Image>
+    </View>
     );
   },
 

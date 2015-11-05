@@ -6,8 +6,8 @@ var Styles = require('../../Styles/Styles');
 
 var {
   View,
-  ScrollView,
   Text,
+  Image,
 } = React;
 
 var UserTotals = React.createClass({
@@ -15,19 +15,25 @@ var UserTotals = React.createClass({
   render() {
 
     return (
-      <ScrollView style={Styles.default.container}>
-        {this.props.users.map((userData, i) => {
+      <View style={{flex: 1}}>
+        <Image
+          source={{uri: Styles.patternURI}}
+          style={Styles.background.belowNavbarArea}>
+          <View style={Styles.list.container}>
+            {this.props.users.map((userData, i) => {
 
-          return (
-            <View key={i}>
-              <Text style={Styles.default.label}>{userData.username} </Text>
-              <Text style={Styles.default.label}>contributed ${centsToPriceString(userData.userToReckoning.contribution)} to the total </Text>
-              {this.getOwedText(userData.userToReckoning.debt)}
-            </View>
-          );
+              return (
+                <View key={i}>
+                  <Text style={Styles.default.label}>{userData.username} </Text>
+                  <Text style={Styles.default.label}>contributed ${centsToPriceString(userData.userToReckoning.contribution)} to the total </Text>
+                  {this.getOwedText(userData.userToReckoning.debt)}
+                </View>
+              );
 
-        })}
-      </ScrollView>
+            })}
+          </View>
+        </Image>
+      </View>
     );
 
   },

@@ -37,35 +37,34 @@ var ItemList = React.createClass({
     return (
       <View style={{flex: 1}}>
         <Image
-          source={{uri: 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg'}}
+          source={{uri: Styles.patternURI}}
           style={Styles.background.belowNavbarArea}>
-      <View style={Styles.list.container}>
-        <SegmentedControlIOS
-          style={{backgroundColor: 'white'}}
-          values={['Pending', 'Bought']}
-          selectedIndex={selectedIndex}
-          tintColor={Styles.secondaryColor}
-          onValueChange={(val) => {
-            if (val === 'Pending') {
-              this.props.gotoPendingItemsList();
-            } else if (val === 'Bought') {
-              this.props.gotoBoughtItemsList();
-            }
-          }} />
-        <ListView
-          dataSource={dataSource}
-          renderRow={this.renderRow}
-          automaticallyAdjustcontentInsets={false}
-          showVerticalScrollIndicator={true}
-        />
-        <TouchableHighlight
-          underlayColor='white'
-          style={Styles.btn.floatBtn}
-          onPress={this.props.gotoItemAddView} >
-          <Icon name='ios-plus' size={70} color={Styles.secondaryColor} />
-        </TouchableHighlight>
-      </View>
-      </Image>
+          <View style={Styles.list.container}>
+            <SegmentedControlIOS
+              style={{backgroundColor: 'white'}}
+              values={['Pending', 'Bought']}
+              selectedIndex={selectedIndex}
+              tintColor={Styles.secondaryColor}
+              onValueChange={(val) => {
+                if (val === 'Pending') {
+                  this.props.gotoPendingItemsList();
+                } else if (val === 'Bought') {
+                  this.props.gotoBoughtItemsList();
+                }
+              }} />
+            <ListView
+              dataSource={dataSource}
+              renderRow={this.renderRow}
+              automaticallyAdjustcontentInsets={false}
+              showVerticalScrollIndicator={true}
+            />
+            <TouchableHighlight
+              style={Styles.btn.floatBtn}
+              onPress={this.props.gotoItemAddView} >
+              <Icon name='ios-plus' size={70} color={Styles.secondaryColor} />
+            </TouchableHighlight>
+          </View>
+        </Image>
       </View>
     );
   },
@@ -74,10 +73,13 @@ var ItemList = React.createClass({
 
     return (
         <TouchableHighlight
-          style={Styles.list.row}
+          style={Styles.list.rowContainer}
           onPress={() => this.props.gotoItemDetailsView(item)} >
-          <View>
-            <Text style={Styles.list.label}>{item.description}<Icon name='ios-arrow-right' size={20} color={Styles.accentColor} /></Text>
+          <View style={Styles.list.row}>
+            <Text style={Styles.list.label}>{item.description}</Text>
+            <View style={Styles.list.rightContainer}>
+              <Icon name='ios-arrow-right' size={20} color={Styles.accentColor} />
+            </View>
           </View>
         </TouchableHighlight>
     );

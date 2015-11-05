@@ -42,6 +42,8 @@ var imageURIs = [
   'http://blogof.francescomugnai.com/wp-content/uploads/2014/06/metz.jpg',
 ];
 
+Styles.patternURI = 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg';
+
 Styles.imageURI = imageURIs[Math.floor(Math.random() * imageURIs.length)];
 
 Styles.background = StyleSheet.create({
@@ -162,8 +164,8 @@ Styles.btn = StyleSheet.create({
   },
   floatBtn: {
     position: 'absolute',
-    bottom: 80,
-    right: 20,
+    bottom: 75,
+    right: 25,
     // borderRadius: 35,
   },
 });
@@ -208,16 +210,25 @@ Styles.list = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
+  },
+  rowContainer: {
     marginLeft: 6,
     marginRight: 6,
     marginBottom: 6,
-    padding: 7,
+    paddingLeft: 15,
+    paddingTop: 9,
+    paddingBottom: 7,
     borderWidth: 2,
     borderRadius: 3,
     borderColor: primaryColor,
     backgroundColor: 'white',
+  },
+  rightContainer: {
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingRight: 20,
   },
   label: {
     fontFamily: mainFont,

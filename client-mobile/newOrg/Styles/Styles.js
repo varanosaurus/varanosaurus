@@ -42,6 +42,8 @@ var imageURIs = [
   'http://blogof.francescomugnai.com/wp-content/uploads/2014/06/metz.jpg',
 ];
 
+Styles.patternURI = 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg';
+
 Styles.imageURI = imageURIs[Math.floor(Math.random() * imageURIs.length)];
 
 Styles.background = StyleSheet.create({

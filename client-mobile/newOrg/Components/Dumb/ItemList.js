@@ -37,7 +37,7 @@ var ItemList = React.createClass({
     return (
       <View style={{flex: 1}}>
         <Image
-          source={{uri: 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg'}}
+          source={{uri: Styles.patternURI}}
           style={Styles.background.belowNavbarArea}>
           <View style={Styles.list.container}>
             <SegmentedControlIOS

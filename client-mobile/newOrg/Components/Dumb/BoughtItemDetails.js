@@ -7,17 +7,24 @@ var Icon = require('react-native-vector-icons/Ionicons');
 var {
   View,
   Text,
+  Image,
 } = React;
 
 var BoughtItemDetails = React.createClass({
 
   render() {
     return (
-      <View style={Styles.default.container}>
-        <Text style={Styles.page.boughtTitle}><Icon stype={{margin: 20}} name='shopping-cart' size={50} color="327CCB" /> {this.props.item.description}</Text>
-        <Text style={Styles.page.boughtBy}><Icon stype={{margin: 20}} name='torso' size={50} color="327CCB" /> Requested By: {this.props.creator.username}</Text>
-        <Text style={Styles.page.boughtDetails}><Icon stype={{margin: 20}} name='pricetag-multiple' size={50} color="327CCB" /> Details: {this.props.item.details}</Text>
-        <Text style={Styles.page.boughtDollar}><Icon stype={{margin: 20}} name='credit-card' size={50} color="327CCB" /> $ {centsToPriceString(this.props.item.price)}</Text>
+      <View style={{flex: 1}}>
+        <Image
+          source={{uri: Styles.patternURI}}
+          style={Styles.background.belowNavbarArea}>
+          <View style={Styles.list.container}>
+            <Text style={Styles.page.boughtTitle}><Icon stype={{margin: 20}} name='shopping-cart' size={50} color="327CCB" /> {this.props.item.description}</Text>
+            <Text style={Styles.page.boughtBy}><Icon stype={{margin: 20}} name='torso' size={50} color="327CCB" /> Requested By: {this.props.creator.username}</Text>
+            <Text style={Styles.page.boughtDetails}><Icon stype={{margin: 20}} name='pricetag-multiple' size={50} color="327CCB" /> Details: {this.props.item.details}</Text>
+            <Text style={Styles.page.boughtDollar}><Icon stype={{margin: 20}} name='credit-card' size={50} color="327CCB" /> $ {centsToPriceString(this.props.item.price)}</Text>
+          </View>
+        </Image>
       </View>
     );
   },

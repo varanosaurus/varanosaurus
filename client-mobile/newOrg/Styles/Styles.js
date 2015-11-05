@@ -60,7 +60,7 @@ Styles.background = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   authArea: {
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
     borderRadius: 10,
     margin: 20,
     marginTop: 150,
@@ -163,7 +163,7 @@ Styles.btn = StyleSheet.create({
     backgroundColor: secondaryColor,
     color: 'white',
     padding: 10,
-    borderRadius: 20,
+    borderRadius: 5,
     overflow: 'hidden',
   },
   floatBtn: {

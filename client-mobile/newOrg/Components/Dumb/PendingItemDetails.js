@@ -130,8 +130,8 @@ var PendingItemDetails = React.createClass({
           source={{uri: Styles.patternURI}}
           style={Styles.background.belowNavbarArea}>
           <View style={Styles.list.container}>
-            <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
-            <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username} </Text>
+            <Text style={Styles.page.pendingTitle} style={stylesheet.title}>{this.props.item.description}</Text>
+            <Text style={Styles.input.textboxLabel}>Requested by: {this.props.creator.username} </Text>
             <Text style={Styles.input.textboxLabel}>Details: {this.state.details} </Text>
             <TextInput
               keyboardType='decimal-pad'
@@ -196,6 +196,7 @@ var stylesheet = StyleSheet.create({
     color: 'white',
     marginRight: 30,
     marginLeft: 30,
+    overflow: 'hidden',
   },
   btn: {
     margin: 10,
@@ -205,6 +206,7 @@ var stylesheet = StyleSheet.create({
     marginRight: 30,
     marginLeft: 30,
     borderRadius: 5,
+    overflow: 'hidden',
   },
 
 });

@@ -355,7 +355,7 @@ Styles.reckoningPayments = StyleSheet.create({
     marginTop: 64,
     backgroundColor: 'black',
     opacity: .7,
-    marginBottom: 40,
+    marginBottom: 48,
     paddingTop: 10,
     paddingLeft: 8,
     paddingRight: 8,

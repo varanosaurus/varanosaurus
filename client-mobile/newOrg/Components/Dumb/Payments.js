@@ -28,9 +28,9 @@ var Payments = React.createClass({
           var fromUsername = paymentData.fromUser.username;
 
           return (
-            <View key={i}>
-              <Text style={Styles.default.label}>
-              {fromUsername} owes {toUsername} ${centsToPriceString(paymentData.amount)}
+            <View style={Styles.reckoningPayments.row} key={i}>
+              <Text style={Styles.reckoningPayments.text}>
+              {fromUsername} owes {toUsername} <Text style={Styles.reckoningPayments.amount}>${centsToPriceString(paymentData.amount)}</Text>
               </Text>
 
             </View>

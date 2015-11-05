@@ -5,6 +5,7 @@ var Styles = require('../../Styles/Styles');
 // var Icon = require('react-native-vector-icons/Ionicons');
 
 var {
+  StyleSheet,
   View,
   Text,
   Image,

@@ -182,7 +182,7 @@ Styles.input = StyleSheet.create({
 
 Styles.btn = StyleSheet.create({
   btn: {
-    marginTop: 5,
+    marginTop: 7,
     marginBottom: 10,
     marginRight: 22,
     marginLeft: 22,

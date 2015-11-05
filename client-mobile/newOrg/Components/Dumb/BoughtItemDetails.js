@@ -40,4 +40,3 @@ function centsToPriceString(cents) {
 
 module.exports = BoughtItemDetails;
 
-

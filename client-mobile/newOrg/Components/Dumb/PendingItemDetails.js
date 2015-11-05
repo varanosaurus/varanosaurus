@@ -130,6 +130,7 @@ var PendingItemDetails = React.createClass({
             <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
             <Text style={Styles.input.textboxLabel}>Requested by: {this.props.creator.username} </Text>
             <Text style={Styles.input.textboxLabel}>Details: {this.state.details} </Text>
+            <Text>$</Text>
             <TextInput
               keyboardType='decimal-pad'
               style={Styles.input.textboxField}
@@ -142,7 +143,7 @@ var PendingItemDetails = React.createClass({
               style={Styles.btn.btn}>
               Enter Price
             </Button>
-            <Button onPress={this.cancel} style={Styles.btn.btn}>Cancel</Button>
+            <Button onPress={this.cancel} style={Styles.btn.accentBtn}>Cancel</Button>
           </View>
         </Image>
       </View>

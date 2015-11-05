@@ -59,6 +59,7 @@ var ItemList = React.createClass({
           showVerticalScrollIndicator={true}
         />
         <TouchableHighlight
+          underlayColor='white'
           style={Styles.btn.floatBtn}
           onPress={this.props.gotoItemAddView} >
           <Icon name='ios-plus' size={70} color={Styles.secondaryColor} />

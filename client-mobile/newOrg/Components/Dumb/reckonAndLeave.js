@@ -7,6 +7,7 @@ var Button = require('react-native-button');
 var {
   View,
   Text,
+  Image,
 } = React;
 
 var ReckonAndLeave = React.createClass({
@@ -21,25 +22,37 @@ var ReckonAndLeave = React.createClass({
 
   renderReckoningStats() {
     return (
-      <View style={Styles.default.container}>
-        <Text>
-          Ok, {this.props.username}. Before you go, we crunched your numbers.
-          This month, you contributed ${centsToPriceString(this.props.contribution)} {this.getDebtText()}
-        </Text>
-        <Button style={Styles.btn.btn} onPress={this.props.leaveHousehold}>
-          Got it. Get me outta here!
-        </Button>
+      <View style={{flex: 1}}>
+        <Image
+          source={{uri: Styles.patternURI}}
+          style={Styles.background.belowNavbarArea}>
+          <View style={Styles.list.container}>
+            <Text>
+              Ok, {this.props.username}. Before you go, we crunched your numbers.
+              This month, you contributed ${centsToPriceString(this.props.contribution)} {this.getDebtText()}
+            </Text>
+            <Button style={Styles.btn.btn} onPress={this.props.leaveHousehold}>
+              Got it. Get me outta here!
+            </Button>
+          </View>
+        </Image>
       </View>
     );
   },
 
   renderGoodToGo() {
     return (
-      <View style={Styles.default.container}>
-        <Text>Knead checked, and you're good to go!</Text>
-        <Button style={Styles.btn.btn} onPress={this.props.leaveHousehold}>
-          Later!
-        </Button>
+      <View style={{flex: 1}}>
+        <Image
+          source={{uri: Styles.patternURI}}
+          style={Styles.background.belowNavbarArea}>
+          <View style={Styles.list.container}>
+            <Text>Knead checked, and you're good to go!</Text>
+            <Button style={Styles.btn.btn} onPress={this.props.leaveHousehold}>
+              Later!
+            </Button>
+          </View>
+        </Image>
       </View>
       );
   },

@@ -8,21 +8,27 @@ var {
   StyleSheet,
   View,
   Text,
+  Image,
 } = React;
 
 var BoughtItemDetails = React.createClass({
 
   render() {
     return (
-      <View style={Styles.default.container}>
-        <Text style={Styles.page.boughtTitle} style={stylesheet.title}>{this.props.item.description}</Text>
-        <Text style={Styles.page.boughtBy} style={stylesheet.requestBoughtBy}>Requested by: {this.props.creator.username}</Text>
-        <Text style={Styles.page.boughtBy} style={stylesheet.requestBoughtBy}>Bought by: {this.props.creator.username}</Text>
-        <View style={stylesheet.priceBox}>
-          <Text style={stylesheet.priceText}>Bought for</Text>
-          <Text style={Styles.page.boughtDollar} style={stylesheet.priceAmount}>${centsToPriceString(this.props.item.price)}</Text>
-        </View>
-        <Text style={Styles.page.boughtDetails}>Details: {this.props.item.details}</Text>
+      <View style={{flex: 1}}>
+        <Image
+          source={{uri: Styles.patternURI}}
+          style={Styles.background.belowNavbarArea}>
+          <View style={Styles.default.container}>
+            <Text style={Styles.page.boughtTitle} style={stylesheet.title}>{this.props.item.description}</Text>
+            <Text style={Styles.page.boughtBy} style={stylesheet.requestBoughtBy}>Requested by: {this.props.creator.username}</Text>
+            <View style={stylesheet.priceBox}>
+              <Text style={stylesheet.priceText}>Bought for</Text>
+              <Text style={Styles.page.boughtDollar} style={stylesheet.priceAmount}>${centsToPriceString(this.props.item.price)}</Text>
+            </View>
+            <Text style={Styles.page.boughtDetails}>Details: {this.props.item.details}</Text>
+          </View>
+        </Image>
       </View>
     );
   },
@@ -56,8 +62,8 @@ var stylesheet = StyleSheet.create({
     marginRight: 100,
     height: 150,
     borderRadius: 5,
-    backgroundColor: '#cc5251',
-    borderColor: '#cc5251',
+    backgroundColor: '#899ea3',
+    borderColor: '#899ea3',
     borderStyle: 'solid',
     borderWidth: 1,
     paddingTop: 10,

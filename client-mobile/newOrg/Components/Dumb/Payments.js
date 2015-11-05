@@ -7,32 +7,38 @@ var Button = require('react-native-button');
 
 var {
   View,
-  ScrollView,
   Text,
   LinkingIOS,
+  Image,
 } = React;
 
 var Payments = React.createClass({
 
   render() {
     return (
-      <ScrollView style={Styles.default.container}>
-        {this.props.payments.map((paymentData, i) => {
+      <View style={{flex: 1}}>
+        <Image
+          source={{uri: Styles.patternURI}}
+          style={Styles.background.belowNavbarArea}>
+          <View style={Styles.list.container}>
+            {this.props.payments.map((paymentData, i) => {
 
-          var toUsername = paymentData.toUser.username;
-          var fromUsername = paymentData.fromUser.username;
+              var toUsername = paymentData.toUser.username;
+              var fromUsername = paymentData.fromUser.username;
 
-          return (
-            <View key={i}>
-              <Text style={Styles.default.label}>
-              {fromUsername} owes {toUsername} ${centsToPriceString(paymentData.amount)}
-              </Text>
-              <Button onPress={this.settle} style={Styles.btn.btn}>Pay or Request via Venmo</Button>
-            </View>
-            );
+              return (
+                <View key={i}>
+                  <Text style={Styles.default.label}>
+                  {fromUsername} owes {toUsername} ${centsToPriceString(paymentData.amount)}
+                  </Text>
+                  <Button onPress={this.settle} style={Styles.btn.btn}>Pay or Request via Venmo</Button>
+                </View>
+                );
 
-        })}
-      </ScrollView>
+            })}
+          </View>
+        </Image>
+      </View>
       );
   },
 

@@ -51,7 +51,7 @@ var Signup = React.createClass({
                 Sign Up
               </Button>
               <Text style={Styles.alert.info}>Already have an account?</Text>
-              <Button style={Styles.btn.btn} onPress={this.props.gotoLogin}>
+              <Button style={Styles.btn.accentBtn} onPress={this.props.gotoLogin}>
                 Log in
               </Button>
             </View>

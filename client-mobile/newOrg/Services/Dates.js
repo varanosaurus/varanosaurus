@@ -14,7 +14,6 @@ var months = {
 };
 
 var convertDate = function(date) {
-  console.log('being called with: ', date);
 
   var result;
 
@@ -27,6 +26,6 @@ var convertDate = function(date) {
   result = month + ' ' + day + ' ' + year;
 
   return result;
-}
+};
 
 module.exports = convertDate;

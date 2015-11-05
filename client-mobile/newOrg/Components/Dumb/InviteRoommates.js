@@ -42,16 +42,18 @@ var InviteRoommates = React.createClass({
             <Text style={Styles.alert.error}>{this.state.error}</Text>
             <Button onPress={this.submitRoommate} style={Styles.btn.btn}>Invite Roommate</Button>
 
-            <Text>Pending invitations to:</Text>
-            {
-              this.state.inputField.map(function(roommateUsername, i) {
-                return (
-                  <View key={i}>
-                    <Text>{roommateUsername}</Text>
-                  </View>
-                );
-              })
-            }
+            <View style={{margin: 20, padding: 20, backgroundColor: 'rgba(0,0,0,0.7)', borderRadius: 5}}>
+              <Text style={[Styles.default.subheading, {marginBottom: 15}]}>Pending invitations to:</Text>
+              {
+                this.state.inputField.map(function(roommateUsername, i) {
+                  return (
+                    <View key={i}>
+                      <Text style={[Styles.default.label, {color: 'white'}]}>{roommateUsername}</Text>
+                    </View>
+                  );
+                })
+              }
+            </View>
           </View>
       </Image>
     </View>

@@ -3,6 +3,7 @@
 var React = require('react-native');
 var Styles = require('../../Styles/Styles');
 var Icon = require('react-native-vector-icons/Ionicons');
+var Dates = require('../../Services/Dates');
 
 var {
   ListView,
@@ -26,7 +27,7 @@ var ReckoningList = React.createClass({
         style={Styles.list.rowContainer}
         onPress={() => this.props.gotoReckoningDetailsView(reckoning)} >
         <View style={Styles.list.row}>
-          <Text style={Styles.list.label}>{reckoning.date.toString()}</Text>
+          <Text style={Styles.list.label}>{Dates(reckoning.date.toString())}</Text>
           <View style={Styles.list.rightContainer}>
             <Icon name='ios-arrow-right' size={20} color={Styles.accentColor} />
           </View>

@@ -351,8 +351,14 @@ Styles.reckoningTotals = StyleSheet.create({
 Styles.reckoningPayments = StyleSheet.create({
 
   container: {
-    flexDirection: 'column',
+    // flex: 1,
     marginTop: 64,
+    backgroundColor: 'black',
+    opacity: .7,
+    marginBottom: 40,
+    padding: 10,
+    paddingBottom: 15,
+    flexDirection: 'column',
   },
 
   list: {
@@ -360,8 +366,28 @@ Styles.reckoningPayments = StyleSheet.create({
     height: 450,
   },
 
+  row: {
+    flex: 1,
+    alignSelf: 'center',
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    borderWidth: 0,
+  },
+
+  text: {
+    flex: 1,
+    color: 'black',
+    fontSize: 20,
+  },
+
+  amount: {
+    color: '#FF4500',
+  },
+
   button: {
     flex: 1,
+    backgroundColor: accentColor,
   },
 
 });

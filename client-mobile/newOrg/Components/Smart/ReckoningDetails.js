@@ -24,7 +24,6 @@ var ReckoningDetails = React.createClass({
         </View>
       );
     } else {
-      console.log('in reckdeets, selectedReckoning is: ', this.props.selectedReckoning);
       return <ReckoningTabBar
                 selectedTab={this.props.reckoningDetailsMode}
                 reckoning={this.props.selectedReckoning}

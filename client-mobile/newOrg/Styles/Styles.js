@@ -13,9 +13,12 @@ var kneadFont = 'Lobster';
 
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;
+Styles.listRowIsTouchedColor = '#CFD8DC';
 Styles.mainFont = mainFont;
 Styles.titleFont = titleFont;
 Styles.kneadFont = kneadFont;
+
+Styles.patternURI = 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg';
 
 var imageURIs = [
   'https://s-media-cache-ak0.pinimg.com/736x/31/de/02/31de023159a3cc9b021c7331e4359738.jpg',
@@ -42,8 +45,6 @@ var imageURIs = [
   'http://blogof.francescomugnai.com/wp-content/uploads/2014/06/metz.jpg',
 ];
 
-Styles.patternURI = 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg';
-
 Styles.imageURI = imageURIs[Math.floor(Math.random() * imageURIs.length)];
 
 Styles.background = StyleSheet.create({
@@ -59,7 +60,7 @@ Styles.background = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   authArea: {
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
     borderRadius: 10,
     margin: 20,
     marginTop: 150,
@@ -144,7 +145,7 @@ Styles.input = StyleSheet.create({
   textboxField: {
     marginLeft: 10,
     marginRight: 10,
-    color: '#00000',
+    color: 'black',
     fontSize: 17,
     height: 36,
     padding: 7,
@@ -152,6 +153,7 @@ Styles.input = StyleSheet.create({
     borderColor: secondaryColor,
     borderWidth: 1,
     marginBottom: 5,
+    backgroundColor: 'white',
   },
 });
 
@@ -161,13 +163,14 @@ Styles.btn = StyleSheet.create({
     backgroundColor: secondaryColor,
     color: 'white',
     padding: 10,
-    borderRadius: 20,
+    borderRadius: 5,
+    overflow: 'hidden',
   },
   floatBtn: {
     position: 'absolute',
     bottom: 75,
     right: 25,
-    // borderRadius: 35,
+    overflow: 'hidden',
   },
 });
 

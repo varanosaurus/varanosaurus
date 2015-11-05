@@ -8,6 +8,7 @@ var {
   View,
   Text,
   Image,
+  ScrollView,
 } = React;
 
 var UserTotals = React.createClass({
@@ -15,14 +16,15 @@ var UserTotals = React.createClass({
   render() {
 
     return (
+      <View style={{flex: 1}}>
       <Image
         source={{uri: Styles.patternURI}}
         style={Styles.background.belowNavbarArea}>
-      <ScrollView style={Styles.list.container}>
+      <ScrollView style={Styles.reckoningTotals.container}>
         {this.props.users.map((userData, i) => {
 
           return (
-            <View style={Styles.list.row} key={i}>
+            <View style={Styles.reckoningTotals.row} key={i}>
               <View style={Styles.reckoningTotals.name}>
                 <Text style={[Styles.default.label, Styles.reckoningTotals.nameText]}>{userData.username} </Text>
               </View>
@@ -46,6 +48,7 @@ var UserTotals = React.createClass({
         })}
       </ScrollView>
       </Image>
+      </View>
     );
 
   },

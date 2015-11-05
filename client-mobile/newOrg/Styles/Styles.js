@@ -211,13 +211,42 @@ Styles.page = StyleSheet.create({
 });
 
 Styles.reckoningTotals = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    marginTop: 64,
+    backgroundColor: 'black',
+    opacity: .7,
+    padding: 10,
+  },
+
   name: {
     flex: .6,
+    alignItems: 'center',
+    alignSelf: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
 
   nameText: {
+    alignSelf: 'center',
     fontSize: 24,
     marginBottom: 0,
+  },
+
+  row: {
+    flexDirection: 'row',
+    marginLeft: 6,
+    marginRight: 6,
+    marginBottom: 6,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingTop: 9,
+    paddingBottom: 7,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'black',
+    backgroundColor: 'white',
   },
 
   text: {

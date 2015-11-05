@@ -10,6 +10,7 @@ var {
   Text,
   LinkingIOS,
   Image,
+  ScrollView,
 } = React;
 
 var Payments = React.createClass({

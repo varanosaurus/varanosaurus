@@ -64,8 +64,8 @@ Styles.background = StyleSheet.create({
     borderRadius: 7,
     paddingBottom: 14,
     marginTop: 150,
-    marginRight: 38,
-    marginLeft: 38,
+    marginRight: 30,
+    marginLeft: 30,
   },
 });
 

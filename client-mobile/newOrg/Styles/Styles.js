@@ -11,6 +11,7 @@ var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
 var kneadFont = 'Lobster';
 
+Styles.addItemButtonIconColor = secondaryColor;
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;
 Styles.listRowIsTouchedColor = '#CFD8DC';
@@ -106,6 +107,15 @@ Styles.default = StyleSheet.create({
     marginBottom: 8,
     textAlign: 'center',
   },
+  leftContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rightContainer: {
+    alignItems: 'flex-end',
+    paddingRight: 20,
+  },
 });
 
 Styles.alert = StyleSheet.create({
@@ -185,7 +195,7 @@ Styles.page = StyleSheet.create({
     margin: 20,
     fontFamily: titleFont,
     fontSize: 30,
-    color: primaryColor,
+    color: accentColor,
     textAlign: 'center',
   },
   boughtBy: {
@@ -202,6 +212,20 @@ Styles.page = StyleSheet.create({
     margin: 20,
     fontFamily: mainFont,
     fontSize: 70,
+  },
+  boughtItemDetailsContainer: {
+    margin: 20,
+    padding: 20,
+    borderRadius: 5,
+    backgroundColor: primaryColor,
+  },
+  pageTitle: {
+    backgroundColor: accentColor,
+    paddingTop: 3,
+    paddingBottom: 3,
+    fontSize: 37,
+    color: 'white',
+    textAlign: 'center',
   },
 });
 

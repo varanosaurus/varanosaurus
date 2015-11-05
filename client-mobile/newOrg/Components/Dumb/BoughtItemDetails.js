@@ -19,14 +19,16 @@ var BoughtItemDetails = React.createClass({
         <Image
           source={{uri: Styles.patternURI}}
           style={Styles.background.belowNavbarArea}>
-          <View style={Styles.default.container}>
+          <View style={{flex: 1, marginTop: 65, backgroundColor: 'rgba(0,0,0,0.7)'}}>
             <Text style={Styles.page.boughtTitle} style={stylesheet.title}>{this.props.item.description}</Text>
             <Text style={Styles.page.boughtBy} style={stylesheet.requestBoughtBy}>Requested by: {this.props.creator.username}</Text>
             <View style={stylesheet.priceBox}>
               <Text style={stylesheet.priceText}>Bought for</Text>
               <Text style={Styles.page.boughtDollar} style={stylesheet.priceAmount}>${centsToPriceString(this.props.item.price)}</Text>
             </View>
-            <Text style={Styles.page.boughtDetails}>Details: {this.props.item.details}</Text>
+            <View style={Styles.page.boughtItemDetailsContainer}>
+              <Text style={Styles.page.boughtDetails}>Details: {this.props.item.details}</Text>
+            </View>
           </View>
         </Image>
       </View>
@@ -43,7 +45,7 @@ module.exports = BoughtItemDetails;
 
 var stylesheet = StyleSheet.create({
   title: {
-    backgroundColor: '3d4e5b',
+    backgroundColor: '#E65100',
     paddingTop: 3,
     paddingBottom: 3,
     fontSize: 37,
@@ -62,7 +64,7 @@ var stylesheet = StyleSheet.create({
     marginRight: 100,
     height: 150,
     borderRadius: 5,
-    backgroundColor: '#899ea3',
+    backgroundColor: '#00E676',
     borderColor: '#899ea3',
     borderStyle: 'solid',
     borderWidth: 1,

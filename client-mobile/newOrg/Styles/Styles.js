@@ -70,7 +70,6 @@ Styles.background = StyleSheet.create({
 
 Styles.navbar = StyleSheet.create({
   container: {
-    borderBottomWidth: 0,
     borderColor: secondaryColor,
     backgroundColor: primaryColor,
   },
@@ -220,6 +219,15 @@ Styles.btn = StyleSheet.create({
 });
 
 Styles.page = StyleSheet.create({
+  pageTitle: {
+    fontFamily: titleFont,
+    backgroundColor: accentColor,
+    paddingTop: 3,
+    paddingBottom: 3,
+    fontSize: 37,
+    color: 'white',
+    textAlign: 'center',
+  },
   pendingTitle: {
     fontFamily: titleFont,
     backgroundColor: '3d4e5b',
@@ -261,14 +269,6 @@ Styles.page = StyleSheet.create({
     padding: 20,
     borderRadius: 5,
     backgroundColor: primaryColor,
-  },
-  pageTitle: {
-    backgroundColor: accentColor,
-    paddingTop: 3,
-    paddingBottom: 3,
-    fontSize: 37,
-    color: 'white',
-    textAlign: 'center',
   },
   priceBox: {
     flexDirection: 'column',

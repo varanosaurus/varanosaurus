@@ -20,7 +20,7 @@ var BoughtItemDetails = React.createClass({
           source={{uri: Styles.patternURI}}
           style={Styles.background.belowNavbarArea}>
           <View style={{flex: 1, marginTop: 65, backgroundColor: 'rgba(0,0,0,0.7)'}}>
-            <Text style={Styles.page.boughtTitle} style={stylesheet.title}>{this.props.item.description}</Text>
+            <Text style={Styles.page.pageTitle}>{this.props.item.description}</Text>
             <Text style={Styles.page.boughtBy} style={stylesheet.requestBoughtBy}>Requested by: {this.props.creator.username}</Text>
             <View style={stylesheet.priceBox}>
               <Text style={stylesheet.priceText}>Bought for</Text>

@@ -61,9 +61,11 @@ Styles.background = StyleSheet.create({
   },
   authArea: {
     backgroundColor: 'rgba(0,0,0,0.5)',
-    borderRadius: 10,
-    margin: 20,
+    borderRadius: 7,
+    paddingBottom: 14,
     marginTop: 150,
+    marginRight: 30,
+    marginLeft: 30,
   },
 });
 
@@ -149,8 +151,8 @@ Styles.input = StyleSheet.create({
     textAlign: 'center',
   },
   textboxField: {
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 22,
+    marginRight: 22,
     color: 'black',
     fontSize: 17,
     height: 36,
@@ -164,8 +166,8 @@ Styles.input = StyleSheet.create({
   textboxDetails: {
     backgroundColor: 'white',
     fontSize: 15,
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 22,
+    marginRight: 22,
     height: 150,
     borderRadius: 5,
     borderColor: '#323232',
@@ -182,8 +184,8 @@ Styles.btn = StyleSheet.create({
   btn: {
     marginTop: 5,
     marginBottom: 10,
-    marginRight: 30,
-    marginLeft: 30,
+    marginRight: 22,
+    marginLeft: 22,
     backgroundColor: primaryColor,
     color: 'white',
     padding: 10,
@@ -193,8 +195,8 @@ Styles.btn = StyleSheet.create({
   accentBtn: {
     marginTop: 5,
     marginBottom: 10,
-    marginRight: 30,
-    marginLeft: 30,
+    marginRight: 22,
+    marginLeft: 22,
     backgroundColor: accentColor,
     color: 'white',
     padding: 10,

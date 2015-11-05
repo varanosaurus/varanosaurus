@@ -72,7 +72,7 @@ var PendingItemDetails = React.createClass({
     if (!this.state.isEditing && !this.state.isBuying) {
       return (
         <View style={Styles.default.container}>
-          <Text style={Styles.page.pendingTitle}>Product: {this.props.item.description}</Text>
+          <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
           <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username}</Text>
           <Text style={Styles.input.textboxLabel}>Details: {this.state.details}</Text>
           <Button onPress={this.edit} style={Styles.btn.btn}>Edit</Button>
@@ -84,7 +84,7 @@ var PendingItemDetails = React.createClass({
     } else if (this.state.isEditing && !this.state.isBuying) {
       return (
         <View style={Styles.default.container}>
-          <Text style={Styles.page.pendingTitle}>Product: {this.props.item.description}</Text>
+          <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
           <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username} </Text>
           <Text style={Styles.input.textboxLabel}>Details: {this.state.details}</Text>
           <TextInput
@@ -105,7 +105,7 @@ var PendingItemDetails = React.createClass({
     } else if (!this.state.isEditing && this.state.isBuying) {
       return (
         <View style={Styles.default.container}>
-          <Text style={Styles.page.pendingTitle}>Product: {this.props.item.description}</Text>
+          <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
           <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username} </Text>
           <Text style={Styles.input.textboxLabel}>Details: {this.state.details} </Text>
           <TextInput

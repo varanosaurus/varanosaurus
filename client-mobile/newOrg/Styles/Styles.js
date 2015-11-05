@@ -257,6 +257,20 @@ Styles.reckoningTotals = StyleSheet.create({
 
 Styles.reckoningPayments = StyleSheet.create({
 
+  container: {
+    flexDirection: 'column',
+    marginTop: 64,
+  },
+
+  list: {
+    flex: 6,
+    height: 450,
+  },
+
+  button: {
+    flex: 1,
+  },
+
 });
 
 Styles.list = StyleSheet.create({

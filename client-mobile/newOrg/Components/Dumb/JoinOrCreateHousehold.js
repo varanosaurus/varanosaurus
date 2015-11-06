@@ -39,6 +39,7 @@ var JoinOrCreateHousehold = React.createClass({
               placeholder="What's your household name?"
               onChangeText={(householdName) => this.setState({householdName: householdName})}
               value={this.state.householdName}
+              placeholderTextColor={Styles.placeholderColor}
             />
             <Button
               style={Styles.btn.btn}

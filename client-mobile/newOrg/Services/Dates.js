@@ -19,7 +19,7 @@ var convertDate = function(date) {
 
   var month = months[date.slice(5, 7)];
 
-  var day = date.slice(8, 10);
+  var day = +date.slice(8, 10);
 
   var year = date.slice(0, 4);
 

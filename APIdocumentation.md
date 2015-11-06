@@ -14,7 +14,7 @@
 ##Household routes
 |Path|Method|Request Body|Response Format|Side Effects|
 |----|------|------------|---------------|------------|
-|`/households`|POST|`{name: String}`|`{user: Object, household: Object, token: string}`|Creates new household record in database and associates it with the creating user|
+|`/households`|POST|`{name: String}`|`{user: Object, household: Object, token: String}`|Creates new household record in database and associates it with the creating user|
 |`/households/:householdId`|GET|None|`{household: Object, users: Array}`|None|
 |`/households/:householdId`|PUT|`{Updated fields}`|`{household: Object}`|Modifies fields of household record in database|
 |`/households/:householdId`|DELETE|None|`{success: Boolean, deletedHouseholdId: Integer}`|Removes household record from database|

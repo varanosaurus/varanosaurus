@@ -6,7 +6,7 @@ var Styles = {};
 var primaryColor = '#A6B6B9';
 var accentColor = '#CC5251';
 var secondaryColor = '#323232';
-// var neutralColor = 'rgb(92, 87, 93)';
+var placeholderColor = '#7e959a';
 var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
 var kneadFont = 'Lobster';
@@ -18,7 +18,7 @@ Styles.mainFont = mainFont;
 Styles.titleFont = titleFont;
 Styles.kneadFont = kneadFont;
 Styles.accentColor = accentColor;
-Styles.placeholderColor = secondaryColor;
+Styles.placeholderColor = placeholderColor;
 
 Styles.patternURI = 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg';
 
@@ -244,7 +244,7 @@ Styles.page = StyleSheet.create({
   },
   pendingTitle: {
     fontFamily: titleFont,
-    backgroundColor: '3d4e5b',
+    backgroundColor: accentColor,
     paddingTop: 6,
     paddingBottom: 3,
     fontSize: 37,
@@ -253,7 +253,7 @@ Styles.page = StyleSheet.create({
   },
   boughtTitle: {
     fontFamily: titleFont,
-    backgroundColor: '3d4e5b',
+    backgroundColor: accentColor,
     paddingTop: 6,
     paddingBottom: 3,
     fontSize: 37,

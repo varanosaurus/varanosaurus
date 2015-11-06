@@ -44,6 +44,10 @@ Reckon items when you choose and see who owes what (or wait until the end of the
 
 <a href="https://gyazo.com/fef2692187928bd1e24635c062e80082"><img src="https://i.gyazo.com/fef2692187928bd1e24635c062e80082.gif" alt="https://gyazo.com/fef2692187928bd1e24635c062e80082"/></a>
 
+Pay or request $ via venmo (click on link below to view).
+
+https://hr33.slack.com/files/kylecho/F0E2ARJQN/venmogif
+
 
 ## Requirements
 

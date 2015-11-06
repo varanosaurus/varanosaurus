@@ -11,7 +11,6 @@ var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
 var kneadFont = 'Lobster';
 
-Styles.addItemButtonIconColor = secondaryColor;
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;
 Styles.listRowIsTouchedColor = '#CFD8DC';
@@ -19,6 +18,7 @@ Styles.mainFont = mainFont;
 Styles.titleFont = titleFont;
 Styles.kneadFont = kneadFont;
 Styles.accentColor = accentColor;
+Styles.placeholderColor = secondaryColor;
 
 Styles.patternURI = 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg';
 

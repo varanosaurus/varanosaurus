@@ -63,7 +63,7 @@ var ItemList = React.createClass({
               style={Styles.btn.floatBtn}
               underlayColor={'transparent'}
               onPress={this.props.gotoItemAddView} >
-              <Icon name='ios-plus' size={70} color={Styles.addItemButtonIconColor} />
+              <Icon name='ios-plus' size={70} color={Styles.accentColor} />
             </TouchableHighlight>
           </View>
         </Image>

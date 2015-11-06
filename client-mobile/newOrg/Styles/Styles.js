@@ -322,6 +322,7 @@ Styles.reckoningTotals = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
+    marginBottom: 48,
     backgroundColor: 'black',
     opacity: .7,
     padding: 10,

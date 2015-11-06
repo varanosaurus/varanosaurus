@@ -3,15 +3,26 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
+var TimerMixin = require('react-timer-mixin');
+
 var Actions = require('../../Services/Actions');
 var Routes = require('../../Services/Routes');
 
 var ReckoningList = require('../Dumb/ReckoningList');
 
+
 var Reckoning = React.createClass({
 
+  mixins: [TimerMixin],
+
   componentWillMount() {
-    this.props.dispatch(Actions.fetchReckoningLists());
+    var dispatch = this.props.dispatch;
+
+    dispatch(Actions.fetchReckoningLists());
+
+    this.setInterval(function() {
+      dispatch(Actions.fetchReckoningLists());
+    }, 3000);
   },
 
   render() {

@@ -26,12 +26,12 @@ var UserTotals = React.createClass({
           return (
             <View style={Styles.reckoningTotals.row} key={i}>
               <View style={Styles.reckoningTotals.name}>
-                <Text style={[Styles.default.label, Styles.reckoningTotals.nameText]}>{userData.username} </Text>
+                <Text style={[Styles.reckoningTotals.text, Styles.reckoningTotals.nameText]}>{userData.username} </Text>
               </View>
               <View style={Styles.reckoningTotals.numbersContainer}>
 
                 <View style={Styles.reckoningTotals.numbers}>
-                  <Text style={[Styles.default.text, Styles.reckoningTotals.contributed]}>
+                  <Text style={[Styles.reckoningTotals.text, Styles.reckoningTotals.contributed]}>
                     contributed <Text style={Styles.reckoningTotals.number}>${centsToPriceString(userData.userToReckoning.contribution)}</Text>
                   </Text>
                 </View>
@@ -55,11 +55,11 @@ var UserTotals = React.createClass({
 
   getOwedText(debt) {
     if (debt > 0) {
-      return <Text style={[Styles.default.text, Styles.reckoningTotals.owes]}>and owes <Text style={Styles.reckoningTotals.number}>${centsToPriceString(debt)}</Text></Text>;
+      return <Text style={[Styles.reckoningTotals.text, Styles.reckoningTotals.owes]}>and owes <Text style={Styles.reckoningTotals.number}>${centsToPriceString(debt)}</Text></Text>;
     } else if (debt < 0) {
-      return <Text style={[Styles.default.text, Styles.reckoningTotals.owed]}>and is owed <Text style={Styles.reckoningTotals.number}>${centsToPriceString(Math.abs(debt))}</Text></Text>;
+      return <Text style={[Styles.reckoningTotals.text, Styles.reckoningTotals.owed]}>and is owed <Text style={Styles.reckoningTotals.number}>${centsToPriceString(Math.abs(debt))}</Text></Text>;
     } else {
-      return <Text style={Styles.default.text}>and is square!</Text>;
+      return <Text style={Styles.reckoningTotals.text}>and is square!</Text>;
     }
   },
 

@@ -337,7 +337,7 @@ Styles.reckoningTotals = StyleSheet.create({
 
   nameText: {
     alignSelf: 'center',
-    fontSize: 24,
+    fontSize: 26,
     marginBottom: 0,
   },
 
@@ -357,7 +357,13 @@ Styles.reckoningTotals = StyleSheet.create({
   },
 
   text: {
-
+    fontSize: 20,
+    // fontWeight: 'bold',
+    // marginBottom: 8,
+    textAlign: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 
   numbers: {

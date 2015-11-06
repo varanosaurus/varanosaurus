@@ -77,6 +77,18 @@ Styles.navbar = StyleSheet.create({
   },
 });
 
+Styles.segmentedControl = StyleSheet.create({
+  control: {
+    tintColor: 'white',
+    color: 'white',
+    overflow: 'hidden',
+    // backgroundColor: 'white',
+    marginTop: 10,
+    marginLeft: 5,
+    marginRight: 5,
+  },
+});
+
 Styles.default = StyleSheet.create({
   container: {
     flex: 1,
@@ -380,7 +392,7 @@ Styles.reckoningTotals = StyleSheet.create({
 
 Styles.reckoningPayments = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     marginTop: 64,
     backgroundColor: 'black',
     opacity: .7,
@@ -400,7 +412,7 @@ Styles.reckoningPayments = StyleSheet.create({
   row: {
     flex: 1,
     alignSelf: 'center',
-    padding: 10,
+    padding: 15,
     backgroundColor: 'white',
     borderRadius: 5,
     borderWidth: 0,
@@ -409,7 +421,7 @@ Styles.reckoningPayments = StyleSheet.create({
   text: {
     flex: 1,
     color: 'black',
-    fontSize: 20,
+    fontSize: 22,
   },
 
   amount: {
@@ -426,7 +438,10 @@ Styles.list = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
-    // backgroundColor: '#F5FCFF',
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: 'black',
+    opacity: 0.7,
   },
   row: {
     flex: 1,
@@ -437,12 +452,12 @@ Styles.list = StyleSheet.create({
   rowContainer: {
     marginLeft: 6,
     marginRight: 6,
-    marginBottom: 6,
+    marginBottom: 10,
     paddingLeft: 15,
     paddingTop: 9,
     paddingBottom: 7,
-    borderWidth: 2,
-    borderRadius: 3,
+    borderWidth: 0,
+    borderRadius: 5,
     borderColor: primaryColor,
     backgroundColor: 'white',
   },
@@ -453,9 +468,13 @@ Styles.list = StyleSheet.create({
   },
   label: {
     fontFamily: mainFont,
-    fontSize: 18,
-    marginBottom: 8,
+    fontSize: 20,
+    fontWeight: 'bold',
+    // marginBottom: 8,
     textAlign: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 });
 

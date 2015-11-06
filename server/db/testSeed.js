@@ -8,29 +8,53 @@ var seed = function() {
   var userIds = {};
   var householdIds = {};
 
+  var randomDay = function() {
+    return Math.floor(Math.random() * 30);
+  };
+
+  var Market = ['kylecho', 'amychiu', 'taylorleh', 'rodrigo'];
+  var Natoma = ['naomij', 'cameron', 'garylovestea', 'dezzza'];
+
+  var randomRoommate = function(household) {
+    var name = household === 'Market' ? Market : Natoma;
+    return name[Math.floor(Math.random() * name.length)];
+  }
+
   return db.User.bulkCreate([
     {
-      username: 'brandon',
+      username: 'kylecho',
       password: 'password',
     },
     {
-      username: 'lyanna',
+      username: 'naomij',
       password: 'password',
     },
     {
-      username: 'rhaegar',
+      username: 'cameron',
       password: 'password',
     },
     {
-      username: 'jonSnow',
+      username: 'amychiu',
       password: 'password',
     },
     {
-      username: 'danyTarg',
+      username: 'dezzza',
       password: 'password',
     },
     {
-      username: 'eddard',
+      username: 'garylovestea',
+      password: 'password',
+    },
+    {
+      username: 'taylorleh',
+      password: 'password',
+    },
+    {
+      username: 'alexhutch',
+      password: 'password',
+    },
+    {
+      username: 'rodrigo',
       password: 'password',
     },
   ], {returning: true, individualHooks: true})
@@ -43,12 +67,12 @@ var seed = function() {
 
     return db.Household.bulkCreate([
       {
-        name: 'Stark',
-        creatorId: userIds['brandon'],
+        name: '945 Market',
+        creatorId: userIds['kylecho'],
       },
       {
-        name: 'Targaryen',
-        creatorId: userIds['rhaegar'],
+        name: '431 Natoma',
+        creatorId: userIds['cameron'],
       },
     ], {returning: true});
   })
@@ -60,107 +84,131 @@ var seed = function() {
   })
 
   .then(function() {
-    //add lyanna to targaryen house
-    return db.User.update({householdId: householdIds['Targaryen']}, {where: {username: 'rhaegar'}});
+    //add cameron to 431 Natoma house
+    return db.User.update({householdId: householdIds['431 Natoma']}, {where: {username: 'cameron'}});
   })
 
   .then(function() {
-    //add lyanna to targaryen house
-    return db.User.update({householdId: householdIds['Targaryen']}, {where: {username: 'lyanna'}});
+    //add naomij to 431 Natoma house
+    return db.User.update({householdId: householdIds['431 Natoma']}, {where: {username: 'naomij'}});
   })
 
   .then(function() {
-    //add jon to stark house
-    return db.User.update({householdId: householdIds['Stark']}, {where: {username: 'jonSnow'}});
+    //add dezzza to 431 Natoma house
+    return db.User.update({householdId: householdIds['431 Natoma']}, {where: {username: 'dezzza'}});
   })
 
   .then(function() {
-    //add jon to stark house
-    return db.User.update({householdId: householdIds['Stark']}, {where: {username: 'brandon'}});
+    //add garylovestea to 431 Natoma house
+    return db.User.update({householdId: householdIds['431 Natoma']}, {where: {username: 'garylovestea'}});
   })
 
-  //invite Dany to both houses
+  .then(function() {
+    //add amychiu to 945 Market house
+    return db.User.update({householdId: householdIds['945 Market']}, {where: {username: 'amychiu'}});
+  })
+
+  .then(function() {
+    //add kylecho to 945 Market house
+    return db.User.update({householdId: householdIds['945 Market']}, {where: {username: 'kylecho'}});
+  })
+
+  .then(function() {
+    //add taylorleh to 945 Market house
+    return db.User.update({householdId: householdIds['945 Market']}, {where: {username: 'taylorleh'}});
+  })
+
+  .then(function() {
+    //add rodrigo to 945 Market house
+    return db.User.update({householdId: householdIds['945 Market']}, {where: {username: 'rodrigo'}});
+  })
+
+  //invite alexhutch to both houses
   .then(function() {
     return db.Invitation.create({
-      toUserId: userIds['danyTarg'],
-      fromUserId: userIds['brandon'],
-      householdId: householdIds['Stark'],
-      householdName: 'Stark',
+      toUserId: userIds['alexhutch'],
+      fromUserId: userIds['kylecho'],
+      householdId: householdIds['945 Market'],
+      householdName: '945 Market',
     });
   })
 
   .then(function() {
     return db.Invitation.create({
-      toUserId: userIds['danyTarg'],
-      fromUserId: userIds['rhaegar'],
-      householdId: householdIds['Targaryen'],
-      householdName: 'Targaryen',
+      toUserId: userIds['alexhutch'],
+      fromUserId: userIds['cameron'],
+      householdId: householdIds['431 Natoma'],
+      householdName: '431 Natoma',
     });
   })
 
   .then(function() {
     //add items
-    //household 1 has users 1 and 4
-    //household 2 has users 2 and 3
+    //household Natoma has users cameron, naomij, dezzza, and garylovestea
+    //household Market has users amychiu, kylecho, taylorleh, and rodrigo
     return db.Item.bulkCreate([
       {
-        description: 'valyrian steel',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['brandon'],
-        buyingUserId: userIds['brandon'],
+        description: 'eggs',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
+        buyingUserId: userIds[randomRoommate('Market')],
         bought: true,
         price: (Math.random() * 10000),
+        timeBought: new Date(2015, 08, randomDay()),
       },
       {
-        description: 'boiled leather',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['brandon'],
+        description: 'milk',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
       },
       {
-        description: 'dragon glass',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['jonSnow'],
+        description: 'bread',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
       },
       {
-        description: 'albino wolf cub',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['jonSnow'],
-        buyingUserId: userIds['jonSnow'],
+        description: 'toilet paper',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
+        buyingUserId: userIds[randomRoommate('Market')],
         bought: true,
         price: (Math.random() * 10000),
+        timeBought: new Date(2015, 08, randomDay()),
       },
       {
-        description: 'dragon eggs',
-        householdId: householdIds['Targaryen'],
-        addingUserId: userIds['lyanna'],
-        buyingUserId: userIds['lyanna'],
+        description: 'paper towels',
+        householdId: householdIds['431 Natoma'],
+        addingUserId: userIds[randomRoommate('Natoma')],
+        buyingUserId: userIds[randomRoommate('Natoma')],
         bought: true,
         price: (Math.random() * 10000),
+        timeBought: new Date(2015, 08, randomDay()),
       },
       {
-        description: 'crown of gold',
-        householdId: householdIds['Targaryen'],
-        addingUserId: userIds['rhaegar'],
+        description: 'solo cups',
+        householdId: householdIds['431 Natoma'],
+        addingUserId: userIds[randomRoommate('Natoma')],
       },
       {
-        description: 'dragon\'s blood',
-        householdId: householdIds['Targaryen'],
-        addingUserId: userIds['rhaegar'],
-        buyingUserId: userIds['rhaegar'],
+        description: 'dishwasher soap stuff',
+        householdId: householdIds['431 Natoma'],
+        addingUserId: userIds[randomRoommate('Natoma')],
+        buyingUserId: userIds[randomRoommate('Natoma')],
         bought: true,
         price: (Math.random() * 10000),
+        timeBought: new Date(2015, 08, randomDay()),
       },
     ]);
   })
 
   .then(function() {
     //reckon the Starks
-    return reckon(householdIds['Stark']);
+    return reckon(householdIds['945 Market'], new Date(2015, 08, 30));
   })
 
   .then(function() {
     //reckon the Targaryens
-    return reckon(householdIds['Targaryen']);
+    return reckon(householdIds['431 Natoma'], new Date(2015, 08, 30));
   })
 
   .then(function() {
@@ -169,60 +217,63 @@ var seed = function() {
     //household 2 has users 2 and 3
     return db.Item.bulkCreate([
       {
-        description: 'Needle',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['brandon'],
-        buyingUserId: userIds['jonSnow'],
+        description: 'beer',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
+        buyingUserId: userIds[randomRoommate('Market')],
         bought: true,
         price: (Math.random() * 10000),
+        timeBought: new Date(2015, 09, randomDay()),
       },
       {
-        description: 'Ice',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['brandon'],
+        description: 'good beer',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
       },
       {
-        description: 'Blackfyre',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['brandon'],
+        description: 'bananas',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
       },
       {
-        description: 'Bright Roar',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['jonSnow'],
-        buyingUserId: userIds['jonSnow'],
+        description: 'papayas',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
+        buyingUserId: userIds[randomRoommate('Market')],
         bought: true,
         price: (Math.random() * 10000),
+        timeBought: new Date(2015, 09, randomDay()),
       },
       {
-        description: 'Dark Sister',
-        householdId: householdIds['Targaryen'],
-        addingUserId: userIds['lyanna'],
-        buyingUserId: userIds['lyanna'],
+        description: 'eggs',
+        householdId: householdIds['431 Natoma'],
+        addingUserId: userIds[randomRoommate('Natoma')],
+        buyingUserId: userIds[randomRoommate('Natoma')],
         bought: true,
         price: (Math.random() * 10000),
+        timeBought: new Date(2015, 09, randomDay()),
       },
       {
-        description: 'Dawn',
-        householdId: householdIds['Targaryen'],
-        addingUserId: userIds['rhaegar'],
+        description: 'milk',
+        householdId: householdIds['431 Natoma'],
+        addingUserId: userIds[randomRoommate('Natoma')],
       },
       {
-        description: 'Heartsbane',
-        householdId: householdIds['Targaryen'],
-        addingUserId: userIds['rhaegar'],
+        description: 'bread',
+        householdId: householdIds['431 Natoma'],
+        addingUserId: userIds[randomRoommate('Natoma')],
       },
     ]);
   })
 
   .then(function() {
     //reckon the Starks
-    return reckon(householdIds['Stark']);
+    return reckon(householdIds['945 Market'], new Date(2015, 09, 30));
   })
 
   .then(function() {
     //reckon the Targaryens
-    return reckon(householdIds['Targaryen']);
+    return reckon(householdIds['431 Natoma'], new Date(2015, 09, 30));
   })
 
   .then(function() {
@@ -231,48 +282,51 @@ var seed = function() {
     //household 2 has users 2 and 3
     return db.Item.bulkCreate([
       {
-        description: 'Lady Forlorn',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['brandon'],
-        buyingUserId: userIds['jonSnow'],
+        description: 'sponges',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
+        buyingUserId: userIds[randomRoommate('Market')],
         bought: true,
         price: (Math.random() * 10000),
+        timeBought: new Date(2015, 10, randomDay()),
       },
       {
-        description: 'Oathkeeper',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['brandon'],
+        description: 'dish soap',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
       },
       {
-        description: 'Nightfall',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['brandon'],
+        description: 'broom',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
       },
       {
-        description: 'Red Rain',
-        householdId: householdIds['Stark'],
-        addingUserId: userIds['jonSnow'],
-        buyingUserId: userIds['jonSnow'],
+        description: 'cheese',
+        householdId: householdIds['945 Market'],
+        addingUserId: userIds[randomRoommate('Market')],
+        buyingUserId: userIds[randomRoommate('Market')],
         bought: true,
         price: (Math.random() * 10000),
+        timeBought: new Date(2015, 10, randomDay()),
       },
       {
-        description: 'Widow\'s Wail',
-        householdId: householdIds['Targaryen'],
-        addingUserId: userIds['lyanna'],
-        buyingUserId: userIds['lyanna'],
+        description: 'milk',
+        householdId: householdIds['431 Natoma'],
+        addingUserId: userIds[randomRoommate('Natoma')],
+        buyingUserId: userIds[randomRoommate('Natoma')],
         bought: true,
         price: (Math.random() * 10000),
+        timeBought: new Date(2015, 10, randomDay()),
       },
       {
-        description: 'Lamentation',
-        householdId: householdIds['Targaryen'],
-        addingUserId: userIds['rhaegar'],
+        description: 'bread',
+        householdId: householdIds['431 Natoma'],
+        addingUserId: userIds[randomRoommate('Natoma')],
       },
       {
-        description: 'Vigilance',
-        householdId: householdIds['Targaryen'],
-        addingUserId: userIds['rhaegar'],
+        description: 'matches',
+        householdId: householdIds['431 Natoma'],
+        addingUserId: userIds[randomRoommate('Natoma')],
       },
     ]);
   })

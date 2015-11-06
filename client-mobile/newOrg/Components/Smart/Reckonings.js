@@ -29,11 +29,15 @@ var Reckoning = React.createClass({
   },
 
   gotoReckoningDetailsView(reckoning) {
-    this.props.dispatch(Actions.selectReckoning(reckoning));
-    this.props.dispatch(Actions.fetchSelectedReckoning())
-      .then(() => {
-        this.props.navigator.push(Routes.reckoningDetailsView);
-      });
+    if (this.props.selectedReckoningId !== reckoning.id) {
+      this.props.dispatch(Actions.selectReckoning(reckoning));
+      this.props.dispatch(Actions.fetchSelectedReckoning())
+        .then(() => {
+          this.props.navigator.push(Routes.reckoningDetailsView);
+        });
+    } else {
+      this.props.navigator.push(Routes.reckoningDetailsView);
+    }
   },
 
 });
@@ -43,6 +47,7 @@ function select(state) {
     reckoningsViewMode: state.uiMode.reckoningsViewMode,
     reckonings: state.data.reckonings,
     selectedReckoning: state.data.selectedReckoning,
+    selectedReckoningId: state.uiMode.selectedReckoningId,
     reckoningDetailsMode: state.uiMode.reckoningDetailsMode,
   };
 }

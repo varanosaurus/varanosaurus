@@ -28,7 +28,7 @@ var ReckoningList = React.createClass({
         underlayColor={Styles.listRowIsTouchedColor}
         onPress={() => this.props.gotoReckoningDetailsView(reckoning)} >
         <View style={Styles.list.row}>
-          <Text style={Styles.list.label}>{Dates(reckoning.date.toString())}</Text>
+          <Text style               ={Styles.list.label}>{Dates(reckoning.date.toString())}</Text>
           <View style={Styles.list.rightContainer}>
             <Icon name='ios-arrow-right' size={20} color={Styles.accentColor} />
           </View>
@@ -44,7 +44,7 @@ var ReckoningList = React.createClass({
           <Image
             source={{uri: 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg'}}
             style={Styles.background.belowNavbarArea}>
-            <View style={Styles.list.container}>
+            <View style={[Styles.list.container, {padding: 30}]}>
               <ListView
                 dataSource={dataSource}
                 renderRow={this.renderRow}

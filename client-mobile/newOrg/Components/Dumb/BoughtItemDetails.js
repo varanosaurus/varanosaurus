@@ -26,7 +26,7 @@ var BoughtItemDetails = React.createClass({
               <Text style={Styles.page.boughtDollar}>${centsToPriceString(this.props.item.price)}</Text>
             </View>
             <View style={Styles.page.boughtItemDetailsContainer}>
-              <Text style={[Styles.page.boughtDetails, {textAlign: 'center', fontFamily: Styles.kneadFont}]}>Memo</Text>
+              <Text style={[Styles.page.boughtDetails, {textAlign: 'center', fontFamily: Styles.titleFont}]}>Memo</Text>
               <Text style={Styles.page.boughtDetails}>{this.props.item.details}</Text>
             </View>
           </View>

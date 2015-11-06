@@ -11,6 +11,7 @@ var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
 var kneadFont = 'Lobster';
 
+Styles.addItemButtonIconColor = accentColor;
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;
 Styles.listRowIsTouchedColor = '#CFD8DC';
@@ -413,6 +414,7 @@ Styles.reckoningPayments = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     padding: 15,
+    marginBottom: 10,
     backgroundColor: 'white',
     borderRadius: 5,
     borderWidth: 0,

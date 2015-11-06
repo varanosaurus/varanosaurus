@@ -6,7 +6,7 @@ var Styles = {};
 var primaryColor = '#A6B6B9';
 var accentColor = '#CC5251';
 var secondaryColor = '#323232';
-// var neutralColor = 'rgb(92, 87, 93)';
+var placeholderColor = '#7e959a';
 var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
 var kneadFont = 'Lobster';
@@ -19,7 +19,7 @@ Styles.mainFont = mainFont;
 Styles.titleFont = titleFont;
 Styles.kneadFont = kneadFont;
 Styles.accentColor = accentColor;
-Styles.placeholderColor = secondaryColor;
+Styles.placeholderColor = placeholderColor;
 
 Styles.patternURI = 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg';
 
@@ -237,26 +237,23 @@ Styles.page = StyleSheet.create({
   pageTitle: {
     fontFamily: titleFont,
     backgroundColor: accentColor,
-    paddingTop: 3,
-    paddingBottom: 3,
+    paddingTop: 7,
     fontSize: 37,
     color: 'white',
     textAlign: 'center',
   },
   pendingTitle: {
     fontFamily: titleFont,
-    backgroundColor: '3d4e5b',
-    paddingTop: 6,
-    paddingBottom: 3,
+    backgroundColor: accentColor,
+    paddingTop: 7,
     fontSize: 37,
     color: 'white',
     textAlign: 'center',
   },
   boughtTitle: {
     fontFamily: titleFont,
-    backgroundColor: '3d4e5b',
-    paddingTop: 6,
-    paddingBottom: 3,
+    backgroundColor: accentColor,
+    paddingTop: 7,
     fontSize: 37,
     color: 'white',
     textAlign: 'center',

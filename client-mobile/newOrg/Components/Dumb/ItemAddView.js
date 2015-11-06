@@ -33,9 +33,9 @@ var ItemAddView = React.createClass({
           source={{uri: Styles.patternURI}}
           style={Styles.background.belowNavbarArea}>
           <View style={Styles.list.container}>
-            <Text style={[Styles.page.pageTitle, {marginBottom: 10}]}>Add an Item</Text>
+            <Text style={[Styles.page.pageTitle]}>Add an Item</Text>
             <TextInput
-              style={Styles.input.textboxField}
+              style={[Styles.input.textboxField, {marginTop: 20}]}
               placeholder='Enter a name of the product'
               onChangeText={(description) => this.setState({description})}
               value={this.state.description}

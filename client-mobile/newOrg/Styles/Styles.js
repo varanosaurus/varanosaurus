@@ -11,6 +11,7 @@ var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
 var kneadFont = 'Lobster';
 
+Styles.addItemButtonIconColor = secondaryColor;
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;
 Styles.listRowIsTouchedColor = '#CFD8DC';
@@ -72,9 +73,20 @@ Styles.background = StyleSheet.create({
 
 Styles.navbar = StyleSheet.create({
   container: {
-    borderBottomWidth: 0,
     borderColor: secondaryColor,
     backgroundColor: primaryColor,
+  },
+});
+
+Styles.segmentedControl = StyleSheet.create({
+  control: {
+    tintColor: 'white',
+    color: 'white',
+    overflow: 'hidden',
+    // backgroundColor: 'white',
+    marginTop: 10,
+    marginLeft: 5,
+    marginRight: 5,
   },
 });
 
@@ -108,6 +120,15 @@ Styles.default = StyleSheet.create({
     fontSize: 18,
     marginBottom: 8,
     textAlign: 'center',
+  },
+  leftContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rightContainer: {
+    alignItems: 'flex-end',
+    paddingRight: 20,
   },
   text: {
     fontFamily: mainFont,
@@ -183,7 +204,7 @@ Styles.input = StyleSheet.create({
 
 Styles.btn = StyleSheet.create({
   btn: {
-    marginTop: 5,
+    marginTop: 7,
     marginBottom: 10,
     marginRight: 22,
     marginLeft: 22,
@@ -213,6 +234,15 @@ Styles.btn = StyleSheet.create({
 });
 
 Styles.page = StyleSheet.create({
+  pageTitle: {
+    fontFamily: titleFont,
+    backgroundColor: accentColor,
+    paddingTop: 3,
+    paddingBottom: 3,
+    fontSize: 37,
+    color: 'white',
+    textAlign: 'center',
+  },
   pendingTitle: {
     fontFamily: titleFont,
     backgroundColor: '3d4e5b',
@@ -232,31 +262,40 @@ Styles.page = StyleSheet.create({
     textAlign: 'center',
   },
   boughtBy: {
-    margin: 20,
-    paddingTop: 15,
+    paddingTop: 3,
+    paddingBottom: 3,
     fontFamily: mainFont,
     fontSize: 24,
     textAlign: 'center',
-    color: secondaryColor,
+    color: 'white',
   },
   boughtDetails: {
-    margin: 20,
     fontFamily: mainFont,
     fontSize: 24,
   },
   boughtDollar: {
-    margin: 20,
+    margin: 10,
     fontFamily: mainFont,
-    fontSize: 70,
+    fontSize: 50,
+    color: 'white',
+    textAlign: 'center',
+  },
+  boughtItemDetailsContainer: {
+    margin: 50,
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    borderWidth: 3,
+    borderColor: primaryColor,
   },
   priceBox: {
     flexDirection: 'column',
     marginTop: 20,
-    marginLeft: 100,
-    marginRight: 100,
+    marginLeft: 50,
+    marginRight: 50,
     height: 150,
     borderRadius: 5,
-    backgroundColor: primaryColor,
+    backgroundColor: '#00E676',
     borderColor: primaryColor,
     borderStyle: 'solid',
     borderWidth: 1,
@@ -264,9 +303,10 @@ Styles.page = StyleSheet.create({
     paddingLeft: 10,
   },
   priceText: {
-    paddingTop: 15,
-    paddingBottom: 9,
-    fontSize: 15,
+    fontFamily: titleFont,
+    paddingTop: 10,
+    paddingBottom: 10,
+    fontSize: 18,
     color: 'white',
     textAlign: 'center',
   },
@@ -352,9 +392,8 @@ Styles.reckoningTotals = StyleSheet.create({
 });
 
 Styles.reckoningPayments = StyleSheet.create({
-
   container: {
-    // flex: 1,
+    flex: 1,
     marginTop: 64,
     backgroundColor: 'black',
     opacity: .7,
@@ -374,7 +413,7 @@ Styles.reckoningPayments = StyleSheet.create({
   row: {
     flex: 1,
     alignSelf: 'center',
-    padding: 10,
+    padding: 15,
     backgroundColor: 'white',
     borderRadius: 5,
     borderWidth: 0,
@@ -383,7 +422,7 @@ Styles.reckoningPayments = StyleSheet.create({
   text: {
     flex: 1,
     color: 'black',
-    fontSize: 20,
+    fontSize: 22,
   },
 
   amount: {
@@ -394,14 +433,16 @@ Styles.reckoningPayments = StyleSheet.create({
     flex: 1,
     backgroundColor: accentColor,
   },
-
 });
 
 Styles.list = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
-    // backgroundColor: '#F5FCFF',
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: 'black',
+    opacity: 0.7,
   },
   row: {
     flex: 1,
@@ -412,12 +453,12 @@ Styles.list = StyleSheet.create({
   rowContainer: {
     marginLeft: 6,
     marginRight: 6,
-    marginBottom: 6,
+    marginBottom: 10,
     paddingLeft: 15,
     paddingTop: 9,
     paddingBottom: 7,
-    borderWidth: 2,
-    borderRadius: 3,
+    borderWidth: 0,
+    borderRadius: 5,
     borderColor: primaryColor,
     backgroundColor: 'white',
   },
@@ -428,9 +469,13 @@ Styles.list = StyleSheet.create({
   },
   label: {
     fontFamily: mainFont,
-    fontSize: 18,
-    marginBottom: 8,
+    fontSize: 20,
+    fontWeight: 'bold',
+    // marginBottom: 8,
     textAlign: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 });
 

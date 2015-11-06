@@ -11,6 +11,7 @@ var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
 var kneadFont = 'Lobster';
 
+Styles.addItemButtonIconColor = secondaryColor;
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;
 Styles.listRowIsTouchedColor = '#CFD8DC';
@@ -71,7 +72,6 @@ Styles.background = StyleSheet.create({
 
 Styles.navbar = StyleSheet.create({
   container: {
-    borderBottomWidth: 0,
     borderColor: secondaryColor,
     backgroundColor: primaryColor,
   },
@@ -107,6 +107,15 @@ Styles.default = StyleSheet.create({
     fontSize: 18,
     marginBottom: 8,
     textAlign: 'center',
+  },
+  leftContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rightContainer: {
+    alignItems: 'flex-end',
+    paddingRight: 20,
   },
   text: {
     fontFamily: mainFont,
@@ -212,6 +221,15 @@ Styles.btn = StyleSheet.create({
 });
 
 Styles.page = StyleSheet.create({
+  pageTitle: {
+    fontFamily: titleFont,
+    backgroundColor: accentColor,
+    paddingTop: 3,
+    paddingBottom: 3,
+    fontSize: 37,
+    color: 'white',
+    textAlign: 'center',
+  },
   pendingTitle: {
     fontFamily: titleFont,
     backgroundColor: '3d4e5b',
@@ -231,31 +249,40 @@ Styles.page = StyleSheet.create({
     textAlign: 'center',
   },
   boughtBy: {
-    margin: 20,
-    paddingTop: 15,
+    paddingTop: 3,
+    paddingBottom: 3,
     fontFamily: mainFont,
     fontSize: 24,
     textAlign: 'center',
-    color: secondaryColor,
+    color: 'white',
   },
   boughtDetails: {
-    margin: 20,
     fontFamily: mainFont,
     fontSize: 24,
   },
   boughtDollar: {
-    margin: 20,
+    margin: 10,
     fontFamily: mainFont,
-    fontSize: 70,
+    fontSize: 50,
+    color: 'white',
+    textAlign: 'center',
+  },
+  boughtItemDetailsContainer: {
+    margin: 50,
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    borderWidth: 3,
+    borderColor: primaryColor,
   },
   priceBox: {
     flexDirection: 'column',
     marginTop: 20,
-    marginLeft: 100,
-    marginRight: 100,
+    marginLeft: 50,
+    marginRight: 50,
     height: 150,
     borderRadius: 5,
-    backgroundColor: primaryColor,
+    backgroundColor: '#00E676',
     borderColor: primaryColor,
     borderStyle: 'solid',
     borderWidth: 1,
@@ -263,9 +290,10 @@ Styles.page = StyleSheet.create({
     paddingLeft: 10,
   },
   priceText: {
-    paddingTop: 15,
-    paddingBottom: 9,
-    fontSize: 15,
+    fontFamily: titleFont,
+    paddingTop: 10,
+    paddingBottom: 10,
+    fontSize: 18,
     color: 'white',
     textAlign: 'center',
   },
@@ -351,7 +379,6 @@ Styles.reckoningTotals = StyleSheet.create({
 });
 
 Styles.reckoningPayments = StyleSheet.create({
-
   container: {
     // flex: 1,
     marginTop: 64,
@@ -393,7 +420,6 @@ Styles.reckoningPayments = StyleSheet.create({
     flex: 1,
     backgroundColor: accentColor,
   },
-
 });
 
 Styles.list = StyleSheet.create({

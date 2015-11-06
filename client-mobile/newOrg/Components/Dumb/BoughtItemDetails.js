@@ -18,14 +18,17 @@ var BoughtItemDetails = React.createClass({
         <Image
           source={{uri: Styles.patternURI}}
           style={Styles.background.belowNavbarArea}>
-          <View style={Styles.default.container}>
-            <Text style={Styles.page.boughtTitle}>{this.props.item.description}</Text>
+          <View style={{flex: 1, marginTop: 65, backgroundColor: 'rgba(0,0,0,0.7)'}}>
+            <Text style={Styles.page.pageTitle}>{this.props.item.description}</Text>
             <Text style={Styles.page.boughtBy}>Requested by: {this.props.creator.username}</Text>
             <View style={Styles.page.priceBox}>
               <Text style={Styles.page.priceText}>Bought for</Text>
-              <Text style={Styles.page.priceAmount}>${centsToPriceString(this.props.item.price)}</Text>
+              <Text style={Styles.page.boughtDollar}>${centsToPriceString(this.props.item.price)}</Text>
             </View>
-            <Text style={Styles.page.boughtDetails}>Details: {this.props.item.details}</Text>
+            <View style={Styles.page.boughtItemDetailsContainer}>
+              <Text style={[Styles.page.boughtDetails, {textAlign: 'center', fontFamily: Styles.kneadFont}]}>Memo</Text>
+              <Text style={Styles.page.boughtDetails}>{this.props.item.details}</Text>
+            </View>
           </View>
         </Image>
       </View>
@@ -39,4 +42,3 @@ function centsToPriceString(cents) {
 }
 
 module.exports = BoughtItemDetails;
-

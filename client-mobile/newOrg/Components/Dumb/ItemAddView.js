@@ -26,9 +26,6 @@ var ItemAddView = React.createClass({
     };
   },
 
-//            <Text style={Styles.input.textboxLabel}>Enter a Product</Text>
-//            <Text style={Styles.input.textboxLabel}>Leave a Memo</Text>
-//                    <Text style={Styles.input.textboxLabel}>Enter a Price</Text>
   render() {
     return (
       <View style={{flex: 1}}>

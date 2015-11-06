@@ -8,6 +8,7 @@ var {
   ListView,
   View,
   SegmentedControlIOS,
+  TouchableOpacity,
   TouchableHighlight,
   Text,
   Image,
@@ -72,7 +73,8 @@ var ItemList = React.createClass({
 
   renderRow(item) {
     return (
-        <TouchableHighlight
+      <View>
+        <TouchableOpacity
           style={Styles.list.rowContainer}
           underlayColor={Styles.listRowIsTouchedColor}
           onPress={() => this.props.gotoItemDetailsView(item)} >
@@ -82,7 +84,8 @@ var ItemList = React.createClass({
               <Icon name='ios-arrow-right' size={20} color={Styles.accentColor} />
             </View>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
+      </View>
     );
 
   },

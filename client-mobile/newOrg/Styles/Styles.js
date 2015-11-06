@@ -254,11 +254,9 @@ Styles.page = StyleSheet.create({
     fontFamily: mainFont,
     fontSize: 24,
     textAlign: 'center',
-    backgroundColor: '#CCFF90',
-    color: secondaryColor,
+    color: 'white',
   },
   boughtDetails: {
-    margin: 20,
     fontFamily: mainFont,
     fontSize: 24,
   },
@@ -270,12 +268,12 @@ Styles.page = StyleSheet.create({
     textAlign: 'center',
   },
   boughtItemDetailsContainer: {
-    margin: 20,
+    margin: 50,
     padding: 10,
     borderRadius: 5,
     backgroundColor: 'white',
     borderWidth: 3,
-    borderColor: '#FFB300',
+    borderColor: primaryColor,
   },
   priceBox: {
     flexDirection: 'column',

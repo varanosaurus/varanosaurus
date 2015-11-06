@@ -50,7 +50,7 @@ var ItemAddView = React.createClass({
               value={this.state.details}
             />
             <View style={Styles.default.leftContainer}>
-              <Text style={Styles.alert.infoLeft}>Already bought?</Text>
+              <Text style={[Styles.alert.infoLeft, {color: 'white'}]}>Already bought?</Text>
               <SwitchIOS
                 style={Styles.default.rightContainer, {margin: 10}}
                 onValueChange={(bought) => this.setState({bought})}

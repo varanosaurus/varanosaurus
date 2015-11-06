@@ -3,20 +3,23 @@ var {StyleSheet} = require('react-native');
 
 var Styles = {};
 
-var primaryColor = '#CFD8DC';
-var accentColor = '#E65100';
-var secondaryColor = '#546E7A';
-// var neutralColor = 'rgb(92, 87, 93)';
+var primaryColor = '#A6B6B9';
+var accentColor = '#CC5251';
+var secondaryColor = '#323232';
+var placeholderColor = '#7e959a';
 var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
 var kneadFont = 'Lobster';
 
+Styles.addItemButtonIconColor = accentColor;
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;
 Styles.listRowIsTouchedColor = '#CFD8DC';
 Styles.mainFont = mainFont;
 Styles.titleFont = titleFont;
 Styles.kneadFont = kneadFont;
+Styles.accentColor = accentColor;
+Styles.placeholderColor = placeholderColor;
 
 Styles.patternURI = 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg';
 
@@ -60,17 +63,30 @@ Styles.background = StyleSheet.create({
   },
   authArea: {
     backgroundColor: 'rgba(0,0,0,0.5)',
-    borderRadius: 10,
-    margin: 20,
+    borderRadius: 7,
+    paddingBottom: 14,
     marginTop: 150,
+    marginRight: 30,
+    marginLeft: 30,
   },
 });
 
 Styles.navbar = StyleSheet.create({
   container: {
-    borderBottomWidth: 0,
     borderColor: secondaryColor,
     backgroundColor: primaryColor,
+  },
+});
+
+Styles.segmentedControl = StyleSheet.create({
+  control: {
+    tintColor: 'white',
+    color: 'white',
+    overflow: 'hidden',
+    // backgroundColor: 'white',
+    marginTop: 10,
+    marginLeft: 5,
+    marginRight: 5,
   },
 });
 
@@ -105,6 +121,20 @@ Styles.default = StyleSheet.create({
     marginBottom: 8,
     textAlign: 'center',
   },
+  leftContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rightContainer: {
+    alignItems: 'flex-end',
+    paddingRight: 20,
+  },
+  text: {
+    fontFamily: mainFont,
+    fontSize: 18,
+    textAlign: 'left',
+  },
 });
 
 Styles.alert = StyleSheet.create({
@@ -112,6 +142,7 @@ Styles.alert = StyleSheet.create({
     fontFamily: mainFont,
     fontSize: 14,
     marginLeft: 10,
+    marginTop: 6,
     textAlign: 'center',
     color: 'white',
   },
@@ -135,15 +166,15 @@ Styles.input = StyleSheet.create({
   textboxLabel: {
     fontFamily: mainFont,
     fontSize: 15,
-    color: primaryColor,
+    color: 'white',
     marginLeft: 10,
     marginTop: 8,
     marginBottom: 8,
     textAlign: 'center',
   },
   textboxField: {
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 22,
+    marginRight: 22,
     color: 'black',
     fontSize: 17,
     height: 36,
@@ -154,12 +185,41 @@ Styles.input = StyleSheet.create({
     marginBottom: 5,
     backgroundColor: 'white',
   },
+  textboxDetails: {
+    backgroundColor: 'white',
+    fontSize: 15,
+    marginLeft: 22,
+    marginRight: 22,
+    height: 150,
+    borderRadius: 5,
+    borderColor: '#323232',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    marginBottom: 15,
+    textAlign: 'left',
+    paddingTop: 10,
+    paddingLeft: 10,
+  },
 });
 
 Styles.btn = StyleSheet.create({
   btn: {
-    margin: 10,
-    backgroundColor: secondaryColor,
+    marginTop: 7,
+    marginBottom: 10,
+    marginRight: 22,
+    marginLeft: 22,
+    backgroundColor: primaryColor,
+    color: 'white',
+    padding: 10,
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
+  accentBtn: {
+    marginTop: 5,
+    marginBottom: 10,
+    marginRight: 22,
+    marginLeft: 22,
+    backgroundColor: accentColor,
     color: 'white',
     padding: 10,
     borderRadius: 5,
@@ -174,33 +234,205 @@ Styles.btn = StyleSheet.create({
 });
 
 Styles.page = StyleSheet.create({
+  pageTitle: {
+    fontFamily: titleFont,
+    backgroundColor: accentColor,
+    paddingTop: 7,
+    fontSize: 37,
+    color: 'white',
+    textAlign: 'center',
+  },
   pendingTitle: {
     fontFamily: titleFont,
-    fontSize: 39,
-    color: 'gray',
+    backgroundColor: accentColor,
+    paddingTop: 7,
+    fontSize: 37,
+    color: 'white',
     textAlign: 'center',
   },
   boughtTitle: {
-    margin: 20,
     fontFamily: titleFont,
-    fontSize: 30,
-    color: primaryColor,
+    backgroundColor: accentColor,
+    paddingTop: 7,
+    fontSize: 37,
+    color: 'white',
     textAlign: 'center',
   },
   boughtBy: {
-    margin: 20,
+    paddingTop: 3,
+    paddingBottom: 3,
     fontFamily: mainFont,
     fontSize: 24,
+    textAlign: 'center',
+    color: 'white',
   },
   boughtDetails: {
-    margin: 20,
     fontFamily: mainFont,
     fontSize: 24,
   },
   boughtDollar: {
-    margin: 20,
     fontFamily: mainFont,
-    fontSize: 70,
+    fontSize: 50,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+  },
+  boughtItemDetailsContainer: {
+    margin: 50,
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: 'white',
+  },
+  priceBox: {
+    flexDirection: 'column',
+    marginTop: 30,
+    marginLeft: 50,
+    marginRight: 50,
+    height: 150,
+    borderRadius: 5,
+    backgroundColor: '#009688',
+    paddingTop: 10,
+    paddingLeft: 10,
+  },
+  priceText: {
+    fontFamily: titleFont,
+    paddingTop: 20,
+    paddingBottom: 6,
+    fontSize: 24,
+    fontWeight: '500',
+    color: 'white',
+    textAlign: 'center',
+  },
+  priceAmount: {
+    fontSize: 40,
+    color: 'white',
+    textAlign: 'center',
+  },
+});
+
+Styles.reckoningTotals = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    marginTop: 64,
+    marginBottom: 48,
+    backgroundColor: 'black',
+    opacity: .7,
+    padding: 10,
+  },
+
+  name: {
+    flex: .6,
+    alignItems: 'center',
+    alignSelf: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+
+  nameText: {
+    alignSelf: 'center',
+    fontSize: 26,
+    marginBottom: 0,
+  },
+
+  row: {
+    flexDirection: 'row',
+    marginLeft: 6,
+    marginRight: 6,
+    marginBottom: 6,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingTop: 9,
+    paddingBottom: 7,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'black',
+    backgroundColor: 'white',
+  },
+
+  text: {
+    fontSize: 20,
+    // fontWeight: 'bold',
+    // marginBottom: 8,
+    textAlign: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+
+  numbers: {
+    margin: 3,
+  },
+
+  number: {
+    fontSize: 21,
+  },
+
+  numbersContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+
+  contributed: {
+    textAlign: 'right',
+  },
+
+  owes: {
+    color: 'red',
+    alignSelf: 'center',
+    textAlign: 'right',
+  },
+
+  owed: {
+    color: 'green',
+    alignSelf: 'center',
+    textAlign: 'right',
+  },
+});
+
+Styles.reckoningPayments = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 64,
+    backgroundColor: 'black',
+    opacity: .7,
+    marginBottom: 48,
+    paddingTop: 10,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingBottom: 15,
+    flexDirection: 'column',
+  },
+
+  list: {
+    flex: 6,
+    height: 450,
+  },
+
+  row: {
+    flex: 1,
+    alignSelf: 'center',
+    padding: 15,
+    marginBottom: 10,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    borderWidth: 0,
+  },
+
+  text: {
+    flex: 1,
+    color: 'black',
+    fontSize: 22,
+  },
+
+  amount: {
+    color: '#FF4500',
+  },
+
+  button: {
+    flex: 1,
+    backgroundColor: accentColor,
   },
 });
 
@@ -208,7 +440,8 @@ Styles.list = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
-    // backgroundColor: '#F5FCFF',
+    backgroundColor: 'black',
+    opacity: 0.7,
   },
   row: {
     flex: 1,
@@ -219,12 +452,12 @@ Styles.list = StyleSheet.create({
   rowContainer: {
     marginLeft: 6,
     marginRight: 6,
-    marginBottom: 6,
+    marginBottom: 10,
     paddingLeft: 15,
     paddingTop: 9,
     paddingBottom: 7,
-    borderWidth: 2,
-    borderRadius: 3,
+    borderWidth: 0,
+    borderRadius: 5,
     borderColor: primaryColor,
     backgroundColor: 'white',
   },
@@ -235,9 +468,13 @@ Styles.list = StyleSheet.create({
   },
   label: {
     fontFamily: mainFont,
-    fontSize: 18,
-    marginBottom: 8,
+    fontSize: 20,
+    fontWeight: 'bold',
+    // marginBottom: 8,
     textAlign: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 });
 

@@ -38,6 +38,7 @@ var InviteRoommates = React.createClass({
               placeholder="roommate's username"
               onChangeText={(input) => this.setState({input: input})}
               value={this.state.input}
+              placeholderTextColor={Styles.placeholderColor}
             />
             <Text style={Styles.alert.error}>{this.state.error}</Text>
             <Button onPress={this.submitRoommate} style={Styles.btn.btn}>Invite Roommate</Button>

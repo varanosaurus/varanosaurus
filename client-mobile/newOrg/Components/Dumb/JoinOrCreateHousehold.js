@@ -30,15 +30,16 @@ var JoinOrCreateHousehold = React.createClass({
           source={{uri: Styles.patternURI}}
           style={Styles.background.belowNavbarArea}>
           <View style={Styles.list.container}>
-            <Text>If you think you have been invited to a household, please check with your roommate and remind them to invite you.</Text>
-            <Text> ----- OR ----- </Text>
-            <Text> Create a household </Text>
+            <Text>Hey there! If you think you've already been invited to a household, make sure to check in with your roommate.</Text>
+            <Text style={Styles.alert.info}> ----- OR ----- </Text>
+            <Text style={Styles.alert.info}> Create a household </Text>
             <TextInput
               style={Styles.input.textboxField}
               keyboardType='default'
-              placeholder='What is your household name?'
+              placeholder="What's your household name?"
               onChangeText={(householdName) => this.setState({householdName: householdName})}
               value={this.state.householdName}
+              placeholderTextColor={Styles.placeholderColor}
             />
             <Button
               style={Styles.btn.btn}
@@ -60,14 +61,14 @@ var JoinOrCreateHousehold = React.createClass({
               this.props.invitations.map(function(invitation) {
                 return (
                   <View>
-                    <Text key={invitation.householdName}>You have been invited to the {invitation.householdName} household!</Text>
+                    <Text key={invitation.householdName}>Hey there! Looks like you've been invited to the {invitation.householdName} household!</Text>
                     <Button
                       style={Styles.btn.btn}
                       onPress={self.props.respondToInvitation('accepted', invitation.id)}>
                       Join
                     </Button>
                     <Button
-                      style={Styles.btn.btn}
+                      style={Styles.btn.accentBtn}
                       onPress={self.props.respondToInvitation('rejected', invitation.id)}>
                       Decline
                     </Button>
@@ -80,7 +81,7 @@ var JoinOrCreateHousehold = React.createClass({
             <TextInput
               style={Styles.input.textboxField}
               keyboardType='default'
-              placeholder='What is your household name?'
+              placeholder="What's your household name?"
               onChangeText={(householdName) => this.setState({householdName: householdName})}
               value={this.state.householdName}
             />

@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var Icon = require('react-native-vector-icons/Ionicons');
+var Styles = require('../../Styles/Styles');
 
 var Totals = require('./UserTotals');
 var Payments = require('./Payments');
@@ -14,7 +15,10 @@ var TabBar = React.createClass({
 
   render() {
     return (
-      <TabBarIOS selectedTab={this.props.selectedTab}>
+      <TabBarIOS
+        selectedTab={this.props.selectedTab}
+        tintColor={Styles.accentColor}
+      >
 
         <Icon.TabBarItem
           selected={this.props.selectedTab === 'totals'}

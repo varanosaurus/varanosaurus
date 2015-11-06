@@ -5,6 +5,7 @@ var {connect} = require('react-redux');
 
 var Actions = require('../../Services/Actions');
 var Icon = require('react-native-vector-icons/Ionicons');
+var Styles = require('../../Styles/Styles');
 
 var Items = require('./Items');
 var Reckonings = require('./Reckonings');
@@ -19,7 +20,10 @@ var HomeTab = React.createClass({
   render() {
     return (
 
-      <TabBarIOS selectedTab={this.props.selectedTab}>
+      <TabBarIOS
+        selectedTab={this.props.selectedTab}
+        tintColor={Styles.iconColor}
+      >
         <Icon.TabBarItem
           selected={this.props.selectedTab === 'items'}
           title='Items'

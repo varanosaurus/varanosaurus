@@ -8,6 +8,7 @@ var {
   ListView,
   View,
   SegmentedControlIOS,
+  TouchableOpacity,
   TouchableHighlight,
   Text,
   Image,
@@ -41,7 +42,7 @@ var ItemList = React.createClass({
           style={Styles.background.belowNavbarArea}>
           <View style={Styles.list.container}>
             <SegmentedControlIOS
-              style={{backgroundColor: 'white'}}
+              style={Styles.segmentedControl.control}
               values={['Pending', 'Bought']}
               selectedIndex={selectedIndex}
               tintColor={Styles.secondaryColor}
@@ -62,7 +63,7 @@ var ItemList = React.createClass({
               style={Styles.btn.floatBtn}
               underlayColor={'transparent'}
               onPress={this.props.gotoItemAddView} >
-              <Icon name='ios-plus' size={70} color={Styles.secondaryColor} />
+              <Icon name='ios-plus' size={70} color={Styles.accentColor} />
             </TouchableHighlight>
           </View>
         </Image>
@@ -72,7 +73,8 @@ var ItemList = React.createClass({
 
   renderRow(item) {
     return (
-        <TouchableHighlight
+      <View>
+        <TouchableOpacity
           style={Styles.list.rowContainer}
           underlayColor={Styles.listRowIsTouchedColor}
           onPress={() => this.props.gotoItemDetailsView(item)} >
@@ -82,7 +84,8 @@ var ItemList = React.createClass({
               <Icon name='ios-arrow-right' size={20} color={Styles.accentColor} />
             </View>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
+      </View>
     );
 
   },

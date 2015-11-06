@@ -8,6 +8,7 @@ var {
   View,
   Text,
   Image,
+  ScrollView,
 } = React;
 
 var UserTotals = React.createClass({
@@ -16,23 +17,37 @@ var UserTotals = React.createClass({
 
     return (
       <View style={{flex: 1}}>
-        <Image
-          source={{uri: Styles.patternURI}}
-          style={Styles.background.belowNavbarArea}>
-          <View style={Styles.list.container}>
-            {this.props.users.map((userData, i) => {
+      <Image
+        source={{uri: Styles.patternURI}}
+        style={Styles.background.belowNavbarArea}>
+      <ScrollView style={Styles.reckoningTotals.container}>
+        {this.props.users.map((userData, i) => {
 
-              return (
-                <View key={i}>
-                  <Text style={Styles.default.label}>{userData.username} </Text>
-                  <Text style={Styles.default.label}>contributed ${centsToPriceString(userData.userToReckoning.contribution)} to the total </Text>
-                  {this.getOwedText(userData.userToReckoning.debt)}
+          return (
+            <View style={Styles.reckoningTotals.row} key={i}>
+              <View style={Styles.reckoningTotals.name}>
+                <Text style={[Styles.reckoningTotals.text, Styles.reckoningTotals.nameText]}>{userData.username} </Text>
+              </View>
+              <View style={Styles.reckoningTotals.numbersContainer}>
+
+                <View style={Styles.reckoningTotals.numbers}>
+                  <Text style={[Styles.reckoningTotals.text, Styles.reckoningTotals.contributed]}>
+                    contributed <Text style={Styles.reckoningTotals.number}>${centsToPriceString(userData.userToReckoning.contribution)}</Text>
+                  </Text>
                 </View>
-              );
 
-            })}
-          </View>
-        </Image>
+                <View style={Styles.reckoningTotals.numbers}>
+                    {this.getOwedText(userData.userToReckoning.debt)}
+                </View>
+
+              </View>
+
+            </View>
+          );
+
+        })}
+      </ScrollView>
+      </Image>
       </View>
     );
 
@@ -40,11 +55,11 @@ var UserTotals = React.createClass({
 
   getOwedText(debt) {
     if (debt > 0) {
-      return <Text style={Styles.default.label}>and owes ${centsToPriceString(debt)}</Text>;
+      return <Text style={[Styles.reckoningTotals.text, Styles.reckoningTotals.owes]}>and owes <Text style={Styles.reckoningTotals.number}>${centsToPriceString(debt)}</Text></Text>;
     } else if (debt < 0) {
-      return <Text style={Styles.default.label}>and is owed ${centsToPriceString(Math.abs(debt))}</Text>;
+      return <Text style={[Styles.reckoningTotals.text, Styles.reckoningTotals.owed]}>and is owed <Text style={Styles.reckoningTotals.number}>${centsToPriceString(Math.abs(debt))}</Text></Text>;
     } else {
-      return <Text style={Styles.default.label}>and is square!</Text>;
+      return <Text style={Styles.reckoningTotals.text}>and is square!</Text>;
     }
   },
 

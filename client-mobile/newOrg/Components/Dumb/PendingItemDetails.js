@@ -9,7 +9,6 @@ var {
   Text,
   TextInput,
   LinkingIOS,
-  StyleSheet,
   Image,
 } = React;
 
@@ -76,52 +75,24 @@ var PendingItemDetails = React.createClass({
           <Image
             source={{uri: Styles.patternURI}}
             style={Styles.background.belowNavbarArea}>
-            <View style={Styles.default.container}>
-              <Text style={Styles.page.pendingTitle} style={stylesheet.title}>{this.props.item.description}</Text>
-              <Text style={Styles.input.textboxLabel} style={stylesheet.requestedBy}>Requested by: {this.props.creator.username}</Text>
+            <View style={Styles.list.container}>
+              <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
+              <Text style={Styles.input.textboxLabel}>Requested by: {this.props.creator.username}</Text>
                 <TextInput
-                  style={Styles.input.textboxLabel}
-                  style={stylesheet.textboxField}
+                  style={Styles.input.textboxDetails}
                   keyboardType='default'
-                  multiline='true'
                   placeholder='Tap to add notes...'
                   onChangeText={(details) => this.setState({details})}
                   value={this.state.details}
+                  placeholderTextColor={Styles.placeholderColor}
                 />
-              <Button onPress={this.handleSubmit} style={Styles.btn.btn} style={stylesheet.btn}>Save details</Button>
-              <Button onPress={this.buy} style={Styles.btn.btn} style={stylesheet.btn}>Mark as bought</Button>
-              <Button onPress={this.browse} style={Styles.btn.btn} style={stylesheet.amazonBtn}>Search {this.props.item.description} on Amazon</Button>
+              <Button onPress={this.handleSubmit} style={Styles.btn.btn}>Save details</Button>
+              <Button onPress={this.buy} style={Styles.btn.btn}>Mark as bought</Button>
+              <Button onPress={this.browse} style={Styles.btn.accentBtn}>Search {this.props.item.description} on Amazon</Button>
             </View>
           </Image>
         </View>
       );
-    // editing & not buying
-    // } else if (this.state.isEditing && !this.state.isBuying) {
-    //   return (
-    //   <View style={{flex: 1}}>
-    //     <Image
-    //       source={{uri: Styles.patternURI}}
-    //       style={Styles.background.belowNavbarArea}>
-    //       <View style={Styles.list.container}>
-    //         <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
-    //         <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username} </Text>
-    //         <Text style={Styles.input.textboxLabel}>Details: {this.state.details}</Text>
-    //         <TextInput
-    //           style={Styles.input.textboxField}
-    //           placeholder='Update description here'
-    //           onChangeText={(details) => this.setState({details})}
-    //           value={this.state.details}
-    //         />
-    //         <Button
-    //           onPress={this.handleSubmit}
-    //           style={Styles.btn.btn}>
-    //           Submit Changes
-    //         </Button>
-    //         <Button onPress={this.cancel} style={Styles.btn.btn}>Cancel</Button>
-    //       </View>
-    //     </Image>
-    //   </View>
-    //   );
     } // not editing & buying
      else if (!this.state.isEditing && this.state.isBuying) {
       return (
@@ -131,21 +102,27 @@ var PendingItemDetails = React.createClass({
           style={Styles.background.belowNavbarArea}>
           <View style={Styles.list.container}>
             <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
-            <Text style={Styles.input.textboxLabel}>Requested By: {this.props.creator.username} </Text>
+            <Text style={Styles.input.textboxLabel}>Requested by: {this.props.creator.username} </Text>
             <Text style={Styles.input.textboxLabel}>Details: {this.state.details} </Text>
-            <TextInput
-              keyboardType='decimal-pad'
-              style={Styles.input.textboxField}
-              placeholder='Price'
-              onChangeText={(price) => this.setState({price})}
-              value={this.state.price}
-            />
+            <View style={{flexDirection: 'row', marginTop: 20}}>
+              <Text style={{fontSize: 30, marginLeft: 22, paddingRight: 7, color: 'white'}}>$</Text>
+              <View style={{flex: 7, marginLeft: 0}}>
+                <TextInput
+                  keyboardType='decimal-pad'
+                  style={[Styles.input.textboxField, {marginLeft: 0}]}
+                  placeholder='Enter price'
+                  onChangeText={(price) => this.setState({price})}
+                  value={this.state.price}
+                  placeholderTextColor={Styles.placeholderColor}
+                />
+              </View>
+            </View>
             <Button
               onPress={this.handleSubmit}
               style={Styles.btn.btn}>
-              Enter Price
+              Save
             </Button>
-            <Button onPress={this.cancel} style={Styles.btn.btn}>Cancel</Button>
+            <Button onPress={this.cancel} style={Styles.btn.accentBtn}>Cancel</Button>
           </View>
         </Image>
       </View>
@@ -154,59 +131,5 @@ var PendingItemDetails = React.createClass({
   }, //closes render
 }); //closes class
 
-var stylesheet = StyleSheet.create({
-  title: {
-    backgroundColor: '3d4e5b',
-    paddingTop: 3,
-    paddingBottom: 3,
-    fontSize: 37,
-    color: 'white',
-    textAlign: 'center',
-  },
-  requestedBy: {
-    color: '3d4e5b',
-    textAlign: 'center',
-    paddingTop: 15,
-    paddingBottom: 15,
-  },
-  textboxField: {
-    backgroundColor: 'white',
-    fontSize: 15,
-    marginLeft: 30,
-    marginRight: 30,
-    height: 150,
-    borderRadius: 5,
-    borderColor: '#323232',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    marginBottom: 15,
-    textAlign: 'left',
-    paddingTop: 10,
-    paddingLeft: 10,
-  },
-  text: {
-    color: 'grey',
-    textAlign: 'left',
-  },
-  amazonBtn: {
-    margin: 10,
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: '#cc5251',
-    color: 'white',
-    marginRight: 30,
-    marginLeft: 30,
-  },
-  btn: {
-    margin: 10,
-    backgroundColor: '#899ea3',
-    color: 'white',
-    padding: 10,
-    marginRight: 30,
-    marginLeft: 30,
-    borderRadius: 5,
-  },
-
-});
 
 module.exports = PendingItemDetails;

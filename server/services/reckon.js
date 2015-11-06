@@ -1,7 +1,7 @@
 var db = require('../db/interface');
 var calculatePayments = require('./payments');
 
-var reckon = function(householdId) {
+var reckon = function(householdId, date) {
 
   if (typeof householdId !== 'number') {
     householdId = parseInt(householdId, 10);
@@ -94,7 +94,10 @@ var reckon = function(householdId) {
 
       // We now have the information we need to build the reckoning model.
       // The only field we pass in directly is the totalSpent.
-      return db.Reckoning.create({totalSpent})
+
+      //unless we are creating our test seed data, in which case we pass in a date, as well
+      date = date || new Date();
+      return db.Reckoning.create({totalSpent, date})
         .then(function(reckoning) {
           // Next, we associate with the household.
           // The `household` identifier is the alias declared at

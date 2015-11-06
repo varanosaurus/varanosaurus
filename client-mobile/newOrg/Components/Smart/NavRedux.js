@@ -8,8 +8,9 @@ var Icon = require('react-native-vector-icons/Ionicons');
 var Routes = require('../../Services/Routes');
 
 var {
+  View,
   Navigator,
-  TouchableHighlight,
+  TouchableOpacity,
   Text,
 } = React;
 
@@ -45,16 +46,18 @@ var NavRedux = React.createClass({
         return null;
       }
 
-      return (<TouchableHighlight
-                style={{marginTop: 8, marginLeft: 15, width:100}}
-                underlayColor={'transparent'}
-                onPress={() => {
-                if (index > 0) {
-                  navigator.pop();
-                }
-              }}>
-                <Icon name='ios-arrow-back' size={30} color="{Styles.secondaryColor}" />
-              </TouchableHighlight>
+      return (<View>
+                <TouchableOpacity
+                  style={{marginTop: 8, marginLeft: 15, width:100}}
+                  underlayColor={'transparent'}
+                  onPress={() => {
+                  if (index > 0) {
+                    navigator.pop();
+                  }
+                }}>
+                  <Icon name='ios-arrow-back' size={30} color="{Styles.secondaryColor}" />
+                </TouchableOpacity>
+              </View>
               );
     },
 
@@ -63,7 +66,7 @@ var NavRedux = React.createClass({
     },
 
     Title() {
-      return (<Text style={{marginTop: 10, fontSize: 20, fontFamily: 'Helvetica'}}>Knead</Text>);
+      return (<Text style={{marginTop: 10, fontSize: 26, fontFamily: Styles.kneadFont, color: Styles.accentColor}}>Knead</Text>);
     },
 
   },

@@ -105,7 +105,7 @@ var PendingItemDetails = React.createClass({
             <Text style={Styles.input.textboxLabel}>Requested by: {this.props.creator.username} </Text>
             <Text style={Styles.input.textboxLabel}>Details: {this.state.details} </Text>
             <View style={{flexDirection: 'row', marginTop: 20}}>
-              <Text style={{fontSize: 30, marginLeft: 22, paddingRight: 7}}>$</Text>
+              <Text style={{fontSize: 30, marginLeft: 22, paddingRight: 7, color: 'white'}}>$</Text>
               <View style={{flex: 7, marginLeft: 0}}>
                 <TextInput
                   keyboardType='decimal-pad'

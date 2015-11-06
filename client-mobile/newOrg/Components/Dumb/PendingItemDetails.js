@@ -130,12 +130,12 @@ var PendingItemDetails = React.createClass({
             <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
             <Text style={Styles.input.textboxLabel}>Requested by: {this.props.creator.username} </Text>
             <Text style={Styles.input.textboxLabel}>Details: {this.state.details} </Text>
-            <View style={Styles.default.leftContainer}>
-              <Text style={{marginLeft: 10}}>$</Text>
-              <View style={Styles.default.rightContainer}>
+            <View style={{flexDirection: 'row', marginTop: 20}}>
+              <Text style={{fontSize: 30, marginLeft: 22, paddingRight: 7}}>$</Text>
+              <View style={{flex: 7, marginLeft: 0}}>
                 <TextInput
                   keyboardType='decimal-pad'
-                  style={[Styles.input.textboxField, {width: 270}]}
+                  style={[Styles.input.textboxField, {marginLeft: 0}]}
                   placeholder='Enter price'
                   onChangeText={(price) => this.setState({price})}
                   value={this.state.price}

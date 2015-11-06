@@ -40,7 +40,7 @@ var ReckoningList = React.createClass({
   render() {
     var dataSource = this.dataSource.cloneWithRows(this.props.reckonings);
     return (
-        <View style={{flex: 1}}>
+        <View style={Styles.default.container}>
           <Image
             source={{uri: 'https://s-media-cache-ak0.pinimg.com/736x/76/e7/67/76e767dbeaad4e6eb37a23698170e006.jpg'}}
             style={Styles.background.belowNavbarArea}>

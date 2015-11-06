@@ -84,6 +84,7 @@ var PendingItemDetails = React.createClass({
                   placeholder='Tap to add notes...'
                   onChangeText={(details) => this.setState({details})}
                   value={this.state.details}
+                  placeholderTextColor={Styles.placeholderColor}
                 />
               <Button onPress={this.handleSubmit} style={Styles.btn.btn}>Save details</Button>
               <Button onPress={this.buy} style={Styles.btn.btn}>Mark as bought</Button>
@@ -139,6 +140,7 @@ var PendingItemDetails = React.createClass({
                   placeholder='Enter price'
                   onChangeText={(price) => this.setState({price})}
                   value={this.state.price}
+                  placeholderTextColor={Styles.placeholderColor}
                 />
               </View>
             </View>

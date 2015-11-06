@@ -39,6 +39,7 @@ var ItemAddView = React.createClass({
               placeholder='Write a name of a product'
               onChangeText={(description) => this.setState({description})}
               value={this.state.description}
+              placeholderTextColor={Styles.placeholderColor}
             />
             <Text style={Styles.input.textboxLabel}>Leave a Memo</Text>
             <TextInput
@@ -46,6 +47,7 @@ var ItemAddView = React.createClass({
               placeholder='Write additional description'
               onChangeText={(details) => this.setState({details})}
               value={this.state.details}
+              placeholderTextColor={Styles.placeholderColor}
             />
             <Text style={Styles.alert.infoLeft}>Already bought?</Text>
             <SwitchIOS
@@ -63,6 +65,7 @@ var ItemAddView = React.createClass({
                       keyboardType='decimal-pad'
                       onChangeText={(price) => this.setState({price})}
                       value={this.state.price}
+                      placeholderTextColor={Styles.placeholderColor}
                     />
                     </View>);
                 }

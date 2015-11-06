@@ -236,8 +236,7 @@ Styles.page = StyleSheet.create({
   pageTitle: {
     fontFamily: titleFont,
     backgroundColor: accentColor,
-    paddingTop: 3,
-    paddingBottom: 3,
+    paddingTop: 7,
     fontSize: 37,
     color: 'white',
     textAlign: 'center',
@@ -245,8 +244,7 @@ Styles.page = StyleSheet.create({
   pendingTitle: {
     fontFamily: titleFont,
     backgroundColor: accentColor,
-    paddingTop: 6,
-    paddingBottom: 3,
+    paddingTop: 7,
     fontSize: 37,
     color: 'white',
     textAlign: 'center',
@@ -254,8 +252,7 @@ Styles.page = StyleSheet.create({
   boughtTitle: {
     fontFamily: titleFont,
     backgroundColor: accentColor,
-    paddingTop: 6,
-    paddingBottom: 3,
+    paddingTop: 7,
     fontSize: 37,
     color: 'white',
     textAlign: 'center',

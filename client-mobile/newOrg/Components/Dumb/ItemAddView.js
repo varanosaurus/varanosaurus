@@ -26,9 +26,6 @@ var ItemAddView = React.createClass({
     };
   },
 
-//            <Text style={Styles.input.textboxLabel}>Enter a Product</Text>
-//            <Text style={Styles.input.textboxLabel}>Leave a Memo</Text>
-//                    <Text style={Styles.input.textboxLabel}>Enter a Price</Text>
   render() {
     return (
       <View style={{flex: 1}}>
@@ -42,12 +39,14 @@ var ItemAddView = React.createClass({
               placeholder='Enter a name of the product'
               onChangeText={(description) => this.setState({description})}
               value={this.state.description}
+              placeholderTextColor={Styles.placeholderColor}
             />
             <TextInput
               style={Styles.input.textboxField}
               placeholder='Leave a memo'
               onChangeText={(details) => this.setState({details})}
               value={this.state.details}
+              placeholderTextColor={Styles.placeholderColor}
             />
             <View style={Styles.default.leftContainer}>
               <Text style={[Styles.alert.infoLeft, {color: 'white'}]}>Already bought?</Text>

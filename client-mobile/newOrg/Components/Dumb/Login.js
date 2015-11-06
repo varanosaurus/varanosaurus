@@ -35,7 +35,7 @@ var Login = React.createClass({
                 placeholder='username'
                 onChangeText={(username) => this.setState({username})}
                 value={this.state.username}
-                placeholderTextColor={'#cccccc'}
+                placeholderTextColor={Styles.placeholderColor}
               />
               <TextInput
                 keyboardType='default'
@@ -44,7 +44,7 @@ var Login = React.createClass({
                 secureTextEntry={true}
                 onChangeText={(password) => this.setState({password})}
                 value={this.state.password}
-                placeholderTextColor={'#cccccc'}
+                placeholderTextColor={Styles.placeholderColor}
               />
               <Text style={Styles.alert.error}>{this.props.errorHandling}</Text>
               <Button style={Styles.btn.btn} onPress={this.handleSubmit}>

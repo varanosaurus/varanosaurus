@@ -3,20 +3,25 @@
 var React = require('react-native');
 var {connect} = require('react-redux');
 
+var TimerMixin = require('react-timer-mixin');
+
 var Actions = require('../../Services/Actions');
 var Routes = require('../../Services/Routes');
 
 var ItemList = require('../Dumb/ItemList');
-// var ItemAdd = require('./ItemAdd/ItemAdd');
-
-// var {
-//   Text,
-// } = React;
 
 var Items = React.createClass({
 
+  mixins: [TimerMixin],
+
   componentWillMount() {
-    this.props.dispatch(Actions.fetchItemLists());
+    var dispatch = this.props.dispatch;
+
+    dispatch(Actions.fetchItemLists());
+
+    this.setInterval(function() {
+      dispatch(Actions.fetchItemLists());
+    }, 3000);
   },
 
   render() {

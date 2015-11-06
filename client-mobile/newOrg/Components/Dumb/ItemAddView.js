@@ -66,6 +66,7 @@ var ItemAddView = React.createClass({
                           keyboardType='decimal-pad'
                           onChangeText={(price) => this.setState({price})}
                           value={this.state.price}
+                          placeholderTextColor={Styles.placeholderColor}
                         />
                         </View>);
                     }

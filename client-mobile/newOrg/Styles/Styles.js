@@ -11,6 +11,7 @@ var mainFont = 'Heiti TC';
 var titleFont = 'Josefin Sans';
 var kneadFont = 'Lobster';
 
+Styles.addItemButtonIconColor = accentColor;
 Styles.iconColor = accentColor;
 Styles.secondaryColor = secondaryColor;
 Styles.listRowIsTouchedColor = '#CFD8DC';
@@ -314,6 +315,7 @@ Styles.reckoningTotals = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
+    marginBottom: 48,
     backgroundColor: 'black',
     opacity: .7,
     padding: 10,
@@ -329,7 +331,7 @@ Styles.reckoningTotals = StyleSheet.create({
 
   nameText: {
     alignSelf: 'center',
-    fontSize: 24,
+    fontSize: 26,
     marginBottom: 0,
   },
 
@@ -349,7 +351,13 @@ Styles.reckoningTotals = StyleSheet.create({
   },
 
   text: {
-
+    fontSize: 20,
+    // fontWeight: 'bold',
+    // marginBottom: 8,
+    textAlign: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 
   numbers: {
@@ -406,6 +414,7 @@ Styles.reckoningPayments = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     padding: 15,
+    marginBottom: 10,
     backgroundColor: 'white',
     borderRadius: 5,
     borderWidth: 0,

@@ -539,6 +539,7 @@ function settingsViewMode(mode) {
 exports.initiateReckoning = function(shouldSetSettingsViewModeToLeave) {
 
   return function(dispatch) {
+    dispatch({type: 'INITIATE_RECKONING'});
     return Network.initiateReckoning()
       .then(function(response) {
         console.log(response);

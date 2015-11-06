@@ -15,14 +15,14 @@ Note: Currently only on iOS.
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Usage & Key Features](#usage & key features)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
 1. [Contributing](#contributing)
 
-## Usage & key features
+## Usage & Key Features
 
 Add items to buy in a pending list and view its details or edit at any time.
 

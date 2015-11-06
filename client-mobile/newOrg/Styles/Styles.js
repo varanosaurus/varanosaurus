@@ -166,7 +166,7 @@ Styles.input = StyleSheet.create({
   textboxLabel: {
     fontFamily: mainFont,
     fontSize: 15,
-    color: secondaryColor,
+    color: 'white',
     marginLeft: 10,
     marginTop: 8,
     marginBottom: 8,
@@ -439,8 +439,6 @@ Styles.list = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
-    paddingLeft: 10,
-    paddingRight: 10,
     backgroundColor: 'black',
     opacity: 0.7,
   },

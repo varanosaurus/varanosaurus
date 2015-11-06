@@ -75,7 +75,7 @@ var PendingItemDetails = React.createClass({
           <Image
             source={{uri: Styles.patternURI}}
             style={Styles.background.belowNavbarArea}>
-            <View style={Styles.default.container}>
+            <View style={Styles.list.container}>
               <Text style={Styles.page.pendingTitle}>{this.props.item.description}</Text>
               <Text style={Styles.input.textboxLabel}>Requested by: {this.props.creator.username}</Text>
                 <TextInput

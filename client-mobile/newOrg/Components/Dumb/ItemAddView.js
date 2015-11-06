@@ -35,7 +35,7 @@ var ItemAddView = React.createClass({
         <Image
           source={{uri: Styles.patternURI}}
           style={Styles.background.belowNavbarArea}>
-          <View style={[Styles.list.container, {flex: 1, marginTop: 65, backgroundColor: 'rgba(0,0,0,0.7)'}]}>
+          <View style={Styles.list.container}>
             <Text style={[Styles.page.pageTitle, {marginBottom: 10}]}>Add an Item</Text>
             <TextInput
               style={Styles.input.textboxField}

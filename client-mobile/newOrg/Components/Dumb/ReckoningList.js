@@ -54,7 +54,7 @@ var ReckoningList = React.createClass({
                 automaticallyAdjustContentInsets={false}
                 contentInset={{bottom: 50}}
                />
-            <Button style={[Styles.btn.btn, Styles.reckoningPayments.button]}>Reckon Now</Button>
+            <Button onPress={this.props.reckonNow} style={[Styles.btn.btn, Styles.reckoningPayments.button]}>Reckon Now</Button>
             </View>
           </Image>
         </View>

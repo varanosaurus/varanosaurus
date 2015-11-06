@@ -34,6 +34,7 @@ var Reckoning = React.createClass({
       <ReckoningList
         reckonings={this.props.reckonings}
         //handleSelect={this.handleSelect}
+        reckonNow={this.reckonNow}
         gotoReckoningDetailsView={this.gotoReckoningDetailsView}
       />
     );
@@ -49,6 +50,10 @@ var Reckoning = React.createClass({
     } else {
       this.props.navigator.push(Routes.reckoningDetailsView);
     }
+  },
+
+  reckonNow() {
+    this.props.dispatch(Actions.initiateReckoning(false));
   },
 
 });

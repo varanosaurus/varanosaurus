@@ -466,6 +466,7 @@ function fetchReckoningListsSuccess(data) {
 
 exports.fetchSelectedReckoning = function() {
   return function(dispatch) {
+    dispatch({type: 'FETCH_SELECTED_RECKONING_PENDING'});
     return Network.getSelectedReckoning()
       .then(function(response) {
         return response.json()
@@ -538,6 +539,7 @@ function settingsViewMode(mode) {
 exports.initiateReckoning = function(shouldSetSettingsViewModeToLeave) {
 
   return function(dispatch) {
+    dispatch({type: 'INITIATE_RECKONING'});
     return Network.initiateReckoning()
       .then(function(response) {
         console.log(response);

@@ -31,6 +31,7 @@ var Login = React.createClass({
               <Text style={Styles.default.knead}>Knead</Text>
               <TextInput
                 keyboardType='default'
+                autoCorrect={false}
                 style={[Styles.input.textboxField, {marginTop: 10}, {color: 'black'}, {borderColor: 'white'}]}
                 placeholder='username'
                 onChangeText={(username) => this.setState({username})}

@@ -121,6 +121,21 @@ function selectedReckoningId(state = null, action) {
   }
 }
 
+function reckoningRequestState(state = null, action) {
+  switch (action.type) {
+  case 'INITIATE_RECKONING':
+  case 'FETCH_SELECTED_RECKONING_PENDING':
+    return 'pending';
+  case 'INITIATE_RECKONING_SUCCESS':
+  case 'INITIATE_RECKONING_FAILURE':
+  case 'FETCH_SELECTED_RECKONING_SUCCESS':
+  case 'FETCH_SELECTED_RECKONING_FAILURE':
+    return null;
+  default:
+    return state;
+  }
+}
+
 function reckoningDetailsMode(state = 'totals', action) {
   switch (action.type) {
   case 'SET_RECKONING_DETAILS_MODE':
@@ -188,5 +203,6 @@ module.exports = combineReducers({
   reckoningDetailsMode,
   reckoningDetailsItemsMode,
   reckoningSelectedItemId,
+  reckoningRequestState,
   settingsViewMode,
 });

@@ -34,7 +34,9 @@ var Reckoning = React.createClass({
       <ReckoningList
         reckonings={this.props.reckonings}
         //handleSelect={this.handleSelect}
+        canReckon={this.props.canReckon}
         reckonNow={this.reckonNow}
+        reckoningRequestState={this.props.reckoningRequestState}
         gotoReckoningDetailsView={this.gotoReckoningDetailsView}
       />
     );
@@ -59,12 +61,15 @@ var Reckoning = React.createClass({
 });
 
 function select(state) {
+
   return {
     reckoningsViewMode: state.uiMode.reckoningsViewMode,
     reckonings: state.data.reckonings,
     selectedReckoning: state.data.selectedReckoning,
     selectedReckoningId: state.uiMode.selectedReckoningId,
     reckoningDetailsMode: state.uiMode.reckoningDetailsMode,
+    canReckon: state.data.items.bought.length ? true : false,
+    reckoningRequestState: state.uiMode.reckoningRequestState,
   };
 }
 

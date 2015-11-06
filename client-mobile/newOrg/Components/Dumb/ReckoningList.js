@@ -42,6 +42,19 @@ var ReckoningList = React.createClass({
 
   render() {
     var dataSource = this.dataSource.cloneWithRows(this.props.reckonings);
+
+    var disabledStyle = {};
+    var buttonText;
+    var buttonHandler;
+
+    if (this.props.canReckon) {
+      buttonHandler = this.props.reckonNow;
+      buttonText = 'Reckon now';
+    } else {
+      disabledStyle.backgroundColor = '#333';
+      buttonText = 'Nothing to reckon';
+    }
+
     return (
         <View style={{flex: 1, marginBottom: 48}}>
           <Image
@@ -54,7 +67,11 @@ var ReckoningList = React.createClass({
                 automaticallyAdjustContentInsets={false}
                 contentInset={{bottom: 50}}
                />
-            <Button onPress={this.props.reckonNow} style={[Styles.btn.btn, Styles.reckoningPayments.button]}>Reckon Now</Button>
+            <Button
+            onPress={buttonHandler}
+            style={[Styles.btn.btn, Styles.reckoningPayments.button, disabledStyle]}>
+              {buttonText}
+            </Button>
             </View>
           </Image>
         </View>

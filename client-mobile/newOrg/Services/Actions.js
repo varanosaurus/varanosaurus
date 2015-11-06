@@ -466,6 +466,7 @@ function fetchReckoningListsSuccess(data) {
 
 exports.fetchSelectedReckoning = function() {
   return function(dispatch) {
+    dispatch({type: 'FETCH_SELECTED_RECKONING_PENDING'});
     return Network.getSelectedReckoning()
       .then(function(response) {
         return response.json()

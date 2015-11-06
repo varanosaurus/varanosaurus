@@ -14,6 +14,7 @@ var {
   TouchableHighlight,
   Text,
   Image,
+  ActivityIndicatorIOS,
 } = React;
 
 var ReckoningList = React.createClass({
@@ -67,6 +68,7 @@ var ReckoningList = React.createClass({
                 automaticallyAdjustContentInsets={false}
                 contentInset={{bottom: 50}}
                />
+            <ActivityIndicatorIOS style={{flex: .5, alignSelf: 'center'}} animating={this.props.reckoningRequestState === 'pending'} />
             <Button
             onPress={buttonHandler}
             style={[Styles.btn.btn, Styles.reckoningPayments.button, disabledStyle]}>

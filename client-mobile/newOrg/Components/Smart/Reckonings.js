@@ -36,6 +36,7 @@ var Reckoning = React.createClass({
         //handleSelect={this.handleSelect}
         canReckon={this.props.canReckon}
         reckonNow={this.reckonNow}
+        reckoningRequestState={this.props.reckoningRequestState}
         gotoReckoningDetailsView={this.gotoReckoningDetailsView}
       />
     );
@@ -68,6 +69,7 @@ function select(state) {
     selectedReckoningId: state.uiMode.selectedReckoningId,
     reckoningDetailsMode: state.uiMode.reckoningDetailsMode,
     canReckon: state.data.items.bought.length ? true : false,
+    reckoningRequestState: state.uiMode.reckoningRequestState,
   };
 }
 

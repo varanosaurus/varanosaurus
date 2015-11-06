@@ -438,8 +438,6 @@ Styles.list = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 64,
-    paddingLeft: 10,
-    paddingRight: 10,
     backgroundColor: 'black',
     opacity: 0.7,
   },

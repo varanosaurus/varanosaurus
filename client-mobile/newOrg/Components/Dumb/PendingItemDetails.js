@@ -15,6 +15,8 @@ var {
 var PendingItemDetails = React.createClass({
 
   getInitialState() {
+    this.cachedDetails = this.props.item.details;
+
     return ({
       details: this.props.item.details,
       isEditing: false,
@@ -64,10 +66,23 @@ var PendingItemDetails = React.createClass({
       this.props.gotoBoughtItemsList();
     }
     this.props.updateItem(updates);
+    this.cachedDetails = this.state.details;
     this.saveChanges();
   },
 
   render() {
+    var editButtonDisabledStyle = {};
+    var editButtonText;
+    var editButtonHandler;
+
+    if (this.state.details === this.cachedDetails) {
+      editButtonDisabledStyle.backgroundColor = '#CCC';
+      editButtonText = 'Details synced';
+    } else {
+      editButtonText = 'Save changes';
+      editButtonHandler = this.handleSubmit;
+    }
+
     // not editing & not buying
     if (!this.state.isEditing && !this.state.isBuying) {
       return (
@@ -86,7 +101,7 @@ var PendingItemDetails = React.createClass({
                   value={this.state.details}
                   placeholderTextColor={Styles.placeholderColor}
                 />
-              <Button onPress={this.handleSubmit} style={Styles.btn.btn}>Save details</Button>
+              <Button onPress={editButtonHandler} style={[Styles.btn.btn, editButtonDisabledStyle]}>{editButtonText}</Button>
               <Button onPress={this.buy} style={Styles.btn.btn}>Mark as bought</Button>
               <Button onPress={this.browse} style={Styles.btn.accentBtn}>Search {this.props.item.description} on Amazon</Button>
             </View>

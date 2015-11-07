@@ -20,7 +20,7 @@ var ItemList = React.createClass({
 
   componentWillMount() {
     this.dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
+      rowHasChanged: (r1, r2) => r1.description !== r2.description,
     });
   },
 
